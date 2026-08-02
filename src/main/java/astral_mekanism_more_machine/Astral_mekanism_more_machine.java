@@ -1,6 +1,6 @@
 package astral_mekanism_more_machine;
 
-import astral_mekanism.block.gui.normalmachine.GuiAstralCrafter;
+import astral_mekanism_more_machine.block.gui.normalmachine.GuiAstralCrafter;
 import astral_mekanism_more_machine.registries.AMMMachines;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
@@ -32,7 +32,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 
-import astral_mekanism.registration.MachineRegistryObject;
+import astral_mekanism_more_machine.registration.MachineRegistryObject;
 import mekanism.common.inventory.container.tile.MekanismTileContainer;
 import mekanism.common.tile.base.TileEntityMekanism;
 import net.minecraft.client.gui.screens.MenuScreens.ScreenConstructor;
@@ -91,8 +91,6 @@ public class Astral_mekanism_more_machine {
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
-
-        initScreens();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -105,6 +103,7 @@ public class Astral_mekanism_more_machine {
         LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
 
         Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
+        initScreens();
     }
 
     // Add the example block item to the building blocks tab
