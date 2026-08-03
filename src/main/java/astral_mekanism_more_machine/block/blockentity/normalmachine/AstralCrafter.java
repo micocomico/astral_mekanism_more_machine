@@ -3,10 +3,11 @@ package astral_mekanism_more_machine.block.blockentity.normalmachine;
 import java.util.Arrays;
 import java.util.List;
 
+import astral_mekanism_more_machine.AMMMConstants;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import astral_mekanism.AMEConstants;
+//import astral_mekanism.AMEConstants;
 import astral_mekanism.recipes.cachedRecipe.AstralCraftingCachedRecipe;
 import astral_mekanism.recipes.inputRecipeCache.AstralCraftingRecipeCache;
 import astral_mekanism.recipes.lookup.AstralCraftingRecipeLookUpHandler;
@@ -148,7 +149,7 @@ public class AstralCrafter extends TileEntityProgressMachine<AstralCraftingRecip
                 .setSlotOverlay(SlotOverlay.MINUS);
         builder.addSlot(energySlot = EnergyInventorySlot.fill(energyContainer, recipeCacheListener, 170, 18));
         inputSlots = new InputInventorySlot[25];
-        for (int i : AMEConstants.ZERO_24) {
+        for (int i : AMMMConstants.ZERO_24) {
             builder.addSlot(inputSlots[i] = InputInventorySlot.at(
                             stack -> containsInputItemOther(stack, i,
                                     Arrays.stream(inputSlots).map(IInventorySlot::getStack).toArray(ItemStack[]::new),
