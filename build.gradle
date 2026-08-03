@@ -169,6 +169,7 @@ dependencies {
         implementation fg.deobf("curse.maven:mekanism-elements-1103224:6537553")
         implementation fg.deobf("curse.maven:mekanism-extras-1026040:8247562")
         implementation fg.deobf("curse.maven:iglee-library-541199:6987117")
+        implementation fg.deobf("curse.maven:Applied-Energistics-2-223794:7148487")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
