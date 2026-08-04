@@ -3,7 +3,6 @@ package astral_mekanism_more_machine.registration;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
-import astral_mekanism_more_machine.registration.BlockTypeMachine;
 import astral_mekanism_more_machine.registration.BlockTypeMachine.BlockMachineBuilder;
 import astral_mekanism.registration.ExtendedContainerDeferredRegister;
 import astral_mekanism.registration.ExtendedContainerRegistryObject;
