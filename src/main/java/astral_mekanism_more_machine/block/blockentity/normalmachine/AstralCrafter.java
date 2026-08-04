@@ -7,7 +7,6 @@ import astral_mekanism_more_machine.AMMMConstants;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-//import astral_mekanism.AMEConstants;
 import astral_mekanism.recipes.cachedRecipe.AstralCraftingCachedRecipe;
 import astral_mekanism.recipes.inputRecipeCache.AstralCraftingRecipeCache;
 import astral_mekanism.recipes.lookup.AstralCraftingRecipeLookUpHandler;
@@ -185,7 +184,7 @@ public class AstralCrafter extends TileEntityProgressMachine<AstralCraftingRecip
                                                                               IContentsListener recipeCacheListener) {
         ChemicalTankHelper<Gas, GasStack, IGasTank> builder = ChemicalTankHelper
                 .forSideGasWithConfig(this::getDirection, this::getConfig);
-        builder.addTank(gasTank = ChemicalTankBuilder.GAS.input(0x7fffffff,
+        builder.addTank(gasTank = ChemicalTankBuilder.GAS.input(Long.MAX_VALUE,
                 gas -> containsInputGasOther(gas,
                         Arrays.stream(inputSlots).map(IInventorySlot::getStack).toArray(ItemStack[]::new),
                         fluidTank.getFluid()),

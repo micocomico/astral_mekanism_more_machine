@@ -2,8 +2,8 @@ package astral_mekanism_more_machine.registries;
 
 import astral_mekanism.AMELang;
 import astral_mekanism_more_machine.block.container.normalmachine.ContainerAstralCrafter;
-import astral_mekanism.config.AMEConfig;
 import astral_mekanism.enums.AMEUpgrade;
+import astral_mekanism_more_machine.config.AMMMConfig;
 import astral_mekanism_more_machine.registration.BlockTypeMachine;
 import astral_mekanism_more_machine.registration.MachineRegistryObject;
 import astral_mekanism_more_machine.AMMMConstants;
@@ -25,6 +25,6 @@ public class AMMMachines {
                     ContainerAstralCrafter::new,
                     AMELang.DESCRIPTION_ESSENTIAL_CRAFTER,
                     builder -> builder
-                            .withEnergyConfig(AMEConfig.usage.essentialCrafter, AMEConfig.storage.essentialCrafter)
+                            .withEnergyConfig(AMMMConfig.usage.astralCrafter, AMMMConfig.storage.astralCrafter)
                             .changeAttributeUpgrade(EnumSet.of(AMEUpgrade.RADIOACTIVE_SEALING.getValue())));
 }
