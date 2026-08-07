@@ -1,16 +1,15 @@
-package ammm.block.container.normalmachine;
+package ammm.block.container;
 
-import org.jetbrains.annotations.NotNull;
-
-import ammm.block.blockentity.normalmachine.AstralCrafter;
+import ammm.block.blockentity.enchantedmachine.EnchantedCrafter;
 import mekanism.common.inventory.container.tile.MekanismTileContainer;
 import mekanism.common.registration.impl.ContainerTypeRegistryObject;
 import net.minecraft.world.entity.player.Inventory;
+import org.jetbrains.annotations.NotNull;
 
-public class ContainerAstralCrafter extends MekanismTileContainer<AstralCrafter> {
+public class ContainerEnchantedCrafter extends MekanismTileContainer<EnchantedCrafter> {
 
-    public ContainerAstralCrafter(ContainerTypeRegistryObject<?> type, int id, Inventory inv,
-                                  @NotNull AstralCrafter tile) {
+    public ContainerEnchantedCrafter(ContainerTypeRegistryObject<?> type, int id, Inventory inv,
+                                     @NotNull EnchantedCrafter tile) {
         super(type, id, inv, tile);
     }
 

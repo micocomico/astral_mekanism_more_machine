@@ -16,7 +16,7 @@ public class AMMMStorageConfig extends BaseMekanismConfig {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
         builder.comment("Machine Energy Storage Config. This config is synced from server to client.").push("storage");
         astralCrafter = CachedFloatingLongValue.define(this, builder, "Base energy storage (Joules).",
-                "essentialCrafter", FloatingLong.createConst(Long.MAX_VALUE));
+                "astralCrafter", FloatingLong.createConst(Long.MAX_VALUE));
         builder.pop();
         configSpec = builder.build();
     }

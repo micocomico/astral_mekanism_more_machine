@@ -1,8 +1,8 @@
 {
   "variants": {
-    "facing=north":  { "model": "ammm:block/normal_machine/astral_crafter", "y": 0 },
-    "facing=south":  { "model": "ammm:block/normal_machine/astral_crafter", "y": 180 },
-    "facing=west":   { "model": "ammm:block/normal_machine/astral_crafter", "y": 270 },
-    "facing=east":   { "model": "ammm:block/normal_machine/astral_crafter", "y": 90 }
+    "facing=north":  { "model": "ammm:block/astral_machine/astral_crafter", "y": 0 },
+    "facing=south":  { "model": "ammm:block/astral_machine/astral_crafter", "y": 180 },
+    "facing=west":   { "model": "ammm:block/astral_machine/astral_crafter", "y": 270 },
+    "facing=east":   { "model": "ammm:block/astral_machine/astral_crafter", "y": 90 }
   }
 }

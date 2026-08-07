@@ -1,7 +1,7 @@
-package ammm.block.gui.normalmachine;
+package ammm.block.gui;
 
-import ammm.block.blockentity.normalmachine.AstralCrafter;
-import ammm.block.container.normalmachine.ContainerAstralCrafter;
+import ammm.block.blockentity.enchantedmachine.EnchantedCrafter;
+import ammm.block.container.ContainerEnchantedCrafter;
 import mekanism.api.recipes.cache.CachedRecipe.OperationTracker.RecipeError;
 import mekanism.client.gui.GuiConfigurableTile;
 import mekanism.client.gui.element.bar.GuiVerticalPowerBar;
@@ -17,9 +17,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;
 
-public class GuiAstralCrafter extends GuiConfigurableTile<AstralCrafter, ContainerAstralCrafter> {
+public class GuiEnchantedCrafter extends GuiConfigurableTile<EnchantedCrafter, ContainerEnchantedCrafter> {
 
-    public GuiAstralCrafter(ContainerAstralCrafter container, Inventory inv, Component title) {
+    public GuiEnchantedCrafter(ContainerEnchantedCrafter container, Inventory inv, Component title) {
         super(container, inv, title);
         dynamicSlots = true;
         imageHeight += 36;
