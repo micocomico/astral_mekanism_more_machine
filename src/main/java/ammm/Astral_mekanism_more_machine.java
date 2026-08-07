@@ -1,10 +1,18 @@
 package ammm;
 
-import ammm.block.gui.normalmachine.GuiAstralCrafter;
+import ammm.block.gui.GuiAstralCrafter;
+import ammm.block.gui.GuiEnchantedCrafter;
+import ammm.registration.MachineRegistryObject;
 import ammm.registries.AMMMCreativeTab;
 import ammm.registries.AMMMachines;
 import com.mojang.logging.LogUtils;
+import mekanism.common.inventory.container.tile.MekanismTileContainer;
+import mekanism.common.tile.base.TileEntityMekanism;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.gui.screens.MenuScreens.ScreenConstructor;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -25,14 +33,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
-
-import ammm.registration.MachineRegistryObject;
-import mekanism.common.inventory.container.tile.MekanismTileContainer;
-import mekanism.common.tile.base.TileEntityMekanism;
-import net.minecraft.client.gui.screens.MenuScreens.ScreenConstructor;
-import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.gui.screens.inventory.MenuAccess;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(Astral_mekanism_more_machine.MODID)
@@ -101,6 +101,7 @@ public class Astral_mekanism_more_machine {
 
     private static void initScreens() {
         registerScreenMek(AMMMachines.ASTRAL_CRAFTER, GuiAstralCrafter::new);
+        registerScreenMek(AMMMachines.ENCHANTED_CRAFTER, GuiEnchantedCrafter::new);
     }
 
     private static <BE extends TileEntityMekanism, CONTAINER extends MekanismTileContainer<BE>, U extends Screen & MenuAccess<CONTAINER>> void registerScreenMek(

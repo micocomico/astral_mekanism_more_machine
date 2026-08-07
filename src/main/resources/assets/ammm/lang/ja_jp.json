@@ -1,6 +1,9 @@
 {
     "block.ammm.astral_crafter": "天体型拡張作業台",
+    "block.ammm.enchanted_crafter": "魔性型拡張作業台",
     "container.ammm.astral_crafter": "天体型拡張作業台",
+    "container.ammm.enchanted_crafter": "魔性型拡張作業台",
     "description.ammm.astral_crafter": "高度なクラフトを行うための拡張された作業台です。",
+    "description.ammm.enchanted_crafter": "高度なクラフトを行うための拡張された作業台です。",
     "item_group.ammm.modid": "Astral Mekanism More Machine"
 }

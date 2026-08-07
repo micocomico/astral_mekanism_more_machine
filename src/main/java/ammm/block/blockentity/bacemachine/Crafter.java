@@ -1,21 +1,12 @@
-package ammm.block.blockentity.normalmachine;
-
-import java.util.Arrays;
-import java.util.List;
+package ammm.block.blockentity.bacemachine;
 
 import ammm.AMMMConstants;
-import mekanism.common.tile.prefab.TileEntityRecipeMachine;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import astral_mekanism.recipes.cachedRecipe.AstralCraftingCachedRecipe;
 import astral_mekanism.recipes.inputRecipeCache.AstralCraftingRecipeCache;
 import astral_mekanism.recipes.lookup.AstralCraftingRecipeLookUpHandler;
 import astral_mekanism.recipes.recipe.AstralCraftingRecipe;
 import astral_mekanism.registries.AMERecipeTypes;
 import mekanism.api.IContentsListener;
-import mekanism.api.chemical.ChemicalTankBuilder;
-import mekanism.api.chemical.gas.Gas;
 import mekanism.api.chemical.gas.GasStack;
 import mekanism.api.chemical.gas.IGasTank;
 import mekanism.api.inventory.IInventorySlot;
@@ -29,12 +20,8 @@ import mekanism.api.recipes.outputs.IOutputHandler;
 import mekanism.api.recipes.outputs.OutputHelper;
 import mekanism.common.capabilities.energy.MachineEnergyContainer;
 import mekanism.common.capabilities.fluid.BasicFluidTank;
-import mekanism.common.capabilities.holder.chemical.ChemicalTankHelper;
-import mekanism.common.capabilities.holder.chemical.IChemicalTankHolder;
 import mekanism.common.capabilities.holder.energy.EnergyContainerHelper;
 import mekanism.common.capabilities.holder.energy.IEnergyContainerHolder;
-import mekanism.common.capabilities.holder.fluid.FluidTankHelper;
-import mekanism.common.capabilities.holder.fluid.IFluidTankHolder;
 import mekanism.common.capabilities.holder.slot.IInventorySlotHolder;
 import mekanism.common.capabilities.holder.slot.InventorySlotHelper;
 import mekanism.common.inventory.container.slot.SlotOverlay;
@@ -48,13 +35,19 @@ import mekanism.common.lib.transmitter.TransmissionType;
 import mekanism.common.recipe.IMekanismRecipeTypeProvider;
 import mekanism.common.tile.component.TileComponentConfig;
 import mekanism.common.tile.component.TileComponentEjector;
+import mekanism.common.tile.prefab.TileEntityRecipeMachine;
 import mekanism.common.util.MekanismUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public class AstralCrafter extends TileEntityRecipeMachine<AstralCraftingRecipe>
+import java.util.Arrays;
+import java.util.List;
+
+public abstract class Crafter extends TileEntityRecipeMachine<AstralCraftingRecipe>
         implements AstralCraftingRecipeLookUpHandler {
 
     public static final RecipeError[] NOT_ENOUGH_ITEMS = new RecipeError[] {
@@ -102,11 +95,11 @@ public class AstralCrafter extends TileEntityRecipeMachine<AstralCraftingRecipe>
             NOT_ENOUGH_GAS,
             RecipeError.INPUT_DOESNT_PRODUCE_OUTPUT,
             RecipeError.NOT_ENOUGH_OUTPUT_SPACE);
-    private InputInventorySlot[] inputSlots;
-    private BasicFluidTank fluidTank;
-    private IGasTank gasTank;
+    public InputInventorySlot[] inputSlots;
+    public BasicFluidTank fluidTank;
+    public IGasTank gasTank;
     private OutputInventorySlot outputSlot;
-    private MachineEnergyContainer<AstralCrafter> energyContainer;
+    private MachineEnergyContainer<ammm.block.blockentity.bacemachine.Crafter> energyContainer;
     private FluidInventorySlot fluidSlot;
     private GasInventorySlot gasSlot;
     private EnergyInventorySlot energySlot;
@@ -116,7 +109,7 @@ public class AstralCrafter extends TileEntityRecipeMachine<AstralCraftingRecipe>
     private final IOutputHandler<ItemStack> outputHandler;
 
     @SuppressWarnings("unchecked")
-    public AstralCrafter(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
+    public Crafter(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
         super(blockProvider, pos, state, TRACKED_ERROR_TYPES);
         configComponent = new TileComponentConfig(this, TransmissionType.ENERGY, TransmissionType.ITEM,
                 TransmissionType.FLUID, TransmissionType.GAS);
@@ -167,33 +160,6 @@ public class AstralCrafter extends TileEntityRecipeMachine<AstralCraftingRecipe>
 
     @NotNull
     @Override
-    protected IFluidTankHolder getInitialFluidTanks(IContentsListener listener,
-                                                    IContentsListener recipeCacheListener) {
-        FluidTankHelper builder = FluidTankHelper.forSideWithConfig(this::getDirection, this::getConfig);
-        builder.addTank(fluidTank = BasicFluidTank.input(0x7fffffff,
-                stack -> containsInputFluidOther(stack,
-                        Arrays.stream(inputSlots).map(IInventorySlot::getStack).toArray(ItemStack[]::new),
-                        gasTank.getStack()),
-                this::containsInputFluid, recipeCacheListener));
-        return builder.build();
-    }
-
-    @NotNull
-    @Override
-    protected IChemicalTankHolder<Gas, GasStack, IGasTank> getInitialGasTanks(IContentsListener listener,
-                                                                              IContentsListener recipeCacheListener) {
-        ChemicalTankHelper<Gas, GasStack, IGasTank> builder = ChemicalTankHelper
-                .forSideGasWithConfig(this::getDirection, this::getConfig);
-        builder.addTank(gasTank = ChemicalTankBuilder.GAS.input(Long.MAX_VALUE,
-                gas -> containsInputGasOther(gas,
-                        Arrays.stream(inputSlots).map(IInventorySlot::getStack).toArray(ItemStack[]::new),
-                        fluidTank.getFluid()),
-                this::containsInputGas, recipeCacheListener));
-        return builder.build();
-    }
-
-    @NotNull
-    @Override
     protected IEnergyContainerHolder getInitialEnergyContainers(IContentsListener listener,
                                                                 IContentsListener recipeCacheListener) {
         EnergyContainerHelper builder = EnergyContainerHelper.forSideWithConfig(this::getDirection,
@@ -224,9 +190,7 @@ public class AstralCrafter extends TileEntityRecipeMachine<AstralCraftingRecipe>
                 .setBaselineMaxOperations(this::getBaselineMaxOperations);
     }
 
-    protected int getBaselineMaxOperations() {
-        return 0x7fffffff;
-    }
+    protected abstract int getBaselineMaxOperations();
 
     public double getScaledProgress() {
         return getActive() ? 1 : 0;
@@ -242,7 +206,7 @@ public class AstralCrafter extends TileEntityRecipeMachine<AstralCraftingRecipe>
         return AMERecipeTypes.ASTRAL_CRAFTING;
     }
 
-    public MachineEnergyContainer<AstralCrafter> getEnergyContainer() {
+    public MachineEnergyContainer<ammm.block.blockentity.bacemachine.Crafter> getEnergyContainer() {
         return energyContainer;
     }
 

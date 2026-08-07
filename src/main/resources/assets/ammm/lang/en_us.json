@@ -1,6 +1,9 @@
 {
     "block.ammm.astral_crafter": "Astral Crafter",
+    "block.ammm.enchanted_crafter": "Enchanted Crafter",
     "container.ammm.astral_crafter": "Astral Crafter",
+    "container.ammm.Enchanted_crafter": "Enchanted Crafter",
     "description.ammm.astral_crafter": "expanded crafting table for advanced crafting.",
+    "description.ammm.enchanted_crafter": "expanded crafting table for advanced crafting.",
     "item_group.ammm.modid": "Astral Mekanism More Machine"
 }

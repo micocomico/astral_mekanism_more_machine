@@ -1,7 +1,0 @@
-{
-    "parent": "ammm:block/machine_base",
-    "textures": {
-        "front": "ammm:block/normal_machine/astral_crafter_front",
-        "up":"ammm:block/normal_machine/astral_crafter_up"
-    }
-}
