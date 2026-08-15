@@ -1,18 +1,10 @@
 
 package ammm.registration;
 
-import java.util.EnumSet;
-import java.util.function.Supplier;
-
 import astral_mekanism.integration.AMEEmpowered;
 import mekanism.api.Upgrade;
 import mekanism.api.text.ILangEntry;
-import mekanism.common.block.attribute.AttributeFactoryType;
-import mekanism.common.block.attribute.AttributeParticleFX;
-import mekanism.common.block.attribute.AttributeStateFacing;
-import mekanism.common.block.attribute.AttributeUpgradeSupport;
-import mekanism.common.block.attribute.AttributeUpgradeable;
-import mekanism.common.block.attribute.Attributes;
+import mekanism.common.block.attribute.*;
 import mekanism.common.content.blocktype.BlockTypeTile;
 import mekanism.common.content.blocktype.FactoryType;
 import mekanism.common.lib.math.Pos3D;
@@ -22,6 +14,9 @@ import mekanism.common.tier.FactoryTier;
 import mekanism.common.tile.base.TileEntityMekanism;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+
+import java.util.EnumSet;
+import java.util.function.Supplier;
 
 //This class is almost thie same as `mekanism.common.content.blocktype.Machine`.
 //This class allows me to use `ILangEntry` instead of `MekanismLang`.

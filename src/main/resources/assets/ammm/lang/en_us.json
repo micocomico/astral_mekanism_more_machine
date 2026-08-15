@@ -1,9 +1,32 @@
 {
     "block.ammm.astral_crafter": "Astral Crafter",
     "block.ammm.enchanted_crafter": "Enchanted Crafter",
+    "block.ammm.essential_enchanted_energized_smelting_factory": "Essential Enchanted Energized Smelting Factory",
+    "block.ammm.basic_standard_enchanted_energized_smelting_factory": "Basic Standard Enchanted Energized Smelting Factory",
+    "block.ammm.advanced_enchanted_energized_smelting_factory": "Advanced Enchanted Energized Smelting Factory",
+    "block.ammm.elite_enchanted_energized_smelting_factory": "Elite Enchanted Energized Smelting Factory",
+    "block.ammm.enchanted_ultimate_enchanted_energized_smelting_factory": "Enchanted Ultimate Enchanted Energized Smelting Factory",
+    "block.ammm.absolute_overclocked_enchanted_energized_smelting_factory": "Absolute Overclocked Enchanted Energized Smelting Factory",
+    "block.ammm.supreme_quantum_enchanted_energized_smelting_factory": "Supreme Quantum Enchanted Energized Smelting Factory",
+    "block.ammm.cosmic_dense_enchanted_energized_smelting_factory": "Cosmic Dense Enchanted Energized Smelting Factory",
+    "block.ammm.infinite_multiversal_enchanted_energized_smelting_factory": "Infinite Multiversal Enchanted Energized Smelting Factory",
+    "block.ammm.astral_enchanted_energized_smelting_factory": "Astronomical Multiversal Enchanted Energized Smelting Factory",
+
     "container.ammm.astral_crafter": "Astral Crafter",
-    "container.ammm.Enchanted_crafter": "Enchanted Crafter",
+    "container.ammm.enchanted_crafter": "Enchanted Crafter",
+    "container.ammm.essential_enchanted_energized_smelting_factory": "Essential Enchanted Energized Smelting Factory",
+    "container.ammm.basic_standard_enchanted_energized_smelting_factory": "Basic Standard Enchanted Energized Smelting Factory",
+    "container.ammm.advanced_enchanted_energized_smelting_factory": "Advanced Enchanted Energized Smelting Factory",
+    "container.ammm.elite_enchanted_energized_smelting_factory": "Elite Enchanted Energized Smelting Factory",
+    "container.ammm.enchanted_ultimate_enchanted_energized_smelting_factory": "Enchanted Ultimate Enchanted Energized Smelting Factory",
+    "container.ammm.absolute_overclocked_enchanted_energized_smelting_factory": "Absolute Overclocked Enchanted Energized Smelting Factory",
+    "container.ammm.supreme_quantum_enchanted_energized_smelting_factory": "Supreme Quantum Enchanted Energized Smelting Factory",
+    "container.ammm.cosmic_dense_enchanted_energized_smelting_factory": "Cosmic Dense Enchanted Energized Smelting Factory",
+    "container.ammm.infinite_multiversal_enchanted_energized_smelting_factory": "Infinite Multiversal Enchanted Energized Smelting Factory",
+    "container.ammm.astral_enchanted_energized_smelting_factory": "Astronomical Multiversal Enchanted Energized Smelting Factory",
+
     "description.ammm.astral_crafter": "expanded crafting table for advanced crafting.",
     "description.ammm.enchanted_crafter": "expanded crafting table for advanced crafting.",
+
     "item_group.ammm.modid": "Astral Mekanism More Machine"
 }

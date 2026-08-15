@@ -47,7 +47,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class Crafter extends TileEntityRecipeMachine<AstralCraftingRecipe>
+public class Crafter extends TileEntityRecipeMachine<AstralCraftingRecipe>
         implements AstralCraftingRecipeLookUpHandler {
 
     public static final RecipeError[] NOT_ENOUGH_ITEMS = new RecipeError[] {
@@ -190,7 +190,7 @@ public abstract class Crafter extends TileEntityRecipeMachine<AstralCraftingReci
                 .setBaselineMaxOperations(this::getBaselineMaxOperations);
     }
 
-    protected abstract int getBaselineMaxOperations();
+    protected int getBaselineMaxOperations() {return 1;}
 
     public double getScaledProgress() {
         return getActive() ? 1 : 0;

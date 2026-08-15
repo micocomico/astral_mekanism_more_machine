@@ -1,15 +1,15 @@
-package ammm.block.container;
+package ammm.block.container.machine;
 
-import ammm.block.blockentity.enchantedmachine.EnchantedCrafter;
+import ammm.block.blockentity.bacemachine.Crafter;
 import mekanism.common.inventory.container.tile.MekanismTileContainer;
 import mekanism.common.registration.impl.ContainerTypeRegistryObject;
 import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;
 
-public class ContainerEnchantedCrafter extends MekanismTileContainer<EnchantedCrafter> {
+public class ContainerCrafter<BE extends Crafter> extends MekanismTileContainer<BE> {
 
-    public ContainerEnchantedCrafter(ContainerTypeRegistryObject<?> type, int id, Inventory inv,
-                                     @NotNull EnchantedCrafter tile) {
+    public ContainerCrafter(ContainerTypeRegistryObject<?> type, int id, Inventory inv,
+                            @NotNull BE tile) {
         super(type, id, inv, tile);
     }
 

@@ -1,12 +1,5 @@
 package ammm.registration;
 
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.function.UnaryOperator;
-
 import ammm.registration.BlockTypeMachine.BlockMachineBuilder;
 import astral_mekanism.registration.ExtendedContainerDeferredRegister;
 import astral_mekanism.registration.RegistrationInterfaces.BlockEntityConstructor;
@@ -22,6 +15,14 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
+
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.UnaryOperator;
+
 public class MachineDeferredRegister {
 
     private final String modId;

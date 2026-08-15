@@ -171,6 +171,7 @@ dependencies {
         implementation fg.deobf("curse.maven:iglee-library-541199:6987117")
         implementation fg.deobf("curse.maven:Applied-Energistics-2-223794:7148487")
         implementation fg.deobf("curse.maven:jei-238222:6600311")
+        implementation fg.deobf("curse.maven:jade-324717:6855440")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

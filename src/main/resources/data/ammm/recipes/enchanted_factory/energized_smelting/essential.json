@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "A": {
+      "item": "astral_mekanism:alloy_elastic"
+    },
+    "B": {
+      "item": "minecraft:amethyst_block"
+    },
+    "C": {
+      "item": "astral_mekanism:alloy_elastic"
+    },
+    "D": {
+      "item": "astral_mekanism:vibration_control_circuit"
+    },
+    "E": {
+      "item": "astral_mekanism:enchanted_energized_smelter"
+    },
+    "F": {
+      "item": "astral_mekanism:vibration_control_circuit"
+    }
+  },
+  "pattern": [
+    "ABC",
+    "DEF",
+    "ABC"
+  ],
+  "result": {
+    "item": "ammm:essential_enchanted_energized_smelting_factory"
+  },
+  "show_notification": true
+}

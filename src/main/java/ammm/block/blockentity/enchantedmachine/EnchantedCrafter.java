@@ -10,7 +10,6 @@ import mekanism.api.chemical.gas.Gas;
 import mekanism.api.chemical.gas.GasStack;
 import mekanism.api.chemical.gas.IGasTank;
 import mekanism.api.inventory.IInventorySlot;
-import mekanism.api.math.MathUtils;
 import mekanism.api.providers.IBlockProvider;
 import mekanism.common.capabilities.fluid.BasicFluidTank;
 import mekanism.common.capabilities.holder.chemical.ChemicalTankHelper;
@@ -27,7 +26,6 @@ import java.util.Arrays;
 public class EnchantedCrafter extends Crafter {
 
     private int baselineMaxOperations = 1;
-    private int inputTankCapacity = 1 * 10000;
 
     public EnchantedCrafter(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
         super(blockProvider, pos, state);
@@ -38,7 +36,7 @@ public class EnchantedCrafter extends Crafter {
     protected IFluidTankHolder getInitialFluidTanks(IContentsListener listener,
                                                     IContentsListener recipeCacheListener) {
         FluidTankHelper builder = FluidTankHelper.forSideWithConfig(this::getDirection, this::getConfig);
-        builder.addTank(fluidTank = BasicFluidTank.input(inputTankCapacity,
+        builder.addTank(fluidTank = BasicFluidTank.input(10000000,
                 stack -> containsInputFluidOther(stack,
                         Arrays.stream(inputSlots).map(IInventorySlot::getStack).toArray(ItemStack[]::new),
                         gasTank.getStack()),
@@ -52,7 +50,7 @@ public class EnchantedCrafter extends Crafter {
                                                                               IContentsListener recipeCacheListener) {
         ChemicalTankHelper<Gas, GasStack, IGasTank> builder = ChemicalTankHelper
                 .forSideGasWithConfig(this::getDirection, this::getConfig);
-        builder.addTank(gasTank = ChemicalTankBuilder.GAS.input(inputTankCapacity,
+        builder.addTank(gasTank = ChemicalTankBuilder.GAS.input(10000000,
                 gas -> containsInputGasOther(gas,
                         Arrays.stream(inputSlots).map(IInventorySlot::getStack).toArray(ItemStack[]::new),
                         fluidTank.getFluid()),
@@ -60,6 +58,7 @@ public class EnchantedCrafter extends Crafter {
         return builder.build();
     }
 
+    @Override
     protected int getBaselineMaxOperations() {
         return baselineMaxOperations;
     }
@@ -75,10 +74,5 @@ public class EnchantedCrafter extends Crafter {
             baselineMaxOperations = 1 << (upgradeComponent.getUpgrades(Upgrade.SPEED)
                     + upgradeComponent.getUpgrades(ExtraUpgrade.STACK));
         }
-        inputTankCapacity = MathUtils.clampToInt(10000l * baselineMaxOperations);
-    }
-
-    public double getScaledProgress() {
-        return getActive() ? 1 : 0;
     }
 }

@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "A": {
+      "item": "astral_mekanism:alloy_stardust"
+    },
+    "B": {
+      "item": "mekanism:pellet_polonium"
+    },
+    "C": {
+      "item": "astral_mekanism:alloy_stardust"
+    },
+    "D": {
+      "item": "astral_mekanism:illusion_control_circuit"
+    },
+    "E": {
+      "item": "ammm:infinite_multiversal_enchanted_energized_smelting_factory"
+    },
+    "F": {
+      "item": "astral_mekanism:illusion_control_circuit"
+    }
+  },
+  "pattern": [
+    "ABC",
+    "DEF",
+    "ABC"
+  ],
+  "result": {
+    "item": "ammm:astral_enchanted_energized_smelting_factory"
+  },
+  "show_notification": true
+}

@@ -1,7 +1,10 @@
 package ammm;
 
-import ammm.block.gui.GuiAstralCrafter;
-import ammm.block.gui.GuiEnchantedCrafter;
+import ammm.block.blockentity.astralmachine.AstralCrafter;
+import ammm.block.blockentity.enchantedfactory.EnchantedEnergizedSmeltingFactory;
+import ammm.block.blockentity.enchantedmachine.EnchantedCrafter;
+import ammm.block.gui.bacemachine.GuiCrafter;
+import ammm.block.gui.factory.GuiEnergizedSmeltingFactory;
 import ammm.registration.MachineRegistryObject;
 import ammm.registries.AMMMCreativeTab;
 import ammm.registries.AMMMachines;
@@ -100,8 +103,9 @@ public class Astral_mekanism_more_machine {
     }
 
     private static void initScreens() {
-        registerScreenMek(AMMMachines.ASTRAL_CRAFTER, GuiAstralCrafter::new);
-        registerScreenMek(AMMMachines.ENCHANTED_CRAFTER, GuiEnchantedCrafter::new);
+        registerScreenMek(AMMMachines.ASTRAL_CRAFTER, GuiCrafter<AstralCrafter>::new);
+        registerScreenMek(AMMMachines.ENCHANTED_CRAFTER, GuiCrafter<EnchantedCrafter>::new);
+        AMMMachines.ENCHANTED_ENERGIZED_SMELTING_FACTRIES.forEach((t, object) -> registerScreenMek(object, GuiEnergizedSmeltingFactory<EnchantedEnergizedSmeltingFactory>::new));
     }
 
     private static <BE extends TileEntityMekanism, CONTAINER extends MekanismTileContainer<BE>, U extends Screen & MenuAccess<CONTAINER>> void registerScreenMek(

@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "A": {
+      "item": "evolvedmekanism:alloy_exoversal"
+    },
+    "B": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "C": {
+      "item": "mekanism_extras:alloy_spectrum"
+    },
+    "D": {
+      "item": "emextras:infinite_multiversal_control_circuit"
+    },
+    "E": {
+      "item": "ammm:cosmic_dense_enchanted_energized_smelting_factory"
+    },
+    "F": {
+      "item": "emextras:infinite_multiversal_control_circuit"
+    }
+  },
+  "pattern": [
+    "ABC",
+    "DEF",
+    "ABC"
+  ],
+  "result": {
+    "item": "ammm:infinite_multiversal_enchanted_energized_smelting_factory"
+  },
+  "show_notification": true
+}

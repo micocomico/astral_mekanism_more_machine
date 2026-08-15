@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "A": {
+      "item": "evolvedmekanism:alloy_singular"
+    },
+    "B": {
+      "item": "mekanism:ingot_refined_obsidian"
+    },
+    "C": {
+      "item": "mekanism_extras:alloy_shining"
+    },
+    "D": {
+      "item": "emextras:cosmic_dense_control_circuit"
+    },
+    "E": {
+      "item": "ammm:supreme_quantum_enchanted_energized_smelting_factory"
+    },
+    "F": {
+      "item": "emextras:cosmic_dense_control_circuit"
+    }
+  },
+  "pattern": [
+    "ABC",
+    "DEF",
+    "ABC"
+  ],
+  "result": {
+    "item": "ammm:cosmic_dense_enchanted_energized_smelting_factory"
+  },
+  "show_notification": true
+}
