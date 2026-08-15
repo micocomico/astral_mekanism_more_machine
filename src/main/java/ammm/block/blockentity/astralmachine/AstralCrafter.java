@@ -55,6 +55,7 @@ public class AstralCrafter extends Crafter
         return builder.build();
     }
 
+    @Override
     protected int getBaselineMaxOperations() {
         return 0x7fffffff;
     }

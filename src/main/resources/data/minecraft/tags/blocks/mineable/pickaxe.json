@@ -1,5 +1,17 @@
 {
   "values": [
-    "ammm:astral_crafter"
+    "ammm:astral_crafter",
+    "ammm:enchanted_crafter",
+
+    "ammm:essential_enchanted_energized_smelting_factory",
+    "ammm:basic_standard_enchanted_energized_smelting_factory",
+    "ammm:advanced_enchanted_energized_smelting_factory",
+    "ammm:elite_enchanted_energized_smelting_factory",
+    "ammm:enchanted_ultimate_enchanted_energized_smelting_factory",
+    "ammm:absolute_overclocked_enchanted_energized_smelting_factory",
+    "ammm:supreme_quantum_enchanted_energized_smelting_factory",
+    "ammm:cosmic_dense_enchanted_energized_smelting_factory",
+    "ammm:infinite_multiversal_enchanted_energized_smelting_factory",
+    "ammm:astral_enchanted_energized_smelting_factory"
   ]
 }

@@ -1,8 +1,5 @@
 package ammm.registration;
 
-import java.util.function.Function;
-import java.util.function.UnaryOperator;
-
 import ammm.registration.BlockTypeMachine.BlockMachineBuilder;
 import astral_mekanism.registration.ExtendedContainerDeferredRegister;
 import astral_mekanism.registration.ExtendedContainerRegistryObject;
@@ -21,6 +18,9 @@ import mekanism.common.tile.base.TileEntityMekanism;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+
+import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 public class MachineRegistryObject<BE extends TileEntityMekanism, BLOCK extends BlockTileModel<BE, BlockTypeMachine<BE>>, CONTAINER extends MekanismTileContainer<BE>, ITEM extends BlockItem>
         implements INamedEntry, IBlockProvider {

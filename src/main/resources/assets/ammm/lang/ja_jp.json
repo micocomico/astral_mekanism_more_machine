@@ -1,9 +1,32 @@
 {
     "block.ammm.astral_crafter": "天体型拡張作業台",
     "block.ammm.enchanted_crafter": "魔性型拡張作業台",
+    "block.ammm.essential_enchanted_energized_smelting_factory": "基礎型魔性型電動精錬ファクトリー",
+    "block.ammm.basic_standard_enchanted_energized_smelting_factory": "基本標準魔性型電動精錬ファクトリー",
+    "block.ammm.advanced_enchanted_energized_smelting_factory": "発展魔性型電動精錬ファクトリー",
+    "block.ammm.elite_enchanted_energized_smelting_factory": "精鋭魔性型電動精錬ファクトリー",
+    "block.ammm.enchanted_ultimate_enchanted_energized_smelting_factory": "魔性究極魔性型電動精錬ファクトリー",
+    "block.ammm.absolute_overclocked_enchanted_energized_smelting_factory": "絶対超速魔性型電動精錬ファクトリー",
+    "block.ammm.supreme_quantum_enchanted_energized_smelting_factory": "至高量子魔性型電動精錬ファクトリー",
+    "block.ammm.cosmic_dense_enchanted_energized_smelting_factory": "宇宙高密魔性型電動精錬ファクトリー",
+    "block.ammm.infinite_multiversal_enchanted_energized_smelting_factory": "無限多元魔性型電動精錬ファクトリー",
+    "block.ammm.astral_enchanted_energized_smelting_factory": "天体級魔性型電動精錬ファクトリー",
+
     "container.ammm.astral_crafter": "天体型拡張作業台",
     "container.ammm.enchanted_crafter": "魔性型拡張作業台",
+    "container.ammm.essential_enchanted_energized_smelting_factory": "基礎型魔性型電動精錬ファクトリー",
+    "container.ammm.basic_standard_enchanted_energized_smelting_factory": "基本標準魔性型電動精錬ファクトリー",
+    "container.ammm.advanced_enchanted_energized_smelting_factory": "発展魔性型電動精錬ファクトリー",
+    "container.ammm.elite_enchanted_energized_smelting_factory": "精鋭魔性型電動精錬ファクトリー",
+    "container.ammm.enchanted_ultimate_enchanted_energized_smelting_factory": "魔性究極魔性型電動精錬ファクトリー",
+    "container.ammm.absolute_overclocked_enchanted_energized_smelting_factory": "絶対超速魔性型電動精錬ファクトリー",
+    "container.ammm.supreme_quantum_enchanted_energized_smelting_factory": "至高量子魔性型電動精錬ファクトリー",
+    "container.ammm.cosmic_dense_enchanted_energized_smelting_factory": "宇宙高密魔性型電動精錬ファクトリー",
+    "container.ammm.infinite_multiversal_enchanted_energized_smelting_factory": "無限多元魔性型電動精錬ファクトリー",
+    "container.ammm.astral_enchanted_energized_smelting_factory": "天体級魔性型電動精錬ファクトリー",
+
     "description.ammm.astral_crafter": "高度なクラフトを行うための拡張された作業台です。",
     "description.ammm.enchanted_crafter": "高度なクラフトを行うための拡張された作業台です。",
+
     "item_group.ammm.modid": "Astral Mekanism More Machine"
 }
