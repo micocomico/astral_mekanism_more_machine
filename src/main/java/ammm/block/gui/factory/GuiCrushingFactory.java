@@ -1,10 +1,12 @@
 package ammm.block.gui.factory;
 
-import ammm.block.blockentity.base.BlockEntityRecipeFactory;
-import ammm.block.blockentity.interf.IEnergizedSmeltingFactory;
-import ammm.block.container.factory.ContainerAstralMekanismFactory;
+import ammm.block.blockentity.interf.ICrushingFactory;
+import astral_mekanism.block.blockentity.base.BlockEntityRecipeFactory;
+import astral_mekanism.block.blockentity.interf.IEnergizedSmeltingFactory;
 import astral_mekanism.block.blockentity.interf.IEssentialEnergizedSmelter;
+import astral_mekanism.block.container.factory.ContainerAstralMekanismFactory;
 import astral_mekanism.block.gui.element.PagedGuiProgress;
+import astral_mekanism.block.gui.factory.GuiAstralMekanismFactory;
 import astral_mekanism.jei.AMEJEIRecipeType;
 import mekanism.api.recipes.cache.CachedRecipe.OperationTracker.RecipeError;
 import mekanism.client.gui.element.bar.GuiVerticalPowerBar;
@@ -15,14 +17,15 @@ import mekanism.client.gui.element.progress.ProgressType;
 import mekanism.client.gui.element.tab.GuiEnergyTab;
 import mekanism.client.jei.MekanismJEIRecipeType;
 import mekanism.common.inventory.warning.WarningTracker.WarningType;
+import mekanism.common.recipe.impl.CrushingIRecipe;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 
-public class GuiEnergizedSmeltingFactory<BE extends BlockEntityRecipeFactory<SmeltingRecipe, BE> & IEnergizedSmeltingFactory<BE>>
+public class GuiCrushingFactory<BE extends BlockEntityRecipeFactory<CrushingIRecipe, BE> & ICrushingFactory<BE>>
         extends GuiAstralMekanismFactory<BE> {
 
-    public GuiEnergizedSmeltingFactory(ContainerAstralMekanismFactory<BE> container, Inventory inv, Component title) {
+    public GuiCrushingFactory(ContainerAstralMekanismFactory<BE> container, Inventory inv, Component title) {
         super(container, inv, title);
     }
 
@@ -40,13 +43,7 @@ public class GuiEnergizedSmeltingFactory<BE extends BlockEntityRecipeFactory<Sme
             int cacheIndex = index;
             addRenderableWidget(
                     new PagedGuiProgress(() -> tile.getProgressScaled(cacheIndex), ProgressType.DOWN, this, x, y, page))
-                    .jeiCategories(AMEJEIRecipeType.ESSENTIAL_SMELTING, MekanismJEIRecipeType.SMELTING);
+                    .jeiCategories(MekanismJEIRecipeType.CRUSHING);
         }
-        addRenderableWidget(new GuiInfusionGauge(tile::getInfusionTank, () -> tile.getInfusionTanks(null),
-                GaugeType.SMALL, this, imageWidth - 36, 36))
-                .warning(WarningType.NO_SPACE_IN_OUTPUT,
-                        tile.getWarningCheck(IEssentialEnergizedSmelter.NOT_ENOUGH_INFUSE_OUTPUT_SPACE, 0));
-        addRenderableWidget(new GuiGasMode(this, imageWidth - 36, 80, true, tile::getGasMode, tile.getBlockPos(), 0));
     }
-
 }

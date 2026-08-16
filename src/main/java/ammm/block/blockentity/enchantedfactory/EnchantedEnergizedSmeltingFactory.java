@@ -1,7 +1,7 @@
 package ammm.block.blockentity.enchantedfactory;
 
-import ammm.block.blockentity.base.BlockEntityRecipeFactory;
-import ammm.block.blockentity.interf.IEnergizedSmeltingFactory;
+import astral_mekanism.block.blockentity.base.BlockEntityRecipeFactory;
+import astral_mekanism.block.blockentity.interf.IEnergizedSmeltingFactory;
 import astral_mekanism.block.blockentity.elements.slot.paged.PagedInputInventorySlot;
 import astral_mekanism.block.blockentity.elements.slot.paged.PagedOutputInventorySlot;
 import astral_mekanism.block.blockentity.interf.IEssentialEnergizedSmelter;
