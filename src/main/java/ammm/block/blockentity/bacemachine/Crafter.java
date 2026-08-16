@@ -192,10 +192,6 @@ public class Crafter extends TileEntityRecipeMachine<AstralCraftingRecipe>
 
     protected int getBaselineMaxOperations() {return 1;}
 
-    public double getScaledProgress() {
-        return getActive() ? 1 : 0;
-    }
-
     @Override
     public @Nullable AstralCraftingRecipe getRecipe(int arg0) {
         return this.findFirstRecipe(itemInputHandlers, fluidInputHandler, gasInputHandler);
