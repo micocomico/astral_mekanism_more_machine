@@ -2,14 +2,16 @@ package ammm.block.blockentity.interf;
 
 import astral_mekanism.block.blockentity.base.IAMEFactory;
 import astral_mekanism.block.blockentity.interf.IEnergizedMachine;
-import astral_mekanism.block.blockentity.interf.IEssentialEnergizedSmelter;
 import astral_mekanism.generalrecipe.lookup.cache.recipe.SingleInputGeneralRecipeCache.GeneralSingleItem;
 import astral_mekanism.generalrecipe.lookup.handler.IUnifiedSingelRecipeLookupHandler;
 import mekanism.api.Action;
 import mekanism.api.chemical.infuse.IInfusionTank;
 import mekanism.api.inventory.IgnoredIInventory;
+import mekanism.api.recipes.ItemStackToItemStackRecipe;
 import mekanism.api.recipes.cache.CachedRecipe.OperationTracker.RecipeError;
 import mekanism.common.recipe.impl.CrushingIRecipe;
+import mekanism.common.recipe.lookup.ISingleRecipeLookupHandler;
+import mekanism.common.recipe.lookup.cache.InputRecipeCache.SingleItem;
 import mekanism.common.tile.base.TileEntityMekanism;
 import mekanism.common.tile.interfaces.IHasGasMode;
 import mekanism.common.tile.interfaces.ISustainedData;
@@ -22,7 +24,7 @@ import java.util.Set;
 
 public interface ICrushingFactory<BE extends TileEntityMekanism & IAMEFactory<BE>>
         extends
-        IUnifiedSingelRecipeLookupHandler<ItemStack, CrushingIRecipe, GeneralSingleItem<IgnoredIInventory, CrushingIRecipe>>,
+        ISingleRecipeLookupHandler<ItemStack, ItemStackToItemStackRecipe, SingleItem<ItemStackToItemStackRecipe>>,
         IEnergizedMachine, IAMEFactory<BE> {
 
     public static final List<RecipeError> TRACKED_ERROR_TYPES = List.of(

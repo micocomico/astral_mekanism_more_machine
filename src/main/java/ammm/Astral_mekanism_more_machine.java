@@ -107,8 +107,8 @@ public class Astral_mekanism_more_machine {
     private static void initScreens() {
         registerScreenMek(AMMMachines.ASTRAL_CRAFTER, GuiCrafter<AstralCrafter>::new);
         registerScreenMek(AMMMachines.ENCHANTED_CRAFTER, GuiCrafter<EnchantedCrafter>::new);
-        AMMMachines.ENCHANTED_ENERGIZED_SMELTING_FACTRIES.forEach((t, object) -> registerScreenMek(object, GuiEnergizedSmeltingFactory<EnchantedEnergizedSmeltingFactory>::new));
         AMMMachines.ENCHANTED_CRUSHING_FACTRIES.forEach((t, object) -> registerScreenMek(object, GuiCrushingFactory<EnchantedCrushingFactory>::new));
+        AMMMachines.ENCHANTED_ENERGIZED_SMELTING_FACTRIES.forEach((t, object) -> registerScreenMek(object, GuiEnergizedSmeltingFactory<EnchantedEnergizedSmeltingFactory>::new));
     }
 
     private static <BE extends TileEntityMekanism, CONTAINER extends MekanismTileContainer<BE>, U extends Screen & MenuAccess<CONTAINER>> void registerScreenMek(

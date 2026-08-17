@@ -4,6 +4,8 @@ import astral_mekanism.generalrecipe.cachedrecipe.GeneralCachedRecipe;
 import astral_mekanism.recipes.output.ItemInfuseOutput;
 import astral_mekanism.registries.AMEInfuseTypes;
 import mekanism.api.chemical.infuse.InfusionStack;
+import mekanism.api.recipes.ItemStackToItemStackRecipe;
+import mekanism.api.recipes.cache.CachedRecipe;
 import mekanism.api.recipes.cache.CachedRecipe.OperationTracker;
 import mekanism.api.recipes.ingredients.ItemStackIngredient;
 import mekanism.api.recipes.ingredients.creator.IItemStackIngredientCreator;
@@ -18,7 +20,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.BooleanSupplier;
 import java.util.function.IntSupplier;
 
-public class EssentialCrushingCachedRecipe extends GeneralCachedRecipe<CrushingIRecipe> {
+public class EssentialCrushingCachedRecipe extends CachedRecipe<ItemStackToItemStackRecipe> {
 
     private final IInputHandler<ItemStack> inputHandler;
     private final IOutputHandler<ItemStack> outputHandler;
@@ -28,7 +30,7 @@ public class EssentialCrushingCachedRecipe extends GeneralCachedRecipe<CrushingI
     @Nullable
     private ItemStack recipeOutput;
 
-    public EssentialCrushingCachedRecipe(CrushingIRecipe recipe, BooleanSupplier recheckAllErrors,
+    public EssentialCrushingCachedRecipe(ItemStackToItemStackRecipe recipe, BooleanSupplier recheckAllErrors,
                                          IInputHandler<ItemStack> inputHandler, IOutputHandler<ItemStack> outputHandler) {
         super(recipe, recheckAllErrors);
         this.inputHandler = inputHandler;

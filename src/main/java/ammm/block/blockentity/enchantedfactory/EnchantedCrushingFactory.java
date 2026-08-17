@@ -3,59 +3,42 @@ package ammm.block.blockentity.enchantedfactory;
 import ammm.block.blockentity.interf.ICrushingFactory;
 import ammm.block.blockentity.interf.IEssentialCrusher;
 import ammm.generalrecipe.cachedrecipe.EssentialCrushingCachedRecipe;
-import astral_mekanism.block.blockentity.base.BlockEntityRecipeFactory;
 import astral_mekanism.block.blockentity.elements.slot.paged.PagedInputInventorySlot;
 import astral_mekanism.block.blockentity.elements.slot.paged.PagedOutputInventorySlot;
-import astral_mekanism.enums.AMEUpgrade;
-import ammm.generalrecipe.GeneralRecipeType;
-import astral_mekanism.generalrecipe.IUnifiedRecipeTypeProvider;
-import astral_mekanism.generalrecipe.cachedrecipe.EssentialSmeltingCachedRecipe;
-import astral_mekanism.generalrecipe.cachedrecipe.ICachedRecipe;
-import astral_mekanism.generalrecipe.lookup.cache.recipe.SingleInputGeneralRecipeCache.GeneralSingleItem;
 import astral_mekanism.integration.AMEEmpowered;
-import astral_mekanism.recipes.output.AMOutputHelper;
-import astral_mekanism.recipes.output.ItemInfuseOutput;
 import com.jerry.mekanism_extras.api.ExtraUpgrade;
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import mekanism.api.IContentsListener;
-import mekanism.api.NBTConstants;
-import mekanism.api.RelativeSide;
 import mekanism.api.Upgrade;
-import mekanism.api.chemical.ChemicalTankBuilder;
 import mekanism.api.chemical.infuse.IInfusionTank;
-import mekanism.api.chemical.infuse.InfuseType;
-import mekanism.api.chemical.infuse.InfusionStack;
 import mekanism.api.providers.IBlockProvider;
+import mekanism.api.recipes.ItemStackToItemStackRecipe;
+import mekanism.api.recipes.cache.CachedRecipe;
 import mekanism.api.recipes.cache.CachedRecipe.OperationTracker.RecipeError;
 import mekanism.api.recipes.inputs.IInputHandler;
 import mekanism.api.recipes.inputs.InputHelper;
 import mekanism.api.recipes.outputs.IOutputHandler;
 import mekanism.api.recipes.outputs.OutputHelper;
 import mekanism.common.capabilities.energy.MachineEnergyContainer;
-import mekanism.common.capabilities.holder.chemical.ChemicalTankHelper;
 import mekanism.common.capabilities.holder.slot.InventorySlotHelper;
-import mekanism.common.inventory.container.MekanismContainer;
-import mekanism.common.inventory.container.sync.SyncableEnum;
 import mekanism.common.lib.transmitter.TransmissionType;
+import mekanism.common.recipe.IMekanismRecipeTypeProvider;
+import mekanism.common.recipe.MekanismRecipeType;
 import mekanism.common.recipe.impl.CrushingIRecipe;
-import mekanism.common.tile.TileEntityChemicalTank.GasMode;
+import mekanism.common.recipe.lookup.cache.InputRecipeCache.SingleItem;
 import mekanism.common.tile.component.TileComponentConfig;
 import mekanism.common.tile.component.TileComponentEjector;
 import mekanism.common.util.MekanismUtils;
-import mekanism.common.util.NBTUtils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import mekanism.api.inventory.IgnoredIInventory;
+import ammm.block.blockentity.base.MekanismRecipeFactory ;
 
 import java.util.Arrays;
-import java.util.Map;
 
 public class EnchantedCrushingFactory
-        extends BlockEntityRecipeFactory<CrushingIRecipe, EnchantedCrushingFactory>
+        extends MekanismRecipeFactory<ItemStackToItemStackRecipe, EnchantedCrushingFactory,SingleItem<ItemStackToItemStackRecipe>>
         implements ICrushingFactory<EnchantedCrushingFactory> {
 
     private PagedInputInventorySlot[] inputSlots;
@@ -83,18 +66,18 @@ public class EnchantedCrushingFactory
     }
 
     @Override
-    public @NotNull IUnifiedRecipeTypeProvider<CrushingIRecipe, GeneralSingleItem<IgnoredIInventory, CrushingIRecipe>> getRecipeType() {
-        return GeneralRecipeType.CRUSHING;
+    public @NotNull IMekanismRecipeTypeProvider<ItemStackToItemStackRecipe, SingleItem<ItemStackToItemStackRecipe>> getRecipeType() {
+        return MekanismRecipeType.CRUSHING;
     }
 
     @Override
-    public @Nullable CrushingIRecipe getRecipe(int cacheIndex) {
+    public @Nullable ItemStackToItemStackRecipe getRecipe(int cacheIndex) {
         return findFirstRecipe(inputHandlers[cacheIndex]);
     }
 
     @Override
-    public @NotNull ICachedRecipe<CrushingIRecipe> createNewCachedRecipe(@NotNull CrushingIRecipe recipe,
-                                                                         int cacheIndex) {
+    public @NotNull CachedRecipe<ItemStackToItemStackRecipe> createNewCachedRecipe(@NotNull ItemStackToItemStackRecipe recipe,
+                                                                        int cacheIndex) {
         return new EssentialCrushingCachedRecipe(recipe, recheckAllRecipeErrors[cacheIndex], inputHandlers[cacheIndex],
                 outputHandlers[cacheIndex])
                 .setErrorsChanged(errors -> errorTracker.onErrorsChanged(errors, cacheIndex))
