@@ -3,6 +3,7 @@ package ammm.registries;
 import ammm.AMMMConstants;
 import ammm.AMMMLang;
 import ammm.block.blockentity.astralmachine.AstralCrafter;
+import ammm.block.blockentity.base.MekanismRecipeFactory;
 import ammm.block.blockentity.enchantedfactory.EnchantedCrushingFactory;
 import astral_mekanism.block.blockentity.base.BlockEntityRecipeFactory;
 import ammm.block.blockentity.enchantedfactory.EnchantedEnergizedSmeltingFactory;
@@ -44,6 +45,22 @@ public class AMMMachines {
     };
 
     private static <BE extends BlockEntityRecipeFactory<?, BE>> EnumMap<AMETier, MachineRegistryObject<BE, BlockTileModel<BE, BlockTypeMachine<BE>>, ContainerAstralMekanismFactory<BE>, ItemBlockMachine>> registerAMEFactories(
+            Function<AMETier, String> nameBuilder,
+            RegistrationInterfaces.BlockEntityConstructor<BE, BlockTypeMachine<BE>, BlockTileModel<BE, BlockTypeMachine<BE>>> constructor,
+            Class<BE> beClass,
+            ILangEntry langEntry,
+            Function<AMETier, UnaryOperator<BlockTypeMachine.BlockMachineBuilder<BlockTypeMachine<BE>, BE>>> operator) {
+        EnumMap<AMETier, MachineRegistryObject<BE, BlockTileModel<BE, BlockTypeMachine<BE>>, ContainerAstralMekanismFactory<BE>, ItemBlockMachine>> result = new EnumMap<>(
+                AMETier.class);
+        for (AMETier tier : AMETier.values()) {
+            result.put(tier, MACHINES.registerDefaultBlockItem(nameBuilder.apply(tier),
+                    constructor, beClass, ContainerAstralMekanismFactory<BE>::new, langEntry,
+                    builder -> operator.apply(tier).apply(builder.with(new AttributeTier<>(tier)))));
+        }
+        return result;
+    }
+
+    private static <BE extends MekanismRecipeFactory<?, BE, ?>> EnumMap<AMETier, MachineRegistryObject<BE, BlockTileModel<BE, BlockTypeMachine<BE>>, ContainerAstralMekanismFactory<BE>, ItemBlockMachine>> registerFactories(
             Function<AMETier, String> nameBuilder,
             RegistrationInterfaces.BlockEntityConstructor<BE, BlockTypeMachine<BE>, BlockTileModel<BE, BlockTypeMachine<BE>>> constructor,
             Class<BE> beClass,
@@ -116,7 +133,7 @@ public class AMMMachines {
                                     Upgrade.ENERGY,Upgrade.SPEED,ExtraUpgrade.STACK)));
 
     public static final EnumMap<AMETier, MachineRegistryObject<EnchantedCrushingFactory, BlockTileModel<EnchantedCrushingFactory, BlockTypeMachine<EnchantedCrushingFactory>>,
-            ContainerAstralMekanismFactory<EnchantedCrushingFactory>, ItemBlockMachine>> ENCHANTED_CRUSHING_FACTRIES = registerAMEFactories(
+            ContainerAstralMekanismFactory<EnchantedCrushingFactory>, ItemBlockMachine>> ENCHANTED_CRUSHING_FACTRIES = registerFactories(
             t -> t.nameForNormal + "_enchanted_crushing_factory",
             EnchantedCrushingFactory::new,
             EnchantedCrushingFactory.class,

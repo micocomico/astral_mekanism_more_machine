@@ -1,5 +1,6 @@
 package ammm.block.gui.factory;
 
+import ammm.block.blockentity.base.MekanismRecipeFactory;
 import ammm.block.blockentity.interf.ICrushingFactory;
 import astral_mekanism.block.blockentity.base.BlockEntityRecipeFactory;
 import astral_mekanism.block.blockentity.interf.IEnergizedSmeltingFactory;
@@ -8,6 +9,7 @@ import astral_mekanism.block.container.factory.ContainerAstralMekanismFactory;
 import astral_mekanism.block.gui.element.PagedGuiProgress;
 import astral_mekanism.block.gui.factory.GuiAstralMekanismFactory;
 import astral_mekanism.jei.AMEJEIRecipeType;
+import mekanism.api.recipes.ItemStackToItemStackRecipe;
 import mekanism.api.recipes.cache.CachedRecipe.OperationTracker.RecipeError;
 import mekanism.client.gui.element.bar.GuiVerticalPowerBar;
 import mekanism.client.gui.element.button.GuiGasMode;
@@ -18,11 +20,12 @@ import mekanism.client.gui.element.tab.GuiEnergyTab;
 import mekanism.client.jei.MekanismJEIRecipeType;
 import mekanism.common.inventory.warning.WarningTracker.WarningType;
 import mekanism.common.recipe.impl.CrushingIRecipe;
+import mekanism.common.recipe.lookup.cache.InputRecipeCache;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 
-public class GuiCrushingFactory<BE extends BlockEntityRecipeFactory<CrushingIRecipe, BE> & ICrushingFactory<BE>>
+public class GuiCrushingFactory<BE extends MekanismRecipeFactory<ItemStackToItemStackRecipe, BE, InputRecipeCache.SingleItem<ItemStackToItemStackRecipe>> & ICrushingFactory<BE>>
         extends GuiAstralMekanismFactory<BE> {
 
     public GuiCrushingFactory(ContainerAstralMekanismFactory<BE> container, Inventory inv, Component title) {
