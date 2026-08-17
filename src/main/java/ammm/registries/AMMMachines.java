@@ -117,7 +117,7 @@ public class AMMMachines {
 
     public static final EnumMap<AMETier, MachineRegistryObject<EnchantedCrushingFactory, BlockTileModel<EnchantedCrushingFactory, BlockTypeMachine<EnchantedCrushingFactory>>,
             ContainerAstralMekanismFactory<EnchantedCrushingFactory>, ItemBlockMachine>> ENCHANTED_CRUSHING_FACTRIES = registerAMEFactories(
-            t -> t.nameForNormal + "_enchanted_energized_smelting_factory",
+            t -> t.nameForNormal + "_enchanted_crushing_factory",
             EnchantedCrushingFactory::new,
             EnchantedCrushingFactory.class,
             AMELang.DESCRIPTION_ENCHANTED_MACHINE,
