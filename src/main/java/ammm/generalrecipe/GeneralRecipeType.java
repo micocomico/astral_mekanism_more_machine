@@ -8,11 +8,8 @@ import astral_mekanism.AstralMekanism;
 import astral_mekanism.generalrecipe.AMEFakeRecipeType;
 import astral_mekanism.generalrecipe.IUnifiedRecipeType;
 import astral_mekanism.generalrecipe.IUnifiedRecipeTypeProvider;
-import astral_mekanism.generalrecipe.lookup.cache.recipe.AAEReactionRecipeCache;
-import astral_mekanism.generalrecipe.lookup.cache.recipe.CropSoilInputRecipeCache;
-import astral_mekanism.generalrecipe.lookup.cache.recipe.InscriberRecipeInputRecipeCache;
+import astral_mekanism.generalrecipe.lookup.cache.recipe.*;
 import ammm.generalrecipe.lookup.cache.recipe.SingleInputGeneralRecipeCache.GeneralSingleItem;
-import astral_mekanism.generalrecipe.lookup.cache.recipe.TransformRecipeInputRecipeCache;
 import astral_mekanism.generalrecipe.recipe.CropSoilRecipe;
 import mekanism.api.inventory.IgnoredIInventory;
 import mekanism.api.recipes.ingredients.ItemStackIngredient;
@@ -150,6 +147,16 @@ public class GeneralRecipeType<C extends Container, RECIPE extends Recipe<C>, IN
 
     public static final GeneralRecipeType<IgnoredIInventory, CrushingIRecipe, GeneralSingleItem<IgnoredIInventory, CrushingIRecipe>> CRUSHING = new GeneralRecipeType<>(
             MekanismRecipeType.CRUSHING,
+            type -> new GeneralSingleItem<>(type,
+                    recipe -> IngredientCreatorAccess.item().createMulti(recipe.getIngredients().stream()
+                            .map(IngredientCreatorAccess.item()::from)
+                            .toArray(ItemStackIngredient[]::new)),
+                    (stack, recipe) -> recipe.getIngredients().stream()
+                            .anyMatch(ingredient -> ingredient.test(stack))));
+
+
+    public static final GeneralRecipeType<Container, SmeltingRecipe, GeneralSingleItem<Container, SmeltingRecipe>> SMELTING = new GeneralRecipeType<>(
+            RecipeType.SMELTING,
             type -> new GeneralSingleItem<>(type,
                     recipe -> IngredientCreatorAccess.item().createMulti(recipe.getIngredients().stream()
                             .map(IngredientCreatorAccess.item()::from)
