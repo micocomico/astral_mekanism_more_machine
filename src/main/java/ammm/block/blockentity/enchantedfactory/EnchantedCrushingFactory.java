@@ -43,7 +43,6 @@ public class EnchantedCrushingFactory
 
     private PagedInputInventorySlot[] inputSlots;
     private PagedOutputInventorySlot[] outputSlots;
-    private IInfusionTank infusionTank;
     private final IInputHandler<ItemStack>[] inputHandlers;
     private final IOutputHandler<ItemStack>[] outputHandlers;
     private int baselineMaxOperations = 1;

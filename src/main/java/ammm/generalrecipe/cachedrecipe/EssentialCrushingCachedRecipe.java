@@ -76,8 +76,7 @@ public class EssentialCrushingCachedRecipe extends CachedRecipe<ItemStackToItemS
         }
     }
 
-    public static IOutputHandler<ItemStack> merge(IOutputHandler<ItemStack> itemOutputHandler,
-            IOutputHandler<InfusionStack> infusionOutputHandler) {
+    public static IOutputHandler<ItemStack> merge(IOutputHandler<ItemStack> itemOutputHandler) {
         return new IOutputHandler<ItemStack>() {
 
             @Override
