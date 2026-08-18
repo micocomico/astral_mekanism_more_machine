@@ -6,6 +6,7 @@ import astral_mekanism.generalrecipe.lookup.cache.recipe.SingleInputGeneralRecip
 import astral_mekanism.generalrecipe.lookup.handler.IUnifiedSingelRecipeLookupHandler;
 import mekanism.api.chemical.infuse.IInfusionTank;
 import mekanism.api.math.FloatingLong;
+import mekanism.api.recipes.ItemStackToItemStackRecipe;
 import mekanism.api.recipes.cache.CachedRecipe.OperationTracker.RecipeError;
 import mekanism.common.capabilities.energy.MachineEnergyContainer;
 import mekanism.common.recipe.impl.CrushingIRecipe;
@@ -21,9 +22,9 @@ import net.minecraft.world.item.crafting.SmeltingRecipe;
 
 import java.util.List;
 
-public interface IEssentialCrusher<BE extends TileEntityRecipeMachine<CrushingIRecipe> & IEssentialCrusher<BE>>
+public interface IEssentialCrusher<BE extends TileEntityRecipeMachine<ItemStackToItemStackRecipe> & IEssentialCrusher<BE>>
         extends
-        ISingleRecipeLookupHandler<ItemStack, CrushingIRecipe, InputRecipeCache.SingleItem<CrushingIRecipe>> {
+        ISingleRecipeLookupHandler<ItemStack, ItemStackToItemStackRecipe, InputRecipeCache.SingleItem<ItemStackToItemStackRecipe>> {
 
     public static final RecipeError NOT_ENOUGH_ITEM_OUTPUT_SPACE = RecipeError.create();
 
