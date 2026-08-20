@@ -1,9 +1,11 @@
 package ammm;
 
+import ammm.block.blockentity.astralfactory.AstralCrushingFactory;
 import ammm.block.blockentity.astralmachine.AstralCrafter;
 import ammm.block.blockentity.enchantedfactory.EnchantedCrushingFactory;
 import ammm.block.blockentity.enchantedfactory.EnchantedEnergizedSmeltingFactory;
 import ammm.block.blockentity.enchantedmachine.EnchantedCrafter;
+import ammm.block.blockentity.normalfactory.CrushingFactory;
 import ammm.block.gui.factory.GuiCrushingFactory;
 import ammm.block.gui.machine.GuiCrafter;
 import astral_mekanism.block.gui.factory.GuiEnergizedSmeltingFactory;
@@ -107,8 +109,13 @@ public class Astral_mekanism_more_machine {
     private static void initScreens() {
         registerScreenMek(AMMMachines.ASTRAL_CRAFTER, GuiCrafter<AstralCrafter>::new);
         registerScreenMek(AMMMachines.ENCHANTED_CRAFTER, GuiCrafter<EnchantedCrafter>::new);
-        AMMMachines.ENCHANTED_CRUSHING_FACTRIES.forEach((t, object) -> registerScreenMek(object, GuiCrushingFactory<EnchantedCrushingFactory>::new));
-        AMMMachines.ENCHANTED_ENERGIZED_SMELTING_FACTRIES.forEach((t, object) -> registerScreenMek(object, GuiEnergizedSmeltingFactory<EnchantedEnergizedSmeltingFactory>::new));
+
+        AMMMachines.ENCHANTED_ENERGIZED_SMELTING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GuiEnergizedSmeltingFactory<EnchantedEnergizedSmeltingFactory>::new));
+
+        AMMMachines.ASTRAL_CRUSHING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GuiCrushingFactory<AstralCrushingFactory>::new));
+        AMMMachines.ENCHANTED_CRUSHING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GuiCrushingFactory<EnchantedCrushingFactory>::new));
+        AMMMachines.CRUSHING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GuiCrushingFactory<CrushingFactory>::new));
+
     }
 
     private static <BE extends TileEntityMekanism, CONTAINER extends MekanismTileContainer<BE>, U extends Screen & MenuAccess<CONTAINER>> void registerScreenMek(

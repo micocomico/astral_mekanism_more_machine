@@ -1,19 +1,19 @@
 package ammm.block.blockentity.enchantedfactory;
 
+import ammm.block.blockentity.base.MekanismRecipeFactory ;
 import ammm.block.blockentity.interf.ICrushingFactory;
 import ammm.block.blockentity.interf.IEssentialCrusher;
-import ammm.generalrecipe.cachedrecipe.EssentialCrushingCachedRecipe;
 import astral_mekanism.block.blockentity.elements.slot.paged.PagedInputInventorySlot;
 import astral_mekanism.block.blockentity.elements.slot.paged.PagedOutputInventorySlot;
 import astral_mekanism.integration.AMEEmpowered;
 import com.jerry.mekanism_extras.api.ExtraUpgrade;
 import mekanism.api.IContentsListener;
 import mekanism.api.Upgrade;
-import mekanism.api.chemical.infuse.IInfusionTank;
 import mekanism.api.providers.IBlockProvider;
 import mekanism.api.recipes.ItemStackToItemStackRecipe;
 import mekanism.api.recipes.cache.CachedRecipe;
 import mekanism.api.recipes.cache.CachedRecipe.OperationTracker.RecipeError;
+import mekanism.api.recipes.cache.OneInputCachedRecipe;
 import mekanism.api.recipes.inputs.IInputHandler;
 import mekanism.api.recipes.inputs.InputHelper;
 import mekanism.api.recipes.outputs.IOutputHandler;
@@ -23,7 +23,6 @@ import mekanism.common.capabilities.holder.slot.InventorySlotHelper;
 import mekanism.common.lib.transmitter.TransmissionType;
 import mekanism.common.recipe.IMekanismRecipeTypeProvider;
 import mekanism.common.recipe.MekanismRecipeType;
-import mekanism.common.recipe.impl.CrushingIRecipe;
 import mekanism.common.recipe.lookup.cache.InputRecipeCache.SingleItem;
 import mekanism.common.tile.component.TileComponentConfig;
 import mekanism.common.tile.component.TileComponentEjector;
@@ -33,7 +32,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import ammm.block.blockentity.base.MekanismRecipeFactory ;
 
 import java.util.Arrays;
 
@@ -77,8 +75,8 @@ public class EnchantedCrushingFactory
     @Override
     public @NotNull CachedRecipe<ItemStackToItemStackRecipe> createNewCachedRecipe(@NotNull ItemStackToItemStackRecipe recipe,
                                                                         int cacheIndex) {
-        return new EssentialCrushingCachedRecipe(recipe, recheckAllRecipeErrors[cacheIndex], inputHandlers[cacheIndex],
-                outputHandlers[cacheIndex])
+        return OneInputCachedRecipe.itemToItem(recipe, recheckAllRecipeErrors[cacheIndex], inputHandlers[cacheIndex],
+                        outputHandlers[cacheIndex])
                 .setErrorsChanged(errors -> errorTracker.onErrorsChanged(errors, cacheIndex))
                 .setCanHolderFunction(() -> MekanismUtils.canFunction(this))
                 .setActive(active -> setActiveState(active, cacheIndex))
@@ -86,6 +84,7 @@ public class EnchantedCrushingFactory
                 .setOnFinish(this::markForSave)
                 .setBaselineMaxOperations(() -> baselineMaxOperations);
     }
+    protected int getBaselineMaxOperations() {return 1;}
 
     @Override
     public MachineEnergyContainer<EnchantedCrushingFactory> getEnergyContainer() {
