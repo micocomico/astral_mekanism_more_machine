@@ -40,7 +40,7 @@ public class GuiCrafter<BE extends Crafter> extends GuiConfigurableTile<BE, Cont
         addRenderableWidget(new GuiGasGauge(tile::getGasTank, () -> tile.getGasTanks(null),
                 GaugeType.STANDARD, this, 25, 29));
         addRenderableWidget(
-                new GuiProgress(tile::getActive, ProgressType.RIGHT, this, 134, 58).jeiCategory(tile)
+                new GuiProgress(tile::getScaledProgress, ProgressType.RIGHT, this, 134, 58).jeiCategory(tile)
                         .warning(WarningType.INPUT_DOESNT_PRODUCE_OUTPUT,
                                 tile.getWarningCheck(RecipeError.INPUT_DOESNT_PRODUCE_OUTPUT)));
     }

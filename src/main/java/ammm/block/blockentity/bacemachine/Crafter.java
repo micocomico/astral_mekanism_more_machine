@@ -217,5 +217,7 @@ public class Crafter extends TileEntityRecipeMachine<AstralCraftingRecipe>
     public FloatingLong getEnergyUsage() {
         return getActive() ? energyContainer.getEnergyPerTick() : FloatingLong.ZERO;
     }
-
+    public double getScaledProgress() {
+        return getActive() ? 1 : 0;
+    }
 }

@@ -18,6 +18,7 @@ import mekanism.common.CommonWorldTickHandler;
 import mekanism.common.inventory.container.MekanismContainer;
 import mekanism.common.inventory.container.sync.SyncableBoolean;
 import mekanism.common.inventory.container.sync.SyncableInt;
+import mekanism.common.recipe.lookup.cache.IInputRecipeCache;
 import mekanism.common.recipe.lookup.cache.InputRecipeCache;
 import mekanism.common.recipe.lookup.monitor.RecipeCacheLookupMonitor;
 import mekanism.common.tile.interfaces.ISustainedData;
@@ -37,8 +38,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.IntConsumer;
 
-public abstract class MekanismProgressFactory<RECIPE extends MekanismRecipe, BE extends MekanismProgressFactory<RECIPE, BE>>
-        extends MekanismRecipeFactory<RECIPE, BE, InputRecipeCache.SingleItem<ItemStackToItemStackRecipe>>
+public abstract class MekanismProgressFactory<RECIPE extends MekanismRecipe, BE extends MekanismProgressFactory<RECIPE, BE, INPUT_CACHE>, INPUT_CACHE extends IInputRecipeCache>
+        extends MekanismRecipeFactory<RECIPE, BE, INPUT_CACHE>
         implements ISustainedData {
 
     protected final int baseTicksRequired;
