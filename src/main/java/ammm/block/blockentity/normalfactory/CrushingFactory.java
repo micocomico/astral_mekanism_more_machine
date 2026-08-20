@@ -26,6 +26,7 @@ import mekanism.common.capabilities.holder.slot.InventorySlotHelper;
 import mekanism.common.lib.transmitter.TransmissionType;
 import mekanism.common.recipe.IMekanismRecipeTypeProvider;
 import mekanism.common.recipe.MekanismRecipeType;
+import mekanism.common.recipe.lookup.cache.InputRecipeCache;
 import mekanism.common.recipe.lookup.cache.InputRecipeCache.SingleItem;
 import mekanism.common.tile.component.TileComponentConfig;
 import mekanism.common.tile.component.TileComponentEjector;
@@ -41,7 +42,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CrushingFactory
-        extends MekanismProgressFactory<ItemStackToItemStackRecipe, CrushingFactory>
+        extends MekanismProgressFactory<ItemStackToItemStackRecipe, CrushingFactory, InputRecipeCache.SingleItem<ItemStackToItemStackRecipe>>
         implements ICrushingFactory<CrushingFactory> {
 
     private PagedInputInventorySlot[] inputSlots;
