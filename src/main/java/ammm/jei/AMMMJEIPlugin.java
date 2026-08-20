@@ -29,7 +29,7 @@ public class AMMMJEIPlugin implements IModPlugin {
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registry) {
         CatalystRegistryHelper.register(registry, AMEJEIRecipeType.ASTRAL_CRAFTING,AMMMachines.ASTRAL_CRAFTER);
         CatalystRegistryHelper.register(registry, AMEJEIRecipeType.ASTRAL_CRAFTING,AMMMachines.ENCHANTED_CRAFTER);
-        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.SMELTING,AMMMachines.ENCHANTED_ENERGIZED_SMELTING_FACTRIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.SMELTING,AMMMachines.ENCHANTED_ENERGIZED_SMELTING_FACTORIES.values().toArray(IItemProvider[]::new));
     }
 
     @Override

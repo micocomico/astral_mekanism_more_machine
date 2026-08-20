@@ -1,4 +1,4 @@
-package ammm.block.blockentity.enchantedfactory;
+package ammm.block.blockentity.astralfactory;
 
 import ammm.block.blockentity.base.MekanismRecipeFactory ;
 import ammm.block.blockentity.interf.ICrushingFactory;
@@ -35,18 +35,18 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 
-public class EnchantedCrushingFactory
-        extends MekanismRecipeFactory<ItemStackToItemStackRecipe, EnchantedCrushingFactory,SingleItem<ItemStackToItemStackRecipe>>
-        implements ICrushingFactory<EnchantedCrushingFactory> {
+public class AstralCrushingFactory
+        extends MekanismRecipeFactory<ItemStackToItemStackRecipe, AstralCrushingFactory,SingleItem<ItemStackToItemStackRecipe>>
+        implements ICrushingFactory<AstralCrushingFactory> {
 
     private PagedInputInventorySlot[] inputSlots;
     private PagedOutputInventorySlot[] outputSlots;
     private final IInputHandler<ItemStack>[] inputHandlers;
     private final IOutputHandler<ItemStack>[] outputHandlers;
-    private int baselineMaxOperations = 1;
+    private int baselineMaxOperations = 0x7fffffff;
 
     @SuppressWarnings("unchecked")
-    public EnchantedCrushingFactory(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
+    public AstralCrushingFactory(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
         super(blockProvider, pos, state, TRACKED_ERROR_TYPES, GLOBAL_ERROR_TYPES);
         configComponent = new TileComponentConfig(this, TransmissionType.ITEM,TransmissionType.ENERGY);
         configComponent.setupItemIOConfig(Arrays.asList(inputSlots), Arrays.asList(outputSlots), energySlot, false);
@@ -87,12 +87,12 @@ public class EnchantedCrushingFactory
     protected int getBaselineMaxOperations() {return 1;}
 
     @Override
-    public MachineEnergyContainer<EnchantedCrushingFactory> getEnergyContainer() {
+    public MachineEnergyContainer<AstralCrushingFactory> getEnergyContainer() {
         return energyContainer;
     }
 
     @Override
-    public EnchantedCrushingFactory getSelf() {
+    public AstralCrushingFactory getSelf() {
         return this;
     }
 
@@ -128,19 +128,5 @@ public class EnchantedCrushingFactory
             builder.addSlot(outputSlots[i] = PagedOutputInventorySlot.at(updateSortingListener, x, y + 44, page));
         }
         return builder;
-    }
-
-    @Override
-    public void recalculateUpgrades(Upgrade upgrade) {
-        super.recalculateUpgrades(upgrade);
-        if (AMEEmpowered.empoweredIsLoaded()) {
-            if (AMEEmpowered.isEmpoweredSpeed(upgrade) || upgrade == Upgrade.SPEED || upgrade == ExtraUpgrade.STACK) {
-                baselineMaxOperations = ((1 << upgradeComponent.getUpgrades(Upgrade.SPEED)) + (2 << AMEEmpowered
-                        .getEmpoweredSpeeds(this))) << upgradeComponent.getUpgrades(ExtraUpgrade.STACK);
-            }
-        } else if (upgrade == Upgrade.SPEED || upgrade == ExtraUpgrade.STACK) {
-            baselineMaxOperations = 1 << (upgradeComponent.getUpgrades(Upgrade.SPEED)
-                    + upgradeComponent.getUpgrades(ExtraUpgrade.STACK));
-        }
     }
 }

@@ -1,14 +1,17 @@
-package ammm.block.blockentity.enchantedfactory;
+package ammm.block.blockentity.normalfactory;
 
+import ammm.block.blockentity.base.MekanismProgressFactory;
 import ammm.block.blockentity.base.MekanismRecipeFactory ;
 import ammm.block.blockentity.interf.ICrushingFactory;
 import ammm.block.blockentity.interf.IEssentialCrusher;
 import astral_mekanism.block.blockentity.elements.slot.paged.PagedInputInventorySlot;
 import astral_mekanism.block.blockentity.elements.slot.paged.PagedOutputInventorySlot;
+import astral_mekanism.enums.AMEUpgrade;
 import astral_mekanism.integration.AMEEmpowered;
 import com.jerry.mekanism_extras.api.ExtraUpgrade;
 import mekanism.api.IContentsListener;
 import mekanism.api.Upgrade;
+import mekanism.api.inventory.IInventorySlot;
 import mekanism.api.providers.IBlockProvider;
 import mekanism.api.recipes.ItemStackToItemStackRecipe;
 import mekanism.api.recipes.cache.CachedRecipe;
@@ -33,21 +36,21 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
-public class EnchantedCrushingFactory
-        extends MekanismRecipeFactory<ItemStackToItemStackRecipe, EnchantedCrushingFactory,SingleItem<ItemStackToItemStackRecipe>>
-        implements ICrushingFactory<EnchantedCrushingFactory> {
+public class CrushingFactory
+        extends MekanismProgressFactory<ItemStackToItemStackRecipe, CrushingFactory>
+        implements ICrushingFactory<CrushingFactory> {
 
     private PagedInputInventorySlot[] inputSlots;
     private PagedOutputInventorySlot[] outputSlots;
     private final IInputHandler<ItemStack>[] inputHandlers;
     private final IOutputHandler<ItemStack>[] outputHandlers;
-    private int baselineMaxOperations = 1;
-
     @SuppressWarnings("unchecked")
-    public EnchantedCrushingFactory(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
-        super(blockProvider, pos, state, TRACKED_ERROR_TYPES, GLOBAL_ERROR_TYPES);
+    public CrushingFactory(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
+        super(blockProvider, pos, state, 200,TRACKED_ERROR_TYPES, GLOBAL_ERROR_TYPES);
         configComponent = new TileComponentConfig(this, TransmissionType.ITEM,TransmissionType.ENERGY);
         configComponent.setupItemIOConfig(Arrays.asList(inputSlots), Arrays.asList(outputSlots), energySlot, false);
         configComponent.setupInputConfig(TransmissionType.ENERGY, energyContainer);
@@ -76,23 +79,24 @@ public class EnchantedCrushingFactory
     public @NotNull CachedRecipe<ItemStackToItemStackRecipe> createNewCachedRecipe(@NotNull ItemStackToItemStackRecipe recipe,
                                                                         int cacheIndex) {
         return OneInputCachedRecipe.itemToItem(recipe, recheckAllRecipeErrors[cacheIndex], inputHandlers[cacheIndex],
-                        outputHandlers[cacheIndex])
+                outputHandlers[cacheIndex])
                 .setErrorsChanged(errors -> errorTracker.onErrorsChanged(errors, cacheIndex))
                 .setCanHolderFunction(() -> MekanismUtils.canFunction(this))
                 .setActive(active -> setActiveState(active, cacheIndex))
                 .setEnergyRequirements(energyContainer::getEnergyPerTick, energyContainer)
+                .setRequiredTicks(this::getTicksRequired)
+                .setBaselineMaxOperations(this::getBaselineMaxOperations)
                 .setOnFinish(this::markForSave)
-                .setBaselineMaxOperations(() -> baselineMaxOperations);
+                .setOperatingTicksChanged(p -> progress[cacheIndex] = p);
     }
-    protected int getBaselineMaxOperations() {return 1;}
 
     @Override
-    public MachineEnergyContainer<EnchantedCrushingFactory> getEnergyContainer() {
+    public MachineEnergyContainer<CrushingFactory> getEnergyContainer() {
         return energyContainer;
     }
 
     @Override
-    public EnchantedCrushingFactory getSelf() {
+    public CrushingFactory getSelf() {
         return this;
     }
 
@@ -131,16 +135,24 @@ public class EnchantedCrushingFactory
     }
 
     @Override
-    public void recalculateUpgrades(Upgrade upgrade) {
-        super.recalculateUpgrades(upgrade);
-        if (AMEEmpowered.empoweredIsLoaded()) {
-            if (AMEEmpowered.isEmpoweredSpeed(upgrade) || upgrade == Upgrade.SPEED || upgrade == ExtraUpgrade.STACK) {
-                baselineMaxOperations = ((1 << upgradeComponent.getUpgrades(Upgrade.SPEED)) + (2 << AMEEmpowered
-                        .getEmpoweredSpeeds(this))) << upgradeComponent.getUpgrades(ExtraUpgrade.STACK);
-            }
-        } else if (upgrade == Upgrade.SPEED || upgrade == ExtraUpgrade.STACK) {
-            baselineMaxOperations = 1 << (upgradeComponent.getUpgrades(Upgrade.SPEED)
-                    + upgradeComponent.getUpgrades(ExtraUpgrade.STACK));
+    protected void sort() {
+        PagedInputInventorySlot manySlot = Arrays.stream(inputSlots).reduce(inputSlots[0],
+                (a, b) -> a.getCount() > b.getCount() ? a : b);
+        if (manySlot.isEmpty()) {
+            return;
+        }
+        List<PagedInputInventorySlot> emptySlots = Arrays.stream(inputSlots).filter(IInventorySlot::isEmpty).toList();
+        if (emptySlots.isEmpty()) {
+            return;
+        }
+        List<PagedInputInventorySlot> targetSlots = new ArrayList<>(emptySlots);
+        targetSlots.add(0, manySlot);
+        ItemStack stack = manySlot.getStack().copy();
+        int size = targetSlots.size();
+        int base = stack.getCount() / size;
+        int left = stack.getCount() % size;
+        for (int index = 0; index < size; index++) {
+            targetSlots.get(index).setStack(stack.copyWithCount(index < left ? base + 1 : base));
         }
     }
 }

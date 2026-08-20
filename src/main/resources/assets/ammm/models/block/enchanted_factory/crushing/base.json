@@ -1,0 +1,7 @@
+{
+    "parent": "astral_mekanism:block/factory_base",
+    "textures": {
+        "front": "ammm:block/enchanted_factory/crusher_front",
+        "up": "ammm:block/machine_base/up_enchanted_factory"
+    }
+}
