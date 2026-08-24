@@ -1,8 +1,8 @@
 package ammm.block.blockentity.enchantedfactory;
 
 import ammm.block.blockentity.base.MekanismRecipeFactory ;
-import ammm.block.blockentity.interf.ICrushingFactory;
-import ammm.block.blockentity.interf.IEssentialCrusher;
+import ammm.block.blockentity.interfacee.IElectricFactory;
+import ammm.block.blockentity.interfacee.IEssentialElectricMachine;
 import astral_mekanism.block.blockentity.elements.slot.paged.PagedInputInventorySlot;
 import astral_mekanism.block.blockentity.elements.slot.paged.PagedOutputInventorySlot;
 import astral_mekanism.integration.AMEEmpowered;
@@ -37,7 +37,7 @@ import java.util.Arrays;
 
 public class EnchantedCrushingFactory
         extends MekanismRecipeFactory<ItemStackToItemStackRecipe, EnchantedCrushingFactory,SingleItem<ItemStackToItemStackRecipe>>
-        implements ICrushingFactory<EnchantedCrushingFactory> {
+        implements IElectricFactory<EnchantedCrushingFactory> {
 
     private PagedInputInventorySlot[] inputSlots;
     private PagedOutputInventorySlot[] outputSlots;
@@ -58,7 +58,7 @@ public class EnchantedCrushingFactory
         for (int i = 0; i < tier.processes; i++) {
             inputHandlers[i] = InputHelper.getInputHandler(inputSlots[i], RecipeError.NOT_ENOUGH_INPUT);
             outputHandlers[i] = OutputHelper.getOutputHandler(outputSlots[i],
-                    IEssentialCrusher.NOT_ENOUGH_ITEM_OUTPUT_SPACE);
+                    IEssentialElectricMachine.NOT_ENOUGH_ITEM_OUTPUT_SPACE);
         }
     }
 
@@ -84,7 +84,6 @@ public class EnchantedCrushingFactory
                 .setOnFinish(this::markForSave)
                 .setBaselineMaxOperations(() -> baselineMaxOperations);
     }
-    protected int getBaselineMaxOperations() {return 1;}
 
     @Override
     public MachineEnergyContainer<EnchantedCrushingFactory> getEnergyContainer() {

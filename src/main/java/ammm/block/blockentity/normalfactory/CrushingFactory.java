@@ -1,17 +1,15 @@
 package ammm.block.blockentity.normalfactory;
 
 import ammm.block.blockentity.base.MekanismProgressFactory;
-import ammm.block.blockentity.base.MekanismRecipeFactory ;
-import ammm.block.blockentity.interf.ICrushingFactory;
-import ammm.block.blockentity.interf.IEssentialCrusher;
+import ammm.block.blockentity.interfacee.IElectricFactory;
 import astral_mekanism.block.blockentity.elements.slot.paged.PagedInputInventorySlot;
 import astral_mekanism.block.blockentity.elements.slot.paged.PagedOutputInventorySlot;
-import astral_mekanism.enums.AMEUpgrade;
-import astral_mekanism.integration.AMEEmpowered;
-import com.jerry.mekanism_extras.api.ExtraUpgrade;
+import astral_mekanism.block.blockentity.interf.IEssentialEnergizedSmelter;
 import mekanism.api.IContentsListener;
 import mekanism.api.Upgrade;
+import mekanism.api.chemical.infuse.IInfusionTank;
 import mekanism.api.inventory.IInventorySlot;
+import mekanism.api.math.FloatingLong;
 import mekanism.api.providers.IBlockProvider;
 import mekanism.api.recipes.ItemStackToItemStackRecipe;
 import mekanism.api.recipes.cache.CachedRecipe;
@@ -27,11 +25,13 @@ import mekanism.common.lib.transmitter.TransmissionType;
 import mekanism.common.recipe.IMekanismRecipeTypeProvider;
 import mekanism.common.recipe.MekanismRecipeType;
 import mekanism.common.recipe.lookup.cache.InputRecipeCache;
-import mekanism.common.recipe.lookup.cache.InputRecipeCache.SingleItem;
+import mekanism.common.tile.TileEntityChemicalTank.GasMode;
 import mekanism.common.tile.component.TileComponentConfig;
 import mekanism.common.tile.component.TileComponentEjector;
 import mekanism.common.util.MekanismUtils;
+import mekanism.common.util.UpgradeUtils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
@@ -43,16 +43,20 @@ import java.util.List;
 
 public class CrushingFactory
         extends MekanismProgressFactory<ItemStackToItemStackRecipe, CrushingFactory, InputRecipeCache.SingleItem<ItemStackToItemStackRecipe>>
-        implements ICrushingFactory<CrushingFactory> {
+        implements IElectricFactory<CrushingFactory> {
 
     private PagedInputInventorySlot[] inputSlots;
     private PagedOutputInventorySlot[] outputSlots;
+    private IInfusionTank infusionTank;
     private final IInputHandler<ItemStack>[] inputHandlers;
     private final IOutputHandler<ItemStack>[] outputHandlers;
+    private GasMode gasMode;
+    private FloatingLong energyUsed = FloatingLong.ZERO;
+
     @SuppressWarnings("unchecked")
     public CrushingFactory(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
-        super(blockProvider, pos, state, 200,TRACKED_ERROR_TYPES, GLOBAL_ERROR_TYPES);
-        configComponent = new TileComponentConfig(this, TransmissionType.ITEM,TransmissionType.ENERGY);
+        super(blockProvider, pos, state, 200, TRACKED_ERROR_TYPES, GLOBAL_ERROR_TYPES);
+        configComponent = new TileComponentConfig(this, TransmissionType.ITEM, TransmissionType.ENERGY);
         configComponent.setupItemIOConfig(Arrays.asList(inputSlots), Arrays.asList(outputSlots), energySlot, false);
         configComponent.setupInputConfig(TransmissionType.ENERGY, energyContainer);
         ejectorComponent = new TileComponentEjector(this, () -> Long.MAX_VALUE);
@@ -62,12 +66,12 @@ public class CrushingFactory
         for (int i = 0; i < tier.processes; i++) {
             inputHandlers[i] = InputHelper.getInputHandler(inputSlots[i], RecipeError.NOT_ENOUGH_INPUT);
             outputHandlers[i] = OutputHelper.getOutputHandler(outputSlots[i],
-                    IEssentialCrusher.NOT_ENOUGH_ITEM_OUTPUT_SPACE);
+                    IEssentialEnergizedSmelter.NOT_ENOUGH_ITEM_OUTPUT_SPACE);
         }
     }
 
     @Override
-    public @NotNull IMekanismRecipeTypeProvider<ItemStackToItemStackRecipe, SingleItem<ItemStackToItemStackRecipe>> getRecipeType() {
+    public @NotNull IMekanismRecipeTypeProvider<ItemStackToItemStackRecipe, InputRecipeCache.SingleItem<ItemStackToItemStackRecipe>> getRecipeType() {
         return MekanismRecipeType.CRUSHING;
     }
 
@@ -78,7 +82,7 @@ public class CrushingFactory
 
     @Override
     public @NotNull CachedRecipe<ItemStackToItemStackRecipe> createNewCachedRecipe(@NotNull ItemStackToItemStackRecipe recipe,
-                                                                        int cacheIndex) {
+                                                                       int cacheIndex) {
         return OneInputCachedRecipe.itemToItem(recipe, recheckAllRecipeErrors[cacheIndex], inputHandlers[cacheIndex],
                 outputHandlers[cacheIndex])
                 .setErrorsChanged(errors -> errorTracker.onErrorsChanged(errors, cacheIndex))
@@ -135,6 +139,7 @@ public class CrushingFactory
         return builder;
     }
 
+
     @Override
     protected void sort() {
         PagedInputInventorySlot manySlot = Arrays.stream(inputSlots).reduce(inputSlots[0],
@@ -156,4 +161,16 @@ public class CrushingFactory
             targetSlots.get(index).setStack(stack.copyWithCount(index < left ? base + 1 : base));
         }
     }
+
+    @NotNull
+    @Override
+    public List<Component> getInfo(@NotNull Upgrade upgrade) {
+        return UpgradeUtils.getMultScaledInfo(this, upgrade);
+    }
+
+    @Override
+    public FloatingLong getEnergyUsage() {
+        return energyUsed;
+    }
+
 }
