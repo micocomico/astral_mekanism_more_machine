@@ -1,14 +1,11 @@
 package ammm.block.blockentity.astralfactory;
 
 import ammm.block.blockentity.base.MekanismRecipeFactory ;
-import ammm.block.blockentity.interf.ICrushingFactory;
-import ammm.block.blockentity.interf.IEssentialCrusher;
+import ammm.block.blockentity.interfacee.IElectricFactory;
+import ammm.block.blockentity.interfacee.IEssentialElectricMachine;
 import astral_mekanism.block.blockentity.elements.slot.paged.PagedInputInventorySlot;
 import astral_mekanism.block.blockentity.elements.slot.paged.PagedOutputInventorySlot;
-import astral_mekanism.integration.AMEEmpowered;
-import com.jerry.mekanism_extras.api.ExtraUpgrade;
 import mekanism.api.IContentsListener;
-import mekanism.api.Upgrade;
 import mekanism.api.providers.IBlockProvider;
 import mekanism.api.recipes.ItemStackToItemStackRecipe;
 import mekanism.api.recipes.cache.CachedRecipe;
@@ -37,7 +34,7 @@ import java.util.Arrays;
 
 public class AstralCrushingFactory
         extends MekanismRecipeFactory<ItemStackToItemStackRecipe, AstralCrushingFactory,SingleItem<ItemStackToItemStackRecipe>>
-        implements ICrushingFactory<AstralCrushingFactory> {
+        implements IElectricFactory<AstralCrushingFactory> {
 
     private PagedInputInventorySlot[] inputSlots;
     private PagedOutputInventorySlot[] outputSlots;
@@ -58,7 +55,7 @@ public class AstralCrushingFactory
         for (int i = 0; i < tier.processes; i++) {
             inputHandlers[i] = InputHelper.getInputHandler(inputSlots[i], RecipeError.NOT_ENOUGH_INPUT);
             outputHandlers[i] = OutputHelper.getOutputHandler(outputSlots[i],
-                    IEssentialCrusher.NOT_ENOUGH_ITEM_OUTPUT_SPACE);
+                    IEssentialElectricMachine.NOT_ENOUGH_ITEM_OUTPUT_SPACE);
         }
     }
 
