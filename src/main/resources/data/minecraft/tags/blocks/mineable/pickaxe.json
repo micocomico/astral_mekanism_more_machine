@@ -1,7 +1,9 @@
 {
   "values": [
     "ammm:astral_crafter",
+
     "ammm:enchanted_crafter",
+    "ammm:enchanted_combiner",
 
     "ammm:essential_enchanted_energized_smelting_factory",
     "ammm:basic_standard_enchanted_energized_smelting_factory",
@@ -13,6 +15,7 @@
     "ammm:cosmic_dense_enchanted_energized_smelting_factory",
     "ammm:infinite_multiversal_enchanted_energized_smelting_factory",
     "ammm:astral_enchanted_energized_smelting_factory",
+
     "ammm:essential_astral_crushing_factory",
     "ammm:basic_standard_astral_crushing_factory",
     "ammm:advanced_astral_crushing_factory",
@@ -43,6 +46,7 @@
     "ammm:cosmic_dense_crushing_factory",
     "ammm:infinite_multiversal_crushing_factory",
     "ammm:astral_crushing_factory",
+
     "ammm:essential_astral_enriching_factory",
     "ammm:basic_standard_astral_enriching_factory",
     "ammm:advanced_astral_enriching_factory",
@@ -72,6 +76,37 @@
     "ammm:supreme_quantum_enriching_factory",
     "ammm:cosmic_dense_enriching_factory",
     "ammm:infinite_multiversal_enriching_factory",
-    "ammm:astral_enriching_factory"
+    "ammm:astral_enriching_factory",
+
+    "ammm:essential_astral_combining_factory",
+    "ammm:basic_standard_astral_combining_factory",
+    "ammm:advanced_astral_combining_factory",
+    "ammm:elite_astral_combining_factory",
+    "ammm:enchanted_ultimate_astral_combining_factory",
+    "ammm:absolute_overclocked_astral_combining_factory",
+    "ammm:supreme_quantum_astral_combining_factory",
+    "ammm:cosmic_dense_astral_combining_factory",
+    "ammm:infinite_multiversal_astral_combining_factory",
+    "ammm:astronomical_astral_combining_factory",
+    "ammm:essential_enchanted_combining_factory",
+    "ammm:basic_standard_enchanted_combining_factory",
+    "ammm:advanced_enchanted_combining_factory",
+    "ammm:elite_enchanted_combining_factory",
+    "ammm:enchanted_ultimate_enchanted_combining_factory",
+    "ammm:absolute_overclocked_enchanted_combining_factory",
+    "ammm:supreme_quantum_enchanted_combining_factory",
+    "ammm:cosmic_dense_enchanted_combining_factory",
+    "ammm:infinite_multiversal_enchanted_combining_factory",
+    "ammm:astral_enchanted_combining_factory",
+    "ammm:essential_combining_factory",
+    "ammm:basic_standard_combining_factory",
+    "ammm:advanced_combining_factory",
+    "ammm:elite_combining_factory",
+    "ammm:enchanted_ultimate_combining_factory",
+    "ammm:absolute_overclocked_combining_factory",
+    "ammm:supreme_quantum_combining_factory",
+    "ammm:cosmic_dense_combining_factory",
+    "ammm:infinite_multiversal_combining_factory",
+    "ammm:astral_combining_factory"
   ]
 }
