@@ -12,7 +12,7 @@
       "item": "mekanism:ingot_refined_obsidian"
     },
     "N": {
-      "item": "astral_mekanism:essential_crafter"
+      "item": "mekanism:combiner"
     }
   },
   "pattern": [
@@ -21,7 +21,7 @@
     "ACA"
   ],
   "result": {
-    "item": "ammm:enchanted_crafter"
+    "item": "ammm:enchanted_combiner"
   },
   "show_notification": true
 }

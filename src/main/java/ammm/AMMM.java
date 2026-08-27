@@ -1,20 +1,26 @@
 package ammm;
 
-import ammm.block.blockentity.astralfactory.AstralCrushingFactory;
-import ammm.block.blockentity.astralfactory.AstralEnrichingFactory;
-import ammm.block.blockentity.astralmachine.AstralCrafter;
-import ammm.block.blockentity.enchantedfactory.EnchantedCrushingFactory;
-import ammm.block.blockentity.enchantedfactory.EnchantedEnergizedSmeltingFactory;
-import ammm.block.blockentity.enchantedfactory.EnchantedEnrichingFactory;
-import ammm.block.blockentity.enchantedmachine.EnchantedCrafter;
-import ammm.block.blockentity.normalfactory.CrushingFactory;
-import ammm.block.blockentity.normalfactory.EnrichingFactory;
-import ammm.block.gui.factory.GuiElectricFactory;
+import ammm.block.blockentity.astralfactory.AFCombining;
+import ammm.block.blockentity.astralfactory.AFCrushing;
+import ammm.block.blockentity.astralfactory.AFEnriching;
+import ammm.block.blockentity.astralmachine.AMCrafter;
+import ammm.block.blockentity.enchantedfactory.EFCombining;
+import ammm.block.blockentity.enchantedfactory.EFCrushing;
+import ammm.block.blockentity.enchantedfactory.EFEnergizedSmelting;
+import ammm.block.blockentity.enchantedfactory.EFEnriching;
+import ammm.block.blockentity.enchantedmachine.EMCombiner;
+import ammm.block.blockentity.enchantedmachine.EMCrafter;
+import ammm.block.blockentity.normalfactory.NFCombining;
+import ammm.block.blockentity.normalfactory.NFCrushing;
+import ammm.block.blockentity.normalfactory.NFEnriching;
+import ammm.block.gui.factory.GFCombining;
+import ammm.block.gui.factory.GFElectric;
 import ammm.block.gui.machine.GuiCrafter;
-import astral_mekanism.block.gui.factory.GuiEnergizedSmeltingFactory;
 import ammm.registration.MachineRegistryObject;
 import ammm.registries.AMMMCreativeTab;
 import ammm.registries.AMMMachines;
+import astral_mekanism.block.gui.factory.GuiEnergizedSmeltingFactory;
+import astral_mekanism.block.gui.prefab.GuiDoubleItemToItemRecipeMachine;
 import com.mojang.logging.LogUtils;
 import mekanism.common.inventory.container.tile.MekanismTileContainer;
 import mekanism.common.tile.base.TileEntityMekanism;
@@ -110,18 +116,23 @@ public class AMMM {
     }
 
     private static void initScreens() {
-        registerScreenMek(AMMMachines.ASTRAL_CRAFTER, GuiCrafter<AstralCrafter>::new);
-        registerScreenMek(AMMMachines.ENCHANTED_CRAFTER, GuiCrafter<EnchantedCrafter>::new);
+        registerScreenMek(AMMMachines.ASTRAL_CRAFTER, GuiCrafter<AMCrafter>::new);
+        registerScreenMek(AMMMachines.ENCHANTED_CRAFTER, GuiCrafter<EMCrafter>::new);
 
-        AMMMachines.ENCHANTED_ENERGIZED_SMELTING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GuiEnergizedSmeltingFactory<EnchantedEnergizedSmeltingFactory>::new));
+        AMMMachines.ENCHANTED_ENERGIZED_SMELTING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GuiEnergizedSmeltingFactory<EFEnergizedSmelting>::new));
 
-        AMMMachines.ASTRAL_CRUSHING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GuiElectricFactory<AstralCrushingFactory>::new));
-        AMMMachines.ENCHANTED_CRUSHING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GuiElectricFactory<EnchantedCrushingFactory>::new));
-        AMMMachines.CRUSHING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GuiElectricFactory<CrushingFactory>::new));
+        AMMMachines.ASTRAL_CRUSHING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFElectric<AFCrushing>::new));
+        AMMMachines.ENCHANTED_CRUSHING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFElectric<EFCrushing>::new));
+        AMMMachines.CRUSHING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFElectric<NFCrushing>::new));
 
-        AMMMachines.ASTRAL_ENRICHING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GuiElectricFactory<AstralEnrichingFactory>::new));
-        AMMMachines.ENCHANTED_ENRICHING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GuiElectricFactory<EnchantedEnrichingFactory>::new));
-        AMMMachines.ENRICHING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GuiElectricFactory<EnrichingFactory>::new));
+        AMMMachines.ASTRAL_ENRICHING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFElectric<AFEnriching>::new));
+        AMMMachines.ENCHANTED_ENRICHING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFElectric<EFEnriching>::new));
+        AMMMachines.ENRICHING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFElectric<NFEnriching>::new));
+
+        registerScreenMek(AMMMachines.ENCHANTED_COMBINER, GuiDoubleItemToItemRecipeMachine<EMCombiner>::new);
+        AMMMachines.ASTRAL_COMBINING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFCombining<AFCombining>::new));
+        AMMMachines.ENCHANTED_COMBINING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFCombining<EFCombining>::new));
+        AMMMachines.COMBINING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFCombining<NFCombining>::new));
     }
 
     private static <BE extends TileEntityMekanism, CONTAINER extends MekanismTileContainer<BE>, U extends Screen & MenuAccess<CONTAINER>> void registerScreenMek(

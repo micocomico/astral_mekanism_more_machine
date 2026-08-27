@@ -1,6 +1,6 @@
 package ammm.block.gui.machine;
 
-import ammm.block.blockentity.bacemachine.Crafter;
+import ammm.block.blockentity.basemachine.BMCrafter;
 import ammm.block.container.machine.ContainerCrafter;
 import mekanism.api.recipes.cache.CachedRecipe.OperationTracker.RecipeError;
 import mekanism.client.gui.GuiConfigurableTile;
@@ -17,7 +17,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;
 
-public class GuiCrafter<BE extends Crafter> extends GuiConfigurableTile<BE, ContainerCrafter<BE>> {
+public class GuiCrafter<BE extends BMCrafter> extends GuiConfigurableTile<BE, ContainerCrafter<BE>> {
 
     public GuiCrafter(ContainerCrafter<BE> container, Inventory inv, Component title) {
         super(container, inv, title);

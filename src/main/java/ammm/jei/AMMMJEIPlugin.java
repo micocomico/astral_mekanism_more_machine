@@ -36,6 +36,10 @@ public class AMMMJEIPlugin implements IModPlugin {
         CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.ENRICHING,AMMMachines.ASTRAL_ENRICHING_FACTORIES.values().toArray(IItemProvider[]::new));
         CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.ENRICHING,AMMMachines.ENCHANTED_ENRICHING_FACTORIES.values().toArray(IItemProvider[]::new));
         CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.ENRICHING,AMMMachines.ENRICHING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.COMBINING,AMMMachines.ENCHANTED_COMBINER);
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.COMBINING,AMMMachines.ASTRAL_COMBINING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.COMBINING,AMMMachines.ENCHANTED_COMBINING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.COMBINING,AMMMachines.COMBINING_FACTORIES.values().toArray(IItemProvider[]::new));
     }
 
     @Override
