@@ -1,4 +1,4 @@
-package ammm.block.blockentity.basefactory;
+package ammm.block.blockentity.base;
 
 import astral_mekanism.integration.AMEEmpowered;
 import com.jerry.mekanism_extras.api.ExtraUpgrade;
