@@ -1,6 +1,6 @@
 package ammm.block.gui.factory;
 
-import ammm.block.blockentity.basefactory.MekanismRecipeFactory;
+import ammm.block.blockentity.base.MekanismRecipeFactory;
 import astral_mekanism.block.container.factory.ContainerAstralMekanismFactory;
 import astral_mekanism.block.gui.element.PagedGuiProgress;
 import astral_mekanism.block.gui.factory.GuiAstralMekanismFactory;

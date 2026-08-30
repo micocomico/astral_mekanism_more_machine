@@ -1,6 +1,6 @@
 package ammm.block.blockentity.astralfactory;
 
-import ammm.block.blockentity.basefactory.MekanismRecipeFactory ;
+import ammm.block.blockentity.base.MekanismRecipeFactory ;
 import astral_mekanism.block.blockentity.elements.slot.paged.PagedInputInventorySlot;
 import astral_mekanism.block.blockentity.elements.slot.paged.PagedOutputInventorySlot;
 import mekanism.api.IContentsListener;

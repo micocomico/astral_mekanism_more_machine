@@ -1,6 +1,7 @@
 package ammm;
 
 import ammm.block.blockentity.astralfactory.AFCombining;
+import ammm.block.blockentity.astralfactory.AFCompressing;
 import ammm.block.blockentity.astralfactory.AFCrushing;
 import ammm.block.blockentity.astralfactory.AFEnriching;
 import ammm.block.blockentity.astralmachine.AMCrafter;
@@ -13,6 +14,7 @@ import ammm.block.blockentity.enchantedmachine.EMCrafter;
 import ammm.block.blockentity.normalfactory.NFCombining;
 import ammm.block.blockentity.normalfactory.NFCrushing;
 import ammm.block.blockentity.normalfactory.NFEnriching;
+import ammm.block.gui.factory.GFAdvanced;
 import ammm.block.gui.factory.GFCombining;
 import ammm.block.gui.factory.GFElectric;
 import ammm.block.gui.machine.GuiCrafter;
@@ -133,6 +135,8 @@ public class AMMM {
         AMMMachines.ASTRAL_COMBINING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFCombining<AFCombining>::new));
         AMMMachines.ENCHANTED_COMBINING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFCombining<EFCombining>::new));
         AMMMachines.COMBINING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFCombining<NFCombining>::new));
+
+        AMMMachines.ASTRAL_COMPRESSING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFAdvanced<AFCompressing>::new));
     }
 
     private static <BE extends TileEntityMekanism, CONTAINER extends MekanismTileContainer<BE>, U extends Screen & MenuAccess<CONTAINER>> void registerScreenMek(
