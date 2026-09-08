@@ -29,6 +29,7 @@ public class AMMMJEIPlugin implements IModPlugin {
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registry) {
         CatalystRegistryHelper.register(registry, AMEJEIRecipeType.ASTRAL_CRAFTING,AMMMachines.ASTRAL_CRAFTER);
         CatalystRegistryHelper.register(registry, AMEJEIRecipeType.ASTRAL_CRAFTING,AMMMachines.ENCHANTED_CRAFTER);
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.COMBINING,AMMMachines.ENCHANTED_COMBINER);
         CatalystRegistryHelper.register(registry, AMEJEIRecipeType.ESSENTIAL_SMELTING,AMMMachines.ENCHANTED_ENERGIZED_SMELTING_FACTORIES.values().toArray(IItemProvider[]::new));
         CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.CRUSHING,AMMMachines.ASTRAL_CRUSHING_FACTORIES.values().toArray(IItemProvider[]::new));
         CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.CRUSHING,AMMMachines.ENCHANTED_CRUSHING_FACTORIES.values().toArray(IItemProvider[]::new));
@@ -36,10 +37,21 @@ public class AMMMJEIPlugin implements IModPlugin {
         CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.ENRICHING,AMMMachines.ASTRAL_ENRICHING_FACTORIES.values().toArray(IItemProvider[]::new));
         CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.ENRICHING,AMMMachines.ENCHANTED_ENRICHING_FACTORIES.values().toArray(IItemProvider[]::new));
         CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.ENRICHING,AMMMachines.ENRICHING_FACTORIES.values().toArray(IItemProvider[]::new));
-        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.COMBINING,AMMMachines.ENCHANTED_COMBINER);
         CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.COMBINING,AMMMachines.ASTRAL_COMBINING_FACTORIES.values().toArray(IItemProvider[]::new));
         CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.COMBINING,AMMMachines.ENCHANTED_COMBINING_FACTORIES.values().toArray(IItemProvider[]::new));
         CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.COMBINING,AMMMachines.COMBINING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.COMPRESSING,AMMMachines.ASTRAL_COMPRESSING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.COMPRESSING,AMMMachines.ENCHANTED_COMPRESSING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.COMPRESSING,AMMMachines.COMPRESSING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.INJECTING,AMMMachines.ASTRAL_INJECTING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.INJECTING,AMMMachines.ENCHANTED_INJECTING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.INJECTING,AMMMachines.INJECTING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.PURIFYING,AMMMachines.ASTRAL_PURIFYING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.PURIFYING,AMMMachines.ENCHANTED_PURIFYING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.PURIFYING,AMMMachines.PURIFYING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.METALLURGIC_INFUSING,AMMMachines.ASTRAL_INFUSING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.METALLURGIC_INFUSING,AMMMachines.ENCHANTED_INFUSING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.METALLURGIC_INFUSING,AMMMachines.INFUSING_FACTORIES.values().toArray(IItemProvider[]::new));
     }
 
     @Override

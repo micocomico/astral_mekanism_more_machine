@@ -1,154 +1,186 @@
 package ammm.block.blockentity.normalfactory;
 
-import ammm.block.blockentity.base.MekanismProgressFactory;
+import ammm.block.blockentity.basefactory.BFElectric;
 import astral_mekanism.block.blockentity.elements.slot.paged.PagedInputInventorySlot;
-import astral_mekanism.block.blockentity.elements.slot.paged.PagedOutputInventorySlot;
+import astral_mekanism.integration.AMEEmpowered;
+import com.jerry.mekanism_extras.api.ExtraUpgrade;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import mekanism.api.IContentsListener;
+import mekanism.api.NBTConstants;
 import mekanism.api.Upgrade;
-import mekanism.api.chemical.infuse.IInfusionTank;
 import mekanism.api.inventory.IInventorySlot;
-import mekanism.api.math.FloatingLong;
 import mekanism.api.providers.IBlockProvider;
 import mekanism.api.recipes.ItemStackToItemStackRecipe;
 import mekanism.api.recipes.cache.CachedRecipe;
-import mekanism.api.recipes.cache.CachedRecipe.OperationTracker.RecipeError;
 import mekanism.api.recipes.cache.OneInputCachedRecipe;
-import mekanism.api.recipes.inputs.IInputHandler;
-import mekanism.api.recipes.inputs.InputHelper;
-import mekanism.api.recipes.outputs.IOutputHandler;
-import mekanism.api.recipes.outputs.OutputHelper;
+import mekanism.common.CommonWorldTickHandler;
 import mekanism.common.capabilities.energy.MachineEnergyContainer;
-import mekanism.common.capabilities.holder.slot.InventorySlotHelper;
-import mekanism.common.lib.transmitter.TransmissionType;
+import mekanism.common.inventory.container.MekanismContainer;
+import mekanism.common.inventory.container.sync.SyncableBoolean;
+import mekanism.common.inventory.container.sync.SyncableInt;
 import mekanism.common.recipe.IMekanismRecipeTypeProvider;
 import mekanism.common.recipe.MekanismRecipeType;
-import mekanism.common.recipe.lookup.ISingleRecipeLookupHandler;
-import mekanism.common.recipe.lookup.cache.InputRecipeCache;
-import mekanism.common.tile.TileEntityChemicalTank.GasMode;
-import mekanism.common.tile.component.TileComponentConfig;
-import mekanism.common.tile.component.TileComponentEjector;
+import mekanism.common.recipe.lookup.cache.InputRecipeCache.SingleItem;
+import mekanism.common.recipe.lookup.monitor.FactoryRecipeCacheLookupMonitor;
+import mekanism.common.recipe.lookup.monitor.RecipeCacheLookupMonitor;
+import mekanism.common.tile.interfaces.ISustainedData;
 import mekanism.common.util.MekanismUtils;
-import mekanism.common.util.UpgradeUtils;
+import mekanism.common.util.NBTUtils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.IntArrayTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
+import java.util.function.IntConsumer;
 
-public class NFEnriching
-        extends MekanismProgressFactory<ItemStackToItemStackRecipe, NFEnriching, InputRecipeCache.SingleItem<ItemStackToItemStackRecipe>> implements
-        ISingleRecipeLookupHandler.ItemRecipeLookupHandler<ItemStackToItemStackRecipe> {
-
-    private static final List<RecipeError> TRACKED_ERROR_TYPES = List.of(
-            RecipeError.NOT_ENOUGH_ENERGY,
-            RecipeError.NOT_ENOUGH_INPUT,
-            RecipeError.NOT_ENOUGH_OUTPUT_SPACE,
-            RecipeError.INPUT_DOESNT_PRODUCE_OUTPUT
-    );
-    private static final Set<RecipeError> GLOBAL_ERROR_TYPES = Set.of(RecipeError.NOT_ENOUGH_ENERGY);
-
-    private PagedInputInventorySlot[] inputSlots;
-    private PagedOutputInventorySlot[] outputSlots;
-    private IInfusionTank infusionTank;
-    private final IInputHandler<ItemStack>[] inputHandlers;
-    private final IOutputHandler<ItemStack>[] outputHandlers;
-    private GasMode gasMode;
-    private FloatingLong energyUsed = FloatingLong.ZERO;
-
-    @SuppressWarnings("unchecked")
-    public NFEnriching(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
-        super(blockProvider, pos, state, 200, TRACKED_ERROR_TYPES, GLOBAL_ERROR_TYPES);
-        configComponent = new TileComponentConfig(this, TransmissionType.ITEM, TransmissionType.ENERGY);
-        configComponent.setupItemIOConfig(Arrays.asList(inputSlots), Arrays.asList(outputSlots), energySlot, false);
-        configComponent.setupInputConfig(TransmissionType.ENERGY, energyContainer);
-        ejectorComponent = new TileComponentEjector(this, () -> Long.MAX_VALUE);
-        ejectorComponent.setOutputData(configComponent, TransmissionType.ITEM);
-        this.inputHandlers = new IInputHandler[tier.processes];
-        this.outputHandlers = new IOutputHandler[tier.processes];
-        for (int i = 0; i < tier.processes; i++) {
-            inputHandlers[i] = InputHelper.getInputHandler(inputSlots[i], RecipeError.NOT_ENOUGH_INPUT);
-            outputHandlers[i] = OutputHelper.getOutputHandler(outputSlots[i],
-                    RecipeError.NOT_ENOUGH_OUTPUT_SPACE);
-        }
-    }
+public class NFEnriching extends BFElectric<NFEnriching> implements ISustainedData {
 
     @Override
-    public @NotNull IMekanismRecipeTypeProvider<ItemStackToItemStackRecipe, InputRecipeCache.SingleItem<ItemStackToItemStackRecipe>> getRecipeType() {
+    public @NotNull IMekanismRecipeTypeProvider<ItemStackToItemStackRecipe, SingleItem<ItemStackToItemStackRecipe>> getRecipeType() {
         return MekanismRecipeType.ENRICHING;
     }
 
-    @Override
-    public @Nullable ItemStackToItemStackRecipe getRecipe(int cacheIndex) {
-        return findFirstRecipe(inputHandlers[cacheIndex]);
+    public NFEnriching getSelf() {
+        return this;
     }
-
-    @Override
-    public @NotNull CachedRecipe<ItemStackToItemStackRecipe> createNewCachedRecipe(@NotNull ItemStackToItemStackRecipe recipe,
-                                                                       int cacheIndex) {
-        return OneInputCachedRecipe.itemToItem(recipe, recheckAllRecipeErrors[cacheIndex], inputHandlers[cacheIndex],
-                outputHandlers[cacheIndex])
-                .setErrorsChanged(errors -> errorTracker.onErrorsChanged(errors, cacheIndex))
-                .setCanHolderFunction(() -> MekanismUtils.canFunction(this))
-                .setActive(active -> setActiveState(active, cacheIndex))
-                .setEnergyRequirements(energyContainer::getEnergyPerTick, energyContainer)
-                .setRequiredTicks(this::getTicksRequired)
-                .setBaselineMaxOperations(this::getBaselineMaxOperations)
-                .setOnFinish(this::markForSave)
-                .setOperatingTicksChanged(p -> progress[cacheIndex] = p);
-    }
-
-    @Override
     public MachineEnergyContainer<NFEnriching> getEnergyContainer() {
         return energyContainer;
     }
 
-    @Override
-    public NFEnriching getSelf() {
-        return this;
+    protected final int baseTicksRequired;
+    private int ticksRequired;
+    private boolean sorting;
+    private boolean sortingNeeded = true;
+    protected int baselineMaxOperations;
+
+    public NFEnriching(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
+        super(blockProvider, pos, state);
+        this.baseTicksRequired = 200;
+        this.ticksRequired = this.baseTicksRequired;
+        baselineMaxOperations = 1;
     }
 
     @Override
-    public int getWidthPerProcess() {
-        return 18;
+    protected RecipeCacheLookupMonitor<ItemStackToItemStackRecipe> createRecipeCacheLookupMonitor(int cacheIndex) {
+        return new FactoryRecipeCacheLookupMonitor<>(this, cacheIndex, () -> sortingNeeded = true);
     }
 
     @Override
-    public int getHeightPerProcess() {
-        return 62;
+    protected IContentsListener getSecondLister(IContentsListener listener) {
+        return () -> {
+            listener.onContentsChanged();
+            sortingNeeded = true;
+        };
     }
 
     @Override
-    public int getSideSpaceWidth() {
-        return 36;
-    }
-
-    @Override
-    protected InventorySlotHelper addSlots(InventorySlotHelper builder, IContentsListener listener,
-            IContentsListener updateSortingListener) {
-        inputSlots = new PagedInputInventorySlot[tier.processes];
-        outputSlots = new PagedOutputInventorySlot[tier.processes];
-        for (int i = 0; i < tier.processes; i++) {
-            int index = i;
-            int x = getXByIndex(index);
-            int y = getY();
-            int page = getPageByIndex(index);
-            builder.addSlot(inputSlots[i] = PagedInputInventorySlot.at(this::containsRecipe, () -> {
-                updateSortingListener.onContentsChanged();
-                recipeCacheLookupMonitors[index].onChange();
-            }, x, y, page));
-            builder.addSlot(outputSlots[i] = PagedOutputInventorySlot.at(updateSortingListener, x, y + 44, page));
+    protected void onUpdateServer() {
+        super.onUpdateServer();
+        if (sortingNeeded && isSorting()) {
+            sortingNeeded = false;
+            sort();
+        } else if (!sortingNeeded && CommonWorldTickHandler.flushTagAndRecipeCaches) {
+            sortingNeeded = true;
         }
-        return builder;
     }
 
+    public void toggleSorting() {
+        sorting = !isSorting();
+        markForSave();
+    }
+
+    public boolean isSorting() {
+        return sorting;
+    }
 
     @Override
+    protected int getTicksRequired() {
+        return ticksRequired;
+    }
+
+    @Override
+    public int getSavedOperatingTicks(int cacheIndex) {
+        return progress[cacheIndex];
+    }
+
+    public IntConsumer getProgressSetter(int cacheIndex) {
+        return p -> progress[cacheIndex] = p;
+    }
+
+    @Override
+    public void load(@NotNull CompoundTag nbt) {
+        super.load(nbt);
+        if (nbt.contains(NBTConstants.PROGRESS, Tag.TAG_INT_ARRAY)) {
+            int[] savedProgress = nbt.getIntArray(NBTConstants.PROGRESS);
+            if (tier.processes != savedProgress.length) {
+                Arrays.fill(progress, 0);
+            }
+            for (int i = 0; i < tier.processes && i < savedProgress.length; i++) {
+                progress[i] = savedProgress[i];
+            }
+        }
+    }
+
+    @Override
+    public void saveAdditional(@NotNull CompoundTag nbtTags) {
+        super.saveAdditional(nbtTags);
+        nbtTags.put(NBTConstants.PROGRESS, new IntArrayTag(Arrays.copyOf(progress, progress.length)));
+    }
+
+    @Override
+    public void writeSustainedData(CompoundTag data) {
+        data.putBoolean(NBTConstants.SORTING, isSorting());
+    }
+
+    @Override
+    public void readSustainedData(CompoundTag data) {
+        NBTUtils.setBooleanIfPresent(data, NBTConstants.SORTING, value -> sorting = value);
+    }
+
+    @Override
+    public Map<String, String> getTileDataRemap() {
+        Map<String, String> remap = new Object2ObjectOpenHashMap<>();
+        remap.put(NBTConstants.SORTING, NBTConstants.SORTING);
+        return remap;
+    }
+
+    @Override
+    public void recalculateUpgrades(Upgrade upgrade) {
+        super.recalculateUpgrades(upgrade);
+        if (upgrade == ExtraUpgrade.STACK) {
+            baselineMaxOperations = 1 << upgradeComponent.getUpgrades(ExtraUpgrade.STACK);
+        } else if (AMEEmpowered.empoweredIsLoaded()) {
+            AMEEmpowered.recalculateUpgrades(getSelf(), upgrade, baseTicksRequired, v -> ticksRequired = v);
+        } else if (upgrade == Upgrade.SPEED) {
+            ticksRequired = MekanismUtils.getTicks(this, baseTicksRequired);
+        }
+    }
+
+    @Override
+    public void addContainerTrackers(MekanismContainer container) {
+        super.addContainerTrackers(container);
+        container.track(SyncableBoolean.create(this::isSorting, v -> sorting = v));
+        container.track(SyncableInt.create(this::getTicksRequired, v -> ticksRequired = v));
+        container.track(SyncableInt.create(this::getBaselineMaxOperations, v -> baselineMaxOperations = v));
+        container.trackArray(progress);
+    }
+
+    @Override
+    public double getProgressScaled(int index) {
+        return ((double) progress[index]) / ((double) ticksRequired);
+    }
+
+    protected int getBaselineMaxOperations() {
+        return baselineMaxOperations;
+    }
+
     protected void sort() {
         PagedInputInventorySlot manySlot = Arrays.stream(inputSlots).reduce(inputSlots[0],
                 (a, b) -> a.getCount() > b.getCount() ? a : b);
@@ -169,16 +201,4 @@ public class NFEnriching
             targetSlots.get(index).setStack(stack.copyWithCount(index < left ? base + 1 : base));
         }
     }
-
-    @NotNull
-    @Override
-    public List<Component> getInfo(@NotNull Upgrade upgrade) {
-        return UpgradeUtils.getMultScaledInfo(this, upgrade);
-    }
-
-    @Override
-    public FloatingLong getEnergyUsage() {
-        return energyUsed;
-    }
-
 }

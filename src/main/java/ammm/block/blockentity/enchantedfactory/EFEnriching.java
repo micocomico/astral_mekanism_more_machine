@@ -1,6 +1,7 @@
 package ammm.block.blockentity.enchantedfactory;
 
 import ammm.block.blockentity.base.MekanismRecipeFactory ;
+import ammm.block.blockentity.basefactory.BFElectric;
 import astral_mekanism.block.blockentity.elements.slot.paged.PagedInputInventorySlot;
 import astral_mekanism.block.blockentity.elements.slot.paged.PagedOutputInventorySlot;
 import astral_mekanism.integration.AMEEmpowered;
@@ -36,39 +37,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-public class EFEnriching
-        extends MekanismRecipeFactory<ItemStackToItemStackRecipe, EFEnriching,SingleItem<ItemStackToItemStackRecipe>> implements
-        ISingleRecipeLookupHandler.ItemRecipeLookupHandler<ItemStackToItemStackRecipe> {
+public class EFEnriching extends BFElectric<EFEnriching> {
 
-    private static final List<RecipeError> TRACKED_ERROR_TYPES = List.of(
-            RecipeError.NOT_ENOUGH_ENERGY,
-            RecipeError.NOT_ENOUGH_INPUT,
-            RecipeError.NOT_ENOUGH_OUTPUT_SPACE,
-            RecipeError.INPUT_DOESNT_PRODUCE_OUTPUT
-    );
-    private static final Set<RecipeError> GLOBAL_ERROR_TYPES = Set.of(RecipeError.NOT_ENOUGH_ENERGY);
-
-    private PagedInputInventorySlot[] inputSlots;
-    private PagedOutputInventorySlot[] outputSlots;
-    private final IInputHandler<ItemStack>[] inputHandlers;
-    private final IOutputHandler<ItemStack>[] outputHandlers;
-    private int baselineMaxOperations = 1;
-
-    @SuppressWarnings("unchecked")
     public EFEnriching(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
-        super(blockProvider, pos, state, TRACKED_ERROR_TYPES, GLOBAL_ERROR_TYPES);
-        configComponent = new TileComponentConfig(this, TransmissionType.ITEM,TransmissionType.ENERGY);
-        configComponent.setupItemIOConfig(Arrays.asList(inputSlots), Arrays.asList(outputSlots), energySlot, false);
-        configComponent.setupInputConfig(TransmissionType.ENERGY, energyContainer);
-        ejectorComponent = new TileComponentEjector(this, () -> Long.MAX_VALUE);
-        ejectorComponent.setOutputData(configComponent, TransmissionType.ITEM);
-        this.inputHandlers = new IInputHandler[tier.processes];
-        this.outputHandlers = new IOutputHandler[tier.processes];
-        for (int i = 0; i < tier.processes; i++) {
-            inputHandlers[i] = InputHelper.getInputHandler(inputSlots[i], RecipeError.NOT_ENOUGH_INPUT);
-            outputHandlers[i] = OutputHelper.getOutputHandler(outputSlots[i],
-                    RecipeError.NOT_ENOUGH_OUTPUT_SPACE);
-        }
+        super(blockProvider, pos, state);
+    }
+
+    private int baselineMaxOperations = 1;
+    @Override
+    protected int getBaselineMaxOperations() {
+        return baselineMaxOperations;
     }
 
     @Override
@@ -76,66 +54,11 @@ public class EFEnriching
         return MekanismRecipeType.ENRICHING;
     }
 
-    @Override
-    public @Nullable ItemStackToItemStackRecipe getRecipe(int cacheIndex) {
-        return findFirstRecipe(inputHandlers[cacheIndex]);
-    }
-
-    @Override
-    public @NotNull CachedRecipe<ItemStackToItemStackRecipe> createNewCachedRecipe(@NotNull ItemStackToItemStackRecipe recipe,
-                                                                        int cacheIndex) {
-        return OneInputCachedRecipe.itemToItem(recipe, recheckAllRecipeErrors[cacheIndex], inputHandlers[cacheIndex],
-                        outputHandlers[cacheIndex])
-                .setErrorsChanged(errors -> errorTracker.onErrorsChanged(errors, cacheIndex))
-                .setCanHolderFunction(() -> MekanismUtils.canFunction(this))
-                .setActive(active -> setActiveState(active, cacheIndex))
-                .setEnergyRequirements(energyContainer::getEnergyPerTick, energyContainer)
-                .setOnFinish(this::markForSave)
-                .setBaselineMaxOperations(() -> baselineMaxOperations);
-    }
-
-    @Override
-    public MachineEnergyContainer<EFEnriching> getEnergyContainer() {
-        return energyContainer;
-    }
-
-    @Override
     public EFEnriching getSelf() {
         return this;
     }
-
-    @Override
-    public int getWidthPerProcess() {
-        return 18;
-    }
-
-    @Override
-    public int getHeightPerProcess() {
-        return 62;
-    }
-
-    @Override
-    public int getSideSpaceWidth() {
-        return 36;
-    }
-
-    @Override
-    protected InventorySlotHelper addSlots(InventorySlotHelper builder, IContentsListener listener,
-            IContentsListener updateSortingListener) {
-        inputSlots = new PagedInputInventorySlot[tier.processes];
-        outputSlots = new PagedOutputInventorySlot[tier.processes];
-        for (int i = 0; i < tier.processes; i++) {
-            int index = i;
-            int x = getXByIndex(index);
-            int y = getY();
-            int page = getPageByIndex(index);
-            builder.addSlot(inputSlots[i] = PagedInputInventorySlot.at(this::containsRecipe, () -> {
-                updateSortingListener.onContentsChanged();
-                recipeCacheLookupMonitors[index].onChange();
-            }, x, y, page));
-            builder.addSlot(outputSlots[i] = PagedOutputInventorySlot.at(updateSortingListener, x, y + 44, page));
-        }
-        return builder;
+    public MachineEnergyContainer<EFEnriching> getEnergyContainer() {
+        return energyContainer;
     }
 
     @Override

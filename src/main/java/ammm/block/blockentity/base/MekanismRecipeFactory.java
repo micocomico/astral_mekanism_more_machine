@@ -66,8 +66,6 @@ public abstract class MekanismRecipeFactory<RECIPE extends MekanismRecipe, BE ex
     protected MachineEnergyContainer<BE> energyContainer;
     protected EnergyInventorySlot energySlot;
 
-
-
     protected MekanismRecipeFactory(IBlockProvider blockProvider, BlockPos pos, BlockState state,
                                     List<RecipeError> errorTypes, Set<RecipeError> globalErrorTypes) {
         super(blockProvider, pos, state);
