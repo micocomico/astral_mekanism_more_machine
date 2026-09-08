@@ -1,19 +1,32 @@
-package ammm.block.blockentity.base;
+package ammm.block.blockentity.normalfactory;
 
+import ammm.block.blockentity.basefactory.BFAdvanced;
+import astral_mekanism.block.blockentity.elements.slot.paged.PagedInputInventorySlot;
 import astral_mekanism.integration.AMEEmpowered;
 import com.jerry.mekanism_extras.api.ExtraUpgrade;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import mekanism.api.IContentsListener;
 import mekanism.api.NBTConstants;
 import mekanism.api.Upgrade;
+import mekanism.api.chemical.ChemicalTankBuilder;
+import mekanism.api.chemical.gas.Gas;
+import mekanism.api.chemical.gas.GasStack;
+import mekanism.api.chemical.gas.IGasTank;
+import mekanism.api.inventory.IInventorySlot;
 import mekanism.api.providers.IBlockProvider;
-import mekanism.api.recipes.MekanismRecipe;
-import mekanism.api.recipes.cache.CachedRecipe.OperationTracker.RecipeError;
+import mekanism.api.recipes.ItemStackGasToItemStackRecipe;
+import mekanism.api.recipes.cache.CachedRecipe;
+import mekanism.api.recipes.cache.ItemStackConstantChemicalToItemStackCachedRecipe;
 import mekanism.common.CommonWorldTickHandler;
+import mekanism.common.capabilities.energy.MachineEnergyContainer;
+import mekanism.common.capabilities.holder.chemical.ChemicalTankHelper;
+import mekanism.common.capabilities.holder.chemical.IChemicalTankHolder;
 import mekanism.common.inventory.container.MekanismContainer;
 import mekanism.common.inventory.container.sync.SyncableBoolean;
 import mekanism.common.inventory.container.sync.SyncableInt;
-import mekanism.common.recipe.lookup.cache.IInputRecipeCache;
+import mekanism.common.recipe.IMekanismRecipeTypeProvider;
+import mekanism.common.recipe.MekanismRecipeType;
+import mekanism.common.recipe.lookup.cache.InputRecipeCache;
 import mekanism.common.recipe.lookup.monitor.FactoryRecipeCacheLookupMonitor;
 import mekanism.common.recipe.lookup.monitor.RecipeCacheLookupMonitor;
 import mekanism.common.tile.interfaces.ISustainedData;
@@ -23,38 +36,53 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.IntArrayTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.IntConsumer;
 
-public abstract class MekanismProgressFactory<RECIPE extends MekanismRecipe, BE extends MekanismProgressFactory<RECIPE, BE, INPUT_CACHE>, INPUT_CACHE extends IInputRecipeCache>
-        extends MekanismRecipeFactory<RECIPE, BE, INPUT_CACHE>
-        implements ISustainedData {
+public class NFInjecting extends BFAdvanced<NFInjecting> implements ISustainedData {
+
+    @Override
+    public @NotNull IMekanismRecipeTypeProvider<ItemStackGasToItemStackRecipe, InputRecipeCache.ItemChemical<Gas, GasStack, ItemStackGasToItemStackRecipe>> getRecipeType() {
+        return MekanismRecipeType.INJECTING;
+    }
+
+    @Override
+    public @NotNull IChemicalTankHolder<Gas, GasStack, IGasTank> getInitialGasTanks(IContentsListener listener) {
+        ChemicalTankHelper<Gas, GasStack, IGasTank> builder = ChemicalTankHelper.forSideGasWithConfig(this::getDirection, this::getConfig);
+        gasTank = ChemicalTankBuilder.GAS.input(320000l * tier.processes, this::containsRecipeB, markAllMonitorsChanged(listener));
+        builder.addTank(gasTank);
+        return builder.build();
+    }
+
+    public NFInjecting getSelf() {
+        return this;
+    }
+    public MachineEnergyContainer<NFInjecting> getEnergyContainer() {
+        return energyContainer;
+    }
 
     protected final int baseTicksRequired;
-    public final int[] progress;
     private int ticksRequired;
     private boolean sorting;
     private boolean sortingNeeded = true;
-    protected int baselineMaxOperations = 1;
+    protected int baselineMaxOperations;
 
-    protected MekanismProgressFactory(IBlockProvider blockProvider, BlockPos pos, BlockState state,
-                                      int baseTicksRequired, List<RecipeError> errorTypes, Set<RecipeError> globalErrorTypes) {
-        super(blockProvider, pos, state, errorTypes, globalErrorTypes);
-        this.baseTicksRequired = baseTicksRequired;
-        this.progress = new int[tier.processes];
-        Arrays.fill(progress, 0);
+    public NFInjecting(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
+        super(blockProvider, pos, state);
+        this.baseTicksRequired = 200;
         this.ticksRequired = this.baseTicksRequired;
         baselineMaxOperations = 1;
     }
 
     @Override
-    protected RecipeCacheLookupMonitor<RECIPE> createRecipeCacheLookupMonitor(int cacheIndex) {
+    protected RecipeCacheLookupMonitor<ItemStackGasToItemStackRecipe> createRecipeCacheLookupMonitor(int cacheIndex) {
         return new FactoryRecipeCacheLookupMonitor<>(this, cacheIndex, () -> sortingNeeded = true);
     }
 
@@ -86,8 +114,7 @@ public abstract class MekanismProgressFactory<RECIPE extends MekanismRecipe, BE 
         return sorting;
     }
 
-    protected abstract void sort();
-
+    @Override
     protected int getTicksRequired() {
         return ticksRequired;
     }
@@ -144,7 +171,7 @@ public abstract class MekanismProgressFactory<RECIPE extends MekanismRecipe, BE 
         if (upgrade == ExtraUpgrade.STACK) {
             baselineMaxOperations = 1 << upgradeComponent.getUpgrades(ExtraUpgrade.STACK);
         } else if (AMEEmpowered.empoweredIsLoaded()) {
-            AMEEmpowered.recalculateUpgrades(getSelf(), upgrade, baseTicksRequired, v -> ticksRequired = v);
+            AMEEmpowered.recalculateUpgrades(this, upgrade, baseTicksRequired, v -> ticksRequired = v);
         } else if (upgrade == Upgrade.SPEED) {
             ticksRequired = MekanismUtils.getTicks(this, baseTicksRequired);
         }
@@ -166,5 +193,26 @@ public abstract class MekanismProgressFactory<RECIPE extends MekanismRecipe, BE 
 
     protected int getBaselineMaxOperations() {
         return baselineMaxOperations;
+    }
+
+    protected void sort() {
+        PagedInputInventorySlot manySlot = Arrays.stream(inputSlots).reduce(inputSlots[0],
+                (a, b) -> a.getCount() > b.getCount() ? a : b);
+        if (manySlot.isEmpty()) {
+            return;
+        }
+        List<PagedInputInventorySlot> emptySlots = Arrays.stream(inputSlots).filter(IInventorySlot::isEmpty).toList();
+        if (emptySlots.isEmpty()) {
+            return;
+        }
+        List<PagedInputInventorySlot> targetSlots = new ArrayList<>(emptySlots);
+        targetSlots.add(0, manySlot);
+        ItemStack stack = manySlot.getStack().copy();
+        int size = targetSlots.size();
+        int base = stack.getCount() / size;
+        int left = stack.getCount() % size;
+        for (int index = 0; index < size; index++) {
+            targetSlots.get(index).setStack(stack.copyWithCount(index < left ? base + 1 : base));
+        }
     }
 }

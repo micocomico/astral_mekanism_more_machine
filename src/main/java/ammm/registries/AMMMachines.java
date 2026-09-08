@@ -2,21 +2,13 @@ package ammm.registries;
 
 import ammm.AMMMConstants;
 import ammm.AMMMLang;
-import ammm.block.blockentity.astralfactory.AFCombining;
-import ammm.block.blockentity.astralfactory.AFCompressing;
-import ammm.block.blockentity.astralfactory.AFCrushing;
-import ammm.block.blockentity.astralfactory.AFEnriching;
+import ammm.block.blockentity.astralfactory.*;
 import ammm.block.blockentity.astralmachine.AMCrafter;
 import ammm.block.blockentity.base.MekanismRecipeFactory;
-import ammm.block.blockentity.enchantedfactory.EFCombining;
-import ammm.block.blockentity.enchantedfactory.EFCrushing;
-import ammm.block.blockentity.enchantedfactory.EFEnergizedSmelting;
-import ammm.block.blockentity.enchantedfactory.EFEnriching;
+import ammm.block.blockentity.enchantedfactory.*;
 import ammm.block.blockentity.enchantedmachine.EMCombiner;
 import ammm.block.blockentity.enchantedmachine.EMCrafter;
-import ammm.block.blockentity.normalfactory.NFCombining;
-import ammm.block.blockentity.normalfactory.NFCrushing;
-import ammm.block.blockentity.normalfactory.NFEnriching;
+import ammm.block.blockentity.normalfactory.*;
 import ammm.block.container.machine.ContainerCrafter;
 import ammm.config.AMMMConfig;
 import ammm.registration.BlockTypeMachine;
@@ -144,8 +136,10 @@ public class AMMMachines {
     public static final EnumMap<AMETier, MachineRegistryObject<EFEnergizedSmelting, BlockTileModel<EFEnergizedSmelting, BlockTypeMachine<EFEnergizedSmelting>>,
             ContainerAstralMekanismFactory<EFEnergizedSmelting>, ItemBlockMachine>> ENCHANTED_ENERGIZED_SMELTING_FACTORIES = registerAMEFactories(
             t -> t.nameForNormal + "_enchanted_energized_smelting_factory", EFEnergizedSmelting::new, EFEnergizedSmelting.class, AMELang.DESCRIPTION_ENCHANTED_MACHINE,
-            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED, AMEUpgrade.COBBLESTONE_SUPPLY.getValue(),AMEUpgrade.XP.getValue()))
-                    .withEnergyConfig(() -> MekanismConfig.usage.energizedSmelter.get().multiply(200),() -> MekanismConfig.storage.energizedSmelter.get().multiply(t.processes * 12800))
+            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED,
+                            ExtraUpgrade.STACK, AMEUpgrade.COBBLESTONE_SUPPLY.getValue(),AMEUpgrade.XP.getValue()))
+                    .withEnergyConfig(() -> MekanismConfig.usage.energizedSmelter.get().multiply(200),
+                            () -> MekanismConfig.storage.energizedSmelter.get().multiply(t.processes * 12800))
                     .withSound(MekanismSounds.ENERGIZED_SMELTER));
 
     public static final EnumMap<AMETier, MachineRegistryObject<AFCrushing, BlockTileModel<AFCrushing, BlockTypeMachine<AFCrushing>>,
@@ -158,14 +152,17 @@ public class AMMMachines {
     public static final EnumMap<AMETier, MachineRegistryObject<EFCrushing, BlockTileModel<EFCrushing, BlockTypeMachine<EFCrushing>>,
             ContainerAstralMekanismFactory<EFCrushing>, ItemBlockMachine>> ENCHANTED_CRUSHING_FACTORIES = registerFactories(
             t -> t.nameForNormal + "_enchanted_crushing_factory", EFCrushing::new, EFCrushing.class, AMELang.DESCRIPTION_ENCHANTED_MACHINE,
-            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED,  ExtraUpgrade.STACK, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
-                    .withEnergyConfig(() -> MekanismConfig.usage.crusher.get().multiply(200),() -> MekanismConfig.storage.crusher.get().multiply(t.processes * 12800))
+            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED,
+                            ExtraUpgrade.STACK, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
+                    .withEnergyConfig(() -> MekanismConfig.usage.crusher.get().multiply(200),
+                            () -> MekanismConfig.storage.crusher.get().multiply(t.processes * 12800))
                     .withSound(MekanismSounds.CRUSHER));
 
     public static final EnumMap<AMETier, MachineRegistryObject<NFCrushing, BlockTileModel<NFCrushing, BlockTypeMachine<NFCrushing>>,
             ContainerAstralMekanismFactory<NFCrushing>, ItemBlockMachine>> CRUSHING_FACTORIES = registerFactories(
             t -> t.nameForNormal + "_crushing_factory", NFCrushing::new, NFCrushing.class, MekanismLang.DESCRIPTION_FACTORY,
-            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED, ExtraUpgrade.STACK, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
+            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED,
+                            ExtraUpgrade.STACK, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
                     .withEnergyConfig(MekanismConfig.usage.crusher,() -> MekanismConfig.storage.crusher.get().multiply(t.processes))
                     .withSound(MekanismSounds.CRUSHER));
 
@@ -179,14 +176,17 @@ public class AMMMachines {
     public static final EnumMap<AMETier, MachineRegistryObject<EFEnriching, BlockTileModel<EFEnriching, BlockTypeMachine<EFEnriching>>,
             ContainerAstralMekanismFactory<EFEnriching>, ItemBlockMachine>> ENCHANTED_ENRICHING_FACTORIES = registerFactories(
             t -> t.nameForNormal + "_enchanted_enriching_factory", EFEnriching::new, EFEnriching.class, AMELang.DESCRIPTION_ENCHANTED_MACHINE,
-            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED,  ExtraUpgrade.STACK,AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
-                    .withEnergyConfig(() -> MekanismConfig.usage.enrichmentChamber.get().multiply(200),() -> MekanismConfig.storage.enrichmentChamber.get().multiply(t.processes * 12800))
+            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED,
+                            ExtraUpgrade.STACK,AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
+                    .withEnergyConfig(() -> MekanismConfig.usage.enrichmentChamber.get().multiply(200),
+                            () -> MekanismConfig.storage.enrichmentChamber.get().multiply(t.processes * 12800))
                     .withSound(MekanismSounds.ENRICHMENT_CHAMBER));
 
     public static final EnumMap<AMETier, MachineRegistryObject<NFEnriching, BlockTileModel<NFEnriching, BlockTypeMachine<NFEnriching>>,
             ContainerAstralMekanismFactory<NFEnriching>, ItemBlockMachine>> ENRICHING_FACTORIES = registerFactories(
             t -> t.nameForNormal + "_enriching_factory", NFEnriching::new, NFEnriching.class, MekanismLang.DESCRIPTION_FACTORY,
-            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED, ExtraUpgrade.STACK,AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
+            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED,
+                            ExtraUpgrade.STACK,AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
                     .withEnergyConfig(MekanismConfig.usage.enrichmentChamber,() -> MekanismConfig.storage.enrichmentChamber.get().multiply(t.processes))
                     .withSound(MekanismSounds.ENRICHMENT_CHAMBER));
 
@@ -200,21 +200,125 @@ public class AMMMachines {
     public static final EnumMap<AMETier, MachineRegistryObject<EFCombining, BlockTileModel<EFCombining, BlockTypeMachine<EFCombining>>,
             ContainerAstralMekanismFactory<EFCombining>, ItemBlockMachine>> ENCHANTED_COMBINING_FACTORIES = registerFactories(
             t -> t.nameForNormal + "_enchanted_combining_factory", EFCombining::new, EFCombining.class, AMELang.DESCRIPTION_ENCHANTED_MACHINE,
-            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
-                    .withEnergyConfig(() -> MekanismConfig.usage.combiner.get().multiply(200),() -> MekanismConfig.storage.combiner.get().multiply(t.processes * 12800))
+            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED,
+                            ExtraUpgrade.STACK, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
+                    .withEnergyConfig(() -> MekanismConfig.usage.combiner.get().multiply(200),
+                            () -> MekanismConfig.storage.combiner.get().multiply(t.processes * 12800))
                     .withSound(MekanismSounds.COMBINER));
 
     public static final EnumMap<AMETier, MachineRegistryObject<NFCombining, BlockTileModel<NFCombining, BlockTypeMachine<NFCombining>>,
             ContainerAstralMekanismFactory<NFCombining>, ItemBlockMachine>> COMBINING_FACTORIES = registerFactories(
             t -> t.nameForNormal + "_combining_factory",NFCombining::new,NFCombining.class,MekanismLang.DESCRIPTION_FACTORY,
-            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
+            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED,
+                            ExtraUpgrade.STACK, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
                     .withEnergyConfig(MekanismConfig.usage.combiner,() -> MekanismConfig.storage.enrichmentChamber.get().multiply(t.processes))
                     .withSound(MekanismSounds.COMBINER));
 
     public static final EnumMap<AMETier, MachineRegistryObject<AFCompressing, BlockTileModel<AFCompressing, BlockTypeMachine<AFCompressing>>,
             ContainerAstralMekanismFactory<AFCompressing>, ItemBlockMachine>> ASTRAL_COMPRESSING_FACTORIES = registerFactories(
             t -> t.nameForAstral + "_astral_compressing_factory", AFCompressing::new, AFCompressing.class, AMELang.DESCRIPTION_ASTRAL_MACHINE,
-            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, AMEUpgrade.COBBLESTONE_SUPPLY.getValue(),AMEUpgrade.RADIOACTIVE_SEALING.getValue(), AMEUpgrade.AIR_INTAKE.getValue()))
+            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY,
+                            AMEUpgrade.COBBLESTONE_SUPPLY.getValue(),AMEUpgrade.RADIOACTIVE_SEALING.getValue(), AMEUpgrade.AIR_INTAKE.getValue()))
                     .withEnergyConfig(MekanismConfig.usage.osmiumCompressor,MAX_SUPPLIER)
                     .withSound(MekanismSounds.OSMIUM_COMPRESSOR));
+
+    public static final EnumMap<AMETier, MachineRegistryObject<EFCompressing, BlockTileModel<EFCompressing, BlockTypeMachine<EFCompressing>>,
+            ContainerAstralMekanismFactory<EFCompressing>, ItemBlockMachine>> ENCHANTED_COMPRESSING_FACTORIES = registerFactories(
+            t -> t.nameForNormal + "_enchanted_compressing_factory", EFCompressing::new, EFCompressing.class, AMELang.DESCRIPTION_ENCHANTED_MACHINE,
+            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED,
+                            ExtraUpgrade.STACK, AMEUpgrade.COBBLESTONE_SUPPLY.getValue(),AMEUpgrade.RADIOACTIVE_SEALING.getValue(), AMEUpgrade.AIR_INTAKE.getValue()))
+                    .withEnergyConfig(() -> MekanismConfig.usage.osmiumCompressor.get().multiply(200),
+                            () -> MekanismConfig.storage.osmiumCompressor.get().multiply(t.processes * 12800))
+                    .withSound(MekanismSounds.OSMIUM_COMPRESSOR));
+
+    public static final EnumMap<AMETier, MachineRegistryObject<NFCompressing, BlockTileModel<NFCompressing, BlockTypeMachine<NFCompressing>>,
+            ContainerAstralMekanismFactory<NFCompressing>, ItemBlockMachine>> COMPRESSING_FACTORIES = registerFactories(
+            t -> t.nameForNormal + "_compressing_factory",NFCompressing::new, NFCompressing.class,MekanismLang.DESCRIPTION_FACTORY,
+            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED,
+                            ExtraUpgrade.STACK, AMEUpgrade.COBBLESTONE_SUPPLY.getValue(),AMEUpgrade.RADIOACTIVE_SEALING.getValue(), AMEUpgrade.AIR_INTAKE.getValue()))
+                    .withEnergyConfig(MekanismConfig.usage.osmiumCompressor,() -> MekanismConfig.storage.osmiumCompressor.get().multiply(t.processes))
+                    .withSound(MekanismSounds.OSMIUM_COMPRESSOR));
+
+    public static final EnumMap<AMETier, MachineRegistryObject<AFPurifying, BlockTileModel<AFPurifying, BlockTypeMachine<AFPurifying>>,
+            ContainerAstralMekanismFactory<AFPurifying>, ItemBlockMachine>> ASTRAL_PURIFYING_FACTORIES = registerFactories(
+            t -> t.nameForAstral + "_astral_purifying_factory", AFPurifying::new, AFPurifying.class, AMELang.DESCRIPTION_ASTRAL_MACHINE,
+            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY,
+                            AMEUpgrade.COBBLESTONE_SUPPLY.getValue(),AMEUpgrade.RADIOACTIVE_SEALING.getValue()))
+                    .withEnergyConfig(MekanismConfig.usage.purificationChamber,MAX_SUPPLIER)
+                    .withSound(MekanismSounds.PURIFICATION_CHAMBER));
+
+    public static final EnumMap<AMETier, MachineRegistryObject<EFPurifying, BlockTileModel<EFPurifying, BlockTypeMachine<EFPurifying>>,
+            ContainerAstralMekanismFactory<EFPurifying>, ItemBlockMachine>> ENCHANTED_PURIFYING_FACTORIES = registerFactories(
+            t -> t.nameForNormal + "_enchanted_purifying_factory", EFPurifying::new, EFPurifying.class, AMELang.DESCRIPTION_ENCHANTED_MACHINE,
+            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED,
+                            ExtraUpgrade.STACK, AMEUpgrade.COBBLESTONE_SUPPLY.getValue(),AMEUpgrade.RADIOACTIVE_SEALING.getValue()))
+                    .withEnergyConfig(() -> MekanismConfig.usage.purificationChamber.get().multiply(200),
+                            () -> MekanismConfig.storage.purificationChamber.get().multiply(t.processes * 12800))
+                    .withSound(MekanismSounds.PURIFICATION_CHAMBER));
+
+    public static final EnumMap<AMETier, MachineRegistryObject<NFPurifying, BlockTileModel<NFPurifying, BlockTypeMachine<NFPurifying>>,
+            ContainerAstralMekanismFactory<NFPurifying>, ItemBlockMachine>> PURIFYING_FACTORIES = registerFactories(
+            t -> t.nameForNormal + "_purifying_factory",NFPurifying::new, NFPurifying.class,MekanismLang.DESCRIPTION_FACTORY,
+            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED,
+                            ExtraUpgrade.STACK, AMEUpgrade.COBBLESTONE_SUPPLY.getValue(),AMEUpgrade.RADIOACTIVE_SEALING.getValue()))
+                    .withEnergyConfig(MekanismConfig.usage.purificationChamber,() -> MekanismConfig.storage.purificationChamber.get().multiply(t.processes))
+                    .withSound(MekanismSounds.PURIFICATION_CHAMBER));
+
+    public static final EnumMap<AMETier, MachineRegistryObject<AFInjecting, BlockTileModel<AFInjecting, BlockTypeMachine<AFInjecting>>,
+            ContainerAstralMekanismFactory<AFInjecting>, ItemBlockMachine>> ASTRAL_INJECTING_FACTORIES = registerFactories(
+            t -> t.nameForAstral + "_astral_injecting_factory", AFInjecting::new, AFInjecting.class, AMELang.DESCRIPTION_ASTRAL_MACHINE,
+            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY,
+                            AMEUpgrade.COBBLESTONE_SUPPLY.getValue(),AMEUpgrade.RADIOACTIVE_SEALING.getValue()))
+                    .withEnergyConfig(MekanismConfig.usage.chemicalInjectionChamber,MAX_SUPPLIER)
+                    .withSound(MekanismSounds.PURIFICATION_CHAMBER));
+
+    public static final EnumMap<AMETier, MachineRegistryObject<EFInjecting, BlockTileModel<EFInjecting, BlockTypeMachine<EFInjecting>>,
+            ContainerAstralMekanismFactory<EFInjecting>, ItemBlockMachine>> ENCHANTED_INJECTING_FACTORIES = registerFactories(
+            t -> t.nameForNormal + "_enchanted_injecting_factory", EFInjecting::new, EFInjecting.class, AMELang.DESCRIPTION_ENCHANTED_MACHINE,
+            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED,
+                            ExtraUpgrade.STACK, AMEUpgrade.COBBLESTONE_SUPPLY.getValue(),AMEUpgrade.RADIOACTIVE_SEALING.getValue()))
+                    .withEnergyConfig(() -> MekanismConfig.usage.chemicalInjectionChamber.get().multiply(200),
+                            () -> MekanismConfig.storage.chemicalInjectionChamber.get().multiply(t.processes * 12800))
+                    .withSound(MekanismSounds.PURIFICATION_CHAMBER));
+
+    public static final EnumMap<AMETier, MachineRegistryObject<NFInjecting, BlockTileModel<NFInjecting, BlockTypeMachine<NFInjecting>>,
+            ContainerAstralMekanismFactory<NFInjecting>, ItemBlockMachine>> INJECTING_FACTORIES = registerFactories(
+            t -> t.nameForNormal + "_injecting_factory",NFInjecting::new, NFInjecting.class,MekanismLang.DESCRIPTION_FACTORY,
+            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED,
+                            ExtraUpgrade.STACK, AMEUpgrade.COBBLESTONE_SUPPLY.getValue(),AMEUpgrade.RADIOACTIVE_SEALING.getValue()))
+                    .withEnergyConfig(MekanismConfig.usage.chemicalInjectionChamber,() -> MekanismConfig.storage.chemicalInjectionChamber.get().multiply(t.processes))
+                    .withSound(MekanismSounds.PURIFICATION_CHAMBER));
+
+    public static final EnumMap<AMETier, MachineRegistryObject<AFInfusing, BlockTileModel<AFInfusing, BlockTypeMachine<AFInfusing>>,
+            ContainerAstralMekanismFactory<AFInfusing>, ItemBlockMachine>> ASTRAL_INFUSING_FACTORIES = registerFactories(
+            t -> t.nameForAstral + "_astral_infusing_factory", AFInfusing::new, AFInfusing.class, AMELang.DESCRIPTION_ASTRAL_MACHINE,
+            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY,
+                            AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
+                    .withEnergyConfig(MekanismConfig.usage.metallurgicInfuser,MAX_SUPPLIER)
+                    .withSound(MekanismSounds.METALLURGIC_INFUSER));
+
+    public static final EnumMap<AMETier, MachineRegistryObject<EFInfusing, BlockTileModel<EFInfusing, BlockTypeMachine<EFInfusing>>,
+            ContainerAstralMekanismFactory<EFInfusing>, ItemBlockMachine>> ENCHANTED_INFUSING_FACTORIES = registerFactories(
+            t -> t.nameForNormal + "_enchanted_infusing_factory", EFInfusing::new, EFInfusing.class, AMELang.DESCRIPTION_ENCHANTED_MACHINE,
+            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED,
+                            ExtraUpgrade.STACK, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
+                    .withEnergyConfig(() -> MekanismConfig.usage.metallurgicInfuser.get().multiply(200),
+                            () -> MekanismConfig.storage.metallurgicInfuser.get().multiply(t.processes * 12800))
+                    .withSound(MekanismSounds.METALLURGIC_INFUSER));
+
+    public static final EnumMap<AMETier, MachineRegistryObject<NFInfusing, BlockTileModel<NFInfusing, BlockTypeMachine<NFInfusing>>,
+            ContainerAstralMekanismFactory<NFInfusing>, ItemBlockMachine>> INFUSING_FACTORIES = registerFactories(
+            t -> t.nameForNormal + "_infusing_factory",NFInfusing::new, NFInfusing.class,MekanismLang.DESCRIPTION_FACTORY,
+            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED,
+                            ExtraUpgrade.STACK, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
+                    .withEnergyConfig(MekanismConfig.usage.metallurgicInfuser,() -> MekanismConfig.storage.metallurgicInfuser.get().multiply(t.processes))
+                    .withSound(MekanismSounds.METALLURGIC_INFUSER));
+
+    public static final EnumMap<AMETier, MachineRegistryObject<AFSawing, BlockTileModel<AFSawing, BlockTypeMachine<AFSawing>>,
+            ContainerAstralMekanismFactory<AFSawing>, ItemBlockMachine>> ASTRAL_SAWING_FACTORIES = registerFactories(
+            t -> t.nameForAstral + "_astral_sawing_factory", AFSawing::new, AFSawing.class, AMELang.DESCRIPTION_ASTRAL_MACHINE,
+            t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY,
+                            AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
+                    .withEnergyConfig(MekanismConfig.usage.precisionSawmill,MAX_SUPPLIER)
+                    .withSound(MekanismSounds.PRECISION_SAWMILL));
 }

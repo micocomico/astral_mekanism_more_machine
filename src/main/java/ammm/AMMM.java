@@ -1,22 +1,12 @@
 package ammm;
 
-import ammm.block.blockentity.astralfactory.AFCombining;
-import ammm.block.blockentity.astralfactory.AFCompressing;
-import ammm.block.blockentity.astralfactory.AFCrushing;
-import ammm.block.blockentity.astralfactory.AFEnriching;
+import ammm.block.blockentity.astralfactory.*;
 import ammm.block.blockentity.astralmachine.AMCrafter;
-import ammm.block.blockentity.enchantedfactory.EFCombining;
-import ammm.block.blockentity.enchantedfactory.EFCrushing;
-import ammm.block.blockentity.enchantedfactory.EFEnergizedSmelting;
-import ammm.block.blockentity.enchantedfactory.EFEnriching;
+import ammm.block.blockentity.enchantedfactory.*;
 import ammm.block.blockentity.enchantedmachine.EMCombiner;
 import ammm.block.blockentity.enchantedmachine.EMCrafter;
-import ammm.block.blockentity.normalfactory.NFCombining;
-import ammm.block.blockentity.normalfactory.NFCrushing;
-import ammm.block.blockentity.normalfactory.NFEnriching;
-import ammm.block.gui.factory.GFAdvanced;
-import ammm.block.gui.factory.GFCombining;
-import ammm.block.gui.factory.GFElectric;
+import ammm.block.blockentity.normalfactory.*;
+import ammm.block.gui.factory.*;
 import ammm.block.gui.machine.GuiCrafter;
 import ammm.registration.MachineRegistryObject;
 import ammm.registries.AMMMCreativeTab;
@@ -137,6 +127,22 @@ public class AMMM {
         AMMMachines.COMBINING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFCombining<NFCombining>::new));
 
         AMMMachines.ASTRAL_COMPRESSING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFAdvanced<AFCompressing>::new));
+        AMMMachines.ENCHANTED_COMPRESSING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFAdvanced<EFCompressing>::new));
+        AMMMachines.COMPRESSING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFAdvanced<NFCompressing>::new));
+
+        AMMMachines.ASTRAL_INJECTING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFAdvanced<AFInjecting>::new));
+        AMMMachines.ENCHANTED_INJECTING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFAdvanced<EFInjecting>::new));
+        AMMMachines.INJECTING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFAdvanced<NFInjecting>::new));
+
+        AMMMachines.ASTRAL_PURIFYING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFAdvanced<AFPurifying>::new));
+        AMMMachines.ENCHANTED_PURIFYING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFAdvanced<EFPurifying>::new));
+        AMMMachines.PURIFYING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFAdvanced<NFPurifying>::new));
+
+        AMMMachines.ASTRAL_INFUSING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFInfusing<AFInfusing>::new));
+        AMMMachines.ENCHANTED_INFUSING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFInfusing<EFInfusing>::new));
+        AMMMachines.INFUSING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFInfusing<NFInfusing>::new));
+
+        AMMMachines.ASTRAL_SAWING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFSawing<AFSawing>::new));
     }
 
     private static <BE extends TileEntityMekanism, CONTAINER extends MekanismTileContainer<BE>, U extends Screen & MenuAccess<CONTAINER>> void registerScreenMek(
