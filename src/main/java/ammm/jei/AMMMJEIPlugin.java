@@ -52,6 +52,9 @@ public class AMMMJEIPlugin implements IModPlugin {
         CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.METALLURGIC_INFUSING,AMMMachines.ASTRAL_INFUSING_FACTORIES.values().toArray(IItemProvider[]::new));
         CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.METALLURGIC_INFUSING,AMMMachines.ENCHANTED_INFUSING_FACTORIES.values().toArray(IItemProvider[]::new));
         CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.METALLURGIC_INFUSING,AMMMachines.INFUSING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.SAWING,AMMMachines.ASTRAL_SAWING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.SAWING,AMMMachines.ENCHANTED_SAWING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.SAWING,AMMMachines.SAWING_FACTORIES.values().toArray(IItemProvider[]::new));
     }
 
     @Override

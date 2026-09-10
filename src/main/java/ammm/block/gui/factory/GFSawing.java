@@ -18,8 +18,8 @@ public class GFSawing<BE extends BFSawing<BE>> extends GuiAstralMekanismFactory<
 
     public GFSawing(ContainerAstralMekanismFactory<BE> container, Inventory inv, Component title) {
         super(container, inv, title);
-        imageHeight += 21;
-        inventoryLabelY = 95;
+        imageHeight += 14;
+        inventoryLabelY = 100;
     }
 
     @Override

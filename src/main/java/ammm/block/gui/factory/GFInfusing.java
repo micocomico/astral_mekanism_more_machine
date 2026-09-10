@@ -45,11 +45,4 @@ public class GFInfusing<BE extends BFInfusing<BE>> extends GuiAstralMekanismFact
                     .jeiCategories(MekanismJEIRecipeType.METALLURGIC_INFUSING);
         }
     }
-
-    @Override
-    protected void drawForegroundText(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY) {
-        renderTitleText(guiGraphics);
-        drawString(guiGraphics, playerInventoryTitle, inventoryLabelX, inventoryLabelY, titleTextColor());
-        super.drawForegroundText(guiGraphics, mouseX, mouseY);
-    }
 }
