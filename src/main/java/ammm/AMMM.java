@@ -143,6 +143,8 @@ public class AMMM {
         AMMMachines.INFUSING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFInfusing<NFInfusing>::new));
 
         AMMMachines.ASTRAL_SAWING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFSawing<AFSawing>::new));
+        AMMMachines.ENCHANTED_SAWING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFSawing<EFSawing>::new));
+        AMMMachines.SAWING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFSawing<NFSawing>::new));
     }
 
     private static <BE extends TileEntityMekanism, CONTAINER extends MekanismTileContainer<BE>, U extends Screen & MenuAccess<CONTAINER>> void registerScreenMek(
