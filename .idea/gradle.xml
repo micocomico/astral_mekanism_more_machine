@@ -4,6 +4,15 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/../Mekanism-Overclocker-main/Mekanism-Overclocker-main" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/../Mekanism-Overclocker-main/Mekanism-Overclocker-main" />
+          </set>
+        </option>
+        <option name="resolveExternalAnnotations" value="true" />
+      </GradleProjectSettings>
+      <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
