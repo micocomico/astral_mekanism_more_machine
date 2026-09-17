@@ -2,6 +2,7 @@ package ammm.registries;
 
 import ammm.AMMMConstants;
 import ammm.AMMMLang;
+import ammm.block.blockentity.appliedmachine.AppliedOsmiumCompressor;
 import ammm.block.blockentity.astralfactory.*;
 import ammm.block.blockentity.astralmachine.AMCrafter;
 import ammm.block.blockentity.base.MekanismRecipeFactory;
@@ -17,6 +18,7 @@ import ammm.registration.MachineDeferredRegister;
 import ammm.registration.MachineRegistryObject;
 import astral_mekanism.AMELang;
 import astral_mekanism.AMETier;
+import astral_mekanism.block.blockentity.appliedmachine.BEAppliedCharger;
 import astral_mekanism.block.blockentity.base.BlockEntityRecipeFactory;
 import astral_mekanism.block.container.factory.ContainerAstralMekanismFactory;
 import astral_mekanism.block.container.prefab.ContainerPagedMachine;
@@ -113,6 +115,10 @@ public class AMMMachines {
     }
 
     public static final MachineDeferredRegister MACHINES = new MachineDeferredRegister(AMMMConstants.MODID);
+
+    public static final MachineRegistryObject<AppliedOsmiumCompressor, ?, MekanismTileContainer<AppliedOsmiumCompressor>, ?> APPLIED_OSMIUM_COMPRESSOR = MACHINES
+            .registerSimple("applied_osmium_compressor", AppliedOsmiumCompressor::new, AppliedOsmiumCompressor.class, AMELang.DESCRIPTION_APPLIED_MACHINE,
+                    builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
 
     public static final MachineRegistryObject<AMCrafter, BlockTileModel<AMCrafter, BlockTypeMachine<AMCrafter>>,
             ContainerCrafter<AMCrafter>, ItemBlockMachine> ASTRAL_CRAFTER = MACHINES.
@@ -272,7 +278,7 @@ public class AMMMachines {
             AMELang.DESCRIPTION_ASTRAL_MACHINE, t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY,
                             AMEUpgrade.COBBLESTONE_SUPPLY.getValue(),AMEUpgrade.RADIOACTIVE_SEALING.getValue()))
                     .withEnergyConfig(MekanismConfig.usage.chemicalInjectionChamber,MAX_SUPPLIER)
-                    .withSound(MekanismSounds.PURIFICATION_CHAMBER));
+                    .withSound(MekanismSounds.CHEMICAL_INJECTION_CHAMBER));
 
     public static final EnumMap<AMETier, MachineRegistryObject<EFInjecting, BlockTileModel<EFInjecting, BlockTypeMachine<EFInjecting>>,
             ContainerAstralMekanismFactory<EFInjecting>, ItemBlockMachine>> ENCHANTED_INJECTING_FACTORIES = registerFactories(
@@ -281,7 +287,7 @@ public class AMMMachines {
                             ExtraUpgrade.STACK, AMEUpgrade.COBBLESTONE_SUPPLY.getValue(),AMEUpgrade.RADIOACTIVE_SEALING.getValue()))
                     .withEnergyConfig(() -> MekanismConfig.usage.chemicalInjectionChamber.get().multiply(200),
                             () -> MekanismConfig.storage.chemicalInjectionChamber.get().multiply(t.processes * 12800))
-                    .withSound(MekanismSounds.PURIFICATION_CHAMBER));
+                    .withSound(MekanismSounds.CHEMICAL_INJECTION_CHAMBER));
 
     public static final EnumMap<AMETier, MachineRegistryObject<NFInjecting, BlockTileModel<NFInjecting, BlockTypeMachine<NFInjecting>>,
             ContainerAstralMekanismFactory<NFInjecting>, ItemBlockMachine>> INJECTING_FACTORIES = registerFactories(
@@ -289,7 +295,7 @@ public class AMMMachines {
             MekanismLang.DESCRIPTION_FACTORY, t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED,
                             ExtraUpgrade.STACK, AMEUpgrade.COBBLESTONE_SUPPLY.getValue(),AMEUpgrade.RADIOACTIVE_SEALING.getValue()))
                     .withEnergyConfig(MekanismConfig.usage.chemicalInjectionChamber,() -> MekanismConfig.storage.chemicalInjectionChamber.get().multiply(t.processes))
-                    .withSound(MekanismSounds.PURIFICATION_CHAMBER));
+                    .withSound(MekanismSounds.CHEMICAL_INJECTION_CHAMBER));
 
     public static final EnumMap<AMETier, MachineRegistryObject<AFInfusing, BlockTileModel<AFInfusing, BlockTypeMachine<AFInfusing>>,
             ContainerAstralMekanismFactory<AFInfusing>, ItemBlockMachine>> ASTRAL_INFUSING_FACTORIES = registerFactories(

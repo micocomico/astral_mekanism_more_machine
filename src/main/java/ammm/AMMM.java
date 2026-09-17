@@ -8,6 +8,7 @@ import ammm.block.blockentity.enchantedmachine.EMCrafter;
 import ammm.block.blockentity.normalfactory.*;
 import ammm.block.gui.factory.*;
 import ammm.block.gui.machine.GuiCrafter;
+import ammm.block.gui.machine.applied.GuiAppliedOsmiumCompressor;
 import ammm.registration.MachineRegistryObject;
 import ammm.registries.AMMMCreativeTab;
 import ammm.registries.AMMMachines;
@@ -108,8 +109,10 @@ public class AMMM {
     }
 
     private static void initScreens() {
+        registerScreenMek(AMMMachines.APPLIED_OSMIUM_COMPRESSOR, GuiAppliedOsmiumCompressor::new);
         registerScreenMek(AMMMachines.ASTRAL_CRAFTER, GuiCrafter<AMCrafter>::new);
         registerScreenMek(AMMMachines.ENCHANTED_CRAFTER, GuiCrafter<EMCrafter>::new);
+        registerScreenMek(AMMMachines.ENCHANTED_COMBINER, GuiDoubleItemToItemRecipeMachine<EMCombiner>::new);
 
         AMMMachines.ENCHANTED_ENERGIZED_SMELTING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GuiEnergizedSmeltingFactory<EFEnergizedSmelting>::new));
 
@@ -121,7 +124,6 @@ public class AMMM {
         AMMMachines.ENCHANTED_ENRICHING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFElectric<EFEnriching>::new));
         AMMMachines.ENRICHING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFElectric<NFEnriching>::new));
 
-        registerScreenMek(AMMMachines.ENCHANTED_COMBINER, GuiDoubleItemToItemRecipeMachine<EMCombiner>::new);
         AMMMachines.ASTRAL_COMBINING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFCombining<AFCombining>::new));
         AMMMachines.ENCHANTED_COMBINING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFCombining<EFCombining>::new));
         AMMMachines.COMBINING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFCombining<NFCombining>::new));
