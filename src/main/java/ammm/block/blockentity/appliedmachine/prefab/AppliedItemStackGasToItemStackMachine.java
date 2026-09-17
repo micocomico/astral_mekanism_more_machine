@@ -83,7 +83,6 @@ public abstract class AppliedItemStackGasToItemStackMachine extends BEAppliedEne
             if (keyA != null && keyB != null && hasLevel()) {
                 ItemStack stackA = keyA.toStack(0x3fffffff);
                 GasStack stackB = AMEKeyUtils.getGas(keyB);
-                //stackB.setAmount(Long.MAX_VALUE);
                 level.getRecipeManager().getAllRecipesFor(getRecipeType().getRecipeType())
                         .stream().filter(r -> r.test(stackA,stackB)).findFirst()
                         .ifPresentOrElse(r -> {
