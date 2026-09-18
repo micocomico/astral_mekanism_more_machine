@@ -1,10 +1,8 @@
 package ammm.block.gui.factory;
 
-import ammm.block.blockentity.basefactory.BFAdvanced;
 import ammm.block.blockentity.basefactory.BFInfusing;
-import astral_mekanism.block.container.factory.ContainerAstralMekanismFactory;
+import ammm.block.container.factory.CFBase;
 import astral_mekanism.block.gui.element.PagedGuiProgress;
-import astral_mekanism.block.gui.factory.GuiAstralMekanismFactory;
 import mekanism.api.recipes.cache.CachedRecipe.OperationTracker.RecipeError;
 import mekanism.client.gui.element.GuiDumpButton;
 import mekanism.client.gui.element.bar.GuiChemicalBar;
@@ -13,14 +11,12 @@ import mekanism.client.gui.element.progress.ProgressType;
 import mekanism.client.gui.element.tab.GuiEnergyTab;
 import mekanism.client.jei.MekanismJEIRecipeType;
 import mekanism.common.inventory.warning.WarningTracker.WarningType;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
-import org.jetbrains.annotations.NotNull;
 
-public class GFInfusing<BE extends BFInfusing<BE>> extends GuiAstralMekanismFactory<BE> {
+public class GFInfusing<BE extends BFInfusing<BE>> extends GFBase<BE> {
 
-    public GFInfusing(ContainerAstralMekanismFactory<BE> container, Inventory inv, Component title) {
+    public GFInfusing(CFBase<BE> container, Inventory inv, Component title) {
         super(container, inv, title);
         inventoryLabelY = 87;
     }

@@ -1,9 +1,9 @@
 package ammm.block.blockentity.enchantedfactory;
 
-import astral_mekanism.block.blockentity.base.BlockEntityRecipeFactory;
+import ammm.block.blockentity.base.AstralMekanismRecipeFactory;
 import astral_mekanism.block.blockentity.elements.slot.paged.PagedInputInventorySlot;
 import astral_mekanism.block.blockentity.elements.slot.paged.PagedOutputInventorySlot;
-import astral_mekanism.block.blockentity.interf.IEnergizedSmeltingFactory;
+import ammm.block.blockentity.interf.IEnergizedSmeltingFactory;
 import astral_mekanism.block.blockentity.interf.IEssentialEnergizedSmelter;
 import astral_mekanism.enums.AMEUpgrade;
 import astral_mekanism.generalrecipe.GeneralRecipeType;
@@ -53,7 +53,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 public class EFEnergizedSmelting
-        extends BlockEntityRecipeFactory<SmeltingRecipe, EFEnergizedSmelting>
+        extends AstralMekanismRecipeFactory<SmeltingRecipe, EFEnergizedSmelting>
         implements IEnergizedSmeltingFactory<EFEnergizedSmelting> {
 
     private PagedInputInventorySlot[] inputSlots;

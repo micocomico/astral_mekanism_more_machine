@@ -1,8 +1,7 @@
 package ammm.block.blockentity.base;
 
-import astral_mekanism.AMETier;
+import ammm.AMMMTier;
 import astral_mekanism.block.blockentity.base.ErrorTracker;
-import astral_mekanism.block.blockentity.base.IAMEFactory;
 import astral_mekanism.block.blockentity.interf.IEnergizedMachine;
 import mekanism.api.IContentsListener;
 import mekanism.api.chemical.gas.Gas;
@@ -32,15 +31,12 @@ import mekanism.common.capabilities.holder.fluid.FluidTankHelper;
 import mekanism.common.capabilities.holder.fluid.IFluidTankHolder;
 import mekanism.common.capabilities.holder.slot.IInventorySlotHolder;
 import mekanism.common.capabilities.holder.slot.InventorySlotHelper;
-import mekanism.common.integration.computer.SpecialComputerMethodWrapper;
-import mekanism.common.integration.computer.annotation.WrappingComputerMethod;
 import mekanism.common.inventory.container.MekanismContainer;
 import mekanism.common.inventory.container.sync.SyncableFloatingLong;
 import mekanism.common.inventory.slot.EnergyInventorySlot;
 import mekanism.common.recipe.lookup.IRecipeLookupHandler;
 import mekanism.common.recipe.lookup.cache.IInputRecipeCache;
 import mekanism.common.recipe.lookup.monitor.RecipeCacheLookupMonitor;
-import mekanism.common.tile.interfaces.IHasDumpButton;
 import mekanism.common.tile.prefab.TileEntityConfigurableMachine;
 import mekanism.common.tile.prefab.TileEntityRecipeMachine;
 import net.minecraft.core.BlockPos;
@@ -55,9 +51,9 @@ import java.util.function.BooleanSupplier;
 
 public abstract class MekanismRecipeFactory<RECIPE extends MekanismRecipe, BE extends MekanismRecipeFactory<RECIPE, BE, INPUT_CACHE>,INPUT_CACHE extends IInputRecipeCache>
         extends TileEntityConfigurableMachine
-        implements IRecipeLookupHandler.IRecipeTypedLookupHandler<RECIPE,INPUT_CACHE>, IEnergizedMachine, IAMEFactory<BE> {
+        implements IRecipeLookupHandler.IRecipeTypedLookupHandler<RECIPE,INPUT_CACHE>, IEnergizedMachine, IAMMMFactory<BE> {
 
-    public AMETier tier;
+    public AMMMTier tier;
     protected RecipeCacheLookupMonitor<RECIPE>[] recipeCacheLookupMonitors;
     protected BooleanSupplier[] recheckAllRecipeErrors;
     protected final ErrorTracker errorTracker;
@@ -79,7 +75,7 @@ public abstract class MekanismRecipeFactory<RECIPE extends MekanismRecipe, BE ex
     }
 
     @Override
-    public AMETier getTier() {
+    public AMMMTier getTier() {
         return tier;
     }
 
@@ -96,7 +92,7 @@ public abstract class MekanismRecipeFactory<RECIPE extends MekanismRecipe, BE ex
     @Override
     protected void presetVariables() {
         super.presetVariables();
-        tier = Attribute.getTier(getBlockType(), AMETier.class);
+        tier = Attribute.getTier(getBlockType(), AMMMTier.class);
         recipeCacheLookupMonitors = new RecipeCacheLookupMonitor[tier.processes];
         for (int i = 0; i < recipeCacheLookupMonitors.length; i++) {
             recipeCacheLookupMonitors[i] = createRecipeCacheLookupMonitor(i);

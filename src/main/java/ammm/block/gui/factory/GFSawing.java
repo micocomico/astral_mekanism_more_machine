@@ -1,10 +1,8 @@
 package ammm.block.gui.factory;
 
-import ammm.block.blockentity.basefactory.BFElectric;
 import ammm.block.blockentity.basefactory.BFSawing;
-import astral_mekanism.block.container.factory.ContainerAstralMekanismFactory;
+import ammm.block.container.factory.CFBase;
 import astral_mekanism.block.gui.element.PagedGuiProgress;
-import astral_mekanism.block.gui.factory.GuiAstralMekanismFactory;
 import mekanism.api.recipes.cache.CachedRecipe.OperationTracker.RecipeError;
 import mekanism.client.gui.element.bar.GuiVerticalPowerBar;
 import mekanism.client.gui.element.progress.ProgressType;
@@ -14,9 +12,9 @@ import mekanism.common.inventory.warning.WarningTracker.WarningType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 
-public class GFSawing<BE extends BFSawing<BE>> extends GuiAstralMekanismFactory<BE> {
+public class GFSawing<BE extends BFSawing<BE>> extends GFBase<BE> {
 
-    public GFSawing(ContainerAstralMekanismFactory<BE> container, Inventory inv, Component title) {
+    public GFSawing(CFBase<BE> container, Inventory inv, Component title) {
         super(container, inv, title);
         imageHeight += 14;
         inventoryLabelY = 100;
