@@ -1,12 +1,8 @@
 package ammm.block.gui.factory;
 
 import ammm.block.blockentity.basefactory.BFAdvanced;
-import astral_mekanism.block.container.factory.ContainerAstralMekanismFactory;
+import ammm.block.container.factory.CFBase;
 import astral_mekanism.block.gui.element.PagedGuiProgress;
-import astral_mekanism.block.gui.factory.GuiAstralMekanismFactory;
-import mekanism.api.chemical.gas.Gas;
-import mekanism.api.chemical.gas.GasStack;
-import mekanism.api.recipes.ItemStackGasToItemStackRecipe;
 import mekanism.api.recipes.cache.CachedRecipe.OperationTracker.RecipeError;
 import mekanism.client.gui.element.GuiDumpButton;
 import mekanism.client.gui.element.bar.GuiChemicalBar;
@@ -15,17 +11,14 @@ import mekanism.client.gui.element.progress.ProgressType;
 import mekanism.client.gui.element.tab.GuiEnergyTab;
 import mekanism.client.jei.MekanismJEIRecipeType;
 import mekanism.common.inventory.warning.WarningTracker.WarningType;
-import mekanism.common.recipe.lookup.cache.InputRecipeCache;
-import mekanism.common.tier.FactoryTier;
-import mekanism.common.tile.factory.TileEntitySawingFactory;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;
 
-public class GFAdvanced<BE extends BFAdvanced<BE>> extends GuiAstralMekanismFactory<BE> {
+public class GFAdvanced<BE extends BFAdvanced<BE>> extends GFBase<BE> {
 
-    public GFAdvanced(ContainerAstralMekanismFactory<BE> container, Inventory inv, Component title) {
+    public GFAdvanced(CFBase<BE> container, Inventory inv, Component title) {
         super(container, inv, title);
         inventoryLabelY = 87;
         //inventoryLabelX = 26;

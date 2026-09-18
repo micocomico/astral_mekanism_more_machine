@@ -8,7 +8,7 @@ import mekanism.common.registration.impl.ContainerTypeRegistryObject;
 import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;
 
-public class CFSawing<BE extends BFSawing<BE>> extends ContainerAstralMekanismFactory<BE> {
+public class CFSawing<BE extends BFSawing<BE>> extends CFBase<BE> {
 
     public CFSawing(ContainerTypeRegistryObject<?> type, int id, Inventory inv,
                     @NotNull BE tile) {

@@ -7,7 +7,6 @@ import appeng.api.stacks.AEItemKey;
 import appeng.api.stacks.AEKey;
 import appeng.api.storage.MEStorage;
 import astral_mekanism.block.blockentity.appliedmachine.prefab.BEAppliedEnergizedMachine;
-import astral_mekanism.block.blockentity.interf.applied.IAppliedSingleToSingleMachine;
 import astral_mekanism.item.recipecard.ChemicalIngredientCardItem;
 import astral_mekanism.item.recipecard.ItemIngredientCardItem;
 import astral_mekanism.util.AMEKeyUtils;
@@ -83,13 +82,14 @@ public abstract class AppliedItemStackGasToItemStackMachine extends BEAppliedEne
             if (keyA != null && keyB != null && hasLevel()) {
                 ItemStack stackA = keyA.toStack(0x3fffffff);
                 GasStack stackB = AMEKeyUtils.getGas(keyB);
+                stackB.setAmount(Long.MAX_VALUE);
                 level.getRecipeManager().getAllRecipesFor(getRecipeType().getRecipeType())
                         .stream().filter(r -> r.test(stackA,stackB)).findFirst()
                         .ifPresentOrElse(r -> {
                             inputKeyA = keyA;
                             inputKeyB = keyB;
                             inputAmountA = r.getItemInput().getNeededAmount(stackA);
-                            inputAmountB = r.getChemicalInput().getNeededAmount(stackB);
+                            inputAmountB = r.getChemicalInput().getNeededAmount(stackB) * 200;
                             ItemStack output = r.getOutput(stackA,stackB);
                             outputKey = AEItemKey.of(output);
                             outputAmount = output.getCount();

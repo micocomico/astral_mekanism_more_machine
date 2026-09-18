@@ -1,8 +1,14 @@
 package ammm.block.blockentity.base;
 
 import ammm.AMMMTier;
+import astral_mekanism.AMETier;
+import astral_mekanism.block.blockentity.base.BlockEntityRecipeFactory;
 import astral_mekanism.block.blockentity.base.ErrorTracker;
+import astral_mekanism.block.blockentity.base.IAMEFactory;
 import astral_mekanism.block.blockentity.interf.IEnergizedMachine;
+import astral_mekanism.generalrecipe.cachedrecipe.ICachedRecipe;
+import astral_mekanism.generalrecipe.lookup.handler.IUnifiedRecipeLookUpHandler;
+import astral_mekanism.generalrecipe.lookup.monitor.UnifiedRecipeCacheLookupMonitor;
 import mekanism.api.IContentsListener;
 import mekanism.api.chemical.gas.Gas;
 import mekanism.api.chemical.gas.GasStack;
@@ -18,8 +24,6 @@ import mekanism.api.chemical.slurry.Slurry;
 import mekanism.api.chemical.slurry.SlurryStack;
 import mekanism.api.math.FloatingLong;
 import mekanism.api.providers.IBlockProvider;
-import mekanism.api.recipes.MekanismRecipe;
-import mekanism.api.recipes.cache.CachedRecipe;
 import mekanism.api.recipes.cache.CachedRecipe.OperationTracker.RecipeError;
 import mekanism.common.block.attribute.Attribute;
 import mekanism.common.capabilities.energy.MachineEnergyContainer;
@@ -34,12 +38,10 @@ import mekanism.common.capabilities.holder.slot.InventorySlotHelper;
 import mekanism.common.inventory.container.MekanismContainer;
 import mekanism.common.inventory.container.sync.SyncableFloatingLong;
 import mekanism.common.inventory.slot.EnergyInventorySlot;
-import mekanism.common.recipe.lookup.IRecipeLookupHandler;
-import mekanism.common.recipe.lookup.cache.IInputRecipeCache;
-import mekanism.common.recipe.lookup.monitor.RecipeCacheLookupMonitor;
 import mekanism.common.tile.prefab.TileEntityConfigurableMachine;
 import mekanism.common.tile.prefab.TileEntityRecipeMachine;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -49,12 +51,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.BooleanSupplier;
 
-public abstract class MekanismRecipeFactory<RECIPE extends MekanismRecipe, BE extends MekanismRecipeFactory<RECIPE, BE, INPUT_CACHE>,INPUT_CACHE extends IInputRecipeCache>
+public abstract class AstralMekanismRecipeFactory<RECIPE extends Recipe<?>, BE extends AstralMekanismRecipeFactory<RECIPE, BE>>
         extends TileEntityConfigurableMachine
-        implements IRecipeLookupHandler.IRecipeTypedLookupHandler<RECIPE,INPUT_CACHE>, IEnergizedMachine, IAMMMFactory<BE> {
+        implements IUnifiedRecipeLookUpHandler<RECIPE>, IEnergizedMachine, IAMMMFactory<BE> {
 
     public AMMMTier tier;
-    protected RecipeCacheLookupMonitor<RECIPE>[] recipeCacheLookupMonitors;
+    protected UnifiedRecipeCacheLookupMonitor<RECIPE>[] recipeCacheLookupMonitors;
     protected BooleanSupplier[] recheckAllRecipeErrors;
     protected final ErrorTracker errorTracker;
     private final boolean[] activeStates;
@@ -62,8 +64,8 @@ public abstract class MekanismRecipeFactory<RECIPE extends MekanismRecipe, BE ex
     protected MachineEnergyContainer<BE> energyContainer;
     protected EnergyInventorySlot energySlot;
 
-    protected MekanismRecipeFactory(IBlockProvider blockProvider, BlockPos pos, BlockState state,
-                                    List<RecipeError> errorTypes, Set<RecipeError> globalErrorTypes) {
+    protected AstralMekanismRecipeFactory(IBlockProvider blockProvider, BlockPos pos, BlockState state,
+                                          List<RecipeError> errorTypes, Set<RecipeError> globalErrorTypes) {
         super(blockProvider, pos, state);
         this.activeStates = new boolean[tier.processes];
         this.errorTracker = new ErrorTracker(errorTypes, globalErrorTypes, tier.processes);
@@ -82,7 +84,7 @@ public abstract class MekanismRecipeFactory<RECIPE extends MekanismRecipe, BE ex
     protected IContentsListener markAllMonitorsChanged(IContentsListener listener) {
         return () -> {
             listener.onContentsChanged();
-            for (RecipeCacheLookupMonitor<RECIPE> cacheLookupMonitor : recipeCacheLookupMonitors) {
+            for (UnifiedRecipeCacheLookupMonitor<RECIPE> cacheLookupMonitor : recipeCacheLookupMonitors) {
                 cacheLookupMonitor.onChange();
             }
         };
@@ -93,18 +95,18 @@ public abstract class MekanismRecipeFactory<RECIPE extends MekanismRecipe, BE ex
     protected void presetVariables() {
         super.presetVariables();
         tier = Attribute.getTier(getBlockType(), AMMMTier.class);
-        recipeCacheLookupMonitors = new RecipeCacheLookupMonitor[tier.processes];
+        recipeCacheLookupMonitors = new UnifiedRecipeCacheLookupMonitor[tier.processes];
         for (int i = 0; i < recipeCacheLookupMonitors.length; i++) {
             recipeCacheLookupMonitors[i] = createRecipeCacheLookupMonitor(i);
         }
     }
 
-    protected RecipeCacheLookupMonitor<RECIPE> createRecipeCacheLookupMonitor(int cacheIndex) {
-        return new RecipeCacheLookupMonitor<>(this, cacheIndex);
+    protected UnifiedRecipeCacheLookupMonitor<RECIPE> createRecipeCacheLookupMonitor(int cacheIndex) {
+        return new UnifiedRecipeCacheLookupMonitor<>(this, cacheIndex);
     }
 
     @Nullable
-    protected CachedRecipe<RECIPE> getCachedRecipe(int cacheIndex) {
+    protected ICachedRecipe<RECIPE> getCachedRecipe(int cacheIndex) {
         return recipeCacheLookupMonitors[cacheIndex].getCachedRecipe(cacheIndex);
     }
 

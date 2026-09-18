@@ -1,21 +1,31 @@
 package ammm.block.gui.factory;
 
-import ammm.block.blockentity.basefactory.BFCombining;
+import ammm.block.blockentity.base.AstralMekanismRecipeFactory;
 import ammm.block.container.factory.CFBase;
+import astral_mekanism.block.blockentity.base.BlockEntityRecipeFactory;
+import ammm.block.blockentity.interf.IEnergizedSmeltingFactory;
+import astral_mekanism.block.blockentity.interf.IEssentialEnergizedSmelter;
+import astral_mekanism.block.container.factory.ContainerAstralMekanismFactory;
 import astral_mekanism.block.gui.element.PagedGuiProgress;
+import astral_mekanism.block.gui.factory.GuiAstralMekanismFactory;
+import astral_mekanism.jei.AMEJEIRecipeType;
 import mekanism.api.recipes.cache.CachedRecipe.OperationTracker.RecipeError;
 import mekanism.client.gui.element.bar.GuiVerticalPowerBar;
+import mekanism.client.gui.element.button.GuiGasMode;
+import mekanism.client.gui.element.gauge.GaugeType;
+import mekanism.client.gui.element.gauge.GuiInfusionGauge;
 import mekanism.client.gui.element.progress.ProgressType;
 import mekanism.client.gui.element.tab.GuiEnergyTab;
 import mekanism.client.jei.MekanismJEIRecipeType;
 import mekanism.common.inventory.warning.WarningTracker.WarningType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.crafting.SmeltingRecipe;
 
-public class GFCombining<BE extends BFCombining<BE>>
+public class GFEnergizedSmelting<BE extends AstralMekanismRecipeFactory<SmeltingRecipe, BE> & IEnergizedSmeltingFactory<BE>>
         extends GFBase<BE> {
 
-    public GFCombining(CFBase<BE> container, Inventory inv, Component title) {
+    public GFEnergizedSmelting(CFBase<BE> container, Inventory inv, Component title) {
         super(container, inv, title);
     }
 
@@ -33,7 +43,13 @@ public class GFCombining<BE extends BFCombining<BE>>
             int cacheIndex = index;
             addRenderableWidget(
                     new PagedGuiProgress(() -> tile.getProgressScaled(cacheIndex), ProgressType.DOWN, this, x, y, page))
-                    .jeiCategories(MekanismJEIRecipeType.COMBINING);
+                    .jeiCategories(AMEJEIRecipeType.ESSENTIAL_SMELTING, MekanismJEIRecipeType.SMELTING);
         }
+        addRenderableWidget(new GuiInfusionGauge(tile::getInfusionTank, () -> tile.getInfusionTanks(null),
+                GaugeType.SMALL, this, imageWidth - 36, 36))
+                .warning(WarningType.NO_SPACE_IN_OUTPUT,
+                        tile.getWarningCheck(IEssentialEnergizedSmelter.NOT_ENOUGH_INFUSE_OUTPUT_SPACE, 0));
+        addRenderableWidget(new GuiGasMode(this, imageWidth - 36, 80, true, tile::getGasMode, tile.getBlockPos(), 0));
     }
+
 }
