@@ -1,19 +1,4 @@
 {
-    "block.astral_mekanism.applied_osmium_compressor": "電子式オスミウム圧縮機",
-    "block.astral_mekanism.applied_purification_chamber": "電子式浄化室",
-    "block.astral_mekanism.applied_chemical_injection_chamber": "電子式化学注入室",
-    "container.astral_mekanism.applied_osmium_compressor": "電子式オスミウム圧縮機",
-    "container.astral_mekanism.applied_purification_chamber": "電子式浄化室",
-    "container.astral_mekanism.applied_chemical_injection_chamber": "電子式化学注入室",
-
-    "block.ammm.astral_crafter": "天体型拡張作業台",
-    "container.ammm.astral_crafter": "天体型拡張作業台",
-
-    "block.ammm.enchanted_crafter": "魔性型拡張作業台",
-    "container.ammm.enchanted_crafter": "魔性型拡張作業台",
-    "block.ammm.enchanted_combiner": "魔性型結合機",
-    "container.ammm.enchanted_combiner": "魔性型結合機",
-
     "block.ammm.essential_enchanted_energized_smelting_factory": "基礎型魔性型電動精錬ファクトリー",
     "block.ammm.basic_standard_enchanted_energized_smelting_factory": "基本標準魔性型電動精錬ファクトリー",
     "block.ammm.advanced_enchanted_energized_smelting_factory": "発展魔性型電動精錬ファクトリー",

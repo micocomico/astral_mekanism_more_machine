@@ -1,0 +1,22 @@
+{
+    "block.astral_mekanism.applied_osmium_compressor": "Applied Osmium Compressor",
+    "block.astral_mekanism.applied_purification_chamber": "Applied Purification Chamber",
+    "block.astral_mekanism.applied_chemical_injection_chamber": "Applied Chemical Injection Chamber",
+    "block.astral_mekanism.applied_combiner": "Applied Combiner",
+    "block.astral_mekanism.applied_metallurgic_infuser": "Applied Metallurgic Infuser",
+    "block.astral_mekanism.applied_precision_sawmill": "Applied Precision Sawmill",
+    "container.astral_mekanism.applied_osmium_compressor": "Applied Osmium Compressor",
+    "container.astral_mekanism.applied_purification_chamber": "Applied Purification Chamber",
+    "container.astral_mekanism.applied_chemical_injection_chamber": "Applied Chemical Injection Chamber",
+    "container.astral_mekanism.applied_combiner": "Applied Combiner",
+    "container.astral_mekanism.applied_metallurgic_infuser": "Applied Metallurgic Infuser",
+    "container.astral_mekanism.applied_precision_sawmill": "Applied Precision Sawmill",
+
+    "block.astral_mekanism.astral_crafter": "Astral Crafter",
+    "container.astral_mekanism.astral_crafter": "Astral Crafter",
+
+    "block.astral_mekanism.enchanted_crafter": "Enchanted Crafter",
+    "block.astral_mekanism.enchanted_combiner": "Enchanted Combiner",
+    "container.astral_mekanism.enchanted_crafter": "Enchanted Crafter",
+    "container.astral_mekanism.enchanted_combiner": "Enchanted Combiner"
+}

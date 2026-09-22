@@ -4,9 +4,9 @@ import appeng.api.stacks.AEKey;
 
 public interface IAppliedDoubleToSingleMachine {
 
-    public AEKey getInputAKey();
+    public AEKey getInputKeyA();
 
-    public AEKey getInputBKey();
+    public AEKey getInputKeyB();
 
     public AEKey getOutputKey();
 }

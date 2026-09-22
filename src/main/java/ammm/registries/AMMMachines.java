@@ -3,9 +3,7 @@ package ammm.registries;
 import ammm.AMMMConstants;
 import ammm.AMMMLang;
 import ammm.AMMMTier;
-import ammm.block.blockentity.appliedmachine.AppliedChemicalInjectionChamber;
-import ammm.block.blockentity.appliedmachine.AppliedOsmiumCompressor;
-import ammm.block.blockentity.appliedmachine.AppliedPurificationChamber;
+import ammm.block.blockentity.appliedmachine.*;
 import ammm.block.blockentity.astralfactory.*;
 import ammm.block.blockentity.astralmachine.AMCrafter;
 import ammm.block.blockentity.base.AstralMekanismRecipeFactory;
@@ -133,21 +131,33 @@ public class AMMMachines {
             .registerSimple("applied_chemical_injection_chamber", AppliedChemicalInjectionChamber::new, AppliedChemicalInjectionChamber.class, AMELang.DESCRIPTION_APPLIED_MACHINE,
                     builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
 
-    public static final MachineRegistryObject<AMCrafter, BlockTileModel<AMCrafter, BlockTypeMachine<AMCrafter>>,
-            ContainerCrafter<AMCrafter>, ItemBlockMachine> ASTRAL_CRAFTER = MACHINES.
+    public static final astral_mekanism.registration.MachineRegistryObject<AppliedCombiner, ?, MekanismTileContainer<AppliedCombiner>, ?> APPLIED_COMBINER = AMEMachines.MACHINES
+            .registerSimple("applied_combiner", AppliedCombiner::new, AppliedCombiner.class, AMELang.DESCRIPTION_APPLIED_MACHINE,
+                    builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+
+    public static final astral_mekanism.registration.MachineRegistryObject<AppliedMetallurgicInfuser, ?, MekanismTileContainer<AppliedMetallurgicInfuser>, ?> APPLIED_METALLURGIC_INFUSER = AMEMachines.MACHINES
+            .registerSimple("applied_metallurgic_infuser", AppliedMetallurgicInfuser::new, AppliedMetallurgicInfuser.class, AMELang.DESCRIPTION_APPLIED_MACHINE,
+                    builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+
+    public static final astral_mekanism.registration.MachineRegistryObject<AppliedPrecisionSawmill, ?, MekanismTileContainer<AppliedPrecisionSawmill>, ?> APPLIED_PRECISION_SAWMILL = AMEMachines.MACHINES
+            .registerSimple("applied_precision_sawmill", AppliedPrecisionSawmill::new, AppliedPrecisionSawmill.class, AMELang.DESCRIPTION_APPLIED_MACHINE,
+                    builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+
+    public static final astral_mekanism.registration.MachineRegistryObject<AMCrafter, BlockTileModel<AMCrafter, astral_mekanism.registration.BlockTypeMachine<AMCrafter>>,
+            ContainerCrafter<AMCrafter>, ItemBlockMachine> ASTRAL_CRAFTER = AMEMachines.MACHINES.
             registerDefaultBlockItem("astral_crafter", AMCrafter::new, AMCrafter.class, ContainerCrafter<AMCrafter>::new, AMMMLang.DESCRIPTION_ASTRAL_CRAFTER,
             builder -> builder.changeAttributeUpgrade(EnumSet.of(AMEUpgrade.RADIOACTIVE_SEALING.getValue(),Upgrade.ENERGY))
                     .withEnergyConfig(AMMMConfig.usage.astralCrafter, MAX_SUPPLIER));
 
 
-    public static final MachineRegistryObject<EMCrafter, BlockTileModel<EMCrafter, BlockTypeMachine<EMCrafter>>,
-            ContainerCrafter<EMCrafter>, ItemBlockMachine> ENCHANTED_CRAFTER = MACHINES.
+    public static final astral_mekanism.registration.MachineRegistryObject<EMCrafter, BlockTileModel<EMCrafter, astral_mekanism.registration.BlockTypeMachine<EMCrafter>>,
+            ContainerCrafter<EMCrafter>, ItemBlockMachine> ENCHANTED_CRAFTER = AMEMachines.MACHINES.
             registerDefaultBlockItem("enchanted_crafter", EMCrafter::new, EMCrafter.class, ContainerCrafter<EMCrafter>::new, AMMMLang.DESCRIPTION_ENCHANTED_CRAFTER,
             builder -> builder.changeAttributeUpgrade(EnumSet.of(AMEUpgrade.RADIOACTIVE_SEALING.getValue(),Upgrade.ENERGY,Upgrade.SPEED,ExtraUpgrade.STACK))
                     .withEnergyConfig(() -> AMEConfig.usage.essentialCrafter.get().multiply(200),() -> AMEConfig.storage.essentialCrafter.get().multiply(12800)));
 
-    public static final MachineRegistryObject<EMCombiner, BlockTileModel<EMCombiner, BlockTypeMachine<EMCombiner>>,
-            MekanismTileContainer<EMCombiner>, ItemBlockMachine> ENCHANTED_COMBINER = MACHINES.
+    public static final astral_mekanism.registration.MachineRegistryObject<EMCombiner, BlockTileModel<EMCombiner, astral_mekanism.registration.BlockTypeMachine<EMCombiner>>,
+            MekanismTileContainer<EMCombiner>, ItemBlockMachine> ENCHANTED_COMBINER = AMEMachines.MACHINES.
             registerSimple("enchanted_combiner", EMCombiner::new, EMCombiner.class, AMELang.DESCRIPTION_ENCHANTED_MACHINE,
             builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
                     .withEnergyConfig(() -> MekanismConfig.storage.combiner.get().multiply(200),() -> MekanismConfig.storage.combiner.get().multiply(12800))

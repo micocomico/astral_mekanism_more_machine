@@ -1,0 +1,22 @@
+{
+    "block.astral_mekanism.applied_osmium_compressor": "電子式オスミウム圧縮機",
+    "block.astral_mekanism.applied_purification_chamber": "電子式浄化室",
+    "block.astral_mekanism.applied_chemical_injection_chamber": "電子式化学注入室",
+    "block.astral_mekanism.applied_combiner": "電子式結合機",
+    "block.astral_mekanism.applied_metallurgic_infuser": "電子式冶金吹込機",
+    "block.astral_mekanism.applied_precision_sawmill": "電子式製材機",
+    "container.astral_mekanism.applied_osmium_compressor": "電子式オスミウム圧縮機",
+    "container.astral_mekanism.applied_purification_chamber": "電子式浄化室",
+    "container.astral_mekanism.applied_chemical_injection_chamber": "電子式化学注入室",
+    "container.astral_mekanism.applied_combiner": "電子式結合機",
+    "container.astral_mekanism.applied_metallurgic_infuser": "電子式冶金吹込機",
+    "container.astral_mekanism.applied_precision_sawmill": "電子式製材機",
+
+    "block.astral_mekanism.astral_crafter": "天体型拡張作業台",
+    "container.astral_mekanism.astral_crafter": "天体型拡張作業台",
+
+    "block.astral_mekanism.enchanted_crafter": "魔性型拡張作業台",
+    "block.astral_mekanism.enchanted_combiner": "魔性型結合機",
+    "container.astral_mekanism.enchanted_crafter": "魔性型拡張作業台",
+    "container.astral_mekanism.enchanted_combiner": "魔性型結合機"
+}
