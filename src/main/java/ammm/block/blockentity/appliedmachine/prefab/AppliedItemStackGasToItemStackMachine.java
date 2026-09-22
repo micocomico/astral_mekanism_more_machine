@@ -128,11 +128,11 @@ public abstract class AppliedItemStackGasToItemStackMachine extends BEAppliedEne
         setActive(false);
     }
 
-    public AEKey getInputAKey() {
+    public AEKey getInputKeyA() {
         return inputKeyA;
     }
 
-    public AEKey getInputBKey() {
+    public AEKey getInputKeyB() {
         return inputKeyB;
     }
 

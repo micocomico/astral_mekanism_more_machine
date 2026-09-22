@@ -8,9 +8,7 @@ import ammm.block.blockentity.enchantedmachine.EMCrafter;
 import ammm.block.blockentity.normalfactory.*;
 import ammm.block.gui.factory.*;
 import ammm.block.gui.machine.GuiCrafter;
-import ammm.block.gui.machine.applied.GuiAppliedChemicalInjectionChamber;
-import ammm.block.gui.machine.applied.GuiAppliedOsmiumCompressor;
-import ammm.block.gui.machine.applied.GuiAppliedPurificationChamber;
+import ammm.block.gui.machine.applied.*;
 import ammm.registration.MachineRegistryObject;
 import ammm.registries.AMMMCreativeTab;
 import ammm.registries.AMMMachines;
@@ -114,11 +112,14 @@ public class AMMM {
         registerScreenAME(AMMMachines.APPLIED_OSMIUM_COMPRESSOR, GuiAppliedOsmiumCompressor::new);
         registerScreenAME(AMMMachines.APPLIED_PURIFICATION_CHAMBER, GuiAppliedPurificationChamber::new);
         registerScreenAME(AMMMachines.APPLIED_CHEMICAL_INJECTION_CHAMBER, GuiAppliedChemicalInjectionChamber::new);
+        registerScreenAME(AMMMachines.APPLIED_COMBINER, GuiAppliedCombiner::new);
+        registerScreenAME(AMMMachines.APPLIED_METALLURGIC_INFUSER, GuiAppliedMetallurgicInfuser::new);
+        registerScreenAME(AMMMachines.APPLIED_PRECISION_SAWMILL, GuiAppliedPrecisionSawmill::new);
 
-        registerScreenMek(AMMMachines.ASTRAL_CRAFTER, GuiCrafter<AMCrafter>::new);
+        registerScreenAME(AMMMachines.ASTRAL_CRAFTER, GuiCrafter<AMCrafter>::new);
 
-        registerScreenMek(AMMMachines.ENCHANTED_CRAFTER, GuiCrafter<EMCrafter>::new);
-        registerScreenMek(AMMMachines.ENCHANTED_COMBINER, GuiDoubleItemToItemRecipeMachine<EMCombiner>::new);
+        registerScreenAME(AMMMachines.ENCHANTED_CRAFTER, GuiCrafter<EMCrafter>::new);
+        registerScreenAME(AMMMachines.ENCHANTED_COMBINER, GuiDoubleItemToItemRecipeMachine<EMCombiner>::new);
 
         AMMMachines.ENCHANTED_ENERGIZED_SMELTING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFEnergizedSmelting<EFEnergizedSmelting>::new));
 

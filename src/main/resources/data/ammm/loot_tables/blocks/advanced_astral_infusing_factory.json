@@ -51,13 +51,8 @@
                 },
                 {
                   "op": "replace",
-                  "source": "FluidTanks",
-                  "target": "mekData.FluidTanks"
-                },
-                {
-                  "op": "replace",
-                  "source": "GasTanks",
-                  "target": "mekData.GasTanks"
+                  "source": "InfusionTanks",
+                  "target": "mekData.InfusionTanks"
                 },
                 {
                   "op": "replace",

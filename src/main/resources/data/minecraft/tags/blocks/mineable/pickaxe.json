@@ -1,9 +1,13 @@
 {
   "values": [
-    "ammm:astral_crafter",
+    "astral_mekanism:applied_osmium_compressor",
+    "astral_mekanism:applied_purification_chamber",
+    "astral_mekanism:applied_chemical_injection_chmaber",
 
-    "ammm:enchanted_crafter",
-    "ammm:enchanted_combiner",
+    "astral_mekanism:astral_crafter",
+
+    "astral_mekanism:enchanted_crafter",
+    "astral_mekanism:enchanted_combiner",
 
     "ammm:essential_enchanted_energized_smelting_factory",
     "ammm:basic_standard_enchanted_energized_smelting_factory",
