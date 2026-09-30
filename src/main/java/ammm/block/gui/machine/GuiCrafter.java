@@ -1,7 +1,8 @@
 package ammm.block.gui.machine;
 
-import ammm.block.blockentity.basemachine.BMCrafter;
+import ammm.block.blockentity.mashine.basemachine.BMCrafter;
 import ammm.block.container.machine.ContainerCrafter;
+import astral_mekanism.jei.AMEJEIRecipeType;
 import mekanism.api.recipes.cache.CachedRecipe.OperationTracker.RecipeError;
 import mekanism.client.gui.GuiConfigurableTile;
 import mekanism.client.gui.element.bar.GuiVerticalPowerBar;
@@ -31,6 +32,7 @@ public class GuiCrafter<BE extends BMCrafter> extends GuiConfigurableTile<BE, Co
     @Override
     protected void addGuiElements() {
         super.addGuiElements();
+
         addRenderableWidget(new GuiEnergyTab(this, tile.getEnergyContainer(), tile::getActive));
         addRenderableWidget(new GuiVerticalPowerBar(this, tile.getEnergyContainer(), 188, 16)
                 .warning(WarningType.NOT_ENOUGH_ENERGY,
@@ -40,7 +42,7 @@ public class GuiCrafter<BE extends BMCrafter> extends GuiConfigurableTile<BE, Co
         addRenderableWidget(new GuiGasGauge(tile::getGasTank, () -> tile.getGasTanks(null),
                 GaugeType.STANDARD, this, 25, 29));
         addRenderableWidget(
-                new GuiProgress(tile::getActive, ProgressType.RIGHT, this, 134, 58).jeiCategory(tile)
+                new GuiProgress(tile::getActive, ProgressType.RIGHT, this, 134, 58).jeiCategories(AMEJEIRecipeType.ASTRAL_CRAFTING)
                         .warning(WarningType.INPUT_DOESNT_PRODUCE_OUTPUT,
                                 tile.getWarningCheck(RecipeError.INPUT_DOESNT_PRODUCE_OUTPUT)));
     }

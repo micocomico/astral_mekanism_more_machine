@@ -10,7 +10,7 @@ public class AMMMCreativeTab {
             AMMMConstants.MODID);
 
     public static final CreativeTabRegistryObject ASTRAL_MEKANISM_MORE_MACHINE_TAB = CREATIVE_TABS.register("astral_mekanism_more_machine_tab",
-            AMMMLang.ITEM_GROUP, AMMMachines.ASTRAL_CRAFTER,
+            AMMMLang.ITEM_GROUP, AMMMachines.ASTRAL_ESSENTIAL_CRAFTER,
             builder -> builder.displayItems((displayParameters, output) -> {
                 CreativeTabDeferredRegister.addToDisplay(AMMMachines.MACHINES.blockRegister, output);
             }));

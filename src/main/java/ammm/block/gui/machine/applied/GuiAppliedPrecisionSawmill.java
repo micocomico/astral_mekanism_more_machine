@@ -1,9 +1,6 @@
 package ammm.block.gui.machine.applied;
 
-import ammm.block.blockentity.appliedmachine.AppliedPrecisionSawmill;
-import ammm.block.blockentity.interf.applied.IAppliedDoubleToSingleMachine;
-import ammm.block.blockentity.interf.applied.IAppliedSingleToDoubleMachine;
-import astral_mekanism.block.blockentity.appliedmachine.prefab.BEAppliedEnergizedMachine;
+import ammm.block.blockentity.mashine.appliedmachine.AppliedPrecisionSawmill;
 import astral_mekanism.block.gui.element.GuiMEKeySlot;
 import mekanism.client.gui.GuiMekanismTile;
 import mekanism.client.gui.element.GuiUpArrow;

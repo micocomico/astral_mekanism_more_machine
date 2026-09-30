@@ -5,9 +5,8 @@ import net.minecraft.Util;
 
 public enum AMMMLang implements ILangEntry {
 
-    DESCRIPTION_ASTRAL_CRAFTER("description", "astral_crafter"),
-    DESCRIPTION_ENCHANTED_CRAFTER("description", "enchanted_crafter"),
-    ITEM_GROUP("item_group", "modid"),;
+    ITEM_GROUP("item_group", "modid"),
+    TEST_GROUP("item_group", "testid"),;
 
     private final String key;
 

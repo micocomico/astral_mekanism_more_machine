@@ -68,12 +68,12 @@
               "source": "block_entity"
             }
           ],
-          "name": "astral_mekanism:astral_crafter"
+          "name": "astral_mekanism:astral_essential_crafter"
         }
       ],
       "name": "main",
       "rolls": 1.0
     }
   ],
-  "random_sequence": "astral_mekanism:blocks/astral_crafter"
+  "random_sequence": "astral_mekanism:blocks/astral_essential_crafter"
 }

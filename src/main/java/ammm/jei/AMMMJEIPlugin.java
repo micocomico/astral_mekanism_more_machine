@@ -1,17 +1,23 @@
 package ammm.jei;
 
 import ammm.registries.AMMMachines;
+import appeng.integration.modules.jei.ChargerCategory;
+import appeng.integration.modules.jei.TransformCategory;
 import astral_mekanism.AMEConstants;
 import astral_mekanism.jei.AMEJEIRecipeType;
+import astral_mekanism.registries.AMEMachines;
+import com.fxd927.mekanismelements.client.MSJEIRecipeType;
 import mekanism.api.providers.IItemProvider;
 import mekanism.client.jei.CatalystRegistryHelper;
 import mekanism.client.jei.MekanismJEIRecipeType;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.runtime.IJeiRuntime;
 import mezz.jei.api.runtime.IRecipesGui;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
 
 @JeiPlugin
@@ -27,9 +33,19 @@ public class AMMMJEIPlugin implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registry) {
-        CatalystRegistryHelper.register(registry, AMEJEIRecipeType.ASTRAL_CRAFTING,AMMMachines.ASTRAL_CRAFTER);
-        CatalystRegistryHelper.register(registry, AMEJEIRecipeType.ASTRAL_CRAFTING,AMMMachines.ENCHANTED_CRAFTER);
-        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.COMBINING,AMMMachines.ENCHANTED_COMBINER);
+        CatalystRegistryHelper.register(registry,MSJEIRecipeType.ADSORPTION_SEPARATOR,AMMMachines.ASTRAL_ADSORPTION_SEPARATOR);
+        CatalystRegistryHelper.register(registry,MekanismJEIRecipeType.PAINTING,AMMMachines.ASTRAL_PAINTING_MACHINE);
+        CatalystRegistryHelper.register(registry,AMEJEIRecipeType.ASTRAL_CRAFTING,AMMMachines.ASTRAL_ESSENTIAL_CRAFTER,AMMMachines.ENCHANTED_ESSENTIAL_CRAFTER);
+        CatalystRegistryHelper.register(registry,AMEJEIRecipeType.MEKANICAL_COMPOSTER,AMMMachines.ENCHANTED_COMPOSTER);
+        registry.addRecipeCatalysts(RecipeTypes.COMPOSTING,AMMMachines.ENCHANTED_COMPOSTER);
+        CatalystRegistryHelper.register(registry,MekanismJEIRecipeType.ACTIVATING,AMMMachines.ENCHANTED_GNA);
+        CatalystRegistryHelper.register(registry,AMEJEIRecipeType.FLUID_INFUSER_RECIPE,AMMMachines.ENCHANTED_FLUID_INFUSER);
+        registry.addRecipeCatalysts(ChargerCategory.RECIPE_TYPE,AMMMachines.ENCHANTED_MEKANICAL_CHARGER);
+        registry.addRecipeCatalysts(TransformCategory.RECIPE_TYPE,AMMMachines.ENCHANTED_TRANSFORMER);
+        CatalystRegistryHelper.register(registry,AMEJEIRecipeType.AAE_REACTION,AMMMachines.ENCHANTED_REACTION_CHAMBER);
+        CatalystRegistryHelper.register(registry,AMEJEIRecipeType.MEKANICAL_TRANSFORM,AMMMachines.ENCHANTED_TRANSFORMER);
+
+        registry.addRecipeCatalysts(RecipeTypes.SMELTING,AMMMachines.ENCHANTED_ENERGIZED_SMELTING_FACTORIES.values().toArray(ItemLike[]::new));
         CatalystRegistryHelper.register(registry, AMEJEIRecipeType.ESSENTIAL_SMELTING,AMMMachines.ENCHANTED_ENERGIZED_SMELTING_FACTORIES.values().toArray(IItemProvider[]::new));
         CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.CRUSHING,AMMMachines.ASTRAL_CRUSHING_FACTORIES.values().toArray(IItemProvider[]::new));
         CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.CRUSHING,AMMMachines.ENCHANTED_CRUSHING_FACTORIES.values().toArray(IItemProvider[]::new));

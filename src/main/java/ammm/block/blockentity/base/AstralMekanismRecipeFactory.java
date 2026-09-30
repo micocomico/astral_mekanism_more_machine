@@ -1,10 +1,7 @@
 package ammm.block.blockentity.base;
 
 import ammm.AMMMTier;
-import astral_mekanism.AMETier;
-import astral_mekanism.block.blockentity.base.BlockEntityRecipeFactory;
 import astral_mekanism.block.blockentity.base.ErrorTracker;
-import astral_mekanism.block.blockentity.base.IAMEFactory;
 import astral_mekanism.block.blockentity.interf.IEnergizedMachine;
 import astral_mekanism.generalrecipe.cachedrecipe.ICachedRecipe;
 import astral_mekanism.generalrecipe.lookup.handler.IUnifiedRecipeLookUpHandler;

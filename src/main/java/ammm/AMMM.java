@@ -1,19 +1,27 @@
 package ammm;
 
-import ammm.block.blockentity.astralfactory.*;
-import ammm.block.blockentity.astralmachine.AMCrafter;
-import ammm.block.blockentity.enchantedfactory.*;
-import ammm.block.blockentity.enchantedmachine.EMCombiner;
-import ammm.block.blockentity.enchantedmachine.EMCrafter;
-import ammm.block.blockentity.normalfactory.*;
+import ammm.block.blockentity.factory.astralfactory.*;
+import ammm.block.blockentity.factory.enchantedfactory.*;
+import ammm.block.blockentity.factory.normalfactory.*;
+import ammm.block.blockentity.mashine.astralmachine.AMAdsorptionSeparator;
+import ammm.block.blockentity.mashine.astralmachine.AMAirCompressor;
+import ammm.block.blockentity.mashine.astralmachine.AMCrafter;
+import ammm.block.blockentity.mashine.astralmachine.AMPaintingMachine;
+import ammm.block.blockentity.mashine.enchantedmachine.*;
+import ammm.block.blockentity.others.SeawaterGeneratorB;
+import ammm.block.blockentity.others.SeawaterGeneratorBE;
 import ammm.block.gui.factory.*;
 import ammm.block.gui.machine.GuiCrafter;
 import ammm.block.gui.machine.applied.*;
-import ammm.registration.MachineRegistryObject;
 import ammm.registries.AMMMCreativeTab;
 import ammm.registries.AMMMachines;
-import astral_mekanism.block.gui.factory.GuiEnergizedSmeltingFactory;
+import astral_mekanism.block.gui.basemachine.GuiAMEAdsorptionSeparator;
+import astral_mekanism.block.gui.basemachine.GuiAMEAirCompressor;
+import astral_mekanism.block.gui.basemachine.GuiAMEPaintingMachine;
+import astral_mekanism.block.gui.normalmachine.*;
 import astral_mekanism.block.gui.prefab.GuiDoubleItemToItemRecipeMachine;
+import astral_mekanism.block.gui.prefab.GuiGasToGasBlock;
+import astral_mekanism.registration.MachineRegistryObject;
 import com.mojang.logging.LogUtils;
 import mekanism.common.inventory.container.tile.MekanismTileContainer;
 import mekanism.common.tile.base.TileEntityMekanism;
@@ -29,10 +37,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -61,20 +69,20 @@ public class AMMM {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MODID);
 
     public AMMM() {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        IEventBus modEventBus = FMLJavaModLoadingContext
+                .get().getModEventBus();
 
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
-        BLOCKS.register(modEventBus);
-        ITEMS.register(modEventBus);
-        CREATIVE_MODE_TABS.register(modEventBus);
-        MinecraftForge.EVENT_BUS.register(this);
-
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
-
-        AMMMCreativeTab.CREATIVE_TABS.register(modEventBus);
+        if (ModList.get().isLoaded("mwgr")) {
+            SeawaterGeneratorB.BLOCKS.register(modEventBus);
+            SeawaterGeneratorBE.BLOCK_ENTITIES.register(modEventBus);
+        }
         AMMMachines.MACHINES.register(modEventBus);
+        AMMMachines.TEST_MACHINES.register(modEventBus);
+        AMMMCreativeTab.CREATIVE_TABS.register(modEventBus);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -109,17 +117,26 @@ public class AMMM {
     }
 
     private static void initScreens() {
-        registerScreenAME(AMMMachines.APPLIED_OSMIUM_COMPRESSOR, GuiAppliedOsmiumCompressor::new);
-        registerScreenAME(AMMMachines.APPLIED_PURIFICATION_CHAMBER, GuiAppliedPurificationChamber::new);
-        registerScreenAME(AMMMachines.APPLIED_CHEMICAL_INJECTION_CHAMBER, GuiAppliedChemicalInjectionChamber::new);
-        registerScreenAME(AMMMachines.APPLIED_COMBINER, GuiAppliedCombiner::new);
-        registerScreenAME(AMMMachines.APPLIED_METALLURGIC_INFUSER, GuiAppliedMetallurgicInfuser::new);
-        registerScreenAME(AMMMachines.APPLIED_PRECISION_SAWMILL, GuiAppliedPrecisionSawmill::new);
+        registerScreenMek(AMMMachines.APPLIED_OSMIUM_COMPRESSOR, GuiAppliedOsmiumCompressor::new);
+        registerScreenMek(AMMMachines.APPLIED_PURIFICATION_CHAMBER, GuiAppliedPurificationChamber::new);
+        registerScreenMek(AMMMachines.APPLIED_CHEMICAL_INJECTION_CHAMBER, GuiAppliedChemicalInjectionChamber::new);
+        registerScreenMek(AMMMachines.APPLIED_COMBINER, GuiAppliedCombiner::new);
+        registerScreenMek(AMMMachines.APPLIED_METALLURGIC_INFUSER, GuiAppliedMetallurgicInfuser::new);
+        registerScreenMek(AMMMachines.APPLIED_PRECISION_SAWMILL, GuiAppliedPrecisionSawmill::new);
 
-        registerScreenAME(AMMMachines.ASTRAL_CRAFTER, GuiCrafter<AMCrafter>::new);
+        registerScreenMek(AMMMachines.ASTRAL_ADSORPTION_SEPARATOR, GuiAMEAdsorptionSeparator<AMAdsorptionSeparator>::new);
+        registerScreenMek(AMMMachines.ASTRAL_AIR_COMPRESSOR, GuiAMEAirCompressor<AMAirCompressor>::new);
+        registerScreenMek(AMMMachines.ASTRAL_PAINTING_MACHINE, GuiAMEPaintingMachine<AMPaintingMachine>::new);
+        registerScreenMek(AMMMachines.ASTRAL_ESSENTIAL_CRAFTER, GuiCrafter<AMCrafter>::new);
 
-        registerScreenAME(AMMMachines.ENCHANTED_CRAFTER, GuiCrafter<EMCrafter>::new);
-        registerScreenAME(AMMMachines.ENCHANTED_COMBINER, GuiDoubleItemToItemRecipeMachine<EMCombiner>::new);
+        registerScreenMek(AMMMachines.ENCHANTED_COMBINER, GuiDoubleItemToItemRecipeMachine<EMCombiner>::new);
+        registerScreenMek(AMMMachines.ENCHANTED_COMPOSTER, GuiMekanicalComposter<EMComposter>::new);
+        registerScreenMek(AMMMachines.ENCHANTED_ESSENTIAL_CRAFTER, GuiCrafter<EMCrafter>::new);
+        registerScreenMek(AMMMachines.ENCHANTED_GNA, GuiGasToGasBlock<EMGNA>::new);
+        registerScreenMek(AMMMachines.ENCHANTED_FLUID_INFUSER, GuiFluidInfuser<EMFluidInfuser>::new);
+        registerScreenMek(AMMMachines.ENCHANTED_MEKANICAL_CHARGER, GuiMekanicalCharger<EMMekanicalCharger>::new);
+        registerScreenMek(AMMMachines.ENCHANTED_REACTION_CHAMBER, GuiAAEReactionChamber<EMReactionChamber>::new);
+        registerScreenMek(AMMMachines.ENCHANTED_TRANSFORMER, GuiTransformer<EMTransformer>::new);
 
         AMMMachines.ENCHANTED_ENERGIZED_SMELTING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFEnergizedSmelting<EFEnergizedSmelting>::new));
 
@@ -158,12 +175,6 @@ public class AMMM {
 
     private static <BE extends TileEntityMekanism, CONTAINER extends MekanismTileContainer<BE>, U extends Screen & MenuAccess<CONTAINER>> void registerScreenMek(
             MachineRegistryObject<BE, ?, ? extends CONTAINER, ?> registryObject,
-            ScreenConstructor<CONTAINER, U> constructor) {
-        MenuScreens.register(registryObject.getContainer().get(), constructor);
-    }
-
-    private static <BE extends TileEntityMekanism, CONTAINER extends MekanismTileContainer<BE>, U extends Screen & MenuAccess<CONTAINER>> void registerScreenAME(
-            astral_mekanism.registration.MachineRegistryObject<BE, ?, ? extends CONTAINER, ?> registryObject,
             ScreenConstructor<CONTAINER, U> constructor) {
         MenuScreens.register(registryObject.getContainer().get(), constructor);
     }
