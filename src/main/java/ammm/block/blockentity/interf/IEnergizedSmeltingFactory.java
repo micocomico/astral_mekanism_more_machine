@@ -1,7 +1,6 @@
 package ammm.block.blockentity.interf;
 
 import ammm.block.blockentity.base.IAMMMFactory;
-import astral_mekanism.block.blockentity.base.IAMEFactory;
 import astral_mekanism.block.blockentity.interf.IEnergizedMachine;
 import astral_mekanism.block.blockentity.interf.IEssentialEnergizedSmelter;
 import astral_mekanism.generalrecipe.lookup.cache.recipe.SingleInputGeneralRecipeCache.GeneralSingleItem;

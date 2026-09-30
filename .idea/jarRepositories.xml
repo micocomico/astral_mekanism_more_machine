@@ -36,5 +36,10 @@
       <option name="name" value="Modmaven" />
       <option name="url" value="https://modmaven.dev/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven2" />
+      <option name="name" value="maven2" />
+      <option name="url" value="https://repo.spongepowered.org/maven" />
+    </remote-repository>
   </component>
 </project>

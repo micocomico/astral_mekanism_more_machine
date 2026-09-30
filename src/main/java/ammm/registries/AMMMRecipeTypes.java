@@ -1,22 +1,11 @@
 package ammm.registries;
 
 import ammm.AMMMConstants;
-import astral_mekanism.AMEConstants;
-import astral_mekanism.recipes.inputRecipeCache.AMInputRecipeCache.FluidFluid;
-import astral_mekanism.recipes.inputRecipeCache.AMInputRecipeCache.GasInfusion;
-import astral_mekanism.recipes.inputRecipeCache.AstralCraftingRecipeCache;
-import astral_mekanism.recipes.inputRecipeCache.MekanicalTransformRecipeCache;
-import astral_mekanism.recipes.recipe.*;
 import astral_mekanism.util.RecipeTypeUtils;
-import mekanism.api.chemical.gas.Gas;
-import mekanism.api.chemical.gas.GasStack;
-import mekanism.api.recipes.GasToGasRecipe;
 import mekanism.api.recipes.ItemStackToItemStackRecipe;
 import mekanism.api.recipes.MekanismRecipe;
 import mekanism.common.recipe.MekanismRecipeType;
 import mekanism.common.recipe.lookup.cache.IInputRecipeCache;
-import mekanism.common.recipe.lookup.cache.InputRecipeCache.ItemFluidChemical;
-import mekanism.common.recipe.lookup.cache.InputRecipeCache.SingleChemical;
 import mekanism.common.recipe.lookup.cache.InputRecipeCache.SingleItem;
 import mekanism.common.registration.impl.RecipeTypeDeferredRegister;
 import mekanism.common.registration.impl.RecipeTypeRegistryObject;

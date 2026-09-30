@@ -166,7 +166,7 @@ ordering="AFTER"
 side="BOTH"
 [[dependencies.${mod_id}]]
 modId="mekmm"
-mandatory=false
+mandatory=true
 versionRange="[1.1.2,)"
 ordering="AFTER"
 side="BOTH"
@@ -175,6 +175,18 @@ modId="morethermalevaporation"
 mandatory=false
 versionRange="[2.8.2,)"
 ordering="AFTER"
+side="BOTH"
+[[dependencies.${mod_id}]]
+modId="mwgr"
+mandatory=false
+versionRange="[1.1.9,)"
+ordering="AFTER"
+side="BOTH"
+[[dependencies.${mod_id}]]
+modId="mwgr_ae"
+mandatory=false
+versionRange="[1.1.9,)"
+ordering="BEFORE"
 side="BOTH"
 [[dependencies.${mod_id}]]
 modId="astral_mekanism"

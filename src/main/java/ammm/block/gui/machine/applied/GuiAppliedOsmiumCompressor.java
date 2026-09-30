@@ -1,9 +1,7 @@
 package ammm.block.gui.machine.applied;
 
-import ammm.block.blockentity.appliedmachine.AppliedOsmiumCompressor;
+import ammm.block.blockentity.mashine.appliedmachine.AppliedOsmiumCompressor;
 import ammm.block.gui.machine.applied.prefab.GuiAppliedDoubleToSingleEnergizedMachine;
-import astral_mekanism.block.blockentity.appliedmachine.BEAppliedCrusher;
-import astral_mekanism.block.gui.appliedmachine.prefab.GuiAppliedSingleToSingleEnergizedMachine;
 import mekanism.client.jei.MekanismJEIRecipeType;
 import mekanism.common.inventory.container.tile.MekanismTileContainer;
 import net.minecraft.network.chat.Component;

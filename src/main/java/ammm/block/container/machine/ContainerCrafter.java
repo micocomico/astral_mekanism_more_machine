@@ -1,6 +1,6 @@
 package ammm.block.container.machine;
 
-import ammm.block.blockentity.basemachine.BMCrafter;
+import ammm.block.blockentity.mashine.basemachine.BMCrafter;
 import mekanism.common.inventory.container.tile.MekanismTileContainer;
 import mekanism.common.registration.impl.ContainerTypeRegistryObject;
 import net.minecraft.world.entity.player.Inventory;

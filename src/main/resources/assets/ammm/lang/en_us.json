@@ -508,8 +508,9 @@
     "container.ammm.infinite_multiversal_sawing_factory": "Infinite multiversal Sawing Factory",
     "container.ammm.astral_sawing_factory": "Astral Sawing Factory",
 
-    "description.ammm.astral_crafter": "expanded crafting table for advanced crafting.",
-    "description.ammm.enchanted_crafter": "expanded crafting table for advanced crafting.",
+    "description.ammm.astral_essential_crafter": "expanded crafting table for advanced crafting.",
+    "description.ammm.enchanted_essential_crafter": "expanded crafting table for advanced crafting.",
 
-    "item_group.ammm.modid": "Astral Mekanism More Machine"
+    "item_group.ammm.modid": "Astral Mekanism More Machine",
+    "item_group.ammm.testid": "Test Tab"
 }

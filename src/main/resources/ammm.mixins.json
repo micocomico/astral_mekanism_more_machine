@@ -1,0 +1,17 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+    "mixinextras": {
+        "minVersion": "0.5.0"
+    },
+	"package": "ammm.mixin",
+	"plugin": "ammm.mixin.AMMMMixinPlugin",
+	"refmap": "ammm.refmap.json",
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [
+		"mwgr.MWGRCreativetabMixin",
+		"mwgrae.MWGRAEMixin"
+	],
+	"client": [],
+	"server": []
+}

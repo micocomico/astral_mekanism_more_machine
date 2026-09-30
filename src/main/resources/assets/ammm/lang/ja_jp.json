@@ -508,8 +508,9 @@
     "container.ammm.infinite_multiversal_sawing_factory": "無限多元製材ファクトリー",
     "container.ammm.astral_sawing_factory": "天体級製材ファクトリー",
 
-    "description.ammm.astral_crafter": "高度なクラフトを行うための拡張された作業台です。",
-    "description.ammm.enchanted_crafter": "高度なクラフトを行うための拡張された作業台です。",
+    "description.ammm.astral_essential_crafter": "高度なクラフトを行うための拡張された作業台です。",
+    "description.ammm.enchanted_essential_crafter": "高度なクラフトを行うための拡張された作業台です。",
 
-    "item_group.ammm.modid": "Astral Mekanism More Machine"
+    "item_group.ammm.modid": "Astral Mekanism More Machine",
+    "item_group.ammm.testid": "Test Tab"
 }

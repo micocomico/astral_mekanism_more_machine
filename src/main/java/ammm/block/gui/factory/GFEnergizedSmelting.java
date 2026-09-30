@@ -1,13 +1,10 @@
 package ammm.block.gui.factory;
 
 import ammm.block.blockentity.base.AstralMekanismRecipeFactory;
-import ammm.block.container.factory.CFBase;
-import astral_mekanism.block.blockentity.base.BlockEntityRecipeFactory;
 import ammm.block.blockentity.interf.IEnergizedSmeltingFactory;
+import ammm.block.container.factory.CFBase;
 import astral_mekanism.block.blockentity.interf.IEssentialEnergizedSmelter;
-import astral_mekanism.block.container.factory.ContainerAstralMekanismFactory;
 import astral_mekanism.block.gui.element.PagedGuiProgress;
-import astral_mekanism.block.gui.factory.GuiAstralMekanismFactory;
 import astral_mekanism.jei.AMEJEIRecipeType;
 import mekanism.api.recipes.cache.CachedRecipe.OperationTracker.RecipeError;
 import mekanism.client.gui.element.bar.GuiVerticalPowerBar;

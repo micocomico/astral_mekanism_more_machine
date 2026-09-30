@@ -1,6 +1,6 @@
 package ammm.block.gui.factory;
 
-import ammm.block.blockentity.basefactory.BFAdvanced;
+import ammm.block.blockentity.factory.basefactory.BFAdvanced;
 import ammm.block.container.factory.CFBase;
 import astral_mekanism.block.gui.element.PagedGuiProgress;
 import mekanism.api.recipes.cache.CachedRecipe.OperationTracker.RecipeError;
