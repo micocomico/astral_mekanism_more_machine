@@ -7,7 +7,6 @@ import mekanism.api.Upgrade;
 import mekanism.api.providers.IBlockProvider;
 import mekanism.common.inventory.container.MekanismContainer;
 import mekanism.common.inventory.container.sync.SyncableInt;
-import mekanism.common.inventory.container.sync.SyncableLong;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 

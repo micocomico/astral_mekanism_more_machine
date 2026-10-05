@@ -1,7 +1,6 @@
 package ammm.block.blockentity.mashine.enchantedmachine;
 
 import appeng.recipes.handlers.ChargerRecipe;
-import astral_mekanism.block.blockentity.astralmachine.BEAstralMekanicalCharger;
 import astral_mekanism.block.blockentity.base.BlockEntityRecipeMachine;
 import astral_mekanism.block.blockentity.interf.IEnergizedMachine;
 import astral_mekanism.generalrecipe.GeneralRecipeType;

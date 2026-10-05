@@ -1,6 +1,5 @@
 package ammm.block.blockentity.mashine.enchantedmachine;
 
-import astral_mekanism.block.blockentity.astralmachine.BEAstralReactionChamber;
 import astral_mekanism.block.blockentity.base.BlockEntityRecipeMachine;
 import astral_mekanism.block.blockentity.elements.ExtendedComponentEjector;
 import astral_mekanism.block.blockentity.elements.energyContainer.EnergyRequiredRecipeMachineEnergyContainer;

@@ -183,7 +183,7 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
-    implementation fg.deobf("curse.maven:astral-mekanism-1415150:8299719")
+    implementation fg.deobf("curse.maven:astral-mekanism-1415150:8601842")
     implementation fg.deobf("mekanism:Mekanism:1.20.1-10.4.16.80")
     implementation fg.deobf("curse.maven:mekanism-generators-268566:6552914")
     implementation fg.deobf("curse.maven:mekanism-tools-268567:6552915")

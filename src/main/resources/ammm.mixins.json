@@ -10,7 +10,9 @@
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
 		"mwgr.MWGRCreativetabMixin",
-		"mwgrae.MWGRAEMixin"
+		"mwgrae.MWGRAEMixin",
+		"mekanism.TileComponentEjectorMixin",
+		"ame.AMEMachinesMixin"
 	],
 	"client": [],
 	"server": []
