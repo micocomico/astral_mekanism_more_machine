@@ -1,17 +1,12 @@
 package ammm.mixin.mwgrae;
 
-import ammm.block.blockentity.others.SeawaterGeneratorB;
 import appeng.api.storage.StorageCells;
-import com.github.misosoupTgit.mwgr.MWGRMod;
 import com.takenokoshi.mwgrae.MwgrAE;
 import com.takenokoshi.mwgrae.WaterGeneratorCellHandler;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.registries.ForgeRegistries;

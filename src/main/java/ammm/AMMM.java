@@ -3,20 +3,16 @@ package ammm;
 import ammm.block.blockentity.factory.astralfactory.*;
 import ammm.block.blockentity.factory.enchantedfactory.*;
 import ammm.block.blockentity.factory.normalfactory.*;
-import ammm.block.blockentity.mashine.astralmachine.AMAdsorptionSeparator;
-import ammm.block.blockentity.mashine.astralmachine.AMAirCompressor;
-import ammm.block.blockentity.mashine.astralmachine.AMCrafter;
-import ammm.block.blockentity.mashine.astralmachine.AMPaintingMachine;
+import ammm.block.blockentity.mashine.astralmachine.*;
 import ammm.block.blockentity.mashine.enchantedmachine.*;
-import ammm.block.blockentity.others.SeawaterGeneratorB;
-import ammm.block.blockentity.others.SeawaterGeneratorBE;
+import ammm.block.blockentity.others.*;
 import ammm.block.gui.factory.*;
-import ammm.block.gui.machine.GuiCrafter;
+import ammm.block.gui.machine.*;
 import ammm.block.gui.machine.applied.*;
 import ammm.registries.AMMMCreativeTab;
 import ammm.registries.AMMMachines;
+import ammm.registries.TabChangedMachines;
 import astral_mekanism.block.gui.basemachine.GuiAMEAdsorptionSeparator;
-import astral_mekanism.block.gui.basemachine.GuiAMEAirCompressor;
 import astral_mekanism.block.gui.basemachine.GuiAMEPaintingMachine;
 import astral_mekanism.block.gui.normalmachine.*;
 import astral_mekanism.block.gui.prefab.GuiDoubleItemToItemRecipeMachine;
@@ -58,7 +54,7 @@ public class AMMM {
     // Define mod id in a common place for everything to reference
     public static final String MODID = AMMMConstants.MODID;
     // Directly reference a slf4j logger
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
     // Create a Deferred Register to hold Blocks which will all be registered under the "astral_mekanism_more_machine" namespace
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     // Create a Deferred Register to hold Items which will all be registered under the "astral_mekanism_more_machine" namespace
@@ -80,8 +76,8 @@ public class AMMM {
             SeawaterGeneratorB.BLOCKS.register(modEventBus);
             SeawaterGeneratorBE.BLOCK_ENTITIES.register(modEventBus);
         }
+        TabChangedMachines.ESF.register(modEventBus);
         AMMMachines.MACHINES.register(modEventBus);
-        AMMMachines.TEST_MACHINES.register(modEventBus);
         AMMMCreativeTab.CREATIVE_TABS.register(modEventBus);
     }
 
@@ -117,28 +113,28 @@ public class AMMM {
     }
 
     private static void initScreens() {
-        registerScreenMek(AMMMachines.APPLIED_OSMIUM_COMPRESSOR, GuiAppliedOsmiumCompressor::new);
-        registerScreenMek(AMMMachines.APPLIED_PURIFICATION_CHAMBER, GuiAppliedPurificationChamber::new);
-        registerScreenMek(AMMMachines.APPLIED_CHEMICAL_INJECTION_CHAMBER, GuiAppliedChemicalInjectionChamber::new);
-        registerScreenMek(AMMMachines.APPLIED_COMBINER, GuiAppliedCombiner::new);
-        registerScreenMek(AMMMachines.APPLIED_METALLURGIC_INFUSER, GuiAppliedMetallurgicInfuser::new);
-        registerScreenMek(AMMMachines.APPLIED_PRECISION_SAWMILL, GuiAppliedPrecisionSawmill::new);
+        registerScreenMek(TabChangedMachines.APPLIED_OSMIUM_COMPRESSOR, GuiAppliedOsmiumCompressor::new);
+        registerScreenMek(TabChangedMachines.APPLIED_PURIFICATION_CHAMBER, GuiAppliedPurificationChamber::new);
+        registerScreenMek(TabChangedMachines.APPLIED_CHEMICAL_INJECTION_CHAMBER, GuiAppliedChemicalInjectionChamber::new);
+        registerScreenMek(TabChangedMachines.APPLIED_COMBINER, GuiAppliedCombiner::new);
+        registerScreenMek(TabChangedMachines.APPLIED_METALLURGIC_INFUSER, GuiAppliedMetallurgicInfuser::new);
+        registerScreenMek(TabChangedMachines.APPLIED_PRECISION_SAWMILL, GuiAppliedPrecisionSawmill::new);
 
-        registerScreenMek(AMMMachines.ASTRAL_ADSORPTION_SEPARATOR, GuiAMEAdsorptionSeparator<AMAdsorptionSeparator>::new);
-        registerScreenMek(AMMMachines.ASTRAL_AIR_COMPRESSOR, GuiAMEAirCompressor<AMAirCompressor>::new);
-        registerScreenMek(AMMMachines.ASTRAL_PAINTING_MACHINE, GuiAMEPaintingMachine<AMPaintingMachine>::new);
-        registerScreenMek(AMMMachines.ASTRAL_ESSENTIAL_CRAFTER, GuiCrafter<AMCrafter>::new);
+        registerScreenMek(TabChangedMachines.ASTRAL_ADSORPTION_SEPARATOR, GuiAMEAdsorptionSeparator<AMAdsorptionSeparator>::new);
+        registerScreenMek(TabChangedMachines.ASTRAL_PAINTING_MACHINE, GuiAMEPaintingMachine<AMPaintingMachine>::new);
 
-        registerScreenMek(AMMMachines.ENCHANTED_COMBINER, GuiDoubleItemToItemRecipeMachine<EMCombiner>::new);
-        registerScreenMek(AMMMachines.ENCHANTED_COMPOSTER, GuiMekanicalComposter<EMComposter>::new);
-        registerScreenMek(AMMMachines.ENCHANTED_ESSENTIAL_CRAFTER, GuiCrafter<EMCrafter>::new);
-        registerScreenMek(AMMMachines.ENCHANTED_GNA, GuiGasToGasBlock<EMGNA>::new);
-        registerScreenMek(AMMMachines.ENCHANTED_FLUID_INFUSER, GuiFluidInfuser<EMFluidInfuser>::new);
-        registerScreenMek(AMMMachines.ENCHANTED_MEKANICAL_CHARGER, GuiMekanicalCharger<EMMekanicalCharger>::new);
-        registerScreenMek(AMMMachines.ENCHANTED_REACTION_CHAMBER, GuiAAEReactionChamber<EMReactionChamber>::new);
-        registerScreenMek(AMMMachines.ENCHANTED_TRANSFORMER, GuiTransformer<EMTransformer>::new);
+        registerScreenMek(TabChangedMachines.ENCHANTED_COMBINER, GuiDoubleItemToItemRecipeMachine<EMCombiner>::new);
+        registerScreenMek(TabChangedMachines.ENCHANTED_COMPOSTER, GuiMekanicalComposter<EMComposter>::new);
+        registerScreenMek(TabChangedMachines.ENCHANTED_GNA, GuiGasToGasBlock<EMGNA>::new);
+        registerScreenMek(TabChangedMachines.ENCHANTED_FLUID_INFUSER, GuiFluidInfuser<EMFluidInfuser>::new);
+        registerScreenMek(TabChangedMachines.ENCHANTED_MEKANICAL_CHARGER, GuiMekanicalCharger<EMMekanicalCharger>::new);
+        registerScreenMek(TabChangedMachines.ENCHANTED_REACTION_CHAMBER, GuiAAEReactionChamber<EMReactionChamber>::new);
+        registerScreenMek(TabChangedMachines.ENCHANTED_TRANSFORMER, GuiTransformer<EMTransformer>::new);
 
-        AMMMachines.ENCHANTED_ENERGIZED_SMELTING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFEnergizedSmelting<EFEnergizedSmelting>::new));
+        TabChangedMachines.ENCHANTED_ENERGIZED_SMELTING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFEnergizedSmelting<EFEnergizedSmelting>::new));
+
+        registerScreenMek(TabChangedMachines.ASTRAL_ESSENTIAL_CRAFTER, GuiCrafter<AMCrafter>::new);
+        registerScreenMek(TabChangedMachines.ENCHANTED_ESSENTIAL_CRAFTER, GuiCrafter<EMCrafter>::new);
 
         AMMMachines.ASTRAL_CRUSHING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFElectric<AFCrushing>::new));
         AMMMachines.ENCHANTED_CRUSHING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFElectric<EFCrushing>::new));

@@ -6,7 +6,7 @@ import net.minecraft.Util;
 public enum AMMMLang implements ILangEntry {
 
     ITEM_GROUP("item_group", "modid"),
-    TEST_GROUP("item_group", "testid"),;
+    TABTITLE("tab_name", "factories");
 
     private final String key;
 
