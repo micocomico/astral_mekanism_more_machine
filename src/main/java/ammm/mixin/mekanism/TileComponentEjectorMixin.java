@@ -1,11 +1,11 @@
 package ammm.mixin.mekanism;
 
 import ammm.EjectTransitRequest;
+import mekanism.api.Action;
+import mekanism.api.AutomationType;
 import mekanism.api.inventory.IInventorySlot;
 import mekanism.api.text.EnumColor;
-import mekanism.common.lib.inventory.TileTransitRequest;
 import mekanism.common.lib.inventory.TransitRequest;
-import mekanism.common.lib.transmitter.TransmissionType;
 import mekanism.common.tile.base.TileEntityMekanism;
 import mekanism.common.tile.component.TileComponentEjector;
 import mekanism.common.tile.component.config.ConfigInfo;
@@ -13,21 +13,18 @@ import mekanism.common.tile.component.config.DataType;
 import mekanism.common.tile.component.config.slot.ISlotInfo;
 import mekanism.common.tile.component.config.slot.InventorySlotInfo;
 import mekanism.common.tile.transmitter.TileEntityLogisticalTransporterBase;
-import mekanism.common.util.InventoryUtils;
 import mekanism.common.util.WorldUtils;
 import net.minecraft.core.Direction;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
-
-import static ammm.AMMM.LOGGER;
 
 @Mixin(value = TileComponentEjector.class, remap = false)
 public abstract class TileComponentEjectorMixin {
@@ -43,7 +40,7 @@ public abstract class TileComponentEjectorMixin {
     private EnumColor outputColor;
 
 
-    @Inject(method = "outputItems", at = @At("HEAD"))
+    @Inject(method = "outputItems", at = @At("HEAD"), cancellable = true)
     private void OverclockedOutputItemsInject(ConfigInfo info, CallbackInfo ci) {
         for (DataType dataType : info.getSupportedDataTypes()) {
             if (!dataType.canOutput()) {
@@ -54,7 +51,11 @@ public abstract class TileComponentEjectorMixin {
                 Set<Direction> outputs = info.getSidesForData(dataType);
                 if (!outputs.isEmpty()) {
                     for (IInventorySlot slot : inventorySlotInfo.getSlots()) {
-                        EjectTransitRequest ejectMap = InventoryUtils.getEjectItemMap(new EjectTransitRequest(tile, outputs.iterator().next()), List.of(slot));
+                        EjectTransitRequest ejectMap = new EjectTransitRequest(tile, outputs.iterator().next());
+                        ItemStack simulatedExtraction = slot.extractItem(slot.getCount(), Action.SIMULATE, AutomationType.EXTERNAL);
+                        if (!simulatedExtraction.isEmpty()) {
+                            ejectMap.addItem(simulatedExtraction, inventorySlotInfo.getSlots().indexOf(slot));
+                        }
                         if (!ejectMap.isEmpty()) {
                             for (Direction side : outputs) {
                                 BlockEntity target = WorldUtils.getTileEntity(tile.getLevel(), tile.getBlockPos().relative(side));
@@ -81,6 +82,7 @@ public abstract class TileComponentEjectorMixin {
         }
 
         tickDelay = 0;
+        ci.cancel();
     }
 
 }

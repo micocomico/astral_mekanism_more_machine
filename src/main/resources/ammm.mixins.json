@@ -9,10 +9,10 @@
 	"refmap": "ammm.refmap.json",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"mwgr.MWGRCreativetabMixin",
-		"mwgrae.MWGRAEMixin",
+		"ame.AMEMachinesMixin",
 		"mekanism.TileComponentEjectorMixin",
-		"ame.AMEMachinesMixin"
+		"mwgr.MWGRCreativetabMixin",
+		"mwgrae.MWGRAEMixin"
 	],
 	"client": [],
 	"server": []
