@@ -1,12 +1,11 @@
 package ammm.jei;
 
-import ammm.registries.TabChangedMachines;
 import ammm.registries.AMMMachines;
+import ammm.registries.TabChangedMachines;
 import appeng.integration.modules.jei.ChargerCategory;
 import appeng.integration.modules.jei.TransformCategory;
 import astral_mekanism.AMEConstants;
 import astral_mekanism.jei.AMEJEIRecipeType;
-import astral_mekanism.registries.AMEMachines;
 import com.fxd927.mekanismelements.client.MSJEIRecipeType;
 import mekanism.api.providers.IItemProvider;
 import mekanism.client.jei.CatalystRegistryHelper;
