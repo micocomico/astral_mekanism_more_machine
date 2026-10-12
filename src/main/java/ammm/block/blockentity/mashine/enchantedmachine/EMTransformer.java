@@ -9,12 +9,12 @@ import com.jerry.mekanism_extras.api.ExtraUpgrade;
 import mekanism.api.Upgrade;
 import mekanism.api.providers.IBlockProvider;
 import mekanism.api.recipes.cache.CachedRecipe;
+import mekanism.common.util.MekanismUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class EMTransformer extends BEAbstractTransformer {
     private int baselineMaxOperations = 1;
-    private int fluidTankCapacity = 1 * 50000;
 
     public EMTransformer(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
         super(blockProvider, pos, state);
@@ -22,7 +22,7 @@ public class EMTransformer extends BEAbstractTransformer {
 
     @Override
     protected int fluidTankCapacity() {
-        return fluidTankCapacity;
+        return 2000 * 200;
     }
 
     @Override
@@ -41,15 +41,13 @@ public class EMTransformer extends BEAbstractTransformer {
     public void recalculateUpgrades(Upgrade upgrade) {
         super.recalculateUpgrades(upgrade);
         if (AMEEmpowered.empoweredIsLoaded()) {
-            if (AMEEmpowered.isEmpoweredSpeed(upgrade) || upgrade == Upgrade.SPEED || upgrade == ExtraUpgrade.STACK) {
-                baselineMaxOperations = ((1 << upgradeComponent.getUpgrades(Upgrade.SPEED)) + (2 << AMEEmpowered
-                        .getEmpoweredSpeeds(this))) << upgradeComponent.getUpgrades(ExtraUpgrade.STACK);
+            if (AMEEmpowered.isEmpoweredSpeed(upgrade) || upgrade == ExtraUpgrade.STACK) {
+                baselineMaxOperations = 200 * (1 << (AMEEmpowered.getEmpoweredSpeeds(this)
+                        + upgradeComponent.getUpgrades(ExtraUpgrade.STACK)));
             }
-        } else if (upgrade == Upgrade.SPEED || upgrade == ExtraUpgrade.STACK) {
-            baselineMaxOperations = 1 << (upgradeComponent.getUpgrades(Upgrade.SPEED)
-                    + upgradeComponent.getUpgrades(ExtraUpgrade.STACK));
+        } else if (upgrade == ExtraUpgrade.STACK) {
+            baselineMaxOperations = 200 * (1 << upgradeComponent.getUpgrades(ExtraUpgrade.STACK));
         }
-        fluidTankCapacity = 50000 * baselineMaxOperations;
     }
 
 }

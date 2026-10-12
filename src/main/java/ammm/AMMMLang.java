@@ -2,11 +2,12 @@ package ammm;
 
 import mekanism.api.text.ILangEntry;
 import net.minecraft.Util;
+import org.jetbrains.annotations.NotNull;
 
 public enum AMMMLang implements ILangEntry {
 
     ITEM_GROUP("item_group", "modid"),
-    TABTITLE("tab_name", "factories");
+    FACTORIES_TAB_TITLE("tab_name", "factories");
 
     private final String key;
 
@@ -19,6 +20,7 @@ public enum AMMMLang implements ILangEntry {
     }
 
     @Override
+    @NotNull
     public String getTranslationKey() {
         return key;
     }

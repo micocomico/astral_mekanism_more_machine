@@ -183,13 +183,13 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
-    implementation fg.deobf("curse.maven:astral-mekanism-1415150:8601842")
+    implementation fg.deobf("curse.maven:astral-mekanism-1415150:9124583")
     implementation fg.deobf("mekanism:Mekanism:1.20.1-10.4.16.80")
     implementation fg.deobf("curse.maven:mekanism-generators-268566:6552914")
     implementation fg.deobf("curse.maven:mekanism-tools-268567:6552915")
     implementation fg.deobf("curse.maven:evolved-mekanism-1230085:7599591")
     implementation fg.deobf("curse.maven:evolved-mekanism-extras-1268159:8294797")
-    implementation fg.deobf("curse.maven:mekanism-elements-1103224:6537553")
+    implementation fg.deobf("curse.maven:mekanism-elements-1103224:8884438")
     implementation fg.deobf("curse.maven:mekanism-extras-1026040:8247562")
     implementation fg.deobf("curse.maven:iglee-library-541199:6987117")
     implementation fg.deobf("curse.maven:Applied-Energistics-2-223794:7148487")
@@ -201,13 +201,13 @@ dependencies {
     implementation fg.deobf("curse.maven:mwgr-ae-1622171:8599767")
     implementation fg.deobf("curse.maven:advancedae-1084104:7939754")
 
-    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.3"))
-    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.3")) {
-        jarJar.ranged(it, "[0.5.3,)")
-    }
 
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
     compileOnly "org.spongepowered:mixin:0.8.5"
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.5"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.5")) {
+        jarJar.ranged(it, "[0.5.5,)")
+    }
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

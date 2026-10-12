@@ -9,7 +9,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class EMComposter extends BEAbstractMekanicalComposter {
-    private int baselineMaxOperations = 1;
 
     public EMComposter(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
         super(blockProvider, pos, state);
@@ -17,20 +16,16 @@ public class EMComposter extends BEAbstractMekanicalComposter {
 
     @Override
     protected int getDefaltBaseline() {
-        return baselineMaxOperations;
+        return 200;
     }
 
     @Override
     public void recalculateUpgrades(Upgrade upgrade) {
         super.recalculateUpgrades(upgrade);
         if (AMEEmpowered.empoweredIsLoaded()) {
-            if (AMEEmpowered.isEmpoweredSpeed(upgrade) || upgrade == Upgrade.SPEED || upgrade == ExtraUpgrade.STACK) {
-                baselineMaxOperations = ((1 << upgradeComponent.getUpgrades(Upgrade.SPEED)) + (2 << AMEEmpowered
-                        .getEmpoweredSpeeds(this))) << upgradeComponent.getUpgrades(ExtraUpgrade.STACK);
-            }
-        } else if (upgrade == Upgrade.SPEED || upgrade == ExtraUpgrade.STACK) {
-            baselineMaxOperations = 1 << (upgradeComponent.getUpgrades(Upgrade.SPEED)
-                    + upgradeComponent.getUpgrades(ExtraUpgrade.STACK));
+            setBaselineMaxOperations(200 * (1 << AMEEmpowered.getAllSpeeds(this)));
+        } else if (upgrade == Upgrade.SPEED) {
+            setBaselineMaxOperations(200 * (1 << upgradeComponent.getUpgrades(Upgrade.SPEED)));
         }
     }
 }

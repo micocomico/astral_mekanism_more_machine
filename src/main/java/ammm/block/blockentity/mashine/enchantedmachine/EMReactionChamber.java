@@ -70,7 +70,6 @@ public class EMReactionChamber extends BlockEntityRecipeMachine<ReactionChamberR
     private FloatingLong recipeEnergyRequierd = FloatingLong.ZERO;
     private FloatingLong lastEnergyUsage = FloatingLong.ZERO;
     private int baselineMaxOperations = 1;
-    private int fluidTankCapacity = 1 * 20000;
 
     @SuppressWarnings("unchecked")
     public EMReactionChamber(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
@@ -117,10 +116,10 @@ public class EMReactionChamber extends BlockEntityRecipeMachine<ReactionChamberR
     protected IFluidTankHolder getInitialFluidTanks(IContentsListener listener,
             IContentsListener recipeCacheListener) {
         FluidTankHelper builder = FluidTankHelper.forSideWithConfig(this::getDirection, this::getConfig);
-        builder.addTank(inputTank = BasicFluidTank.input(fluidTankCapacity,
+        builder.addTank(inputTank = BasicFluidTank.input(0x7fffffff,
                 stack -> containsFluidOther(getItems(), stack),
                 this::containsFluid, recipeCacheListener));
-        builder.addTank(outputTank = BasicFluidTank.output(fluidTankCapacity, listener));
+        builder.addTank(outputTank = BasicFluidTank.output(0x7fffffff, listener));
         return builder.build();
     }
 
@@ -178,19 +177,14 @@ public class EMReactionChamber extends BlockEntityRecipeMachine<ReactionChamberR
         return baselineMaxOperations;
     }
 
-    @Override
     public void recalculateUpgrades(Upgrade upgrade) {
         super.recalculateUpgrades(upgrade);
         if (AMEEmpowered.empoweredIsLoaded()) {
-            if (AMEEmpowered.isEmpoweredSpeed(upgrade) || upgrade == Upgrade.SPEED || upgrade == ExtraUpgrade.STACK) {
-                baselineMaxOperations = ((1 << upgradeComponent.getUpgrades(Upgrade.SPEED)) + (2 << AMEEmpowered
-                        .getEmpoweredSpeeds(this))) << upgradeComponent.getUpgrades(ExtraUpgrade.STACK);
+            if (AMEEmpowered.isEmpoweredSpeed(upgrade) || upgrade == ExtraUpgrade.STACK) {
+                baselineMaxOperations = 20 * (1 << (AMEEmpowered.getEmpoweredSpeeds(this)
+                        + upgradeComponent.getUpgrades(ExtraUpgrade.STACK)));
             }
-        } else if (upgrade == Upgrade.SPEED || upgrade == ExtraUpgrade.STACK) {
-            baselineMaxOperations = 1 << (upgradeComponent.getUpgrades(Upgrade.SPEED)
-                    + upgradeComponent.getUpgrades(ExtraUpgrade.STACK));
         }
-        fluidTankCapacity = 20000 * baselineMaxOperations;
     }
 
     @Override

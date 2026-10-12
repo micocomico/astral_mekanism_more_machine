@@ -75,10 +75,8 @@ public class AMMM {
         modEventBus.addListener(this::commonSetup);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
-        if (ModList.get().isLoaded("mwgr")) {
-            SeawaterGeneratorB.BLOCKS.register(modEventBus);
-            SeawaterGeneratorBE.BLOCK_ENTITIES.register(modEventBus);
-        }
+        SeawaterGeneratorB.BLOCKS.register(modEventBus);
+        SeawaterGeneratorBE.BLOCK_ENTITIES.register(modEventBus);
         TabChangedMachines.ESF.register(modEventBus);
         AMMMachines.MACHINES.register(modEventBus);
         AMMMCreativeTab.CREATIVE_TABS.register(modEventBus);

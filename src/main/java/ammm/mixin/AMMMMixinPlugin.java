@@ -21,12 +21,6 @@ public class AMMMMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if (mixinClassName.contains(".mwgr.")) {
-            return LoadingModList.get().getModFileById("mwgr") != null;
-        }
-        if (mixinClassName.contains(".mwgrae.")) {
-            return LoadingModList.get().getModFileById("mwgr_ae") != null;
-        }
         return true;
     }
 

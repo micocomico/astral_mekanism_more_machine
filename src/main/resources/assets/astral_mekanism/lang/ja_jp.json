@@ -14,11 +14,9 @@
 
     "block.astral_mekanism.astral_essential_crafter": "天体型基礎型拡張作業台",
     "block.astral_mekanism.astral_adsorption_separator": "天体型Adsorption分離機",
-    "block.astral_mekanism.astral_air_compressor": "天体型空気圧縮機",
     "block.astral_mekanism.astral_painting_machine": "天体型Painting機械",
     "container.astral_mekanism.astral_essential_crafter": "天体型基礎型拡張作業台",
     "container.astral_mekanism.astral_adsorption_separator": "天体型Adsorption分離機",
-    "container.astral_mekanism.astral_air_compressor": "天体型空気圧縮機",
     "container.astral_mekanism.astral_painting_machine": "天体型Painting機械",
 
     "block.astral_mekanism.enchanted_combiner": "魔性結合機",
@@ -58,9 +56,6 @@
     "container.astral_mekanism.cosmic_dense_enchanted_energized_smelting_factory": "宇宙高密魔性型電動精錬ファクトリー",
     "container.astral_mekanism.infinite_multiversal_enchanted_energized_smelting_factory": "無限多元魔性型電動精錬ファクトリー",
     "container.astral_mekanism.astral_enchanted_energized_smelting_factory": "天体級魔性型電動精錬ファクトリー",
-
-    "block.astral_mekanism.advanced_air_compressor": "強化空気圧縮機",
-    "container.astral_mekanism.advanced_air_compressor": "強化空気圧縮機",
 
     "block.astral_mekanism.essential_astral_crushing_factory": "基礎天体型粉砕ファクトリー",
     "block.astral_mekanism.basic_standard_astral_crushing_factory": "基本標準天体型粉砕ファクトリー",
