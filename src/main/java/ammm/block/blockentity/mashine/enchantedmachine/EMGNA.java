@@ -16,8 +16,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 public class EMGNA extends BEGasToGasBlock {
-    private int baselineMaxOperations = 1;
-    private int TankCapacity = 1 * 100;
 
     public EMGNA(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
         super(blockProvider, pos, state);
@@ -30,27 +28,22 @@ public class EMGNA extends BEGasToGasBlock {
 
     @Override
     protected long tankCapacity() {
-        return TankCapacity;
+        return 0x100000000l * 200;
     }
 
     @Override
     protected int maxOperation() {
-        return baselineMaxOperations;
+        return 128 * 200;
     }
 
     @Override
     public void recalculateUpgrades(Upgrade upgrade) {
         super.recalculateUpgrades(upgrade);
         if (AMEEmpowered.empoweredIsLoaded()) {
-            if (AMEEmpowered.isEmpoweredSpeed(upgrade) || upgrade == Upgrade.SPEED || upgrade == ExtraUpgrade.STACK) {
-                baselineMaxOperations = ((1 << upgradeComponent.getUpgrades(Upgrade.SPEED)) + (2 << AMEEmpowered
-                        .getEmpoweredSpeeds(this))) << upgradeComponent.getUpgrades(ExtraUpgrade.STACK);
-            }
-        } else if (upgrade == Upgrade.SPEED || upgrade == ExtraUpgrade.STACK) {
-            baselineMaxOperations = 1 << (upgradeComponent.getUpgrades(Upgrade.SPEED)
-                    + upgradeComponent.getUpgrades(ExtraUpgrade.STACK));
+            baselineMaxOperations = 200 * (128 << AMEEmpowered.getAllSpeeds(this));
+        } else if (upgrade == Upgrade.SPEED) {
+            baselineMaxOperations = 200 * (128 << upgradeComponent.getUpgrades(Upgrade.SPEED));
         }
-        TankCapacity = 100 * baselineMaxOperations;
     }
 
     @Override

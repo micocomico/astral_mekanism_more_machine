@@ -58,7 +58,7 @@ public class EMMekanicalCharger extends BlockEntityRecipeMachine<ChargerRecipe> 
     OutputInventorySlot outputSlot;
     EnergyInventorySlot energySlot;
     private MachineEnergyContainer<EMMekanicalCharger> energyContainer;
-    private int baselineMaxOperations = 1;
+    private int baselineMaxOperations = 20;
 
     public EMMekanicalCharger(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
         super(blockProvider, pos, state, TRACKED_ERROR_TYPES);
@@ -141,17 +141,13 @@ public class EMMekanicalCharger extends BlockEntityRecipeMachine<ChargerRecipe> 
         return baselineMaxOperations;
     }
 
-    @Override
     public void recalculateUpgrades(Upgrade upgrade) {
         super.recalculateUpgrades(upgrade);
         if (AMEEmpowered.empoweredIsLoaded()) {
-            if (AMEEmpowered.isEmpoweredSpeed(upgrade) || upgrade == Upgrade.SPEED || upgrade == ExtraUpgrade.STACK) {
-                baselineMaxOperations = ((1 << upgradeComponent.getUpgrades(Upgrade.SPEED)) + (2 << AMEEmpowered
-                        .getEmpoweredSpeeds(this))) << upgradeComponent.getUpgrades(ExtraUpgrade.STACK);
+            if (AMEEmpowered.isEmpoweredSpeed(upgrade) || upgrade == ExtraUpgrade.STACK) {
+                baselineMaxOperations = 20 * (1 << (AMEEmpowered.getEmpoweredSpeeds(this)
+                        + upgradeComponent.getUpgrades(ExtraUpgrade.STACK)));
             }
-        } else if (upgrade == Upgrade.SPEED || upgrade == ExtraUpgrade.STACK) {
-            baselineMaxOperations = 1 << (upgradeComponent.getUpgrades(Upgrade.SPEED)
-                    + upgradeComponent.getUpgrades(ExtraUpgrade.STACK));
         }
     }
 

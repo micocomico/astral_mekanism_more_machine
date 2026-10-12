@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class EMFluidInfuser extends BEAbstractFluidInfuser {
     private int baselineMaxOperations = 1;
-    private int fluidTankCapacity = 1 * 20000;
+    private int fluidTankCapacity = 1 * 20000000;
 
     public EMFluidInfuser(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
         super(blockProvider, pos, state);
@@ -39,15 +39,11 @@ public class EMFluidInfuser extends BEAbstractFluidInfuser {
     public void recalculateUpgrades(Upgrade upgrade) {
         super.recalculateUpgrades(upgrade);
         if (AMEEmpowered.empoweredIsLoaded()) {
-            if (AMEEmpowered.isEmpoweredSpeed(upgrade) || upgrade == Upgrade.SPEED || upgrade == ExtraUpgrade.STACK) {
-                baselineMaxOperations = ((1 << upgradeComponent.getUpgrades(Upgrade.SPEED)) + (2 << AMEEmpowered
-                        .getEmpoweredSpeeds(this))) << upgradeComponent.getUpgrades(ExtraUpgrade.STACK);
-            }
-        } else if (upgrade == Upgrade.SPEED || upgrade == ExtraUpgrade.STACK) {
-            baselineMaxOperations = 1 << (upgradeComponent.getUpgrades(Upgrade.SPEED)
-                    + upgradeComponent.getUpgrades(ExtraUpgrade.STACK));
+            baselineMaxOperations = 200 * (5 << AMEEmpowered.getAllSpeeds(this));
+        } else if (upgrade == Upgrade.SPEED) {
+            baselineMaxOperations = 200 * (5 << upgradeComponent.getUpgrades(Upgrade.SPEED));
         }
-        fluidTankCapacity = 20000 * baselineMaxOperations;
+        fluidTankCapacity = 20000000 * baselineMaxOperations;
     }
 
 }

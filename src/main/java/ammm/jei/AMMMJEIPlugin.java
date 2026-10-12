@@ -6,7 +6,7 @@ import appeng.integration.modules.jei.ChargerCategory;
 import appeng.integration.modules.jei.TransformCategory;
 import astral_mekanism.AMEConstants;
 import astral_mekanism.jei.AMEJEIRecipeType;
-import com.fxd927.mekanismelements.client.MSJEIRecipeType;
+import fixdol.mekanismelements.client.MSJEIRecipeType;
 import mekanism.api.providers.IItemProvider;
 import mekanism.client.jei.CatalystRegistryHelper;
 import mekanism.client.jei.MekanismJEIRecipeType;

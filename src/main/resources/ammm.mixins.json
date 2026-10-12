@@ -10,7 +10,7 @@
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
 		"ame.AMEMachinesMixin",
-		"mekanism.TileComponentEjectorMixin",
+		"ame.GuiAppliedElectrolyticSeparatorMixin",
 		"mwgr.MWGRCreativetabMixin",
 		"mwgrae.MWGRAEMixin"
 	],
