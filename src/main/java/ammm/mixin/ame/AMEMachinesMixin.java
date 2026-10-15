@@ -57,6 +57,11 @@ public class AMEMachinesMixin {
         return astral_mekanism_more_machine$registerFactories(nameBuilder,constructor,beClass,langEntry,operator);
     }
 
+    @Redirect(method = "<clinit>",at = @At(value = "INVOKE", target = "Lastral_mekanism/registration/MachineDeferredRegister;registerSimple(Ljava/lang/String;Lastral_mekanism/registration/RegistrationInterfaces$BlockEntityConstructor;Ljava/lang/Class;Lmekanism/api/text/ILangEntry;Ljava/util/function/UnaryOperator;)Lastral_mekanism/registration/MachineRegistryObject;",ordinal = 57))
+    private static <BE extends TileEntityMekanism> MachineRegistryObject<BE, BlockTile.BlockTileModel<BE, BlockTypeMachine<BE>>, MekanismTileContainer<BE>, ItemBlockMachine> hege(MachineDeferredRegister instance, String name, RegistrationInterfaces.BlockEntityConstructor<BE, BlockTypeMachine<BE>, BlockTile.BlockTileModel<BE, BlockTypeMachine<BE>>> beConstructor, Class<BE> beClass, ILangEntry entry, UnaryOperator<BlockTypeMachine.BlockMachineBuilder<BlockTypeMachine<BE>, BE>> operator) {
+        return null;
+    }
+
     @Unique
     private static <BE extends BlockEntityRecipeFactory<?, BE>> EnumMap<AMETier, MachineRegistryObject<BE, BlockTile.BlockTileModel<BE, BlockTypeMachine<BE>>, ContainerAstralMekanismFactory<BE>, ItemBlockMachine>> astral_mekanism_more_machine$registerFactories(
             Function<AMETier, String> nameBuilder,

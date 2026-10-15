@@ -17,6 +17,8 @@ public class GFCombining<BE extends BFCombining<BE>>
 
     public GFCombining(CFBase<BE> container, Inventory inv, Component title) {
         super(container, inv, title);
+        imageHeight += 14;
+        inventoryLabelY = 100;
     }
 
     @Override
@@ -29,7 +31,7 @@ public class GFCombining<BE extends BFCombining<BE>>
         for (int index = 0; index < tile.tier.processes; index++) {
             int page = tile.getPageByIndex(index);
             int x = tile.getXByIndex(index) + 4;
-            int y = tile.getY() + 20;
+            int y = tile.getY() + 40;
             int cacheIndex = index;
             addRenderableWidget(
                     new PagedGuiProgress(() -> tile.getProgressScaled(cacheIndex), ProgressType.DOWN, this, x, y, page))

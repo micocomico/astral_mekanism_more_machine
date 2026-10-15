@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "IBI",
+    "III"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass_pane"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "B": {
+      "item": "mekanismelements:compressed_air_bucket"
+    }
+  },
+  "result": {
+    "item": "mwgr:liquid_compressed_air_generator",
+    "count": 1
+  }
+}

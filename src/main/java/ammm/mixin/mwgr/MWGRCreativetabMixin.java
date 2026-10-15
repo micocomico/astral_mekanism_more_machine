@@ -1,6 +1,6 @@
 package ammm.mixin.mwgr;
 
-import ammm.block.blockentity.others.SeawaterGeneratorB;
+import ammm.block.blockentity.others.FluidGeneratorB;
 import com.github.misosoupTgit.mwgr.MWGRMod;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.ItemLike;
@@ -15,7 +15,8 @@ public abstract class MWGRCreativetabMixin {
     @Inject(method = "addCreative",at = @At("TAIL"))
     private void add(BuildCreativeModeTabContentsEvent event,CallbackInfo ci){
         if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
-            event.accept((ItemLike) SeawaterGeneratorB.SEA_WATER_GENERATOR.get());
+            event.accept((ItemLike) FluidGeneratorB.SEA_WATER_GENERATOR.get());
+            event.accept((ItemLike) FluidGeneratorB.LIQUID_COMPRESSED_AIR_GENERATOR.get());
         }
     }
 }

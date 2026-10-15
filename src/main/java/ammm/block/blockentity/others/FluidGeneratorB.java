@@ -19,9 +19,10 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
 
-public class SeawaterGeneratorB {
+public class FluidGeneratorB {
     public static final DeferredRegister<Block> BLOCKS;
     public static final RegistryObject<Block> SEA_WATER_GENERATOR;
+    public static final RegistryObject<Block> LIQUID_COMPRESSED_AIR_GENERATOR;
 
     private static RegistryObject<Block> registerGenerator(String name, Supplier<BlockBehaviour.Properties> propertiesSupplier, Supplier<RegistryObject<BlockEntityType<FluidGeneratorBlockEntity>>> typeSupplier, Supplier<Fluid> fluidSupplier, String descriptionKey, String hexColor, boolean isBold) {
         RegistryObject<Block> block = BLOCKS.register(name, () -> {
@@ -35,6 +36,7 @@ public class SeawaterGeneratorB {
 
     static {
         BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, "mwgr");
-        SEA_WATER_GENERATOR = registerGenerator("seawater_generator", () -> BlockBehaviour.Properties.of().mapColor(Blocks.IRON_BLOCK.defaultMapColor()).strength(0.8F, 128.0F).sound(SoundType.STONE), () -> SeawaterGeneratorBE.SEA_WATER_GENERATOR_BE, () -> ForgeRegistries.FLUIDS.getValue(ResourceLocation.fromNamespaceAndPath("mekanismelements", "seawater")), "description.mwgr.seawater_generator", "#06C9E6", true);
+        SEA_WATER_GENERATOR = registerGenerator("seawater_generator", () -> BlockBehaviour.Properties.of().mapColor(Blocks.IRON_BLOCK.defaultMapColor()).strength(0.8F, 128.0F).sound(SoundType.STONE), () -> FluidGeneratorBE.SEA_WATER_GENERATOR_BE, () -> ForgeRegistries.FLUIDS.getValue(ResourceLocation.fromNamespaceAndPath("mekanismelements", "seawater")), "description.mwgr.seawater_generator", "#06C9E6", true);
+        LIQUID_COMPRESSED_AIR_GENERATOR = registerGenerator("liquid_compressed_air_generator", () -> BlockBehaviour.Properties.of().mapColor(Blocks.IRON_BLOCK.defaultMapColor()).strength(0.8F, 128.0F).sound(SoundType.STONE), () -> FluidGeneratorBE.LIQUID_COMPRESSED_AIR_GENERATOR_BE, () -> ForgeRegistries.FLUIDS.getValue(ResourceLocation.fromNamespaceAndPath("mekanismelements", "compressed_air")), "description.mwgr.liquid_compressed_air_generator", "#FFFFFF", true);
     }
 }

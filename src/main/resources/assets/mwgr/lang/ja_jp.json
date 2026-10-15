@@ -1,4 +1,6 @@
 {
     "block.mwgr.seawater_generator": "海水生成機",
-    "description.mwgr.seawater_generator": "海水を無限に供給します。"
+    "description.mwgr.seawater_generator": "海水を無限に供給します。",
+    "block.mwgr.liquid_compressed_air_generator": "液体圧縮空気生成機",
+    "description.mwgr.liquid_compressed_air_generator": "液体圧縮空気を無限に供給します。"
 }
