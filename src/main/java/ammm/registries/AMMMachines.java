@@ -6,6 +6,7 @@ import ammm.block.blockentity.factory.astralfactory.*;
 import ammm.block.blockentity.factory.enchantedfactory.*;
 import ammm.block.blockentity.factory.normalfactory.*;
 import ammm.block.container.factory.CFBase;
+import ammm.block.container.factory.CFCombining;
 import ammm.block.container.factory.CFSawing;
 import astral_mekanism.AMEConstants;
 import astral_mekanism.AMELang;
@@ -139,15 +140,15 @@ public class AMMMachines {
                     .withSound(MekanismSounds.ENRICHMENT_CHAMBER));
 
     public static final EnumMap<AMMMTier, MachineRegistryObject<AFCombining, BlockTileModel<AFCombining, BlockTypeMachine<AFCombining>>,
-            CFBase<AFCombining>, ItemBlockMachine>> ASTRAL_COMBINING_FACTORIES = registerFactories(
-            t -> t.nameForAstral + "_astral_combining_factory", AFCombining::new, AFCombining.class, CFBase<AFCombining>::new,
+            CFCombining<AFCombining>, ItemBlockMachine>> ASTRAL_COMBINING_FACTORIES = registerFactories(
+            t -> t.nameForAstral + "_astral_combining_factory", AFCombining::new, AFCombining.class, CFCombining<AFCombining>::new,
             AMELang.DESCRIPTION_ASTRAL_MACHINE, t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
                     .withEnergyConfig(MekanismConfig.usage.combiner,MAX_SUPPLIER)
                     .withSound(MekanismSounds.COMBINER));
 
     public static final EnumMap<AMMMTier, MachineRegistryObject<EFCombining, BlockTileModel<EFCombining, BlockTypeMachine<EFCombining>>,
-            CFBase<EFCombining>, ItemBlockMachine>> ENCHANTED_COMBINING_FACTORIES = registerFactories(
-            t -> t.nameForEnchanted + "_enchanted_combining_factory", EFCombining::new, EFCombining.class, CFBase<EFCombining>::new,
+            CFCombining<EFCombining>, ItemBlockMachine>> ENCHANTED_COMBINING_FACTORIES = registerFactories(
+            t -> t.nameForEnchanted + "_enchanted_combining_factory", EFCombining::new, EFCombining.class, CFCombining<EFCombining>::new,
             AMELang.DESCRIPTION_ENCHANTED_MACHINE, t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED,
                             ExtraUpgrade.STACK, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
                     .withEnergyConfig(() -> MekanismConfig.usage.combiner.get().multiply(200),
@@ -155,8 +156,8 @@ public class AMMMachines {
                     .withSound(MekanismSounds.COMBINER));
 
     public static final EnumMap<AMMMTier, MachineRegistryObject<NFCombining, BlockTileModel<NFCombining, BlockTypeMachine<NFCombining>>,
-            CFBase<NFCombining>, ItemBlockMachine>> COMBINING_FACTORIES = registerFactories(
-            t -> t.nameForNormal + "_combining_factory",NFCombining::new,NFCombining.class, CFBase<NFCombining>::new,
+            CFCombining<NFCombining>, ItemBlockMachine>> COMBINING_FACTORIES = registerFactories(
+            t -> t.nameForNormal + "_combining_factory",NFCombining::new,NFCombining.class, CFCombining<NFCombining>::new,
             MekanismLang.DESCRIPTION_FACTORY, t -> builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED,
                             ExtraUpgrade.STACK, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
                     .withEnergyConfig(MekanismConfig.usage.combiner,() -> MekanismConfig.storage.enrichmentChamber.get().multiply(t.processes))

@@ -10,6 +10,7 @@
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
 		"ame.AMEMachinesMixin",
+		"ame.AMEClientMixin",
 		"ame.GuiAppliedElectrolyticSeparatorMixin",
 		"mwgr.MWGRCreativetabMixin",
 		"mwgrae.MWGRAEMixin"

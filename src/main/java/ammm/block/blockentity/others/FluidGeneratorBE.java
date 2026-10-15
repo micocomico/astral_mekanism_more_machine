@@ -12,9 +12,10 @@ import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
 
-public class SeawaterGeneratorBE {
+public class FluidGeneratorBE {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES;
     public static final RegistryObject<BlockEntityType<FluidGeneratorBlockEntity>>  SEA_WATER_GENERATOR_BE;
+    public static final RegistryObject<BlockEntityType<FluidGeneratorBlockEntity>> LIQUID_COMPRESSED_AIR_GENERATOR_BE;
 
     private static RegistryObject<BlockEntityType<FluidGeneratorBlockEntity>> registerGeneratorBE(String name, Supplier<RegistryObject<Block>> blockReg, Supplier<Fluid> fluidSupplier) {
         return BLOCK_ENTITIES.register(name, () -> BlockEntityType.Builder.of((pos, state) -> {
@@ -25,6 +26,7 @@ public class SeawaterGeneratorBE {
 
     static {
         BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, "mwgr");
-        SEA_WATER_GENERATOR_BE = registerGeneratorBE("seawater_generator", () -> SeawaterGeneratorB.SEA_WATER_GENERATOR, () ->  ForgeRegistries.FLUIDS.getValue(ResourceLocation.fromNamespaceAndPath("mekanismelements", "seawater")));
+        SEA_WATER_GENERATOR_BE = registerGeneratorBE("seawater_generator", () -> FluidGeneratorB.SEA_WATER_GENERATOR, () ->  ForgeRegistries.FLUIDS.getValue(ResourceLocation.fromNamespaceAndPath("mekanismelements", "seawater")));
+        LIQUID_COMPRESSED_AIR_GENERATOR_BE = registerGeneratorBE("liquid_compressed_air_generator", () -> FluidGeneratorB.LIQUID_COMPRESSED_AIR_GENERATOR, () ->  ForgeRegistries.FLUIDS.getValue(ResourceLocation.fromNamespaceAndPath("mekanismelements", "compressed_air")));
     }
 }

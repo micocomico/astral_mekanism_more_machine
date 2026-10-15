@@ -57,10 +57,10 @@ public abstract class BFCombining<BE extends MekanismRecipeFactory<CombinerRecip
             RecipeError.NOT_ENOUGH_SECONDARY_INPUT
     );
 
-    public final IInputHandler<@NotNull ItemStack> extraInputHandler;
+    public final IInputHandler<ItemStack>[] extraInputHandlers;
 
     @WrappingComputerMethod(wrapper = SpecialComputerMethodWrapper.ComputerIInventorySlotWrapper.class, methodNames = "getSecondaryInput", docPlaceholder = "secondary input slot")
-    InputInventorySlot extraSlot;
+    PagedInputInventorySlot[] extraSlots;
 
     public PagedInputInventorySlot[] inputSlots;
     public PagedOutputInventorySlot[] outputSlots;
@@ -73,18 +73,19 @@ public abstract class BFCombining<BE extends MekanismRecipeFactory<CombinerRecip
         super(blockProvider, pos, state, TRACKED_ERROR_TYPES, GLOBAL_ERROR_TYPES);
         this.progress = new int[tier.processes];
         Arrays.fill(progress, 0);
-        extraInputHandler = InputHelper.getInputHandler(extraSlot, RecipeError.NOT_ENOUGH_SECONDARY_INPUT);
         configComponent = new TileComponentConfig(this, TransmissionType.ITEM,TransmissionType.ENERGY);
         configComponent.setupItemIOConfig(Arrays.asList(inputSlots), Arrays.asList(outputSlots), energySlot, false);
-        configComponent.getConfig(TransmissionType.ITEM).addSlotInfo(DataType.EXTRA, new InventorySlotInfo(true, true, extraSlot));
+        configComponent.getConfig(TransmissionType.ITEM).addSlotInfo(DataType.EXTRA, new InventorySlotInfo(true, true, extraSlots));
         configComponent.getConfig(TransmissionType.ITEM).setDataType(DataType.EXTRA, RelativeSide.BOTTOM);
         configComponent.setupInputConfig(TransmissionType.ENERGY, energyContainer);
         ejectorComponent = new TileComponentEjector(this, () -> Long.MAX_VALUE);
         ejectorComponent.setOutputData(configComponent, TransmissionType.ITEM);
         this.inputHandlers = new IInputHandler[tier.processes];
+        this.extraInputHandlers = new IInputHandler[tier.processes];
         this.outputHandlers = new IOutputHandler[tier.processes];
         for (int i = 0; i < tier.processes; i++) {
             inputHandlers[i] = InputHelper.getInputHandler(inputSlots[i], RecipeError.NOT_ENOUGH_INPUT);
+            extraInputHandlers[i] = InputHelper.getInputHandler(extraSlots[i], RecipeError.NOT_ENOUGH_SECONDARY_INPUT);
             outputHandlers[i] = OutputHelper.getOutputHandler(outputSlots[i],
                     RecipeError.NOT_ENOUGH_OUTPUT_SPACE);
         }
@@ -97,13 +98,13 @@ public abstract class BFCombining<BE extends MekanismRecipeFactory<CombinerRecip
 
     @Override
     public @Nullable CombinerRecipe getRecipe(int cacheIndex) {
-        return findFirstRecipe(inputHandlers[cacheIndex], extraInputHandler);
+        return findFirstRecipe(inputHandlers[cacheIndex], extraInputHandlers[cacheIndex]);
     }
 
     @Override
     public @NotNull CachedRecipe<CombinerRecipe> createNewCachedRecipe(@NotNull CombinerRecipe recipe,
                                                                         int cacheIndex) {
-        return TwoInputCachedRecipe.combiner(recipe, recheckAllRecipeErrors[cacheIndex], inputHandlers[cacheIndex],extraInputHandler,
+        return TwoInputCachedRecipe.combiner(recipe, recheckAllRecipeErrors[cacheIndex], inputHandlers[cacheIndex],extraInputHandlers[cacheIndex],
                         outputHandlers[cacheIndex])
                 .setErrorsChanged(errors -> errorTracker.onErrorsChanged(errors, cacheIndex))
                 .setCanHolderFunction(() -> MekanismUtils.canFunction(this))
@@ -140,7 +141,9 @@ public abstract class BFCombining<BE extends MekanismRecipeFactory<CombinerRecip
     public void parseUpgradeData(@NotNull IUpgradeData upgradeData) {
         if (upgradeData instanceof CombinerUpgradeData data) {
             super.parseUpgradeData(upgradeData);
-            extraSlot.deserializeNBT(data.extraSlot.serializeNBT());
+            for (int i = 0; i < tier.processes; i++) {
+                extraSlots[i].deserializeNBT(data.extraSlot.serializeNBT());
+            }
         }
     }
 
@@ -148,9 +151,8 @@ public abstract class BFCombining<BE extends MekanismRecipeFactory<CombinerRecip
     protected InventorySlotHelper addSlots(InventorySlotHelper builder, IContentsListener listener,
             IContentsListener updateSortingListener) {
         inputSlots = new PagedInputInventorySlot[tier.processes];
+        extraSlots = new PagedInputInventorySlot[tier.processes];
         outputSlots = new PagedOutputInventorySlot[tier.processes];
-        builder.addSlot(extraSlot = InputInventorySlot.at(this::containsRecipeB, markAllMonitorsChanged(listener), 7, 62));
-        extraSlot.setSlotType(ContainerSlotType.EXTRA);
         for (int i = 0; i < tier.processes; i++) {
             int index = i;
             int x = getXByIndex(index);
@@ -160,7 +162,12 @@ public abstract class BFCombining<BE extends MekanismRecipeFactory<CombinerRecip
                 updateSortingListener.onContentsChanged();
                 recipeCacheLookupMonitors[index].onChange();
             }, x, y, page));
-            builder.addSlot(outputSlots[i] = PagedOutputInventorySlot.at(updateSortingListener, x, y + 44, page));
+            builder.addSlot(extraSlots[i] = PagedInputInventorySlot.at(this::containsRecipeB,  () -> {
+                updateSortingListener.onContentsChanged();
+                recipeCacheLookupMonitors[index].onChange();
+            }, x, y + 20,page));
+            builder.addSlot(outputSlots[i] = PagedOutputInventorySlot.at(updateSortingListener, x, y + 64, page));
+            extraSlots[i].setSlotType(ContainerSlotType.EXTRA);
         }
         return builder;
     }

@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:block/cube_all",
+	"textures": {
+		"all": "mwgr:block/liquid_compressed_air_generator"
+	}
+}

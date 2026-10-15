@@ -21,6 +21,7 @@ public abstract class MWGRAEMixin {
     private void add(FMLCommonSetupEvent event, CallbackInfo ci){
         if (ModList.get().isLoaded("mekanismelements")) {
             StorageCells.addCellHandler(new WaterGeneratorCellHandler((Item) ForgeRegistries.ITEMS.getValue(new ResourceLocation("mwgr", "seawater_generator")), (Fluid)((Holder)ForgeRegistries.FLUIDS.getHolder(new ResourceLocation("mekanismelements", "seawater")).get()).get(), "seawater_generator"));
+            StorageCells.addCellHandler(new WaterGeneratorCellHandler((Item) ForgeRegistries.ITEMS.getValue(new ResourceLocation("mwgr", "liquid_compressed_air_generator")), (Fluid)((Holder)ForgeRegistries.FLUIDS.getHolder(new ResourceLocation("mekanismelements", "compressed_air")).get()).get(), "compressed_air_generator"));
         }
     }
 }
