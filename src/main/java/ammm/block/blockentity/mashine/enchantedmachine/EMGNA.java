@@ -2,7 +2,6 @@ package ammm.block.blockentity.mashine.enchantedmachine;
 
 import astral_mekanism.block.blockentity.prefab.BEGasToGasBlock;
 import astral_mekanism.integration.AMEEmpowered;
-import com.jerry.mekanism_extras.api.ExtraUpgrade;
 import mekanism.api.Upgrade;
 import mekanism.api.chemical.gas.Gas;
 import mekanism.api.chemical.gas.GasStack;

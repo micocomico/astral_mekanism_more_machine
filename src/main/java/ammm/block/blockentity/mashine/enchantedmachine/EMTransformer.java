@@ -9,7 +9,6 @@ import com.jerry.mekanism_extras.api.ExtraUpgrade;
 import mekanism.api.Upgrade;
 import mekanism.api.providers.IBlockProvider;
 import mekanism.api.recipes.cache.CachedRecipe;
-import mekanism.common.util.MekanismUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 

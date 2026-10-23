@@ -43,12 +43,12 @@
               "source": "block_entity"
             }
           ],
-          "name": "astral_mekanism:applied_purfication_chamber"
+          "name": "astral_mekanism:applied_infusing_condensentrator"
         }
       ],
       "name": "main",
       "rolls": 1.0
     }
   ],
-  "random_sequence": "astral_mekanism:blocks/applied_purfication_chamber"
+  "random_sequence": "astral_mekanism:blocks/applied_infusing_condensentrator"
 }

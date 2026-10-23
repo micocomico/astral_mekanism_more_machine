@@ -3,6 +3,22 @@
   <component name="JsonSchemaMappingsProjectConfiguration">
     <state>
       <map>
+        <entry key="Minecraft Data Pack Metadata">
+          <value>
+            <SchemaInfo>
+              <option name="name" value="Minecraft Data Pack Metadata" />
+              <option name="relativePathToSchema" value="https://www.schemastore.org/minecraft-pack-mcmeta.json" />
+              <option name="applicationDefined" value="true" />
+              <option name="patterns">
+                <list>
+                  <Item>
+                    <option name="path" value="src/main/resources/pack.mcmeta" />
+                  </Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
         <entry key="Sponge Mixin configuration">
           <value>
             <SchemaInfo>

@@ -3,13 +3,13 @@ package ammm.mixin.ame;
 import astral_mekanism.AMEClient;
 import astral_mekanism.registration.MachineRegistryObject;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import mekanism.common.inventory.container.tile.MekanismTileContainer;
 import mekanism.common.tile.base.TileEntityMekanism;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import org.spongepowered.asm.mixin.Mixin;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(value = AMEClient.class,remap = false)

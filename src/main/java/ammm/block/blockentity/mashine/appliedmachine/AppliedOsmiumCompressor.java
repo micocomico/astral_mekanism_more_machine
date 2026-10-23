@@ -9,7 +9,7 @@ import mekanism.common.recipe.MekanismRecipeType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class AppliedOsmiumCompressor extends AppliedItemStackGasToItemStackMachine {
+public class AppliedOsmiumCompressor extends AppliedItemStackGasToItemStackMachine<ItemStackGasToItemStackRecipe> {
 
     public AppliedOsmiumCompressor(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
         super(blockProvider, pos, state, MekanismConfig.usage.osmiumCompressor.get().multiply(200)

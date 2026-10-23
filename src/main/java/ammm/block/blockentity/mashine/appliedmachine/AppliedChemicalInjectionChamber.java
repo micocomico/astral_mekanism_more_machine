@@ -9,7 +9,7 @@ import mekanism.common.recipe.MekanismRecipeType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class AppliedChemicalInjectionChamber extends AppliedItemStackGasToItemStackMachine {
+public class AppliedChemicalInjectionChamber extends AppliedItemStackGasToItemStackMachine<ItemStackGasToItemStackRecipe> {
 
     public AppliedChemicalInjectionChamber(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
         super(blockProvider, pos, state, MekanismConfig.usage.chemicalInjectionChamber.get().multiply(200)

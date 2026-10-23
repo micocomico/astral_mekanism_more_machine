@@ -13,6 +13,7 @@ import ammm.block.container.machine.ContainerCrafter;
 import ammm.config.AMMMConfig;
 import astral_mekanism.AMEConstants;
 import astral_mekanism.AMELang;
+import astral_mekanism.block.blockentity.enchantedmachine.BEEnchantedAirCompressor;
 import astral_mekanism.block.container.normalmachine.ContainerTransformer;
 import astral_mekanism.block.shape.AMEBlockShapes;
 import astral_mekanism.config.AMEConfig;
@@ -22,9 +23,9 @@ import astral_mekanism.registration.MachineDeferredRegister;
 import astral_mekanism.registration.MachineRegistryObject;
 import astral_mekanism.registration.RegistrationInterfaces;
 import astral_mekanism.registries.AMEMachines;
+import com.jerry.mekanism_extras.api.ExtraUpgrade;
 import fixdol.mekanismelements.common.config.MSConfig;
 import fixdol.mekanismelements.common.content.blocktype.MSBlockShapes;
-import com.jerry.mekanism_extras.api.ExtraUpgrade;
 import mekanism.api.Upgrade;
 import mekanism.api.math.FloatingLong;
 import mekanism.api.math.FloatingLongSupplier;
@@ -48,6 +49,7 @@ public class TabChangedMachines {
     };
 
     public static final MachineDeferredRegister ESF = new MachineDeferredRegister(AMEConstants.MODID);
+    public static final MachineDeferredRegister INV = new MachineDeferredRegister(AMEConstants.MODID);
 
     private static <BE extends AstralMekanismRecipeFactory<?, BE>, CONTAINER extends MekanismTileContainer<BE>> EnumMap<AMMMTier, MachineRegistryObject<BE, BlockTile.BlockTileModel<BE, BlockTypeMachine<BE>>, CONTAINER, ItemBlockMachine>> registerAMEFactories(
             Function<AMMMTier, String> nameBuilder,
@@ -72,6 +74,18 @@ public class TabChangedMachines {
     public static MachineRegistryObject<AppliedCombiner, ?, MekanismTileContainer<AppliedCombiner>, ?> APPLIED_COMBINER;
     public static MachineRegistryObject<AppliedMetallurgicInfuser, ?, MekanismTileContainer<AppliedMetallurgicInfuser>, ?> APPLIED_METALLURGIC_INFUSER;
     public static MachineRegistryObject<AppliedPrecisionSawmill, ?, MekanismTileContainer<AppliedPrecisionSawmill>, ?> APPLIED_PRECISION_SAWMILL;
+    public static MachineRegistryObject<AppliedAlloyer, ?, MekanismTileContainer<AppliedAlloyer>, ?> APPLIED_ALLOYER;
+    public static MachineRegistryObject<AppliedAntiprotonicNucleosynthesizer, ?, MekanismTileContainer<AppliedAntiprotonicNucleosynthesizer>, ?> APPLIED_ANTIPROTONIC_NUCLEOSYNTHESIZER;
+    public static MachineRegistryObject<AppliedAPT, ?, MekanismTileContainer<AppliedAPT>, ?> APPLIED_APT;
+    public static MachineRegistryObject<AppliedChemicalInfuser, ?, MekanismTileContainer<AppliedChemicalInfuser>, ?> APPLIED_CHEMICAL_INFUSER;
+    public static MachineRegistryObject<AppliedChemicalWasher, ?, MekanismTileContainer<AppliedChemicalWasher>, ?> APPLIED_CHEMICAL_WASHER;
+    public static MachineRegistryObject<AppliedDissolutionChamber, ?, MekanismTileContainer<AppliedDissolutionChamber>, ?> APPLIED_DISSOLUTION_CHAMBER;
+    public static MachineRegistryObject<AppliedFluidInfuser, ?, MekanismTileContainer<AppliedFluidInfuser>, ?> APPLIED_FLUID_INFUSER;
+    public static MachineRegistryObject<AppliedInfusingCondensentrator, ?, MekanismTileContainer<AppliedInfusingCondensentrator>, ?> APPLIED_INFUSING_CONDENSENTRATOR;
+    public static MachineRegistryObject<AppliedMekanicalInscriber, ?, MekanismTileContainer<AppliedMekanicalInscriber>, ?> APPLIED_MEKANICAL_INSCRIBER;
+    public static MachineRegistryObject<AppliedPaintingMachine, ?, MekanismTileContainer<AppliedPaintingMachine>, ?> APPLIED_PAINTING_MACHINE;
+    public static MachineRegistryObject<AppliedPigmentMixer, ?, MekanismTileContainer<AppliedPigmentMixer>, ?> APPLIED_PIGMENT_MIXER;
+    public static MachineRegistryObject<AppliedRadiationIrradiator, ?, MekanismTileContainer<AppliedRadiationIrradiator>, ?> APPLIED_RADIATION_IRRADIATOR;
 
     public static MachineRegistryObject<AMAdsorptionSeparator, BlockTile.BlockTileModel<AMAdsorptionSeparator, BlockTypeMachine<AMAdsorptionSeparator>>,
             MekanismTileContainer<AMAdsorptionSeparator>, ItemBlockMachine> ASTRAL_ADSORPTION_SEPARATOR;
@@ -112,6 +126,30 @@ public class TabChangedMachines {
         APPLIED_METALLURGIC_INFUSER = AMEMachines.MACHINES.registerSimple("applied_metallurgic_infuser", AppliedMetallurgicInfuser::new, AppliedMetallurgicInfuser.class,
                 AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
         APPLIED_PRECISION_SAWMILL = AMEMachines.MACHINES.registerSimple("applied_precision_sawmill", AppliedPrecisionSawmill::new, AppliedPrecisionSawmill.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_ALLOYER = AMEMachines.MACHINES.registerSimple("applied_alloyer", AppliedAlloyer::new, AppliedAlloyer.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_ANTIPROTONIC_NUCLEOSYNTHESIZER = AMEMachines.MACHINES.registerSimple("applied_antiprotonic_nucleosynthesizer", AppliedAntiprotonicNucleosynthesizer::new, AppliedAntiprotonicNucleosynthesizer.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_APT = AMEMachines.MACHINES.registerSimple("applied_apt", AppliedAPT::new, AppliedAPT.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_CHEMICAL_INFUSER = AMEMachines.MACHINES.registerSimple("applied_chemical_infuser", AppliedChemicalInfuser::new, AppliedChemicalInfuser.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_CHEMICAL_WASHER = AMEMachines.MACHINES.registerSimple("applied_chemical_washer", AppliedChemicalWasher::new, AppliedChemicalWasher.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_DISSOLUTION_CHAMBER = AMEMachines.MACHINES.registerSimple("applied_dissolution_chamber", AppliedDissolutionChamber::new, AppliedDissolutionChamber.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_FLUID_INFUSER = AMEMachines.MACHINES.registerSimple("applied_fluid_infuser", AppliedFluidInfuser::new, AppliedFluidInfuser.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_INFUSING_CONDENSENTRATOR = AMEMachines.MACHINES.registerSimple("applied_infusing_condensentrator", AppliedInfusingCondensentrator::new, AppliedInfusingCondensentrator.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_MEKANICAL_INSCRIBER = AMEMachines.MACHINES.registerSimple("applied_mekanical_inscriber", AppliedMekanicalInscriber::new, AppliedMekanicalInscriber.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_PAINTING_MACHINE = AMEMachines.MACHINES.registerSimple("applied_painting_machine", AppliedPaintingMachine::new, AppliedPaintingMachine.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_PIGMENT_MIXER = AMEMachines.MACHINES.registerSimple("applied_pigment_mixer", AppliedPigmentMixer::new, AppliedPigmentMixer.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_RADIATION_IRRADIATOR = AMEMachines.MACHINES.registerSimple("applied_radiation_irradiator", AppliedRadiationIrradiator::new, AppliedRadiationIrradiator.class,
                 AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
     }
     
@@ -164,4 +202,8 @@ public class TabChangedMachines {
                 .withSound(MekanismSounds.ENERGIZED_SMELTER));
     }
 
+    public static final MachineRegistryObject<BEEnchantedAirCompressor, BlockTile.BlockTileModel<BEEnchantedAirCompressor, BlockTypeMachine<BEEnchantedAirCompressor>>, MekanismTileContainer<BEEnchantedAirCompressor>, ItemBlockMachine>
+        EAC = INV.registerSimple("enchanted_air_compressor", BEEnchantedAirCompressor::new, BEEnchantedAirCompressor.class, AMELang.DESCRIPTION_ENCHANTED_MACHINE,
+            builder -> builder.withEnergyConfig(MSConfig.usageConfig.airCompressor,() -> MSConfig.storageConfig.airCompressor.get().multiply(400)).withSound(MekanismSounds.CHEMICAL_INFUSER)
+            .changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.SPEED, Upgrade.ENERGY,AMEUpgrade.RADIOACTIVE_SEALING.getValue(),ExtraUpgrade.STACK)));
 }
