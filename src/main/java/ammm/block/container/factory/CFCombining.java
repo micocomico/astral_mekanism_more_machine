@@ -1,7 +1,6 @@
 package ammm.block.container.factory;
 
 import ammm.block.blockentity.factory.basefactory.BFCombining;
-import ammm.block.blockentity.factory.basefactory.BFSawing;
 import mekanism.common.registration.impl.ContainerTypeRegistryObject;
 import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;

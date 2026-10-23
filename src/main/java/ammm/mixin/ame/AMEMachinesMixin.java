@@ -3,6 +3,7 @@ package ammm.mixin.ame;
 import ammm.registries.TabChangedMachines;
 import astral_mekanism.AMETier;
 import astral_mekanism.block.blockentity.base.BlockEntityRecipeFactory;
+import astral_mekanism.block.blockentity.enchantedmachine.BEEnchantedAirCompressor;
 import astral_mekanism.block.container.factory.ContainerAstralMekanismFactory;
 import astral_mekanism.registration.BlockTypeMachine;
 import astral_mekanism.registration.MachineDeferredRegister;
@@ -14,8 +15,8 @@ import mekanism.common.block.attribute.AttributeTier;
 import mekanism.common.block.prefab.BlockTile;
 import mekanism.common.inventory.container.tile.MekanismTileContainer;
 import mekanism.common.item.block.machine.ItemBlockMachine;
-import mekanism.common.tile.base.TileEntityMekanism;
-import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -58,7 +59,7 @@ public class AMEMachinesMixin {
     }
 
     @Redirect(method = "<clinit>",at = @At(value = "INVOKE", target = "Lastral_mekanism/registration/MachineDeferredRegister;registerSimple(Ljava/lang/String;Lastral_mekanism/registration/RegistrationInterfaces$BlockEntityConstructor;Ljava/lang/Class;Lmekanism/api/text/ILangEntry;Ljava/util/function/UnaryOperator;)Lastral_mekanism/registration/MachineRegistryObject;",ordinal = 57))
-    private static <BE extends TileEntityMekanism> MachineRegistryObject<BE, BlockTile.BlockTileModel<BE, BlockTypeMachine<BE>>, MekanismTileContainer<BE>, ItemBlockMachine> hege(MachineDeferredRegister instance, String name, RegistrationInterfaces.BlockEntityConstructor<BE, BlockTypeMachine<BE>, BlockTile.BlockTileModel<BE, BlockTypeMachine<BE>>> beConstructor, Class<BE> beClass, ILangEntry entry, UnaryOperator<BlockTypeMachine.BlockMachineBuilder<BlockTypeMachine<BE>, BE>> operator) {
+    private static MachineRegistryObject<BEEnchantedAirCompressor, BlockTile.BlockTileModel<BEEnchantedAirCompressor, BlockTypeMachine<BEEnchantedAirCompressor>>, MekanismTileContainer<BEEnchantedAirCompressor>, ItemBlockMachine> hege(MachineDeferredRegister instance, String name, RegistrationInterfaces.BlockEntityConstructor<BEEnchantedAirCompressor, BlockTypeMachine<BEEnchantedAirCompressor>, BlockTile.BlockTileModel<BEEnchantedAirCompressor, BlockTypeMachine<BEEnchantedAirCompressor>>> beConstructor, Class<BEEnchantedAirCompressor> beClass, ILangEntry entry, UnaryOperator<BlockTypeMachine.BlockMachineBuilder<BlockTypeMachine<BEEnchantedAirCompressor>, BEEnchantedAirCompressor>> operator) {
         return null;
     }
 

@@ -26,9 +26,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class AppliedItemStackGasToItemStackMachine extends BEAppliedEnergizedMachine
+public abstract class AppliedItemStackGasToItemStackMachine<RECIPE extends ItemStackGasToItemStackRecipe> extends BEAppliedEnergizedMachine
         implements IAppliedDoubleToSingleMachine {
 
+    private int duration;
     private BasicInventorySlot cardSlotA;
     private BasicInventorySlot cardSlotB;
     private AEKey inputKeyA;
@@ -48,12 +49,12 @@ public abstract class AppliedItemStackGasToItemStackMachine extends BEAppliedEne
     protected IInventorySlotHolder getInitialInventory(IContentsListener listener) {
         InventorySlotHelper builder = InventorySlotHelper.forSide(this::getDirection);
         builder.addSlot(
-                cardSlotA = BasicInventorySlot.at(stack -> stack.getItem() instanceof ItemIngredientCardItem, () -> {
+                cardSlotA = BasicInventorySlot.at(stack -> stack.getItem() instanceof ChemicalIngredientCardItem, () -> {
                     listener.onContentsChanged();
                     recalculateRecipeInfo();
                 }, 55, 53));
         builder.addSlot(
-                cardSlotB = BasicInventorySlot.at(stack -> stack.getItem() instanceof ChemicalIngredientCardItem, () -> {
+                cardSlotB = BasicInventorySlot.at(stack -> stack.getItem() instanceof ItemIngredientCardItem, () -> {
                     listener.onContentsChanged();
                     recalculateRecipeInfo();
                 }, 74, 53));
@@ -76,21 +77,21 @@ public abstract class AppliedItemStackGasToItemStackMachine extends BEAppliedEne
         }
         ItemStack isA = cardSlotA.getStack();
         ItemStack isB = cardSlotB.getStack();
-        if (isA.getItem() instanceof ItemIngredientCardItem cardItemA && isB.getItem() instanceof ChemicalIngredientCardItem cardItemB) {
-            AEItemKey keyA = cardItemA.getKey(isA);
-            MekanismKey keyB = cardItemB.getKey(isB);
+        if (isA.getItem() instanceof ChemicalIngredientCardItem cardItemA && isB.getItem() instanceof ItemIngredientCardItem cardItemB) {
+            MekanismKey keyA = cardItemA.getKey(isA);
+            AEItemKey keyB = cardItemB.getKey(isB);
             if (keyA != null && keyB != null && hasLevel()) {
-                ItemStack stackA = keyA.toStack(0x3fffffff);
-                GasStack stackB = AMEKeyUtils.getGas(keyB);
-                stackB.setAmount(Long.MAX_VALUE);
+                GasStack stackA = AMEKeyUtils.getGas(keyA);
+                stackA.setAmount(Long.MAX_VALUE);
+                ItemStack stackB = keyB.toStack(0x3fffffff);
                 level.getRecipeManager().getAllRecipesFor(getRecipeType().getRecipeType())
-                        .stream().filter(r -> r.test(stackA,stackB)).findFirst()
+                        .stream().filter(r -> r.test(stackB,stackA)).findFirst()
                         .ifPresentOrElse(r -> {
                             inputKeyA = keyA;
                             inputKeyB = keyB;
-                            inputAmountA = r.getItemInput().getNeededAmount(stackA);
-                            inputAmountB = r.getChemicalInput().getNeededAmount(stackB) * 200;
-                            ItemStack output = r.getOutput(stackA,stackB);
+                            inputAmountA = r.getItemInput().getNeededAmount(stackB);
+                            inputAmountB = r.getChemicalInput().getNeededAmount(stackA) * 200;
+                            ItemStack output = r.getOutput(stackB,stackA);
                             outputKey = AEItemKey.of(output);
                             outputAmount = output.getCount();
                         }, this::removeRecipeInfo);
@@ -101,7 +102,7 @@ public abstract class AppliedItemStackGasToItemStackMachine extends BEAppliedEne
         return;
     }
 
-    protected abstract IMekanismRecipeTypeProvider<ItemStackGasToItemStackRecipe, ?> getRecipeType();
+    protected abstract IMekanismRecipeTypeProvider<RECIPE, ?> getRecipeType();
 
     protected void onUpdateServer() {
         super.onUpdateServer();
@@ -139,5 +140,4 @@ public abstract class AppliedItemStackGasToItemStackMachine extends BEAppliedEne
     public AEKey getOutputKey() {
         return outputKey;
     }
-
 }

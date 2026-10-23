@@ -2,7 +2,6 @@ package ammm.block.blockentity.mashine.enchantedmachine;
 
 import astral_mekanism.block.blockentity.basemachine.BEAbstractFluidInfuser;
 import astral_mekanism.integration.AMEEmpowered;
-import com.jerry.mekanism_extras.api.ExtraUpgrade;
 import mekanism.api.Upgrade;
 import mekanism.api.providers.IBlockProvider;
 import mekanism.common.inventory.container.MekanismContainer;

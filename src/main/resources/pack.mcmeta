@@ -2,5 +2,13 @@
     "pack": {
         "description": "astral_mekanism_more_machine resources",
         "pack_format": 15
+    },
+    "filter": {
+        "block": [
+            {
+                "namespace": "astral_mekanism",
+                "path": "recipes/craftting/enchanted_machine/enchanted_air_compressor"
+            }
+        ]
     }
 }
