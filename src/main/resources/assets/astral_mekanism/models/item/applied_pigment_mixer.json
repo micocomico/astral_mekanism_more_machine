@@ -1,3 +1,1 @@
-{
-  "parent": "astral_mekanism:block/applied_machine/pigment_mixer"
-}
+{"parent":"mekanism:block/pigment_mixer"}

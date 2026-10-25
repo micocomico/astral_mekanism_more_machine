@@ -21,6 +21,12 @@
     "astral_mekanism:applied_painting_machine",
     "astral_mekanism:applied_pigment_mixer",
     "astral_mekanism:applied_radiation_irradiator",
+    "astral_mekanism:applied_adsorption_separator",
+    "astral_mekanism:applied_chemixer",
+    "astral_mekanism:applied_composter",
+    "astral_mekanism:applied_thermalizer",
+    "astral_mekanism:applied_prc",
+    "astral_mekanism:applied_solidification_chamber",
 
     "astral_mekanism:astral_essential_crafter",
     "astral_mekanism:astral_adsorption_separator",

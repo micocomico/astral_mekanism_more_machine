@@ -86,6 +86,12 @@ public class TabChangedMachines {
     public static MachineRegistryObject<AppliedPaintingMachine, ?, MekanismTileContainer<AppliedPaintingMachine>, ?> APPLIED_PAINTING_MACHINE;
     public static MachineRegistryObject<AppliedPigmentMixer, ?, MekanismTileContainer<AppliedPigmentMixer>, ?> APPLIED_PIGMENT_MIXER;
     public static MachineRegistryObject<AppliedRadiationIrradiator, ?, MekanismTileContainer<AppliedRadiationIrradiator>, ?> APPLIED_RADIATION_IRRADIATOR;
+    public static MachineRegistryObject<AppliedAdsorptionSeparator, ?, MekanismTileContainer<AppliedAdsorptionSeparator>, ?> APPLIED_ADSORPTION_SEPARATOR;
+    public static MachineRegistryObject<AppliedChemixer, ?, MekanismTileContainer<AppliedChemixer>, ?> APPLIED_CHEMIXER;
+    public static MachineRegistryObject<AppliedComposter, ?, MekanismTileContainer<AppliedComposter>, ?> APPLIED_COMPOSTER;
+    public static MachineRegistryObject<AppliedMelter, ?, MekanismTileContainer<AppliedMelter>, ?> APPLIED_MELTER;
+    public static MachineRegistryObject<AppliedPRC, ?, MekanismTileContainer<AppliedPRC>, ?> APPLIED_PRC;
+    public static MachineRegistryObject<AppliedSolidificationChamber, ?, MekanismTileContainer<AppliedSolidificationChamber>, ?> APPLIED_SOLIDIFICATION_CHAMBER;
 
     public static MachineRegistryObject<AMAdsorptionSeparator, BlockTile.BlockTileModel<AMAdsorptionSeparator, BlockTypeMachine<AMAdsorptionSeparator>>,
             MekanismTileContainer<AMAdsorptionSeparator>, ItemBlockMachine> ASTRAL_ADSORPTION_SEPARATOR;
@@ -150,6 +156,18 @@ public class TabChangedMachines {
         APPLIED_PIGMENT_MIXER = AMEMachines.MACHINES.registerSimple("applied_pigment_mixer", AppliedPigmentMixer::new, AppliedPigmentMixer.class,
                 AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
         APPLIED_RADIATION_IRRADIATOR = AMEMachines.MACHINES.registerSimple("applied_radiation_irradiator", AppliedRadiationIrradiator::new, AppliedRadiationIrradiator.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_ADSORPTION_SEPARATOR = AMEMachines.MACHINES.registerSimple("applied_adsorption_separator", AppliedAdsorptionSeparator::new, AppliedAdsorptionSeparator.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)).withCustomShape(MSBlockShapes.ADSORPTION_SEPARATOR));
+        APPLIED_CHEMIXER = AMEMachines.MACHINES.registerSimple("applied_chemixer", AppliedChemixer::new, AppliedChemixer.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_COMPOSTER = AMEMachines.MACHINES.registerSimple("applied_composter", AppliedComposter::new, AppliedComposter.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(AMEUpgrade.COBBLESTONE_SUPPLY.getValue())).withCustomShape(AMEBlockShapes.COMPOSTER));
+        APPLIED_MELTER = AMEMachines.MACHINES.registerSimple("applied_thermalizer", AppliedMelter::new, AppliedMelter.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_PRC = AMEMachines.MACHINES.registerSimple("applied_prc", AppliedPRC::new, AppliedPRC.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_SOLIDIFICATION_CHAMBER = AMEMachines.MACHINES.registerSimple("applied_solidification_chamber", AppliedSolidificationChamber::new, AppliedSolidificationChamber.class,
                 AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
     }
     

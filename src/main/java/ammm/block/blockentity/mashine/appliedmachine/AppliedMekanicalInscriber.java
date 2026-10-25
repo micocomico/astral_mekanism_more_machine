@@ -126,9 +126,9 @@ public class AppliedMekanicalInscriber extends BEAppliedEnergizedMachine
         if (MekanismUtils.canFunction(this) && inputAmountB > 0 && storage != null) {
             IActionSource source = IActionSource.ofMachine(this);
             long operations = Math.min(
-                    Math.min(inputAmountA != 0 ? storage.extract(inputKeyA, Long.MAX_VALUE, Actionable.SIMULATE, source) / inputAmountA : Long.MAX_VALUE,
-                             storage.extract(inputKeyB, Long.MAX_VALUE, Actionable.SIMULATE, source) / inputAmountB),
-                    Math.min(inputAmountC != 0 ? storage.extract(inputKeyC, Long.MAX_VALUE, Actionable.SIMULATE, source) / inputAmountC : Long.MAX_VALUE,
+                    Math.min(inputAmountA != 0 ? storage.extract(inputKeyA, Long.MAX_VALUE, Actionable.SIMULATE, source) : Long.MAX_VALUE,
+                             storage.extract(inputKeyB, Long.MAX_VALUE, Actionable.SIMULATE, source)),
+                    Math.min(inputAmountC != 0 ? storage.extract(inputKeyC, Long.MAX_VALUE, Actionable.SIMULATE, source) : Long.MAX_VALUE,
                              storage.insert(outputKey, Long.MAX_VALUE, Actionable.SIMULATE, source) / outputAmount));
             operations = Math.min(operations, getSupportableOperations(storage, source));
             if (operations > 0) {

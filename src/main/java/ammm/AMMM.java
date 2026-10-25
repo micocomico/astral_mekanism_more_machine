@@ -21,6 +21,7 @@ import astral_mekanism.block.gui.normalmachine.*;
 import astral_mekanism.block.gui.prefab.GuiDoubleItemToItemRecipeMachine;
 import astral_mekanism.block.gui.prefab.GuiGasToGasBlock;
 import astral_mekanism.registration.MachineRegistryObject;
+import astral_mekanism.registries.AMEMachines;
 import com.mojang.logging.LogUtils;
 import mekanism.common.inventory.container.tile.MekanismTileContainer;
 import mekanism.common.tile.base.TileEntityMekanism;
@@ -114,6 +115,7 @@ public class AMMM {
     }
 
     private static void initScreens() {
+        registerScreenMek(AMEMachines.APPLIED_SMELTER, GuiAppliedSmelter::new);
         registerScreenMek(TabChangedMachines.APPLIED_OSMIUM_COMPRESSOR, GuiAppliedOsmiumCompressor::new);
         registerScreenMek(TabChangedMachines.APPLIED_PURIFICATION_CHAMBER, GuiAppliedPurificationChamber::new);
         registerScreenMek(TabChangedMachines.APPLIED_CHEMICAL_INJECTION_CHAMBER, GuiAppliedChemicalInjectionChamber::new);
@@ -132,6 +134,12 @@ public class AMMM {
         registerScreenMek(TabChangedMachines.APPLIED_PAINTING_MACHINE, GuiAppliedPaintingMachine::new);
         registerScreenMek(TabChangedMachines.APPLIED_PIGMENT_MIXER, GuiAppliedPigmentMixer::new);
         registerScreenMek(TabChangedMachines.APPLIED_RADIATION_IRRADIATOR, GuiAppliedRadiationIrradiator::new);
+        registerScreenMek(TabChangedMachines.APPLIED_ADSORPTION_SEPARATOR, GuiAppliedAdsorptionSeparator::new);
+        registerScreenMek(TabChangedMachines.APPLIED_CHEMIXER, GuiAppliedChemixer::new);
+        registerScreenMek(TabChangedMachines.APPLIED_COMPOSTER, GuiAppliedComposter::new);
+        registerScreenMek(TabChangedMachines.APPLIED_MELTER, GuiAppliedMelter::new);
+        registerScreenMek(TabChangedMachines.APPLIED_PRC, GuiAppliedPRC::new);
+        registerScreenMek(TabChangedMachines.APPLIED_SOLIDIFICATION_CHAMBER, GuiAppliedSolidificationChamber::new);
 
         registerScreenMek(TabChangedMachines.ASTRAL_ADSORPTION_SEPARATOR, GuiAMEAdsorptionSeparator<AMAdsorptionSeparator>::new);
         registerScreenMek(TabChangedMachines.ASTRAL_PAINTING_MACHINE, GuiAMEPaintingMachine<AMPaintingMachine>::new);

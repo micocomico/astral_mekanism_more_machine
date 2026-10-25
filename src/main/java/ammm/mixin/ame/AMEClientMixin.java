@@ -15,7 +15,12 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(value = AMEClient.class,remap = false)
 public class AMEClientMixin {
     @WrapOperation(method = "initScreens",at = @At(value = "INVOKE", target = "Lastral_mekanism/AMEClient;registerScreenMek(Lastral_mekanism/registration/MachineRegistryObject;Lnet/minecraft/client/gui/screens/MenuScreens$ScreenConstructor;)V",ordinal = 59))
-    private static <BE extends TileEntityMekanism, CONTAINER extends MekanismTileContainer<BE>, U extends Screen & MenuAccess<CONTAINER>> void registerScreenMek(MachineRegistryObject<BE, ?, ? extends CONTAINER, ?> registryObject, MenuScreens.ScreenConstructor<CONTAINER, U> constructor, Operation<Void> original) {
+    private static <BE extends TileEntityMekanism, CONTAINER extends MekanismTileContainer<BE>, U extends Screen & MenuAccess<CONTAINER>> void hage(MachineRegistryObject<BE, ?, ? extends CONTAINER, ?> registryObject, MenuScreens.ScreenConstructor<CONTAINER, U> constructor, Operation<Void> original) {
+
+    }
+
+    @WrapOperation(method = "initScreens",at = @At(value = "INVOKE", target = "Lastral_mekanism/AMEClient;registerScreenMek(Lastral_mekanism/registration/MachineRegistryObject;Lnet/minecraft/client/gui/screens/MenuScreens$ScreenConstructor;)V",ordinal = 12))
+    private static <BE extends TileEntityMekanism, CONTAINER extends MekanismTileContainer<BE>, U extends Screen & MenuAccess<CONTAINER>> void hugo(MachineRegistryObject<BE, ?, ? extends CONTAINER, ?> registryObject, MenuScreens.ScreenConstructor<CONTAINER, U> constructor, Operation<Void> original) {
 
     }
 }

@@ -43,7 +43,7 @@ public class AppliedAPT extends BEAppliedEnergizedMachine
     private long outputAmount;
 
     public AppliedAPT(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
-        super(blockProvider, pos, state, MekanismConfig.usage.chemicalInjectionChamber.get().multiply(EMConfig.general.aptDefaultDuration.getOrDefault())
+        super(blockProvider, pos, state, MekanismConfig.usage.chemicalInjectionChamber.get().multiply(200)
                 .divideToLong(MekanismConfig.general.forgeConversionRate.get()));
     }
 
