@@ -1,6 +1,6 @@
 package ammm.block.blockentity.base;
 
-import ammm.AMMMTier;
+import ammm.AMEMMTier;
 
 public interface IAMMMFactory<BE extends IAMMMFactory<BE>>  {
 
@@ -16,7 +16,7 @@ public interface IAMMMFactory<BE extends IAMMMFactory<BE>>  {
         return 0;
     };
 
-    public abstract AMMMTier getTier();
+    public abstract AMEMMTier getTier();
 
     private int getProcessPerPage() {
         int w = getWidthPerProcess() + 1;

@@ -1,6 +1,6 @@
 package ammm.block.gui.machine.applied;
 
-import ammm.block.blockentity.mashine.appliedmachine.AppliedRadiationIrradiator;
+import ammm.block.blockentity.machine.appliedmachine.AppliedRadiationIrradiator;
 import ammm.block.gui.machine.applied.prefab.GuiAppliedDoubleToSingleEnergizedMachine;
 import fixdol.mekanismelements.client.MSJEIRecipeType;
 import mekanism.client.jei.MekanismJEIRecipeType;

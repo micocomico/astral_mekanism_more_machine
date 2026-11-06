@@ -1,7 +1,6 @@
 package ammm.block.gui.machine.applied;
 
-import ammm.block.blockentity.mashine.appliedmachine.AppliedMelter;
-import astral_mekanism.block.blockentity.appliedmachine.BEAppliedTEP;
+import ammm.block.blockentity.machine.appliedmachine.AppliedMelter;
 import astral_mekanism.block.gui.element.GuiMEKeySlot;
 import mekanism.client.gui.GuiConfigurableTile;
 import mekanism.client.gui.element.GuiUpArrow;

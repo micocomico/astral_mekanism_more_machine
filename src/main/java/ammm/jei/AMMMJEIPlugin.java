@@ -1,7 +1,7 @@
 package ammm.jei;
 
-import ammm.registries.AMMMachines;
-import ammm.registries.TabChangedMachines;
+import ammm.registries.AMEMMFactories;
+import ammm.registries.AMEMMMachines;
 import appeng.integration.modules.jei.ChargerCategory;
 import appeng.integration.modules.jei.TransformCategory;
 import astral_mekanism.AMEConstants;
@@ -33,47 +33,47 @@ public class AMMMJEIPlugin implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registry) {
-        CatalystRegistryHelper.register(registry,MSJEIRecipeType.ADSORPTION_SEPARATOR, TabChangedMachines.ASTRAL_ADSORPTION_SEPARATOR);
-        CatalystRegistryHelper.register(registry,MekanismJEIRecipeType.PAINTING, TabChangedMachines.ASTRAL_PAINTING_MACHINE);
-        CatalystRegistryHelper.register(registry,AMEJEIRecipeType.MEKANICAL_COMPOSTER, TabChangedMachines.ENCHANTED_COMPOSTER);
-        registry.addRecipeCatalysts(RecipeTypes.COMPOSTING, TabChangedMachines.ENCHANTED_COMPOSTER);
-        CatalystRegistryHelper.register(registry,MekanismJEIRecipeType.ACTIVATING, TabChangedMachines.ENCHANTED_GNA);
-        CatalystRegistryHelper.register(registry,AMEJEIRecipeType.FLUID_INFUSER_RECIPE, TabChangedMachines.ENCHANTED_FLUID_INFUSER);
-        registry.addRecipeCatalysts(ChargerCategory.RECIPE_TYPE, TabChangedMachines.ENCHANTED_MEKANICAL_CHARGER);
-        CatalystRegistryHelper.register(registry,AMEJEIRecipeType.AAE_REACTION, TabChangedMachines.ENCHANTED_REACTION_CHAMBER);
-        registry.addRecipeCatalysts(TransformCategory.RECIPE_TYPE, TabChangedMachines.ENCHANTED_TRANSFORMER);
-        CatalystRegistryHelper.register(registry,AMEJEIRecipeType.MEKANICAL_TRANSFORM, TabChangedMachines.ENCHANTED_TRANSFORMER);
-        CatalystRegistryHelper.register(registry, AMEJEIRecipeType.TRANSFORM,TabChangedMachines.ENCHANTED_TRANSFORMER);
+        CatalystRegistryHelper.register(registry,MSJEIRecipeType.ADSORPTION_SEPARATOR, AMEMMMachines.ASTRAL_ADSORPTION_SEPARATOR);
+        CatalystRegistryHelper.register(registry,MekanismJEIRecipeType.PAINTING, AMEMMMachines.ASTRAL_PAINTING_MACHINE);
+        CatalystRegistryHelper.register(registry,AMEJEIRecipeType.MEKANICAL_COMPOSTER, AMEMMMachines.ENCHANTED_COMPOSTER);
+        registry.addRecipeCatalysts(RecipeTypes.COMPOSTING, AMEMMMachines.ENCHANTED_COMPOSTER);
+        CatalystRegistryHelper.register(registry,MekanismJEIRecipeType.ACTIVATING, AMEMMMachines.ENCHANTED_GNA);
+        CatalystRegistryHelper.register(registry,AMEJEIRecipeType.FLUID_INFUSER_RECIPE, AMEMMMachines.ENCHANTED_FLUID_INFUSER);
+        registry.addRecipeCatalysts(ChargerCategory.RECIPE_TYPE, AMEMMMachines.ENCHANTED_MEKANICAL_CHARGER);
+        CatalystRegistryHelper.register(registry,AMEJEIRecipeType.AAE_REACTION, AMEMMMachines.ENCHANTED_REACTION_CHAMBER);
+        registry.addRecipeCatalysts(TransformCategory.RECIPE_TYPE, AMEMMMachines.ENCHANTED_TRANSFORMER);
+        CatalystRegistryHelper.register(registry,AMEJEIRecipeType.MEKANICAL_TRANSFORM, AMEMMMachines.ENCHANTED_TRANSFORMER);
+        CatalystRegistryHelper.register(registry, AMEJEIRecipeType.TRANSFORM, AMEMMMachines.ENCHANTED_TRANSFORMER);
 
-        registry.addRecipeCatalysts(TransformCategory.RECIPE_TYPE,TabChangedMachines.ENCHANTED_TRANSFORMER);
-        CatalystRegistryHelper.register(registry,AMEJEIRecipeType.ASTRAL_CRAFTING,TabChangedMachines.ASTRAL_ESSENTIAL_CRAFTER,TabChangedMachines.ENCHANTED_ESSENTIAL_CRAFTER);
+        registry.addRecipeCatalysts(TransformCategory.RECIPE_TYPE, AMEMMMachines.ENCHANTED_TRANSFORMER);
+        CatalystRegistryHelper.register(registry,AMEJEIRecipeType.ASTRAL_CRAFTING, AMEMMMachines.ASTRAL_ESSENTIAL_CRAFTER, AMEMMMachines.ENCHANTED_ESSENTIAL_CRAFTER);
 
-        registry.addRecipeCatalysts(RecipeTypes.SMELTING,TabChangedMachines.ENCHANTED_ENERGIZED_SMELTING_FACTORIES.values().toArray(ItemLike[]::new));
-        CatalystRegistryHelper.register(registry, AMEJEIRecipeType.ESSENTIAL_SMELTING,TabChangedMachines.ENCHANTED_ENERGIZED_SMELTING_FACTORIES.values().toArray(IItemProvider[]::new));
-        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.CRUSHING,AMMMachines.ASTRAL_CRUSHING_FACTORIES.values().toArray(IItemProvider[]::new));
-        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.CRUSHING,AMMMachines.ENCHANTED_CRUSHING_FACTORIES.values().toArray(IItemProvider[]::new));
-        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.CRUSHING,AMMMachines.CRUSHING_FACTORIES.values().toArray(IItemProvider[]::new));
-        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.ENRICHING,AMMMachines.ASTRAL_ENRICHING_FACTORIES.values().toArray(IItemProvider[]::new));
-        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.ENRICHING,AMMMachines.ENCHANTED_ENRICHING_FACTORIES.values().toArray(IItemProvider[]::new));
-        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.ENRICHING,AMMMachines.ENRICHING_FACTORIES.values().toArray(IItemProvider[]::new));
-        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.COMBINING,AMMMachines.ASTRAL_COMBINING_FACTORIES.values().toArray(IItemProvider[]::new));
-        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.COMBINING,AMMMachines.ENCHANTED_COMBINING_FACTORIES.values().toArray(IItemProvider[]::new));
-        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.COMBINING,AMMMachines.COMBINING_FACTORIES.values().toArray(IItemProvider[]::new));
-        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.COMPRESSING,AMMMachines.ASTRAL_COMPRESSING_FACTORIES.values().toArray(IItemProvider[]::new));
-        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.COMPRESSING,AMMMachines.ENCHANTED_COMPRESSING_FACTORIES.values().toArray(IItemProvider[]::new));
-        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.COMPRESSING,AMMMachines.COMPRESSING_FACTORIES.values().toArray(IItemProvider[]::new));
-        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.INJECTING,AMMMachines.ASTRAL_INJECTING_FACTORIES.values().toArray(IItemProvider[]::new));
-        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.INJECTING,AMMMachines.ENCHANTED_INJECTING_FACTORIES.values().toArray(IItemProvider[]::new));
-        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.INJECTING,AMMMachines.INJECTING_FACTORIES.values().toArray(IItemProvider[]::new));
-        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.PURIFYING,AMMMachines.ASTRAL_PURIFYING_FACTORIES.values().toArray(IItemProvider[]::new));
-        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.PURIFYING,AMMMachines.ENCHANTED_PURIFYING_FACTORIES.values().toArray(IItemProvider[]::new));
-        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.PURIFYING,AMMMachines.PURIFYING_FACTORIES.values().toArray(IItemProvider[]::new));
-        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.METALLURGIC_INFUSING,AMMMachines.ASTRAL_INFUSING_FACTORIES.values().toArray(IItemProvider[]::new));
-        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.METALLURGIC_INFUSING,AMMMachines.ENCHANTED_INFUSING_FACTORIES.values().toArray(IItemProvider[]::new));
-        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.METALLURGIC_INFUSING,AMMMachines.INFUSING_FACTORIES.values().toArray(IItemProvider[]::new));
-        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.SAWING,AMMMachines.ASTRAL_SAWING_FACTORIES.values().toArray(IItemProvider[]::new));
-        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.SAWING,AMMMachines.ENCHANTED_SAWING_FACTORIES.values().toArray(IItemProvider[]::new));
-        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.SAWING,AMMMachines.SAWING_FACTORIES.values().toArray(IItemProvider[]::new));
+        registry.addRecipeCatalysts(RecipeTypes.SMELTING, AMEMMMachines.ENCHANTED_ENERGIZED_SMELTING_FACTORIES.values().toArray(ItemLike[]::new));
+        CatalystRegistryHelper.register(registry, AMEJEIRecipeType.ESSENTIAL_SMELTING, AMEMMMachines.ENCHANTED_ENERGIZED_SMELTING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.CRUSHING, AMEMMFactories.ASTRAL_CRUSHING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.CRUSHING, AMEMMFactories.ENCHANTED_CRUSHING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.CRUSHING, AMEMMFactories.CRUSHING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.ENRICHING, AMEMMFactories.ASTRAL_ENRICHING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.ENRICHING, AMEMMFactories.ENCHANTED_ENRICHING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.ENRICHING, AMEMMFactories.ENRICHING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.COMBINING, AMEMMFactories.ASTRAL_COMBINING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.COMBINING, AMEMMFactories.ENCHANTED_COMBINING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.COMBINING, AMEMMFactories.COMBINING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.COMPRESSING, AMEMMFactories.ASTRAL_COMPRESSING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.COMPRESSING, AMEMMFactories.ENCHANTED_COMPRESSING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.COMPRESSING, AMEMMFactories.COMPRESSING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.INJECTING, AMEMMFactories.ASTRAL_INJECTING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.INJECTING, AMEMMFactories.ENCHANTED_INJECTING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.INJECTING, AMEMMFactories.INJECTING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.PURIFYING, AMEMMFactories.ASTRAL_PURIFYING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.PURIFYING, AMEMMFactories.ENCHANTED_PURIFYING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.PURIFYING, AMEMMFactories.PURIFYING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.METALLURGIC_INFUSING, AMEMMFactories.ASTRAL_INFUSING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.METALLURGIC_INFUSING, AMEMMFactories.ENCHANTED_INFUSING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.METALLURGIC_INFUSING, AMEMMFactories.INFUSING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.SAWING, AMEMMFactories.ASTRAL_SAWING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.SAWING, AMEMMFactories.ENCHANTED_SAWING_FACTORIES.values().toArray(IItemProvider[]::new));
+        CatalystRegistryHelper.register(registry, MekanismJEIRecipeType.SAWING, AMEMMFactories.SAWING_FACTORIES.values().toArray(IItemProvider[]::new));
     }
 
     @Override

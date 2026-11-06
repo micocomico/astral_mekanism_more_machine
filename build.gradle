@@ -183,23 +183,19 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
-    implementation fg.deobf("curse.maven:astral-mekanism-1415150:9124583")
-    implementation fg.deobf("mekanism:Mekanism:1.20.1-10.4.16.80")
-    implementation fg.deobf("curse.maven:mekanism-generators-268566:6552914")
-    implementation fg.deobf("curse.maven:mekanism-tools-268567:6552915")
-    implementation fg.deobf("curse.maven:evolved-mekanism-1230085:7599591")
-    implementation fg.deobf("curse.maven:evolved-mekanism-extras-1268159:8294797")
-    implementation fg.deobf("curse.maven:mekanism-elements-1103224:9249578")
-    implementation fg.deobf("curse.maven:mekanism-extras-1026040:8247562")
-    implementation fg.deobf("curse.maven:iglee-library-541199:6987117")
-    implementation fg.deobf("curse.maven:Applied-Energistics-2-223794:7148487")
     implementation fg.deobf("curse.maven:jei-238222:6600311")
-    implementation fg.deobf("curse.maven:jade-324717:6855440")
+    implementation fg.deobf("curse.maven:astral-mekanism-1415150:9320136")
+    implementation fg.deobf("mekanism:Mekanism:1.20.1-10.4.16.80")
+    implementation fg.deobf("curse.maven:evolved-mekanism-1230085:7599591")
+    implementation fg.deobf("curse.maven:mekanism-extras-1026040:8247562")
+    implementation fg.deobf("curse.maven:mekanism-elements-1103224:9249578")
+    implementation fg.deobf("curse.maven:Applied-Energistics-2-223794:7148487")
+    implementation fg.deobf("curse.maven:advancedae-1084104:7939754")
     implementation fg.deobf("curse.maven:applied-mekanistics-574300:7244744")
     implementation fg.deobf("curse.maven:applied-flux-965012:7651647")
-    implementation fg.deobf("curse.maven:mekanism-water-generator-rebuild-1396471:8422761")
-    implementation fg.deobf("curse.maven:mwgr-ae-1622171:8599767")
-    implementation fg.deobf("curse.maven:advancedae-1084104:7939754")
+    implementation fg.deobf("curse.maven:ae2addonlib-1366135:7668681")
+    implementation fg.deobf("curse.maven:bigger-stacks-564896:8263248")
+    implementation fg.deobf("curse.maven:botany-pots-353928:7612402")
 
 
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"

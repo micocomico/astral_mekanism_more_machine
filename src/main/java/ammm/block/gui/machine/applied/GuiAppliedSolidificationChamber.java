@@ -1,7 +1,6 @@
 package ammm.block.gui.machine.applied;
 
-import ammm.block.blockentity.mashine.appliedmachine.AppliedAlloyer;
-import ammm.block.blockentity.mashine.appliedmachine.AppliedSolidificationChamber;
+import ammm.block.blockentity.machine.appliedmachine.AppliedSolidificationChamber;
 import ammm.block.gui.machine.applied.prefab.GuiAppliedTripleToSingleEnergizedMachine;
 import fr.iglee42.evolvedmekanism.jei.EMJEI;
 import mekanism.client.jei.MekanismJEIRecipeType;

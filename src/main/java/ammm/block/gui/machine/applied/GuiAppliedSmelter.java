@@ -1,6 +1,5 @@
 package ammm.block.gui.machine.applied;
 
-import ammm.block.blockentity.mashine.appliedmachine.AppliedPrecisionSawmill;
 import astral_mekanism.block.blockentity.appliedmachine.BEAppliedSmelter;
 import astral_mekanism.block.gui.element.GuiMEKeySlot;
 import astral_mekanism.jei.AMEJEIRecipeType;
@@ -28,7 +27,7 @@ public class GuiAppliedSmelter extends GuiMekanismTile<BEAppliedSmelter, Mekanis
         super.addGuiElements();
         addRenderableWidget(new GuiMEKeySlot(this, 63, 16, tile::getMeStorage, tile::getInputKey));
         addRenderableWidget(new GuiMEKeySlot(this, 115, 24, tile::getMeStorage, tile::getOutputKey));
-        addRenderableWidget(new GuiMEKeySlot(this, 115, 43, tile::getMeStorage, () -> tile.xpKey));
+        addRenderableWidget(new GuiMEKeySlot(this, 115, 42, tile::getMeStorage, () -> tile.xpKey));
         addRenderableWidget(new GuiMEKeySlot(this, 38, 34, tile::getMeStorage, () -> tile.feKey));
         addRenderableWidget(new GuiUpArrow(this, 68, 38));
         addRenderableWidget(new GuiProgress(tile::getActive, ProgressType.BAR, this, 86, 38))

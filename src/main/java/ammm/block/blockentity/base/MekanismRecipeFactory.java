@@ -1,6 +1,6 @@
 package ammm.block.blockentity.base;
 
-import ammm.AMMMTier;
+import ammm.AMEMMTier;
 import astral_mekanism.block.blockentity.base.ErrorTracker;
 import astral_mekanism.block.blockentity.interf.IEnergizedMachine;
 import mekanism.api.IContentsListener;
@@ -53,7 +53,7 @@ public abstract class MekanismRecipeFactory<RECIPE extends MekanismRecipe, BE ex
         extends TileEntityConfigurableMachine
         implements IRecipeLookupHandler.IRecipeTypedLookupHandler<RECIPE,INPUT_CACHE>, IEnergizedMachine, IAMMMFactory<BE> {
 
-    public AMMMTier tier;
+    public AMEMMTier tier;
     protected RecipeCacheLookupMonitor<RECIPE>[] recipeCacheLookupMonitors;
     protected BooleanSupplier[] recheckAllRecipeErrors;
     protected final ErrorTracker errorTracker;
@@ -75,7 +75,7 @@ public abstract class MekanismRecipeFactory<RECIPE extends MekanismRecipe, BE ex
     }
 
     @Override
-    public AMMMTier getTier() {
+    public AMEMMTier getTier() {
         return tier;
     }
 
@@ -92,7 +92,7 @@ public abstract class MekanismRecipeFactory<RECIPE extends MekanismRecipe, BE ex
     @Override
     protected void presetVariables() {
         super.presetVariables();
-        tier = Attribute.getTier(getBlockType(), AMMMTier.class);
+        tier = Attribute.getTier(getBlockType(), AMEMMTier.class);
         recipeCacheLookupMonitors = new RecipeCacheLookupMonitor[tier.processes];
         for (int i = 0; i < recipeCacheLookupMonitors.length; i++) {
             recipeCacheLookupMonitors[i] = createRecipeCacheLookupMonitor(i);

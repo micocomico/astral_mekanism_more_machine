@@ -1,10 +1,7 @@
 package ammm.block.gui.machine.applied;
 
-import ammm.block.blockentity.interf.applied.IAppliedTripleToSingleMachine;
-import ammm.block.blockentity.mashine.appliedmachine.AppliedPRC;
-import astral_mekanism.block.blockentity.appliedmachine.prefab.BEAppliedEnergizedMachine;
+import ammm.block.blockentity.machine.appliedmachine.AppliedPRC;
 import astral_mekanism.block.gui.element.GuiMEKeySlot;
-import com.mojang.datafixers.kinds.App;
 import mekanism.client.gui.GuiMekanismTile;
 import mekanism.client.gui.element.GuiUpArrow;
 import mekanism.client.gui.element.progress.GuiProgress;
@@ -27,14 +24,14 @@ public class GuiAppliedPRC extends GuiMekanismTile<AppliedPRC, MekanismTileConta
     @Override
     protected void addGuiElements() {
         super.addGuiElements();
-        addRenderableWidget(new GuiMEKeySlot(this, 44, 16, tile::getMeStorage, tile::getInputKeyA));
-        addRenderableWidget(new GuiMEKeySlot(this, 63, 16, tile::getMeStorage, tile::getInputKeyB));
-        addRenderableWidget(new GuiMEKeySlot(this, 82, 16, tile::getMeStorage, tile::getInputKeyC));
-        addRenderableWidget(new GuiMEKeySlot(this, 134, 24, tile::getMeStorage, tile::getOutputKeyA));
-        addRenderableWidget(new GuiMEKeySlot(this, 134, 43, tile::getMeStorage, tile::getOutputKeyB));
-        addRenderableWidget(new GuiMEKeySlot(this, 21, 34, tile::getMeStorage, () -> tile.feKey));
+        addRenderableWidget(new GuiMEKeySlot(this, 43, 16, tile::getMeStorage, tile::getInputKeyA));
+        addRenderableWidget(new GuiMEKeySlot(this, 62, 16, tile::getMeStorage, tile::getInputKeyB));
+        addRenderableWidget(new GuiMEKeySlot(this, 81, 16, tile::getMeStorage, tile::getInputKeyC));
+        addRenderableWidget(new GuiMEKeySlot(this, 133, 24, tile::getMeStorage, tile::getOutputKeyA));
+        addRenderableWidget(new GuiMEKeySlot(this, 133, 42, tile::getMeStorage, tile::getOutputKeyB));
+        addRenderableWidget(new GuiMEKeySlot(this, 22, 34, tile::getMeStorage, () -> tile.feKey));
         addRenderableWidget(new GuiUpArrow(this, 68, 38));
-        addRenderableWidget(new GuiProgress(tile::getActive, ProgressType.BAR, this, 105, 38))
+        addRenderableWidget(new GuiProgress(tile::getActive, ProgressType.BAR, this, 106, 38))
                 .jeiCategories(MekanismJEIRecipeType.REACTION);
     }
 

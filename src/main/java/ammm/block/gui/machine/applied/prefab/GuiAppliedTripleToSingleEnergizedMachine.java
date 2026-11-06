@@ -28,13 +28,13 @@ public abstract class GuiAppliedTripleToSingleEnergizedMachine<BE extends BEAppl
     @Override
     protected void addGuiElements() {
         super.addGuiElements();
-        addRenderableWidget(new GuiMEKeySlot(this, 44, 16, tile::getMeStorage, tile::getInputKeyA));
+        addRenderableWidget(new GuiMEKeySlot(this, 45, 16, tile::getMeStorage, tile::getInputKeyA));
         addRenderableWidget(new GuiMEKeySlot(this, 63, 16, tile::getMeStorage, tile::getInputKeyB));
-        addRenderableWidget(new GuiMEKeySlot(this, 82, 16, tile::getMeStorage, tile::getInputKeyC));
-        addRenderableWidget(new GuiMEKeySlot(this, 134, 34, tile::getMeStorage, tile::getOutputKey));
-        addRenderableWidget(new GuiMEKeySlot(this, 21, 34, tile::getMeStorage, () -> tile.feKey));
+        addRenderableWidget(new GuiMEKeySlot(this, 81, 16, tile::getMeStorage, tile::getInputKeyC));
+        addRenderableWidget(new GuiMEKeySlot(this, 133, 34, tile::getMeStorage, tile::getOutputKey));
+        addRenderableWidget(new GuiMEKeySlot(this, 20, 34, tile::getMeStorage, () -> tile.feKey));
         addRenderableWidget(new GuiUpArrow(this, 68, 38));
-        addRenderableWidget(new GuiProgress(tile::getActive, ProgressType.BAR, this, 105, 38))
+        addRenderableWidget(new GuiProgress(tile::getActive, ProgressType.BAR, this, 104, 38))
                 .jeiCategories(getJEIJeiRecipeTypes());
     }
 

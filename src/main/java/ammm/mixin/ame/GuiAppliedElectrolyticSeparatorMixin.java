@@ -27,6 +27,6 @@ public class GuiAppliedElectrolyticSeparatorMixin
 
     @Redirect(method = "addGuiElements",at = @At(value = "INVOKE", target = "Lastral_mekanism/block/gui/appliedmachine/GuiAppliedElectrolyticSeparator;addRenderableWidget(Lmekanism/client/gui/element/GuiElement;)Lmekanism/client/gui/element/GuiElement;",ordinal = 2))
     protected GuiElement hugo(GuiAppliedElectrolyticSeparator instance, GuiElement guiElement){
-        return addRenderableWidget(new GuiMEKeySlot(this, 115, 43, tile::getMeStorage, tile::getSecondOutputKey));
+        return addRenderableWidget(new GuiMEKeySlot(this, 115, 42, tile::getMeStorage, tile::getSecondOutputKey));
     }
 }

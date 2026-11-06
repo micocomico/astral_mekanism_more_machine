@@ -1,6 +1,6 @@
 package ammm.block.gui.machine.applied;
 
-import ammm.block.blockentity.mashine.appliedmachine.AppliedPrecisionSawmill;
+import ammm.block.blockentity.machine.appliedmachine.AppliedPrecisionSawmill;
 import astral_mekanism.block.gui.element.GuiMEKeySlot;
 import mekanism.client.gui.GuiMekanismTile;
 import mekanism.client.gui.element.GuiUpArrow;
@@ -26,7 +26,7 @@ public class GuiAppliedPrecisionSawmill extends GuiMekanismTile<AppliedPrecision
         super.addGuiElements();
         addRenderableWidget(new GuiMEKeySlot(this, 63, 16, tile::getMeStorage, tile::getInputKey));
         addRenderableWidget(new GuiMEKeySlot(this, 115, 24, tile::getMeStorage, tile::getOutputKeyA));
-        addRenderableWidget(new GuiMEKeySlot(this, 115, 43, tile::getMeStorage, tile::getOutputKeyB));
+        addRenderableWidget(new GuiMEKeySlot(this, 115, 42, tile::getMeStorage, tile::getOutputKeyB));
         addRenderableWidget(new GuiMEKeySlot(this, 38, 34, tile::getMeStorage, () -> tile.feKey));
         addRenderableWidget(new GuiUpArrow(this, 68, 38));
         addRenderableWidget(new GuiProgress(tile::getActive, ProgressType.BAR, this, 86, 38))

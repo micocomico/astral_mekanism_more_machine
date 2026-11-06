@@ -1,10 +1,8 @@
 package ammm.block.gui.machine.applied;
 
-import ammm.block.blockentity.mashine.appliedmachine.AppliedAPT;
-import ammm.block.blockentity.mashine.appliedmachine.AppliedAdsorptionSeparator;
+import ammm.block.blockentity.machine.appliedmachine.AppliedAdsorptionSeparator;
 import ammm.block.gui.machine.applied.prefab.GuiAppliedDoubleToSingleEnergizedMachine;
 import fixdol.mekanismelements.client.MSJEIRecipeType;
-import fr.iglee42.evolvedmekanism.jei.EMJEI;
 import mekanism.client.jei.MekanismJEIRecipeType;
 import mekanism.common.inventory.container.tile.MekanismTileContainer;
 import net.minecraft.network.chat.Component;

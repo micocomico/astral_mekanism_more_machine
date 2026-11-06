@@ -1,6 +1,6 @@
 package ammm.block.gui.machine.applied;
 
-import ammm.block.blockentity.mashine.appliedmachine.AppliedMekanicalInscriber;
+import ammm.block.blockentity.machine.appliedmachine.AppliedMekanicalInscriber;
 import ammm.block.gui.machine.applied.prefab.GuiAppliedTripleToSingleEnergizedMachine;
 import astral_mekanism.jei.AMEJEIRecipeType;
 import mekanism.client.jei.MekanismJEIRecipeType;

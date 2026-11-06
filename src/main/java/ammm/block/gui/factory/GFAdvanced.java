@@ -21,7 +21,6 @@ public class GFAdvanced<BE extends BFAdvanced<BE>> extends GFBase<BE> {
     public GFAdvanced(CFBase<BE> container, Inventory inv, Component title) {
         super(container, inv, title);
         inventoryLabelY = 87;
-        //inventoryLabelX = 26;
         titleLabelY = 4;
         dynamicSlots = true;
     }

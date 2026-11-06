@@ -1,6 +1,6 @@
 package ammm.mixin.ame;
 
-import ammm.registries.TabChangedMachines;
+import ammm.registries.AMEMMMachines;
 import astral_mekanism.AMETier;
 import astral_mekanism.block.blockentity.base.BlockEntityRecipeFactory;
 import astral_mekanism.block.blockentity.enchantedmachine.BEEnchantedAirCompressor;
@@ -26,21 +26,21 @@ import java.util.EnumMap;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
-import static ammm.registries.TabChangedMachines.ESF;
+import static ammm.registries.AMEMMMachines.ESF;
 
 @Mixin(value = AMEMachines.class, remap = false)
 public class AMEMachinesMixin {
     @Inject(method = "<clinit>",at = @At(value = "INVOKE", target = "Lastral_mekanism/registration/MachineDeferredRegister;registerSimple(Ljava/lang/String;Lastral_mekanism/registration/RegistrationInterfaces$BlockEntityConstructor;Ljava/lang/Class;Lmekanism/api/text/ILangEntry;Ljava/util/function/UnaryOperator;)Lastral_mekanism/registration/MachineRegistryObject;",ordinal = 6))
     private static void addApplied(CallbackInfo ci) {
-        TabChangedMachines.AppliedMachines();
+        AMEMMMachines.AppliedMachines();
     }
     @Inject(method = "<clinit>",at = @At(value = "INVOKE", target = "Lastral_mekanism/registration/MachineDeferredRegister;registerSimple(Ljava/lang/String;Lastral_mekanism/registration/RegistrationInterfaces$BlockEntityConstructor;Ljava/lang/Class;Lmekanism/api/text/ILangEntry;Ljava/util/function/UnaryOperator;)Lastral_mekanism/registration/MachineRegistryObject;",ordinal = 49))
     private static void addAstral(CallbackInfo ci) {
-        TabChangedMachines.AstralMachines();
+        AMEMMMachines.AstralMachines();
     }
     @Inject(method = "<clinit>",at = @At(value = "INVOKE", target = "Lastral_mekanism/registration/MachineDeferredRegister;registerSimple(Ljava/lang/String;Lastral_mekanism/registration/RegistrationInterfaces$BlockEntityConstructor;Ljava/lang/Class;Lmekanism/api/text/ILangEntry;Ljava/util/function/UnaryOperator;)Lastral_mekanism/registration/MachineRegistryObject;",ordinal = 82))
     private static void addEnchanted(CallbackInfo ci) {
-        TabChangedMachines.EnchantedMachines();
+        AMEMMMachines.EnchantedMachines();
     }
 
     @Redirect(method = "<clinit>",at = @At(value = "INVOKE", target = "Lastral_mekanism/registries/AMEMachines;registerFactories(Ljava/util/function/Function;Lastral_mekanism/registration/RegistrationInterfaces$BlockEntityConstructor;Ljava/lang/Class;Lmekanism/api/text/ILangEntry;Ljava/util/function/Function;)Ljava/util/EnumMap;",ordinal =0))
@@ -50,7 +50,7 @@ public class AMEMachinesMixin {
 
     @Inject(method = "<clinit>",at = @At(value = "INVOKE", target = "Lastral_mekanism/registries/AMEMachines;registerFactories(Ljava/util/function/Function;Lastral_mekanism/registration/RegistrationInterfaces$BlockEntityConstructor;Ljava/lang/Class;Lmekanism/api/text/ILangEntry;Ljava/util/function/Function;)Ljava/util/EnumMap;",ordinal = 1))
     private static void addEF(CallbackInfo ci) {
-        TabChangedMachines.EnchantedFactory();
+        AMEMMMachines.EnchantedFactory();
     }
 
     @Redirect(method = "<clinit>",at = @At(value = "INVOKE", target = "Lastral_mekanism/registries/AMEMachines;registerFactories(Ljava/util/function/Function;Lastral_mekanism/registration/RegistrationInterfaces$BlockEntityConstructor;Ljava/lang/Class;Lmekanism/api/text/ILangEntry;Ljava/util/function/Function;)Ljava/util/EnumMap;",ordinal =1))

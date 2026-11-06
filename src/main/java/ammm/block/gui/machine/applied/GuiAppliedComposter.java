@@ -1,14 +1,12 @@
 package ammm.block.gui.machine.applied;
 
-import ammm.block.blockentity.mashine.appliedmachine.AppliedComposter;
-import astral_mekanism.block.blockentity.appliedmachine.BEAppliedNeutronActivator;
+import ammm.block.blockentity.machine.appliedmachine.AppliedComposter;
 import astral_mekanism.block.gui.element.GuiMEKeySlot;
 import astral_mekanism.jei.AMEJEIRecipeType;
 import mekanism.client.gui.GuiMekanismTile;
 import mekanism.client.gui.element.GuiUpArrow;
 import mekanism.client.gui.element.progress.GuiProgress;
 import mekanism.client.gui.element.progress.ProgressType;
-import mekanism.client.jei.MekanismJEIRecipeType;
 import mekanism.common.inventory.container.tile.MekanismTileContainer;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;

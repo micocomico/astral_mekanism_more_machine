@@ -29,11 +29,11 @@ public abstract class GuiAppliedDoubleToSingleEnergizedMachine<BE extends BEAppl
     protected void addGuiElements() {
         super.addGuiElements();
         addRenderableWidget(new GuiMEKeySlot(this, 54, 16, tile::getMeStorage, tile::getInputKeyA));
-        addRenderableWidget(new GuiMEKeySlot(this, 73, 16, tile::getMeStorage, tile::getInputKeyB));
-        addRenderableWidget(new GuiMEKeySlot(this, 125, 34, tile::getMeStorage, tile::getOutputKey));
-        addRenderableWidget(new GuiMEKeySlot(this, 29, 34, tile::getMeStorage, () -> tile.feKey));
+        addRenderableWidget(new GuiMEKeySlot(this, 72, 16, tile::getMeStorage, tile::getInputKeyB));
+        addRenderableWidget(new GuiMEKeySlot(this, 124, 34, tile::getMeStorage, tile::getOutputKey));
+        addRenderableWidget(new GuiMEKeySlot(this, 30, 34, tile::getMeStorage, () -> tile.feKey));
         addRenderableWidget(new GuiUpArrow(this, 68, 38));
-        addRenderableWidget(new GuiProgress(tile::getActive, ProgressType.BAR, this, 96, 38))
+        addRenderableWidget(new GuiProgress(tile::getActive, ProgressType.BAR, this, 95, 38))
                 .jeiCategories(getJEIJeiRecipeTypes());
     }
 

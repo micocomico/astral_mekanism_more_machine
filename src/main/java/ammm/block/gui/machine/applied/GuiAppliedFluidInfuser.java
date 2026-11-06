@@ -1,6 +1,6 @@
 package ammm.block.gui.machine.applied;
 
-import ammm.block.blockentity.mashine.appliedmachine.AppliedFluidInfuser;
+import ammm.block.blockentity.machine.appliedmachine.AppliedFluidInfuser;
 import ammm.block.gui.machine.applied.prefab.GuiAppliedDoubleToSingleEnergizedMachine;
 import astral_mekanism.jei.AMEJEIRecipeType;
 import mekanism.client.jei.MekanismJEIRecipeType;
