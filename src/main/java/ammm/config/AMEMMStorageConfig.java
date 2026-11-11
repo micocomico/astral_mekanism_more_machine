@@ -6,13 +6,13 @@ import mekanism.common.config.value.CachedFloatingLongValue;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.config.ModConfig.Type;
 
-public class AMMMStorageConfig extends BaseMekanismConfig {
+public class AMEMMStorageConfig extends BaseMekanismConfig {
 
     private final ForgeConfigSpec configSpec;
     public final CachedFloatingLongValue astralCrafter;
 
 
-    AMMMStorageConfig() {
+    AMEMMStorageConfig() {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
         builder.comment("Machine Energy Storage Config. This config is synced from server to client.").push("storage");
         astralCrafter = CachedFloatingLongValue.define(this, builder, "Base energy storage (Joules).",

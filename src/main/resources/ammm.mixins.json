@@ -12,6 +12,7 @@
 		"ame.AMEClientMixin",
 		"ame.AMEMachinesMixin",
 		"ame.GuiAppliedElectrolyticSeparatorMixin",
+		"ame.AMEDMachinesMixin"
 	],
 	"client": [],
 	"server": []

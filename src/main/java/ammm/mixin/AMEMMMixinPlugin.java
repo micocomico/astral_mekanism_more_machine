@@ -1,5 +1,6 @@
 package ammm.mixin;
 
+import net.minecraftforge.fml.loading.LoadingModList;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -20,6 +21,9 @@ public class AMEMMMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        if (mixinClassName.contains("AMEDMachinesMixin")) {
+            return LoadingModList.get().getModFileById("ame_dynamics") != null;
+        }
         return true;
     }
 

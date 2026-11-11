@@ -11,7 +11,7 @@ import ammm.block.blockentity.machine.enchantedmachine.*;
 import ammm.block.container.factory.CFBase;
 import ammm.block.container.machine.CMCrafter;
 import ammm.block.container.machine.applied.ContainerAppliedReactionChamber;
-import ammm.config.AMMMConfig;
+import ammm.config.AMEMMConfig;
 import astral_mekanism.AMEConstants;
 import astral_mekanism.AMELang;
 import astral_mekanism.block.blockentity.enchantedmachine.BEEnchantedAirCompressor;
@@ -37,6 +37,7 @@ import mekanism.common.config.MekanismConfig;
 import mekanism.common.inventory.container.tile.MekanismTileContainer;
 import mekanism.common.item.block.machine.ItemBlockMachine;
 import mekanism.common.registries.MekanismSounds;
+import net.minecraftforge.fml.loading.LoadingModList;
 
 import java.util.EnumMap;
 import java.util.EnumSet;
@@ -97,6 +98,15 @@ public class AMEMMMachines {
     public static MachineRegistryObject<AppliedReactionChamber, ?, MekanismTileContainer<AppliedReactionChamber>, ?> APPLIED_REACTION_CHAMBER;
     public static MachineRegistryObject<AppliedTransformer, ?, MekanismTileContainer<AppliedTransformer>, ?> APPLIED_TRANSFORMER;
     public static MachineRegistryObject<AppliedGreenHouse, ?, MekanismTileContainer<AppliedGreenHouse>, ?> APPLIED_GREEN_HOUSE;
+    public static MachineRegistryObject<AppliedCDM, ?, MekanismTileContainer<AppliedCDM>, ?> APPLIED_CDM;
+    public static MachineRegistryObject<AppliedCncLathe, ?, MekanismTileContainer<AppliedCncLathe>, ?> APPLIED_CNC_LATHE;
+    public static MachineRegistryObject<AppliedCncRollingMill, ?, MekanismTileContainer<AppliedCncRollingMill>, ?> APPLIED_CNC_ROLLING_MILL;
+    public static MachineRegistryObject<AppliedCncStamper, ?, MekanismTileContainer<AppliedCncStamper>, ?> APPLIED_CNC_STAMPER;
+    public static MachineRegistryObject<AppliedIOR, ?, MekanismTileContainer<AppliedIOR>, ?> APPLIED_IOR;
+    public static MachineRegistryObject<AppliedNutritionalLiquifier, ?, MekanismTileContainer<AppliedNutritionalLiquifier>, ?> APPLIED_NUTRITIONAL_LIQUIFIER;
+    public static MachineRegistryObject<AppliedPigmentExtractor, ?, MekanismTileContainer<AppliedPigmentExtractor>, ?> APPLIED_PIGMENT_EXTRACTOR;
+    public static MachineRegistryObject<AppliedPlantingStation, ?, MekanismTileContainer<AppliedPlantingStation>, ?> APPLIED_PLANTING_STATION;
+    public static MachineRegistryObject<AppliedRecycler, ?, MekanismTileContainer<AppliedRecycler>, ?> APPLIED_RECYCLER;
 
     public static MachineRegistryObject<AMAdsorptionSeparator, BlockTile.BlockTileModel<AMAdsorptionSeparator, BlockTypeMachine<AMAdsorptionSeparator>>,
             MekanismTileContainer<AMAdsorptionSeparator>, ItemBlockMachine> ASTRAL_ADSORPTION_SEPARATOR;
@@ -182,6 +192,26 @@ public class AMEMMMachines {
                 AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
         APPLIED_GREEN_HOUSE = AMEMachines.MACHINES.registerSimple("applied_green_house", AppliedGreenHouse::new, AppliedGreenHouse.class,
                 AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_CDM = AMEMachines.MACHINES.registerSimple("applied_cdm", AppliedCDM::new, AppliedCDM.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_IOR = AMEMachines.MACHINES.registerSimple("applied_ior", AppliedIOR::new, AppliedIOR.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_NUTRITIONAL_LIQUIFIER = AMEMachines.MACHINES.registerSimple("applied_nutritional_liquifier", AppliedNutritionalLiquifier::new, AppliedNutritionalLiquifier.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_PIGMENT_EXTRACTOR = AMEMachines.MACHINES.registerSimple("applied_pigment_extractor", AppliedPigmentExtractor::new, AppliedPigmentExtractor.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        if (LoadingModList.get().getModFileById("mekmm") != null){
+            APPLIED_CNC_LATHE = AMEMachines.MACHINES.registerSimple("applied_cnc_lathe", AppliedCncLathe::new, AppliedCncLathe.class,
+                    AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+            APPLIED_CNC_ROLLING_MILL = AMEMachines.MACHINES.registerSimple("applied_cnc_rolling_mill", AppliedCncRollingMill::new, AppliedCncRollingMill.class,
+                    AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+            APPLIED_CNC_STAMPER = AMEMachines.MACHINES.registerSimple("applied_cnc_stamper", AppliedCncStamper::new, AppliedCncStamper.class,
+                    AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+            APPLIED_PLANTING_STATION = AMEMachines.MACHINES.registerSimple("applied_planting_station", AppliedPlantingStation::new, AppliedPlantingStation.class,
+                    AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+            APPLIED_RECYCLER = AMEMachines.MACHINES.registerSimple("applied_recycler", AppliedRecycler::new, AppliedRecycler.class,
+                    AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        }
     }
     
     public static void AstralMachines(){
@@ -193,7 +223,7 @@ public class AMEMMMachines {
                 .withEnergyConfig(MekanismConfig.usage.paintingMachine,MAX_SUPPLIER).withSound(MekanismSounds.PAINTING_MACHINE));
         ASTRAL_ESSENTIAL_CRAFTER = AMEMachines.MACHINES.registerDefaultBlockItem("astral_crafter", AMCrafter::new, AMCrafter.class, CMCrafter<AMCrafter>::new,
                 AMELang.DESCRIPTION_ESSENTIAL_CRAFTER,builder -> builder.changeAttributeUpgrade(EnumSet.of(AMEUpgrade.RADIOACTIVE_SEALING.getValue(), Upgrade.ENERGY))
-                .withEnergyConfig(AMMMConfig.usage.astralCrafter, MAX_SUPPLIER));
+                .withEnergyConfig(AMEMMConfig.usage.astralCrafter, MAX_SUPPLIER));
     }
 
     public static void EnchantedMachines(){

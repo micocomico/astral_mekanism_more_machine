@@ -186,9 +186,10 @@ dependencies {
     implementation fg.deobf("curse.maven:jei-238222:6600311")
     implementation fg.deobf("curse.maven:astral-mekanism-1415150:9320136")
     implementation fg.deobf("mekanism:Mekanism:1.20.1-10.4.16.80")
-    implementation fg.deobf("curse.maven:evolved-mekanism-1230085:7599591")
+    implementation fg.deobf("curse.maven:evolved-mekanism-1230085:9289436")
     implementation fg.deobf("curse.maven:mekanism-extras-1026040:8247562")
     implementation fg.deobf("curse.maven:mekanism-elements-1103224:9249578")
+    implementation fg.deobf("curse.maven:mekanism-more-machine-1275257:7884538")
     implementation fg.deobf("curse.maven:Applied-Energistics-2-223794:7148487")
     implementation fg.deobf("curse.maven:advancedae-1084104:7939754")
     implementation fg.deobf("curse.maven:applied-mekanistics-574300:7244744")
@@ -196,6 +197,9 @@ dependencies {
     implementation fg.deobf("curse.maven:ae2addonlib-1366135:7668681")
     implementation fg.deobf("curse.maven:bigger-stacks-564896:8263248")
     implementation fg.deobf("curse.maven:botany-pots-353928:7612402")
+    implementation fg.deobf("curse.maven:astral-mekanism-energistics-dynamics-1538042:9308915")
+    implementation fg.deobf("curse.maven:integrated-dynamics-236307:9385153")
+    implementation fg.deobf("curse.maven:cyclops-core-232758:9476266")
 
 
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"

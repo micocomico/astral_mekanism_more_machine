@@ -1,5 +1,6 @@
 package ammm.jei;
 
+import ammm.AMEMMConstants;
 import ammm.registries.AMEMMFactories;
 import ammm.registries.AMEMMMachines;
 import appeng.integration.modules.jei.ChargerCategory;
@@ -18,22 +19,25 @@ import mezz.jei.api.runtime.IJeiRuntime;
 import mezz.jei.api.runtime.IRecipesGui;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
+import net.minecraftforge.fml.ModList;
 import org.jetbrains.annotations.Nullable;
 
 @JeiPlugin
 
-public class AMMMJEIPlugin implements IModPlugin {
+public class AMEMMJEIPlugin implements IModPlugin {
     private static IJeiRuntime runtime;
     private static IRecipesGui recipesGui;
 
     @Override
     public ResourceLocation getPluginUid() {
-        return AMEConstants.rl("jei_plugin");
+        return AMEMMConstants.rl("jei_plugin");
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registry) {
-        CatalystRegistryHelper.register(registry,MSJEIRecipeType.ADSORPTION_SEPARATOR, AMEMMMachines.ASTRAL_ADSORPTION_SEPARATOR);
+        if (!ModList.get().isLoaded("emi")) {
+            CatalystRegistryHelper.register(registry, MSJEIRecipeType.ADSORPTION_SEPARATOR, AMEMMMachines.ASTRAL_ADSORPTION_SEPARATOR);
+        }
         CatalystRegistryHelper.register(registry,MekanismJEIRecipeType.PAINTING, AMEMMMachines.ASTRAL_PAINTING_MACHINE);
         CatalystRegistryHelper.register(registry,AMEJEIRecipeType.MEKANICAL_COMPOSTER, AMEMMMachines.ENCHANTED_COMPOSTER);
         registry.addRecipeCatalysts(RecipeTypes.COMPOSTING, AMEMMMachines.ENCHANTED_COMPOSTER);

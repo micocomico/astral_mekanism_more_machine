@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "X": {
+            "item": "ame_dynamics:astral_squeezer"
+        },
+        "A": {
+            "item": "astral_mekanism:autonomy_alloy_ingot"
+        },
+        "C": {
+            "item": "astral_mekanism:autonomy_processor"
+        }
+    },
+    "pattern": [
+        "ACA",
+        "CXC",
+        "ACA"
+    ],
+    "result": {
+        "item": "ame_dynamics:applied_squeezer",
+        "count": 1
+    }
+}

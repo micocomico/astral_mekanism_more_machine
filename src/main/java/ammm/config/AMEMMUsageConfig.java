@@ -6,11 +6,11 @@ import mekanism.common.config.value.CachedFloatingLongValue;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.config.ModConfig.Type;
 
-public class AMMMUsageConfig extends BaseMekanismConfig {
+public class AMEMMUsageConfig extends BaseMekanismConfig {
     private final ForgeConfigSpec configSpec;
     public final CachedFloatingLongValue astralCrafter;
 
-    AMMMUsageConfig() {
+    AMEMMUsageConfig() {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
         builder.comment("Machine Energy Usage Config. This config is synced from server to client.").push("usage");
         astralCrafter = CachedFloatingLongValue.define(this, builder, "Energy per operation tick (Joules).",

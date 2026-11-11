@@ -29,7 +29,6 @@ import org.jetbrains.annotations.NotNull;
 public abstract class AppliedItemStackGasToItemStackMachine<RECIPE extends ItemStackGasToItemStackRecipe> extends BEAppliedEnergizedMachine
         implements IAppliedDoubleToSingleMachine {
 
-    private int duration;
     private BasicInventorySlot cardSlotA;
     private BasicInventorySlot cardSlotB;
     private AEKey inputKeyA;

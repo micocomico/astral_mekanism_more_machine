@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "": {
+            "model": "integrateddynamics:block/mechanical_drying_basin"
+        }
+    }
+}

@@ -22,6 +22,7 @@ public class GuiAppliedFormulaicAssemblicator extends GuiMekanismTile<AppliedFor
 
     @Override
     protected void addGuiElements() {
+        super.addGuiElements();
         addRenderableWidget(new GuiMEKeySlot(this, 103 + 0 * 18, 16 + 0 * 18, tile::getMeStorage, tile::getInputKey0));
         addRenderableWidget(new GuiMEKeySlot(this, 103 + 1 * 18, 16 + 0 * 18, tile::getMeStorage, tile::getInputKey1));
         addRenderableWidget(new GuiMEKeySlot(this, 103 + 2 * 18, 16 + 0 * 18, tile::getMeStorage, tile::getInputKey2));

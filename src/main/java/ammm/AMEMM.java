@@ -10,6 +10,7 @@ import ammm.block.blockentity.machine.enchantedmachine.*;
 import ammm.block.gui.factory.*;
 import ammm.block.gui.machine.GMCrafter;
 import ammm.block.gui.machine.applied.*;
+import ammm.registries.AMEDMMMachines;
 import ammm.registries.AMEMMCreativeTab;
 import ammm.registries.AMEMMFactories;
 import ammm.registries.AMEMMMachines;
@@ -44,6 +45,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.LoadingModList;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
@@ -56,23 +58,12 @@ public class AMEMM {
     public static final String MODID = AMEMMConstants.MODID;
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
-    // Create a Deferred Register to hold Blocks which will all be registered under the "astral_mekanism_more_machine" namespace
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
-    // Create a Deferred Register to hold Items which will all be registered under the "astral_mekanism_more_machine" namespace
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
-    // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "astral_mekanism_more_machine" namespace
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
-
-    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MODID);
 
     public AMEMM() {
         IEventBus modEventBus = FMLJavaModLoadingContext
                 .get().getModEventBus();
 
-        // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
-
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
         AMEMMMachines.ESF.register(modEventBus);
         AMEMMMachines.INV.register(modEventBus);
         AMEMMFactories.MACHINES.register(modEventBus);
@@ -80,34 +71,7 @@ public class AMEMM {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        // Some common setup code
-        LOGGER.info("HELLO FROM COMMON SETUP");
-        LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT));
-
-        if (Config.logDirtBlock) LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT));
-
-        LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
-
-
-        ammm.Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
         initScreens();
-    }
-
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event) {
-        // Do something when the server starts
-        LOGGER.info("HELLO from server starting");
-    }
-
-    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents {
-
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
-            // Some client setup code
-            LOGGER.info("HELLO FROM CLIENT SETUP");
-            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
-        }
     }
 
     private static void initScreens() {
@@ -140,6 +104,21 @@ public class AMEMM {
         registerScreenMek(AMEMMMachines.APPLIED_REACTION_CHAMBER, GuiAppliedReactionChamber::new);
         registerScreenMek(AMEMMMachines.APPLIED_TRANSFORMER, GuiAppliedTransformer::new);
         registerScreenMek(AMEMMMachines.APPLIED_GREEN_HOUSE, GuiAppliedGreenHouse::new);
+        registerScreenMek(AMEMMMachines.APPLIED_CDM, GuiAppliedCDM::new);
+        registerScreenMek(AMEMMMachines.APPLIED_IOR, GuiAppliedIOR::new);
+        registerScreenMek(AMEMMMachines.APPLIED_NUTRITIONAL_LIQUIFIER, GuiAppliedNutritionalLiquifier::new);
+        registerScreenMek(AMEMMMachines.APPLIED_PIGMENT_EXTRACTOR, GuiAppliedPigmentExtractor::new);
+        if (LoadingModList.get().getModFileById("mekmm") != null) {
+            registerScreenMek(AMEMMMachines.APPLIED_CNC_LATHE, GuiAppliedCncLathe::new);
+            registerScreenMek(AMEMMMachines.APPLIED_CNC_ROLLING_MILL, GuiAppliedCncRollingMill::new);
+            registerScreenMek(AMEMMMachines.APPLIED_CNC_STAMPER, GuiAppliedCncStamper::new);
+            registerScreenMek(AMEMMMachines.APPLIED_PLANTING_STATION, GuiAppliedPlantingStation::new);
+            registerScreenMek(AMEMMMachines.APPLIED_RECYCLER, GuiAppliedRecycler::new);
+        }
+        if (LoadingModList.get().getModFileById("ame_dynamics") != null){
+            registerScreenMek(AMEDMMMachines.APPLIED_SQUEEZER, GuiAppliedSqueezer::new);
+            registerScreenMek(AMEDMMMachines.APPLIED_DRYING_BASIN, GuiAppliedDryingBasin::new);
+        }
 
         registerScreenMek(AMEMMMachines.ASTRAL_ADSORPTION_SEPARATOR, GuiAMEAdsorptionSeparator<AMAdsorptionSeparator>::new);
         registerScreenMek(AMEMMMachines.ASTRAL_PAINTING_MACHINE, GuiAMEPaintingMachine<AMPaintingMachine>::new);

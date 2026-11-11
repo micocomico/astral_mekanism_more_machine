@@ -18,7 +18,6 @@ import mekanism.common.config.MekanismConfig;
 import mekanism.common.inventory.slot.BasicInventorySlot;
 import mekanism.common.recipe.IMekanismRecipeTypeProvider;
 import mekanism.common.recipe.MekanismRecipeType;
-import mekanism.common.recipe.lookup.cache.InputRecipeCache;
 import mekanism.common.util.MekanismUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
@@ -99,7 +98,7 @@ public class AppliedCombiner extends BEAppliedEnergizedMachine
         return;
     }
 
-    public IMekanismRecipeTypeProvider<CombinerRecipe, InputRecipeCache.DoubleItem<CombinerRecipe>> getRecipeType() {
+    public IMekanismRecipeTypeProvider<CombinerRecipe, ?> getRecipeType() {
         return MekanismRecipeType.COMBINING;
     }
 

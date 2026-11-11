@@ -1,8 +1,5 @@
 {
   "values": [
-    "mwgr:seawater_generator",
-    "mwgr:liquid_compressed_air_generator",
-
     "astral_mekanism:applied_osmium_compressor",
     "astral_mekanism:applied_purification_chamber",
     "astral_mekanism:applied_chemical_injection_chamber",
@@ -32,6 +29,17 @@
     "astral_mekanism:applied_reaction_chamber",
     "astral_mekanism:applied_transformer",
     "astral_mekanism:applied_green_house",
+    "astral_mekanism:applied_cdm",
+    "astral_mekanism:applied_ior",
+    "astral_mekanism:applied_nutritional_liquifier",
+    "astral_mekanism:applied_pigment_extractor",
+    { "id": "astral_mekanism:applied_cnc_lathe", "required": false },
+    { "id": "astral_mekanism:applied_cnc_rolling_mill", "required": false },
+    { "id": "astral_mekanism:applied_cnc_stamper", "required": false },
+    { "id": "astral_mekanism:applied_planting_station", "required": false },
+    { "id": "astral_mekanism:applied_recycler", "required": false },
+    { "id": "ame_dynamics:applied_drying_basin", "required": false },
+    { "id": "ame_dynamics:applied_squeezer", "required": false },
 
     "astral_mekanism:astral_crafter",
     "astral_mekanism:astral_adsorption_separator",
