@@ -24,6 +24,9 @@ public class AMEMMMixinPlugin implements IMixinConfigPlugin {
         if (mixinClassName.contains("AMEDMachinesMixin")) {
             return LoadingModList.get().getModFileById("ame_dynamics") != null;
         }
+        if (mixinClassName.contains("AMETheValineMachinesMixin")) {
+            return LoadingModList.get().getModFileById("ame_the_valine") != null;
+        }
         return true;
     }
 

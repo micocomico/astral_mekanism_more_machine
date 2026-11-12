@@ -8,6 +8,7 @@ import appeng.api.stacks.AEKey;
 import appeng.api.storage.MEStorage;
 import astral_mekanism.block.blockentity.appliedmachine.prefab.BEAppliedEnergizedMachine;
 import astral_mekanism.item.recipecard.ItemIngredientCardItem;
+import fr.iglee42.evolvedmekanism.config.EMConfig;
 import fr.iglee42.evolvedmekanism.recipes.AlloyerRecipe;
 import fr.iglee42.evolvedmekanism.registries.EMRecipeType;
 import mekanism.api.IContentsListener;
@@ -40,7 +41,7 @@ public class AppliedAlloyer extends BEAppliedEnergizedMachine
     private long outputAmount;
 
     public AppliedAlloyer(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
-        super(blockProvider, pos, state, MekanismConfig.usage.combiner.get().multiply(200)
+        super(blockProvider, pos, state, EMConfig.general.alloyerEnergyUsage.get().multiply(200)
                 .divideToLong(MekanismConfig.general.forgeConversionRate.get()));
     }
 

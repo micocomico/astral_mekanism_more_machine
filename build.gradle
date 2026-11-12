@@ -200,6 +200,7 @@ dependencies {
     implementation fg.deobf("curse.maven:astral-mekanism-energistics-dynamics-1538042:9308915")
     implementation fg.deobf("curse.maven:integrated-dynamics-236307:9385153")
     implementation fg.deobf("curse.maven:cyclops-core-232758:9476266")
+    implementation fg.deobf("curse.maven:astral-mekanism-energistics-the-valine-1567482:8246337")
 
 
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"

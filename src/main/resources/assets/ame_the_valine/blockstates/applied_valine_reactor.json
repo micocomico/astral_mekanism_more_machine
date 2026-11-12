@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north":  { "model": "ame_the_valine:block/applied_machine/valine_reactor", "y": 0 },
+    "facing=south":  { "model": "ame_the_valine:block/applied_machine/valine_reactor", "y": 180 },
+    "facing=west":   { "model": "ame_the_valine:block/applied_machine/valine_reactor", "y": 270 },
+    "facing=east":   { "model": "ame_the_valine:block/applied_machine/valine_reactor", "y": 90 }
+  }
+}

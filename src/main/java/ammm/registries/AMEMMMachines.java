@@ -107,6 +107,15 @@ public class AMEMMMachines {
     public static MachineRegistryObject<AppliedPigmentExtractor, ?, MekanismTileContainer<AppliedPigmentExtractor>, ?> APPLIED_PIGMENT_EXTRACTOR;
     public static MachineRegistryObject<AppliedPlantingStation, ?, MekanismTileContainer<AppliedPlantingStation>, ?> APPLIED_PLANTING_STATION;
     public static MachineRegistryObject<AppliedRecycler, ?, MekanismTileContainer<AppliedRecycler>, ?> APPLIED_RECYCLER;
+    public static MachineRegistryObject<AppliedGasConverter, ?, MekanismTileContainer<AppliedGasConverter>, ?> APPLIED_GAS_CONVERTER;
+    public static MachineRegistryObject<AppliedGasSynthesizer, ?, MekanismTileContainer<AppliedGasSynthesizer>, ?> APPLIED_GAS_SYNTHESIZER;
+    public static MachineRegistryObject<AppliedIAMRA, ?, MekanismTileContainer<AppliedIAMRA>, ?> APPLIED_IAMRA;
+    public static MachineRegistryObject<AppliedInfuseSynthesizer, ?, MekanismTileContainer<AppliedInfuseSynthesizer>, ?> APPLIED_INFUSE_SYNTHESIZER;
+    public static MachineRegistryObject<AppliedItemCompressor, ?, MekanismTileContainer<AppliedItemCompressor>, ?> APPLIED_ITEM_COMPRESSOR;
+    public static MachineRegistryObject<AppliedItemUnzipper, ?, MekanismTileContainer<AppliedItemUnzipper>, ?> APPLIED_ITEM_UNZIPPER;
+    public static MachineRegistryObject<AppliedMekanicalMatterCondenser, ?, MekanismTileContainer<AppliedMekanicalMatterCondenser>, ?> APPLIED_MEKANICAL_MATTER_CONDENSER;
+    public static MachineRegistryObject<AppliedFluidAlloyer, ?, MekanismTileContainer<AppliedFluidAlloyer>, ?> APPLIED_FLUID_ALLOYER;
+    public static MachineRegistryObject<AppliedFluidCombiner, ?, MekanismTileContainer<AppliedFluidCombiner>, ?> APPLIED_FLUID_COMBINER;
 
     public static MachineRegistryObject<AMAdsorptionSeparator, BlockTile.BlockTileModel<AMAdsorptionSeparator, BlockTypeMachine<AMAdsorptionSeparator>>,
             MekanismTileContainer<AMAdsorptionSeparator>, ItemBlockMachine> ASTRAL_ADSORPTION_SEPARATOR;
@@ -200,6 +209,10 @@ public class AMEMMMachines {
                 AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
         APPLIED_PIGMENT_EXTRACTOR = AMEMachines.MACHINES.registerSimple("applied_pigment_extractor", AppliedPigmentExtractor::new, AppliedPigmentExtractor.class,
                 AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_FLUID_COMBINER = AMEMachines.MACHINES.registerSimple("applied_fluid_combiner", AppliedFluidCombiner::new, AppliedFluidCombiner.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_FLUID_ALLOYER = AMEMachines.MACHINES.registerSimple("applied_fluid_alloyer", AppliedFluidAlloyer::new, AppliedFluidAlloyer.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
         if (LoadingModList.get().getModFileById("mekmm") != null){
             APPLIED_CNC_LATHE = AMEMachines.MACHINES.registerSimple("applied_cnc_lathe", AppliedCncLathe::new, AppliedCncLathe.class,
                     AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
@@ -212,6 +225,20 @@ public class AMEMMMachines {
             APPLIED_RECYCLER = AMEMachines.MACHINES.registerSimple("applied_recycler", AppliedRecycler::new, AppliedRecycler.class,
                     AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
         }
+        APPLIED_GAS_CONVERTER = AMEMachines.MACHINES.registerSimple("applied_gas_converter", AppliedGasConverter::new, AppliedGasConverter.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_GAS_SYNTHESIZER = AMEMachines.MACHINES.registerSimple("applied_gas_synthesizer", AppliedGasSynthesizer::new, AppliedGasSynthesizer.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_IAMRA = AMEMachines.MACHINES.registerSimple("applied_iamra", AppliedIAMRA::new, AppliedIAMRA.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_INFUSE_SYNTHESIZER = AMEMachines.MACHINES.registerSimple("applied_infuse_synthesizer", AppliedInfuseSynthesizer::new, AppliedInfuseSynthesizer.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_ITEM_COMPRESSOR = AMEMachines.MACHINES.registerSimple("applied_item_compressor", AppliedItemCompressor::new, AppliedItemCompressor.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_ITEM_UNZIPPER = AMEMachines.MACHINES.registerSimple("applied_item_unzipper", AppliedItemUnzipper::new, AppliedItemUnzipper.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_MEKANICAL_MATTER_CONDENSER = AMEMachines.MACHINES.registerSimple("applied_mekanical_matter_condenser", AppliedMekanicalMatterCondenser::new, AppliedMekanicalMatterCondenser.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
     }
     
     public static void AstralMachines(){

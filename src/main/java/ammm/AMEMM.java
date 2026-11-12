@@ -10,10 +10,8 @@ import ammm.block.blockentity.machine.enchantedmachine.*;
 import ammm.block.gui.factory.*;
 import ammm.block.gui.machine.GMCrafter;
 import ammm.block.gui.machine.applied.*;
-import ammm.registries.AMEDMMMachines;
-import ammm.registries.AMEMMCreativeTab;
-import ammm.registries.AMEMMFactories;
-import ammm.registries.AMEMMMachines;
+import ammm.mixin.ame.AMETheValineMachinesMixin;
+import ammm.registries.*;
 import astral_mekanism.block.gui.basemachine.GuiAMEAdsorptionSeparator;
 import astral_mekanism.block.gui.basemachine.GuiAMEPaintingMachine;
 import astral_mekanism.block.gui.normalmachine.*;
@@ -108,6 +106,8 @@ public class AMEMM {
         registerScreenMek(AMEMMMachines.APPLIED_IOR, GuiAppliedIOR::new);
         registerScreenMek(AMEMMMachines.APPLIED_NUTRITIONAL_LIQUIFIER, GuiAppliedNutritionalLiquifier::new);
         registerScreenMek(AMEMMMachines.APPLIED_PIGMENT_EXTRACTOR, GuiAppliedPigmentExtractor::new);
+        registerScreenMek(AMEMMMachines.APPLIED_FLUID_ALLOYER, GuiAppliedFluidAlloyer::new);
+        registerScreenMek(AMEMMMachines.APPLIED_FLUID_COMBINER, GuiAppliedFluidCombiner::new);
         if (LoadingModList.get().getModFileById("mekmm") != null) {
             registerScreenMek(AMEMMMachines.APPLIED_CNC_LATHE, GuiAppliedCncLathe::new);
             registerScreenMek(AMEMMMachines.APPLIED_CNC_ROLLING_MILL, GuiAppliedCncRollingMill::new);
@@ -115,9 +115,19 @@ public class AMEMM {
             registerScreenMek(AMEMMMachines.APPLIED_PLANTING_STATION, GuiAppliedPlantingStation::new);
             registerScreenMek(AMEMMMachines.APPLIED_RECYCLER, GuiAppliedRecycler::new);
         }
+        registerScreenMek(AMEMMMachines.APPLIED_GAS_CONVERTER, GuiAppliedGasConverter::new);
+        registerScreenMek(AMEMMMachines.APPLIED_GAS_SYNTHESIZER, GuiAppliedGasSynthesizer::new);
+        registerScreenMek(AMEMMMachines.APPLIED_IAMRA, GuiAppliedIAMRA::new);
+        registerScreenMek(AMEMMMachines.APPLIED_INFUSE_SYNTHESIZER, GuiAppliedInfuseSynthesizer::new);
+        registerScreenMek(AMEMMMachines.APPLIED_ITEM_COMPRESSOR, GuiAppliedItemCompressor::new);
+        registerScreenMek(AMEMMMachines.APPLIED_ITEM_UNZIPPER, GuiAppliedItemUnzipper::new);
+        registerScreenMek(AMEMMMachines.APPLIED_MEKANICAL_MATTER_CONDENSER, GuiAppliedMekanicalMatterCondenser::new);
         if (LoadingModList.get().getModFileById("ame_dynamics") != null){
             registerScreenMek(AMEDMMMachines.APPLIED_SQUEEZER, GuiAppliedSqueezer::new);
             registerScreenMek(AMEDMMMachines.APPLIED_DRYING_BASIN, GuiAppliedDryingBasin::new);
+        }
+        if (LoadingModList.get().getModFileById("ame_the_valine") != null){
+            registerScreenMek(AMETheValineMMMachines.APPLIED_VALINE_REACTOR, GuiAppliedValineReactor::new);
         }
 
         registerScreenMek(AMEMMMachines.ASTRAL_ADSORPTION_SEPARATOR, GuiAMEAdsorptionSeparator<AMAdsorptionSeparator>::new);
