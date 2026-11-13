@@ -1,6 +1,5 @@
 package ammm.block.gui.machine.applied;
 
-import ammm.block.blockentity.machine.appliedmachine.AppliedComposter;
 import ammm.block.blockentity.machine.appliedmachine.AppliedGasSynthesizer;
 import ammm.block.gui.machine.applied.prefab.GuiAppliedSingleToSingleMachine;
 import mekanism.client.jei.MekanismJEIRecipeType;

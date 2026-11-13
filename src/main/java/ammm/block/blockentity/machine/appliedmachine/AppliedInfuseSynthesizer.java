@@ -10,10 +10,8 @@ import astral_mekanism.block.blockentity.interf.applied.IAppliedSingleToSingleMa
 import astral_mekanism.item.recipecard.ItemIngredientCardItem;
 import me.ramidzkh.mekae2.ae2.MekanismKey;
 import mekanism.api.IContentsListener;
-import mekanism.api.chemical.gas.GasStack;
 import mekanism.api.chemical.infuse.InfusionStack;
 import mekanism.api.providers.IBlockProvider;
-import mekanism.api.recipes.ItemStackToGasRecipe;
 import mekanism.api.recipes.ItemStackToInfuseTypeRecipe;
 import mekanism.common.CommonWorldTickHandler;
 import mekanism.common.capabilities.holder.slot.IInventorySlotHolder;

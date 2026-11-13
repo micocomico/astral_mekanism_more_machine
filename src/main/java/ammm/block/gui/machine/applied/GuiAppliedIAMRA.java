@@ -1,7 +1,6 @@
 package ammm.block.gui.machine.applied;
 
 import ammm.block.blockentity.machine.appliedmachine.AppliedIAMRA;
-import ammm.block.blockentity.machine.appliedmachine.AppliedPRC;
 import ammm.block.gui.machine.applied.prefab.GuiAppliedTripleToDoubleEnergizedMachine;
 import astral_mekanism.jei.AMEJEIRecipeType;
 import mekanism.client.jei.MekanismJEIRecipeType;

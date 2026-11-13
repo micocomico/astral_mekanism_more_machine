@@ -45,6 +45,7 @@
     "block.astral_mekanism.applied_mekanical_matter_condenser": "Applied Mekanical Matter Condenser",
     "block.astral_mekanism.applied_fluid_alloyer": "Applied Fluid Alloyer",
     "block.astral_mekanism.applied_fluid_combiner": "Applied Fluid Combiner",
+    "block.astral_mekanism.applied_crafter": "Applied Crafter",
     "container.astral_mekanism.applied_osmium_compressor": "Applied Osmium Compressor",
     "container.astral_mekanism.applied_purification_chamber": "Applied Purification Chamber",
     "container.astral_mekanism.applied_chemical_injection_chamber": "Applied Chemical Injection Chamber",
@@ -91,6 +92,7 @@
     "container.astral_mekanism.applied_mekanical_matter_condenser": "Applied Mekanical Matter Condenser",
     "container.astral_mekanism.applied_fluid_alloyer": "Applied Fluid Alloyer",
     "container.astral_mekanism.applied_fluid_combiner": "Applied Fluid Combiner",
+    "container.astral_mekanism.applied_crafter": "Applied Crafter",
 
     "block.astral_mekanism.astral_crafter": "Astral Crafter",
     "block.astral_mekanism.astral_adsorption_separator": "Astral Adsorption Separator",

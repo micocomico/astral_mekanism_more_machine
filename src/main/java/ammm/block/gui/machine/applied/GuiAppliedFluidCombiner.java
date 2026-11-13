@@ -1,6 +1,5 @@
 package ammm.block.gui.machine.applied;
 
-import ammm.block.blockentity.machine.appliedmachine.AppliedCombiner;
 import ammm.block.blockentity.machine.appliedmachine.AppliedFluidCombiner;
 import ammm.block.gui.machine.applied.prefab.GuiAppliedDoubleToSingleEnergizedMachine;
 import fr.iglee42.evolvedmekanism.jei.EMJEI;

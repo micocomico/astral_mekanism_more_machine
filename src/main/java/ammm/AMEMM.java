@@ -10,7 +10,6 @@ import ammm.block.blockentity.machine.enchantedmachine.*;
 import ammm.block.gui.factory.*;
 import ammm.block.gui.machine.GMCrafter;
 import ammm.block.gui.machine.applied.*;
-import ammm.mixin.ame.AMETheValineMachinesMixin;
 import ammm.registries.*;
 import astral_mekanism.block.gui.basemachine.GuiAMEAdsorptionSeparator;
 import astral_mekanism.block.gui.basemachine.GuiAMEPaintingMachine;
@@ -22,30 +21,15 @@ import astral_mekanism.registries.AMEMachines;
 import com.mojang.logging.LogUtils;
 import mekanism.common.inventory.container.tile.MekanismTileContainer;
 import mekanism.common.tile.base.TileEntityMekanism;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.MenuScreens.ScreenConstructor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.LoadingModList;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -108,6 +92,7 @@ public class AMEMM {
         registerScreenMek(AMEMMMachines.APPLIED_PIGMENT_EXTRACTOR, GuiAppliedPigmentExtractor::new);
         registerScreenMek(AMEMMMachines.APPLIED_FLUID_ALLOYER, GuiAppliedFluidAlloyer::new);
         registerScreenMek(AMEMMMachines.APPLIED_FLUID_COMBINER, GuiAppliedFluidCombiner::new);
+        registerScreenMek(AMEMMMachines.APPLIED_CRAFTER, GuiAppliedCrafter::new);
         if (LoadingModList.get().getModFileById("mekmm") != null) {
             registerScreenMek(AMEMMMachines.APPLIED_CNC_LATHE, GuiAppliedCncLathe::new);
             registerScreenMek(AMEMMMachines.APPLIED_CNC_ROLLING_MILL, GuiAppliedCncRollingMill::new);

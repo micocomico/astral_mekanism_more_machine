@@ -1,14 +1,12 @@
 package ammm.block.gui.machine.applied;
 
 import ame_the_valine.jei.AMETheValineJEIPlugin;
-import ammm.block.blockentity.interf.applied.IAppliedDoubleToSingleMachine;
 import ammm.block.blockentity.machine.appliedmachine.AppliedValineReactor;
 import astral_mekanism.block.gui.element.GuiMEKeySlot;
 import mekanism.client.gui.GuiMekanismTile;
 import mekanism.client.gui.element.GuiUpArrow;
 import mekanism.client.gui.element.progress.GuiProgress;
 import mekanism.client.gui.element.progress.ProgressType;
-import mekanism.client.jei.MekanismJEIRecipeType;
 import mekanism.common.inventory.container.tile.MekanismTileContainer;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;

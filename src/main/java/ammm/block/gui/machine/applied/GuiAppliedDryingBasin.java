@@ -1,9 +1,7 @@
 package ammm.block.gui.machine.applied;
 
-import ammm.block.blockentity.machine.appliedmachine.AppliedCDM;
 import ammm.block.blockentity.machine.appliedmachine.AppliedDryingBasin;
 import ammm.block.gui.machine.applied.prefab.GuiAppliedDoubleToDoubleEnergizedMachine;
-import fixdol.mekanismelements.client.MSJEIRecipeType;
 import mekanism.client.jei.MekanismJEIRecipeType;
 import mekanism.common.inventory.container.tile.MekanismTileContainer;
 import net.minecraft.network.chat.Component;

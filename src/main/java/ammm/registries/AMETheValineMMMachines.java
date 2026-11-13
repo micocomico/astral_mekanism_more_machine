@@ -1,8 +1,6 @@
 package ammm.registries;
 
-import ame_dynamics.registries.AMEDMachines;
 import ame_the_valine.registries.AMETheValineMachines;
-import ammm.block.blockentity.machine.appliedmachine.AppliedDryingBasin;
 import ammm.block.blockentity.machine.appliedmachine.AppliedValineReactor;
 import astral_mekanism.AMELang;
 import astral_mekanism.registration.MachineRegistryObject;

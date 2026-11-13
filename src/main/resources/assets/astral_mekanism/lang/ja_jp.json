@@ -43,6 +43,7 @@
     "block.astral_mekanism.applied_item_compressor": "電子式アイテム圧縮機",
     "block.astral_mekanism.applied_item_unzipper": "電子式アイテム解凍機",
     "block.astral_mekanism.applied_mekanical_matter_condenser": "電子式メカニカルマターコンデンサー",
+    "block.astral_mekanism.applied_crafter": "電子式拡張作業台",
     "container.astral_mekanism.applied_osmium_compressor": "電子式オスミウム圧縮機",
     "container.astral_mekanism.applied_purification_chamber": "電子式浄化室",
     "container.astral_mekanism.applied_chemical_injection_chamber": "電子式化学注入室",
@@ -87,6 +88,7 @@
     "container.astral_mekanism.applied_item_compressor": "電子式アイテム圧縮機",
     "container.astral_mekanism.applied_item_unzipper": "電子式アイテム解凍機",
     "container.astral_mekanism.applied_mekanical_matter_condenser": "電子式メカニカルマターコンデンサー",
+    "container.astral_mekanism.applied_crafter": "電子式拡張作業台",
 
     "block.astral_mekanism.astral_crafter": "天体型拡張作業台",
     "block.astral_mekanism.astral_adsorption_separator": "天体型Adsorption分離機",

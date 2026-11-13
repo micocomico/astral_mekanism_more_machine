@@ -1,7 +1,6 @@
 package ammm.block.gui.machine.applied.prefab;
 
 import ammm.block.blockentity.interf.applied.IAppliedTripleToDoubleMachine;
-import ammm.block.blockentity.interf.applied.IAppliedTripleToSingleMachine;
 import astral_mekanism.block.blockentity.appliedmachine.prefab.BEAppliedEnergizedMachine;
 import astral_mekanism.block.gui.element.GuiMEKeySlot;
 import mekanism.client.gui.GuiMekanismTile;

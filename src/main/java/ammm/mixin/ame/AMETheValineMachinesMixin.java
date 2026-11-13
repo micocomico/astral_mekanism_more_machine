@@ -1,8 +1,6 @@
 package ammm.mixin.ame;
 
-import ame_dynamics.registries.AMEDMachines;
 import ame_the_valine.registries.AMETheValineMachines;
-import ammm.registries.AMEDMMMachines;
 import ammm.registries.AMETheValineMMMachines;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

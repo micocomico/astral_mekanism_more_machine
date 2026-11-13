@@ -10,6 +10,7 @@ import ammm.block.blockentity.machine.astralmachine.AMPaintingMachine;
 import ammm.block.blockentity.machine.enchantedmachine.*;
 import ammm.block.container.factory.CFBase;
 import ammm.block.container.machine.CMCrafter;
+import ammm.block.container.machine.applied.ContainerAppliedCrafter;
 import ammm.block.container.machine.applied.ContainerAppliedReactionChamber;
 import ammm.config.AMEMMConfig;
 import astral_mekanism.AMEConstants;
@@ -116,6 +117,7 @@ public class AMEMMMachines {
     public static MachineRegistryObject<AppliedMekanicalMatterCondenser, ?, MekanismTileContainer<AppliedMekanicalMatterCondenser>, ?> APPLIED_MEKANICAL_MATTER_CONDENSER;
     public static MachineRegistryObject<AppliedFluidAlloyer, ?, MekanismTileContainer<AppliedFluidAlloyer>, ?> APPLIED_FLUID_ALLOYER;
     public static MachineRegistryObject<AppliedFluidCombiner, ?, MekanismTileContainer<AppliedFluidCombiner>, ?> APPLIED_FLUID_COMBINER;
+    public static MachineRegistryObject<AppliedCrafter, ?, MekanismTileContainer<AppliedCrafter>, ?> APPLIED_CRAFTER;
 
     public static MachineRegistryObject<AMAdsorptionSeparator, BlockTile.BlockTileModel<AMAdsorptionSeparator, BlockTypeMachine<AMAdsorptionSeparator>>,
             MekanismTileContainer<AMAdsorptionSeparator>, ItemBlockMachine> ASTRAL_ADSORPTION_SEPARATOR;
@@ -212,6 +214,8 @@ public class AMEMMMachines {
         APPLIED_FLUID_COMBINER = AMEMachines.MACHINES.registerSimple("applied_fluid_combiner", AppliedFluidCombiner::new, AppliedFluidCombiner.class,
                 AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
         APPLIED_FLUID_ALLOYER = AMEMachines.MACHINES.registerSimple("applied_fluid_alloyer", AppliedFluidAlloyer::new, AppliedFluidAlloyer.class,
+                AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
+        APPLIED_CRAFTER = AMEMachines.MACHINES.registerDefaultBlockItem("applied_crafter", AppliedCrafter::new, AppliedCrafter.class, ContainerAppliedCrafter::new,
                 AMELang.DESCRIPTION_APPLIED_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY)));
         if (LoadingModList.get().getModFileById("mekmm") != null){
             APPLIED_CNC_LATHE = AMEMachines.MACHINES.registerSimple("applied_cnc_lathe", AppliedCncLathe::new, AppliedCncLathe.class,

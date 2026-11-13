@@ -5,7 +5,6 @@ import ammm.registries.AMEMMFactories;
 import ammm.registries.AMEMMMachines;
 import appeng.integration.modules.jei.ChargerCategory;
 import appeng.integration.modules.jei.TransformCategory;
-import astral_mekanism.AMEConstants;
 import astral_mekanism.jei.AMEJEIRecipeType;
 import fixdol.mekanismelements.client.MSJEIRecipeType;
 import mekanism.api.providers.IItemProvider;
