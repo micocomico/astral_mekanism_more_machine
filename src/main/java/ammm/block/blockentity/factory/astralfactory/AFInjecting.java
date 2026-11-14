@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 public class AFInjecting extends BFAdvanced<AFInjecting> {
 
     public AFInjecting(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
-        super(blockProvider, pos, state);
+        super(blockProvider, pos, state, 20);
     }
 
     @Override

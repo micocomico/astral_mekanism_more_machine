@@ -37,10 +37,12 @@ public abstract class AppliedItemStackGasToItemStackMachine<RECIPE extends ItemS
     private long inputAmountA;
     private long inputAmountB;
     private long outputAmount;
+    private final int multiply;
 
     public AppliedItemStackGasToItemStackMachine(IBlockProvider blockProvider, BlockPos pos, BlockState state,
-                                                 long fePerProcess) {
+                                                 long fePerProcess, int multiply) {
         super(blockProvider, pos, state, fePerProcess);
+        this.multiply = multiply;
     }
 
     @NotNull
@@ -89,7 +91,7 @@ public abstract class AppliedItemStackGasToItemStackMachine<RECIPE extends ItemS
                             inputKeyA = keyA;
                             inputKeyB = keyB;
                             inputAmountA = r.getItemInput().getNeededAmount(stackB);
-                            inputAmountB = r.getChemicalInput().getNeededAmount(stackA) * 200;
+                            inputAmountB = r.getChemicalInput().getNeededAmount(stackA) * multiply;
                             ItemStack output = r.getOutput(stackB,stackA);
                             outputKey = AEItemKey.of(output);
                             outputAmount = output.getCount();

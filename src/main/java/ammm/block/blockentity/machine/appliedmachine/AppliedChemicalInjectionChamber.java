@@ -13,7 +13,7 @@ public class AppliedChemicalInjectionChamber extends AppliedItemStackGasToItemSt
 
     public AppliedChemicalInjectionChamber(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
         super(blockProvider, pos, state, MekanismConfig.usage.chemicalInjectionChamber.get().multiply(200)
-                .divideToLong(MekanismConfig.general.forgeConversionRate.get()));
+                .divideToLong(MekanismConfig.general.forgeConversionRate.get()),20);
     }
 
     @Override

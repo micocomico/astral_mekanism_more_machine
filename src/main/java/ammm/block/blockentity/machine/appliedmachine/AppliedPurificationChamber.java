@@ -13,7 +13,7 @@ public class AppliedPurificationChamber extends AppliedItemStackGasToItemStackMa
 
     public AppliedPurificationChamber(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
         super(blockProvider, pos, state, MekanismConfig.usage.purificationChamber.get().multiply(200)
-                .divideToLong(MekanismConfig.general.forgeConversionRate.get()));
+                .divideToLong(MekanismConfig.general.forgeConversionRate.get()), 20);
     }
 
     @Override

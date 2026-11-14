@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 public class EFPurifying extends BFAdvanced<EFPurifying> {
 
     public EFPurifying(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
-        super(blockProvider, pos, state);
+        super(blockProvider, pos, state, 20);
     }
 
     private int baselineMaxOperations = 1;

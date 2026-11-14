@@ -40,6 +40,7 @@ public class AppliedReactionChamber extends BEAppliedEnergizedMachine {
     private long[] inputAmountB = new long[9];
     private long outputAmountA;
     private long outputAmountB;
+    private long energyAmount;
 
     public AppliedReactionChamber(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
         super(blockProvider, pos, state, AMEConfig.usage.aaeReactionChamber.getOrDefault().multiply(10)
@@ -76,6 +77,7 @@ public class AppliedReactionChamber extends BEAppliedEnergizedMachine {
         Arrays.fill(inputAmountB,0);
         outputAmountA = 0;
         outputAmountB = 0;
+        energyAmount = 0;
     }
 
     private void recalculateRecipeInfo() {
@@ -134,6 +136,7 @@ public class AppliedReactionChamber extends BEAppliedEnergizedMachine {
                         outputKeyB = AEFluidKey.of(outputB);
                         outputAmountA = outputA.getCount();
                         outputAmountB = outputB.getAmount();
+                        energyAmount = r.getEnergy();
                         return;
                     }
                 }
@@ -157,7 +160,7 @@ public class AppliedReactionChamber extends BEAppliedEnergizedMachine {
             }
             operations = Math.min(operations,outputKeyA != null ? storage.insert(outputKeyA, Long.MAX_VALUE, Actionable.SIMULATE, source) / outputAmountA : Long.MAX_VALUE);
             operations = Math.min(operations,outputKeyB != null ? storage.insert(outputKeyB, Long.MAX_VALUE, Actionable.SIMULATE, source) / outputAmountB : Long.MAX_VALUE);
-            operations = Math.min(operations, getSupportableOperations(storage, source));
+            operations = Math.min(operations, storage.insert(this.feKey, Long.MAX_VALUE, Actionable.SIMULATE, source) / energyAmount);
             if (operations > 0) {
                 storage.extract(inputKeyA, operations * inputAmountA, Actionable.MODULATE, source);
                 for (int i = 0; i < 9; i++){
@@ -165,7 +168,7 @@ public class AppliedReactionChamber extends BEAppliedEnergizedMachine {
                 }
                 storage.insert(outputKeyA, operations * outputAmountA, Actionable.MODULATE, source);
                 storage.insert(outputKeyB, operations * outputAmountB, Actionable.MODULATE, source);
-                consumeEnergy(storage, source, operations);
+                storage.extract(this.feKey, operations * energyAmount, Actionable.MODULATE, source);
                 setActive(true);
                 return;
             }

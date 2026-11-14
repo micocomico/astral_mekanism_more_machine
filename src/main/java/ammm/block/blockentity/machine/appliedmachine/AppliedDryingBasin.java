@@ -41,9 +41,10 @@ public class AppliedDryingBasin extends BEAppliedEnergizedMachine
     private long inputAmountB;
     private long outputAmountA;
     private long outputAmountB;
+    private long energyAmount;
 
     public AppliedDryingBasin(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
-        super(blockProvider, pos, state, AMEDConfig.usage.essentialDryingBasin.get().multiply(100)
+        super(blockProvider, pos, state, AMEDConfig.usage.essentialDryingBasin.get().multiply(200)
                 .divideToLong(MekanismConfig.general.forgeConversionRate.get()));
     }
 
@@ -73,6 +74,7 @@ public class AppliedDryingBasin extends BEAppliedEnergizedMachine
         inputAmountB = 0;
         outputAmountA = 0;
         outputAmountB = 0;
+        energyAmount = 0;
     }
 
     private void recalculateRecipeInfo() {
@@ -101,6 +103,8 @@ public class AppliedDryingBasin extends BEAppliedEnergizedMachine
                             outputKeyB = AEFluidKey.of(outputB);
                             outputAmountA = outputA.getCount();
                             outputAmountB = outputB.getAmount();
+                            energyAmount = AMEDConfig.usage.essentialDryingBasin.get().multiply(r.getDuration())
+                                    .divideToLong(MekanismConfig.general.forgeConversionRate.get());
                         }, this::removeRecipeInfo);
                 return;
             }
@@ -126,13 +130,13 @@ public class AppliedDryingBasin extends BEAppliedEnergizedMachine
                              inputKeyB != null ? storage.extract(inputKeyB, Long.MAX_VALUE, Actionable.SIMULATE, source) / inputAmountB : Long.MAX_VALUE),
                     Math.min(outputKeyA != null ? storage.insert(outputKeyA, Long.MAX_VALUE, Actionable.SIMULATE, source) / outputAmountA : Long.MAX_VALUE,
                              outputKeyB != null ? storage.insert(outputKeyB, Long.MAX_VALUE, Actionable.SIMULATE, source) / outputAmountB : Long.MAX_VALUE));
-            operations = Math.min(operations, getSupportableOperations(storage, source));
+            operations = Math.min(operations,storage.insert(this.feKey, Long.MAX_VALUE, Actionable.SIMULATE, source) / energyAmount);
             if (operations > 0) {
                 storage.extract(inputKeyA, operations * inputAmountA, Actionable.MODULATE, source);
                 storage.extract(inputKeyB, operations * inputAmountB, Actionable.MODULATE, source);
                 storage.insert(outputKeyA, operations * outputAmountA, Actionable.MODULATE, source);
                 storage.insert(outputKeyB, operations * outputAmountB, Actionable.MODULATE, source);
-                consumeEnergy(storage, source, operations);
+                storage.extract(this.feKey, operations * energyAmount, Actionable.MODULATE, source);
                 setActive(true);
                 return;
             }

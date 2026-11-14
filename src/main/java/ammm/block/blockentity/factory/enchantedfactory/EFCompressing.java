@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 public class EFCompressing extends BFAdvanced<EFCompressing> {
 
     public EFCompressing(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
-        super(blockProvider, pos, state);
+        super(blockProvider, pos, state, 200);
     }
 
     private int baselineMaxOperations = 1;

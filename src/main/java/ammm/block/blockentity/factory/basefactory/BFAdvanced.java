@@ -3,6 +3,7 @@ package ammm.block.blockentity.factory.basefactory;
 import ammm.block.blockentity.base.MekanismRecipeFactory;
 import astral_mekanism.block.blockentity.elements.slot.paged.PagedInputInventorySlot;
 import astral_mekanism.block.blockentity.elements.slot.paged.PagedOutputInventorySlot;
+import astral_mekanism.recipes.cachedRecipe.FormulizedItemGasToItemCachedRecipe;
 import mekanism.api.IContentsListener;
 import mekanism.api.RelativeSide;
 import mekanism.api.Upgrade;
@@ -67,14 +68,9 @@ public abstract class BFAdvanced<BE extends MekanismRecipeFactory<ItemStackGasTo
             CachedRecipe.OperationTracker.RecipeError.NOT_ENOUGH_SECONDARY_INPUT
     );
 
-    private static final int BASE_TICKS_REQUIRED = 200;
-
     public final ILongInputHandler<@NotNull GasStack> gasInputHandler;
     public final long[] usedSoFar;
-    private double gasPerTickMeanMultiplier = 1;
-    private long baseTotalUsage;
 
-    public final ItemStackConstantChemicalToItemStackCachedRecipe.ChemicalUsageMultiplier gasUsageMultiplier;
     public final IInputHandler<ItemStack>[] inputHandlers;
     public final IOutputHandler<ItemStack>[] outputHandlers;
     @WrappingComputerMethod(wrapper = SpecialComputerMethodWrapper.ComputerChemicalTankWrapper.class, methodNames = {"getChemical", "getChemicalCapacity", "getChemicalNeeded",
@@ -86,8 +82,10 @@ public abstract class BFAdvanced<BE extends MekanismRecipeFactory<ItemStackGasTo
     public PagedOutputInventorySlot[] outputSlots;
     public final int[] progress;
 
+    private final int multiply;
+
     @SuppressWarnings("unchecked")
-    public BFAdvanced(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
+    public BFAdvanced(IBlockProvider blockProvider, BlockPos pos, BlockState state, int multiply) {
         super(blockProvider, pos, state, TRACKED_ERROR_TYPES, GLOBAL_ERROR_TYPES);
         this.progress = new int[tier.processes];
         Arrays.fill(progress, 0);
@@ -104,26 +102,7 @@ public abstract class BFAdvanced<BE extends MekanismRecipeFactory<ItemStackGasTo
         configComponent.setupInputConfig(TransmissionType.ENERGY, energyContainer);
         ejectorComponent = new TileComponentEjector(this, () -> Long.MAX_VALUE);
         ejectorComponent.setOutputData(configComponent, TransmissionType.ITEM);
-        baseTotalUsage = BASE_TICKS_REQUIRED;
         usedSoFar = new long[tier.processes];
-        if (useStatisticalMechanics()) {
-            //Note: Statistical mechanics works best by just using the mean gas usage we want to target
-            // rather than adjusting the mean each time to try and reach a given target
-            gasUsageMultiplier = (usedSoFar, operatingTicks) -> StatUtils.inversePoisson(gasPerTickMeanMultiplier);
-        } else {
-            gasUsageMultiplier = (usedSoFar, operatingTicks) -> {
-                long baseRemaining = baseTotalUsage - usedSoFar;
-                int remainingTicks = getTicksRequired() - operatingTicks;
-                if (baseRemaining < remainingTicks) {
-                    //If we already used more than we would need to use (due to removing speed upgrades or adding gas upgrades)
-                    // then just don't use any gas this tick
-                    return 0;
-                } else if (baseRemaining == remainingTicks) {
-                    return 1;
-                }
-                return Math.max(MathUtils.clampToLong(baseRemaining / (double) remainingTicks), 0);
-            };
-        }
         this.inputHandlers = new IInputHandler[tier.processes];
         this.outputHandlers = new IOutputHandler[tier.processes];
         for (int i = 0; i < tier.processes; i++) {
@@ -131,6 +110,7 @@ public abstract class BFAdvanced<BE extends MekanismRecipeFactory<ItemStackGasTo
             outputHandlers[i] = OutputHelper.getOutputHandler(outputSlots[i],
                     CachedRecipe.OperationTracker.RecipeError.NOT_ENOUGH_OUTPUT_SPACE);
         }
+        this.multiply = multiply;
     }
 
     @NotNull
@@ -146,8 +126,8 @@ public abstract class BFAdvanced<BE extends MekanismRecipeFactory<ItemStackGasTo
     @Override
     public @NotNull CachedRecipe<ItemStackGasToItemStackRecipe> createNewCachedRecipe(@NotNull ItemStackGasToItemStackRecipe recipe,
                                                                                       int cacheIndex) {
-        return new ItemStackConstantChemicalToItemStackCachedRecipe<>(recipe, recheckAllRecipeErrors[cacheIndex], inputHandlers[cacheIndex], gasInputHandler,
-                gasUsageMultiplier, used -> usedSoFar[cacheIndex] = used, outputHandlers[cacheIndex])
+        return new FormulizedItemGasToItemCachedRecipe(recipe, recheckAllRecipeErrors[cacheIndex], inputHandlers[cacheIndex], gasInputHandler,
+                outputHandlers[cacheIndex], multiply)
                 .setErrorsChanged(errors -> errorTracker.onErrorsChanged(errors, cacheIndex))
                 .setCanHolderFunction(() -> MekanismUtils.canFunction(this))
                 .setActive(active -> setActiveState(active, cacheIndex))
@@ -214,18 +194,6 @@ public abstract class BFAdvanced<BE extends MekanismRecipeFactory<ItemStackGasTo
 
     private boolean useStatisticalMechanics() {
         return getRecipeType() == MekanismRecipeType.INJECTING || getRecipeType() == MekanismRecipeType.PURIFYING;
-    }
-
-    @Override
-    public void recalculateUpgrades(Upgrade upgrade) {
-        super.recalculateUpgrades(upgrade);
-        if (upgrade == Upgrade.SPEED || upgrade == Upgrade.GAS && supportsUpgrade(Upgrade.GAS)) {
-            if (useStatisticalMechanics()) {
-                gasPerTickMeanMultiplier = MekanismUtils.getGasPerTickMeanMultiplier(this);
-            } else {
-                baseTotalUsage = MekanismUtils.getBaseUsage(this, BASE_TICKS_REQUIRED);
-            }
-        }
     }
 
     protected int getTicksRequired() {

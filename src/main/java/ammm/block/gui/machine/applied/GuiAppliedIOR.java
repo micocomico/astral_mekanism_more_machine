@@ -7,6 +7,7 @@ import mekanism.client.jei.MekanismJEIRecipeType;
 import mekanism.common.inventory.container.tile.MekanismTileContainer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraftforge.fml.ModList;
 
 public class GuiAppliedIOR extends GuiAppliedDoubleToSingleEnergizedMachine<AppliedIOR> {
 
@@ -16,7 +17,7 @@ public class GuiAppliedIOR extends GuiAppliedDoubleToSingleEnergizedMachine<Appl
 
     @Override
     protected MekanismJEIRecipeType<?>[] getJEIJeiRecipeTypes() {
-        return new MekanismJEIRecipeType[] { MSJEIRecipeType.INFINITY_ORE_REPROCESSING };
+        return ModList.get().isLoaded("emi") ? new MekanismJEIRecipeType[] { } : new MekanismJEIRecipeType[] { MSJEIRecipeType.INFINITY_ORE_REPROCESSING };
     }
 
 }

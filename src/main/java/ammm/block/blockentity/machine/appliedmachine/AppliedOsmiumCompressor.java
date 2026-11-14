@@ -13,7 +13,7 @@ public class AppliedOsmiumCompressor extends AppliedItemStackGasToItemStackMachi
 
     public AppliedOsmiumCompressor(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
         super(blockProvider, pos, state, MekanismConfig.usage.osmiumCompressor.get().multiply(200)
-                .divideToLong(MekanismConfig.general.forgeConversionRate.get()));
+                .divideToLong(MekanismConfig.general.forgeConversionRate.get()), 200);
     }
 
     @Override

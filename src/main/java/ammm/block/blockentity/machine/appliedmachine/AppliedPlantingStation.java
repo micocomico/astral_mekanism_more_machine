@@ -131,7 +131,6 @@ public class AppliedPlantingStation extends BEAppliedEnergizedMachine
                              outputKeyB != null ? storage.insert(outputKeyB, Long.MAX_VALUE, Actionable.SIMULATE, source) / outputAmountB : Long.MAX_VALUE));
             operations = Math.min(operations, getSupportableOperations(storage, source));
             if (operations > 0) {
-                storage.extract(inputKeyA, operations * inputAmountA, Actionable.MODULATE, source);
                 storage.extract(inputKeyB, operations * inputAmountB, Actionable.MODULATE, source);
                 storage.insert(outputKeyA, operations * outputAmountA, Actionable.MODULATE, source);
                 storage.insert(outputKeyB, operations * outputAmountB, Actionable.MODULATE, source);

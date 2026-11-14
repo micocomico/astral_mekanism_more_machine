@@ -51,7 +51,7 @@ public class NFPurifying extends BFAdvanced<NFPurifying> implements ISustainedDa
 
     @Override
     protected IGasTank createGasTank(IContentsListener listener) {
-        return ChemicalTankBuilder.GAS.input(320000l * tier.processes, this::containsRecipeB, markAllMonitorsChanged(listener));
+        return ChemicalTankBuilder.GAS.input(500000l * tier.processes, this::containsRecipeB, markAllMonitorsChanged(listener));
     }
 
     public NFPurifying getSelf() {
@@ -68,7 +68,7 @@ public class NFPurifying extends BFAdvanced<NFPurifying> implements ISustainedDa
     protected int baselineMaxOperations;
 
     public NFPurifying(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
-        super(blockProvider, pos, state);
+        super(blockProvider, pos, state, 20);
         this.baseTicksRequired = 200;
         this.ticksRequired = this.baseTicksRequired;
         baselineMaxOperations = 1;

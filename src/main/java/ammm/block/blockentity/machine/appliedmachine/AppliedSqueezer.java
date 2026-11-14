@@ -47,6 +47,7 @@ public class AppliedSqueezer extends BEAppliedEnergizedMachine {
     private float outputChanceA;
     private float outputChanceB;
     private float outputChanceC;
+    private long energyAmount;
 
     public AppliedSqueezer(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
         super(blockProvider, pos, state, AMEDConfig.usage.essentialSqueezer.get().multiply(200)
@@ -76,6 +77,7 @@ public class AppliedSqueezer extends BEAppliedEnergizedMachine {
         outputAmountB = 0;
         outputAmountC = 0;
         outputAmountD = 0;
+        energyAmount = 0;
     }
 
     private void recalculateRecipeInfo() {
@@ -109,6 +111,8 @@ public class AppliedSqueezer extends BEAppliedEnergizedMachine {
                             outputChanceA = outputA != null ? outputA.getChance() : 1;
                             outputChanceB = outputB != null ? outputB.getChance() : 1;
                             outputChanceC = outputC != null ? outputC.getChance() : 1;
+                            energyAmount = AMEDConfig.usage.essentialSqueezer.get().multiply(r.getDuration())
+                                    .divideToLong(MekanismConfig.general.forgeConversionRate.get());
                         }, this::removeRecipeInfo);
                 return;
             }
@@ -135,7 +139,7 @@ public class AppliedSqueezer extends BEAppliedEnergizedMachine {
                     Math.min(outputKeyB != null ? storage.insert(outputKeyB, Long.MAX_VALUE, Actionable.SIMULATE, source) / outputAmountB : Long.MAX_VALUE,
                              outputKeyC != null ? storage.insert(outputKeyC, Long.MAX_VALUE, Actionable.SIMULATE, source) / outputAmountC : Long.MAX_VALUE));
             operations = Math.min(operations, outputKeyD != null ? storage.insert(outputKeyD, Long.MAX_VALUE, Actionable.SIMULATE, source) / outputAmountD : Long.MAX_VALUE);
-            operations = Math.min(operations, getSupportableOperations(storage, source));
+            operations = Math.min(operations,storage.insert(this.feKey, Long.MAX_VALUE, Actionable.SIMULATE, source) / energyAmount);
             if (operations > 0) {
                 Random rnd = new Random();
                 storage.extract(inputKey, operations * inputAmount, Actionable.MODULATE, source);
@@ -143,7 +147,7 @@ public class AppliedSqueezer extends BEAppliedEnergizedMachine {
                 if (outputKeyB != null) storage.insert(outputKeyB, MathUtils.clampToLong((double) ((float) operations * (float) outputAmountB * outputChanceB + rnd.nextFloat(0.0F, 1.0F))), Actionable.MODULATE, source);
                 if (outputKeyC != null) storage.insert(outputKeyC, MathUtils.clampToLong((double) ((float) operations * (float) outputAmountC * outputChanceC + rnd.nextFloat(0.0F, 1.0F))), Actionable.MODULATE, source);
                 storage.insert(outputKeyD, operations * outputAmountD, Actionable.MODULATE, source);
-                consumeEnergy(storage, source, operations);
+                storage.extract(this.feKey, operations * energyAmount, Actionable.MODULATE, source);
                 setActive(true);
                 return;
             }

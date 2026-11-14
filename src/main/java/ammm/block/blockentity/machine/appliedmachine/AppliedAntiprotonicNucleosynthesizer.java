@@ -31,7 +31,6 @@ import org.jetbrains.annotations.NotNull;
 public class AppliedAntiprotonicNucleosynthesizer extends BEAppliedEnergizedMachine
         implements IAppliedDoubleToSingleMachine {
 
-    private int duration;
     private BasicInventorySlot cardSlotA;
     private BasicInventorySlot cardSlotB;
     private AEKey inputKeyA;
@@ -40,6 +39,7 @@ public class AppliedAntiprotonicNucleosynthesizer extends BEAppliedEnergizedMach
     private long inputAmountA;
     private long inputAmountB;
     private long outputAmount;
+    private long energyAmount;
 
     public AppliedAntiprotonicNucleosynthesizer(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
         super(blockProvider, pos, state, MekanismConfig.usage.antiprotonicNucleosynthesizer.get().multiply(1000)
@@ -96,6 +96,8 @@ public class AppliedAntiprotonicNucleosynthesizer extends BEAppliedEnergizedMach
                             ItemStack output = r.getOutput(stackB,stackA);
                             outputKey = AEItemKey.of(output);
                             outputAmount = output.getCount();
+                            energyAmount = MekanismConfig.usage.antiprotonicNucleosynthesizer.get().multiply(r.getDuration())
+                                    .divideToLong(MekanismConfig.general.forgeConversionRate.get());
                         }, this::removeRecipeInfo);
                 return;
             }
@@ -120,12 +122,12 @@ public class AppliedAntiprotonicNucleosynthesizer extends BEAppliedEnergizedMach
                     storage.extract(inputKeyA, Long.MAX_VALUE, Actionable.SIMULATE, source) / inputAmountA,
                     storage.extract(inputKeyB, Long.MAX_VALUE, Actionable.SIMULATE, source) / inputAmountB),
                     storage.insert(outputKey, Long.MAX_VALUE, Actionable.SIMULATE, source) / outputAmount);
-            operations = Math.min(operations, getSupportableOperations(storage, source));
+            operations = Math.min(operations,storage.insert(this.feKey, Long.MAX_VALUE, Actionable.SIMULATE, source) / energyAmount);
             if (operations > 0) {
                 storage.extract(inputKeyA, operations * inputAmountA, Actionable.MODULATE, source);
                 storage.extract(inputKeyB, operations * inputAmountB, Actionable.MODULATE, source);
                 storage.insert(outputKey, operations * outputAmount, Actionable.MODULATE, source);
-                consumeEnergy(storage, source, operations);
+                storage.extract(this.feKey, operations * energyAmount, Actionable.MODULATE, source);
                 setActive(true);
                 return;
             }

@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 public class AFCompressing extends BFAdvanced<AFCompressing> {
 
     public AFCompressing(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
-        super(blockProvider, pos, state);
+        super(blockProvider, pos, state, 200);
     }
 
     @Override

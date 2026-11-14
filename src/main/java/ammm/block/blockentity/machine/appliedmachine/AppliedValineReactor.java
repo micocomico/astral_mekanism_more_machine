@@ -17,6 +17,7 @@ import mekanism.api.providers.IBlockProvider;
 import mekanism.common.CommonWorldTickHandler;
 import mekanism.common.capabilities.holder.slot.IInventorySlotHolder;
 import mekanism.common.capabilities.holder.slot.InventorySlotHelper;
+import mekanism.common.config.MekanismConfig;
 import mekanism.common.inventory.slot.BasicInventorySlot;
 import mekanism.common.recipe.IMekanismRecipeTypeProvider;
 import mekanism.common.util.MekanismUtils;
@@ -101,7 +102,7 @@ public class AppliedValineReactor extends BEAppliedEnergizedMachine
                             outputKeyB = MekanismKey.of(outputB);
                             outputAmountA = outputA.getAmount();
                             outputAmountB = outputB.getAmount();
-                            outputAmountC = r.getOutputEnergy().getValue();
+                            outputAmountC = r.getOutputEnergy().divideToLong(MekanismConfig.general.forgeConversionRate.get());
                         }, this::removeRecipeInfo);
                 return;
             }

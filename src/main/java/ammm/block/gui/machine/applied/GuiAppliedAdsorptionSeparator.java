@@ -7,6 +7,7 @@ import mekanism.client.jei.MekanismJEIRecipeType;
 import mekanism.common.inventory.container.tile.MekanismTileContainer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraftforge.fml.ModList;
 
 public class GuiAppliedAdsorptionSeparator extends GuiAppliedDoubleToSingleEnergizedMachine<AppliedAdsorptionSeparator> {
 
@@ -16,7 +17,7 @@ public class GuiAppliedAdsorptionSeparator extends GuiAppliedDoubleToSingleEnerg
 
     @Override
     protected MekanismJEIRecipeType<?>[] getJEIJeiRecipeTypes() {
-        return new MekanismJEIRecipeType[] { MSJEIRecipeType.ADSORPTION_SEPARATOR };
+        return ModList.get().isLoaded("emi") ? new MekanismJEIRecipeType[] { } : new MekanismJEIRecipeType[] { MSJEIRecipeType.ADSORPTION_SEPARATOR };
     }
 
 }

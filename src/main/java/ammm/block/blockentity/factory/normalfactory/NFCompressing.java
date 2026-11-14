@@ -51,7 +51,7 @@ public class NFCompressing extends BFAdvanced<NFCompressing> implements ISustain
 
     @Override
     protected IGasTank createGasTank(IContentsListener listener) {
-        return ChemicalTankBuilder.GAS.create(640000l * tier.processes, this::containsRecipeB, markAllMonitorsChanged(listener));
+        return ChemicalTankBuilder.GAS.create(1000000l * tier.processes, this::containsRecipeB, markAllMonitorsChanged(listener));
     }
 
     public NFCompressing getSelf() {
@@ -68,7 +68,7 @@ public class NFCompressing extends BFAdvanced<NFCompressing> implements ISustain
     protected int baselineMaxOperations;
 
     public NFCompressing(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
-        super(blockProvider, pos, state);
+        super(blockProvider, pos, state, 20);
         this.baseTicksRequired = 200;
         this.ticksRequired = this.baseTicksRequired;
         baselineMaxOperations = 1;

@@ -92,7 +92,7 @@ public class AppliedDissolutionChamber extends BEAppliedEnergizedMachine
                         .ifPresentOrElse(r -> {
                             inputKeyA = keyA;
                             inputKeyB = keyB;
-                            inputAmountA = r.getGasInput().getNeededAmount(stackA) * 100;
+                            inputAmountA = r.getGasInput().getNeededAmount(stackA) * 10;
                             inputAmountB = r.getItemInput().getNeededAmount(stackB);
                             BoxedChemicalStack output = r.getOutput(stackB,stackA);
                             outputKey = MekanismKey.of(output.getChemicalStack());

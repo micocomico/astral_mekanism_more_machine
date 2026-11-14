@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 public class EFInjecting extends BFAdvanced<EFInjecting> {
 
     public EFInjecting(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
-        super(blockProvider, pos, state);
+        super(blockProvider, pos, state, 20);
     }
 
     private int baselineMaxOperations = 1;
