@@ -2,7 +2,6 @@ package ammm.block.blockentity.machine.astralmachine;
 
 import ammm.block.blockentity.machine.basemachine.BMNutritionalLiquifier;
 import mekanism.api.IContentsListener;
-import mekanism.api.chemical.ChemicalTankBuilder;
 import mekanism.api.fluid.IExtendedFluidTank;
 import mekanism.api.providers.IBlockProvider;
 import mekanism.common.capabilities.fluid.BasicFluidTank;

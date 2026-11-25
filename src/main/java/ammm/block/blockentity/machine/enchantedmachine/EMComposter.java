@@ -2,6 +2,7 @@ package ammm.block.blockentity.machine.enchantedmachine;
 
 import astral_mekanism.block.blockentity.basemachine.BEAbstractMekanicalComposter;
 import astral_mekanism.integration.AMEEmpowered;
+import com.jerry.mekanism_extras.api.ExtraUpgrade;
 import mekanism.api.Upgrade;
 import mekanism.api.providers.IBlockProvider;
 import net.minecraft.core.BlockPos;
@@ -22,9 +23,13 @@ public class EMComposter extends BEAbstractMekanicalComposter {
     public void recalculateUpgrades(Upgrade upgrade) {
         super.recalculateUpgrades(upgrade);
         if (AMEEmpowered.empoweredIsLoaded()) {
-            setBaselineMaxOperations(200 * (1 << AMEEmpowered.getAllSpeeds(this)));
-        } else if (upgrade == Upgrade.SPEED) {
-            setBaselineMaxOperations(200 * (1 << upgradeComponent.getUpgrades(Upgrade.SPEED)));
+            if (AMEEmpowered.isEmpoweredSpeed(upgrade) || upgrade == Upgrade.SPEED || upgrade == ExtraUpgrade.STACK) {
+                setBaselineMaxOperations(200 * ((1 << upgradeComponent.getUpgrades(Upgrade.SPEED)) + (2 << AMEEmpowered
+                        .getEmpoweredSpeeds(this))) << upgradeComponent.getUpgrades(ExtraUpgrade.STACK));
+            }
+        } else if (upgrade == Upgrade.SPEED || upgrade == ExtraUpgrade.STACK) {
+            setBaselineMaxOperations(200 << (upgradeComponent.getUpgrades(Upgrade.SPEED)
+                    + upgradeComponent.getUpgrades(ExtraUpgrade.STACK)));
         }
     }
 }

@@ -95,7 +95,7 @@ public class AppliedCDM extends BEAppliedEnergizedMachine
                         .ifPresentOrElse(r -> {
                             inputKeyA = keyA;
                             inputKeyB = keyB;
-                            inputAmountA = r.getGasInput().getNeededAmount(stackA) * 100;
+                            inputAmountA = r.getGasInput().getNeededAmount(stackA) * 10;
                             inputAmountB = r.getItemInput().getNeededAmount(stackB);
                             ItemStack outputA = r.getFirstOutput(stackB,stackA);
                             ItemStack outputB = r.getSecondOutput(stackB,stackA);

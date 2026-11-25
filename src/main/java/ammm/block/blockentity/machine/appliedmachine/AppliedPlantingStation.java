@@ -94,7 +94,7 @@ public class AppliedPlantingStation extends BEAppliedEnergizedMachine
                         .stream().filter(r -> r.test(stackA,stackB)).findFirst()
                         .ifPresentOrElse(r -> {
                             double chance = r.getSecondaryChance();
-                            long multi = chance > 0 ? (long) Math.ceil(1 / r.getSecondaryChance()) : 1;
+                            long multi = chance > 0 ? (long) Math.ceil(1 / chance) : 1;
                             inputKeyA = keyA;
                             inputKeyB = keyB;
                             inputAmountA = r.getItemInput().getNeededAmount(stackA) * multi;

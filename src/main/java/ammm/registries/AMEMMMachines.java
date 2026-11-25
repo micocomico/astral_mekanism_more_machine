@@ -4,14 +4,14 @@ import ammm.AMEMMTier;
 import ammm.block.blockentity.base.AstralMekanismRecipeFactory;
 import ammm.block.blockentity.factory.enchantedfactory.EFEnergizedSmelting;
 import ammm.block.blockentity.machine.appliedmachine.*;
-import ammm.block.blockentity.machine.astralmachine.AMAdsorptionSeparator;
-import ammm.block.blockentity.machine.astralmachine.AMCrafter;
-import ammm.block.blockentity.machine.astralmachine.AMPaintingMachine;
+import ammm.block.blockentity.machine.astralmachine.*;
 import ammm.block.blockentity.machine.enchantedmachine.*;
+import ammm.block.container.applied.ContainerAppliedCrafter;
+import ammm.block.container.applied.ContainerAppliedReactionChamber;
 import ammm.block.container.factory.CFBase;
 import ammm.block.container.machine.CMCrafter;
-import ammm.block.container.machine.applied.ContainerAppliedCrafter;
-import ammm.block.container.machine.applied.ContainerAppliedReactionChamber;
+import ammm.block.container.machine.CMFluidAlloyer;
+import ammm.block.container.machine.CMFluidCombiner;
 import ammm.config.AMEMMConfig;
 import astral_mekanism.AMEConstants;
 import astral_mekanism.AMELang;
@@ -26,8 +26,11 @@ import astral_mekanism.registration.MachineRegistryObject;
 import astral_mekanism.registration.RegistrationInterfaces;
 import astral_mekanism.registries.AMEMachines;
 import com.jerry.mekanism_extras.api.ExtraUpgrade;
+import com.jerry.mekmm.common.config.MoreMachineConfig;
 import fixdol.mekanismelements.common.config.MSConfig;
 import fixdol.mekanismelements.common.content.blocktype.MSBlockShapes;
+import fixdol.mekanismelements.common.registries.MSSounds;
+import fr.iglee42.evolvedmekanism.config.EMConfig;
 import mekanism.api.Upgrade;
 import mekanism.api.math.FloatingLong;
 import mekanism.api.math.FloatingLongSupplier;
@@ -124,10 +127,34 @@ public class AMEMMMachines {
     public static MachineRegistryObject<AMPaintingMachine, BlockTile.BlockTileModel<AMPaintingMachine, BlockTypeMachine<AMPaintingMachine>>,
             MekanismTileContainer<AMPaintingMachine>, ItemBlockMachine> ASTRAL_PAINTING_MACHINE;
     public static MachineRegistryObject<AMCrafter, BlockTile.BlockTileModel<AMCrafter, BlockTypeMachine<AMCrafter>>,
-            CMCrafter<AMCrafter>, ItemBlockMachine> ASTRAL_ESSENTIAL_CRAFTER;
+            CMCrafter<AMCrafter>, ItemBlockMachine> ASTRAL_CRAFTER;
+    public static MachineRegistryObject<AMCDM, BlockTile.BlockTileModel<AMCDM, BlockTypeMachine<AMCDM>>,
+            MekanismTileContainer<AMCDM>, ItemBlockMachine> ASTRAL_CDM;
+    public static MachineRegistryObject<AMCncLathe, BlockTile.BlockTileModel<AMCncLathe, BlockTypeMachine<AMCncLathe>>,
+            MekanismTileContainer<AMCncLathe>, ItemBlockMachine> ASTRAL_CNC_LATHE;
+    public static MachineRegistryObject<AMCncRollingMill, BlockTile.BlockTileModel<AMCncRollingMill, BlockTypeMachine<AMCncRollingMill>>,
+            MekanismTileContainer<AMCncRollingMill>, ItemBlockMachine> ASTRAL_CNC_ROLLING_MILL;
+    public static MachineRegistryObject<AMCncStamper, BlockTile.BlockTileModel<AMCncStamper, BlockTypeMachine<AMCncStamper>>,
+            MekanismTileContainer<AMCncStamper>, ItemBlockMachine> ASTRAL_CNC_STAMPER;
+    public static MachineRegistryObject<AMFluidAlloyer, BlockTile.BlockTileModel<AMFluidAlloyer, BlockTypeMachine<AMFluidAlloyer>>,
+            MekanismTileContainer<AMFluidAlloyer>, ItemBlockMachine> ASTRAL_FLUID_ALLOYER;
+    public static MachineRegistryObject<AMFluidCombiner, BlockTile.BlockTileModel<AMFluidCombiner, BlockTypeMachine<AMFluidCombiner>>,
+            MekanismTileContainer<AMFluidCombiner>, ItemBlockMachine> ASTRAL_FLUID_COMBINER;
+    public static MachineRegistryObject<AMIOR, BlockTile.BlockTileModel<AMIOR, BlockTypeMachine<AMIOR>>,
+            MekanismTileContainer<AMIOR>, ItemBlockMachine> ASTRAL_IOR;
+    public static MachineRegistryObject<AMNutritionalLiquifier, BlockTile.BlockTileModel<AMNutritionalLiquifier, BlockTypeMachine<AMNutritionalLiquifier>>,
+            MekanismTileContainer<AMNutritionalLiquifier>, ItemBlockMachine> ASTRAL_NUTRITIONAL_LIQUIFIER;
+    public static MachineRegistryObject<AMPigmentExtractor, BlockTile.BlockTileModel<AMPigmentExtractor, BlockTypeMachine<AMPigmentExtractor>>,
+            MekanismTileContainer<AMPigmentExtractor>, ItemBlockMachine> ASTRAL_PIGMENT_EXTRACTOR;
+    public static MachineRegistryObject<AMPigmentMixer, BlockTile.BlockTileModel<AMPigmentMixer, BlockTypeMachine<AMPigmentMixer>>,
+            MekanismTileContainer<AMPigmentMixer>, ItemBlockMachine> ASTRAL_PIGMENT_MIXER;
+    public static MachineRegistryObject<AMPlantingStation, BlockTile.BlockTileModel<AMPlantingStation, BlockTypeMachine<AMPlantingStation>>,
+            MekanismTileContainer<AMPlantingStation>, ItemBlockMachine> ASTRAL_PLANTING_STATION;
+    public static MachineRegistryObject<AMRecycler, BlockTile.BlockTileModel<AMRecycler, BlockTypeMachine<AMRecycler>>,
+            MekanismTileContainer<AMRecycler>, ItemBlockMachine> ASTRAL_RECYCLER;
 
     public static MachineRegistryObject<EMCrafter, BlockTile.BlockTileModel<EMCrafter, BlockTypeMachine<EMCrafter>>,
-            CMCrafter<EMCrafter>, ItemBlockMachine> ENCHANTED_ESSENTIAL_CRAFTER;
+            CMCrafter<EMCrafter>, ItemBlockMachine> ENCHANTED_CRAFTER;
     public static MachineRegistryObject<EMCombiner, BlockTile.BlockTileModel<EMCombiner, BlockTypeMachine<EMCombiner>>,
             MekanismTileContainer<EMCombiner>, ItemBlockMachine> ENCHANTED_COMBINER;
     public static MachineRegistryObject<EMComposter, BlockTile.BlockTileModel<EMComposter, BlockTypeMachine<EMComposter>>,
@@ -142,6 +169,30 @@ public class AMEMMMachines {
             MekanismTileContainer<EMReactionChamber>, ItemBlockMachine> ENCHANTED_REACTION_CHAMBER;
     public static MachineRegistryObject<EMTransformer, BlockTile.BlockTileModel<EMTransformer, BlockTypeMachine<EMTransformer>>,
             ContainerTransformer<EMTransformer>, ItemBlockMachine> ENCHANTED_TRANSFORMER;
+    public static MachineRegistryObject<EMCDM, BlockTile.BlockTileModel<EMCDM, BlockTypeMachine<EMCDM>>,
+            MekanismTileContainer<EMCDM>, ItemBlockMachine> ENCHANTED_CDM;
+    public static MachineRegistryObject<EMCncLathe, BlockTile.BlockTileModel<EMCncLathe, BlockTypeMachine<EMCncLathe>>,
+            MekanismTileContainer<EMCncLathe>, ItemBlockMachine> ENCHANTED_CNC_LATHE;
+    public static MachineRegistryObject<EMCncRollingMill, BlockTile.BlockTileModel<EMCncRollingMill, BlockTypeMachine<EMCncRollingMill>>,
+            MekanismTileContainer<EMCncRollingMill>, ItemBlockMachine> ENCHANTED_CNC_ROLLING_MILL;
+    public static MachineRegistryObject<EMCncStamper, BlockTile.BlockTileModel<EMCncStamper, BlockTypeMachine<EMCncStamper>>,
+            MekanismTileContainer<EMCncStamper>, ItemBlockMachine> ENCHANTED_CNC_STAMPER;
+    public static MachineRegistryObject<EMFluidAlloyer, BlockTile.BlockTileModel<EMFluidAlloyer, BlockTypeMachine<EMFluidAlloyer>>,
+            MekanismTileContainer<EMFluidAlloyer>, ItemBlockMachine> ENCHANTED_FLUID_ALLOYER;
+    public static MachineRegistryObject<EMFluidCombiner, BlockTile.BlockTileModel<EMFluidCombiner, BlockTypeMachine<EMFluidCombiner>>,
+            MekanismTileContainer<EMFluidCombiner>, ItemBlockMachine> ENCHANTED_FLUID_COMBINER;
+    public static MachineRegistryObject<EMIOR, BlockTile.BlockTileModel<EMIOR, BlockTypeMachine<EMIOR>>,
+            MekanismTileContainer<EMIOR>, ItemBlockMachine> ENCHANTED_IOR;
+    public static MachineRegistryObject<EMNutritionalLiquifier, BlockTile.BlockTileModel<EMNutritionalLiquifier, BlockTypeMachine<EMNutritionalLiquifier>>,
+            MekanismTileContainer<EMNutritionalLiquifier>, ItemBlockMachine> ENCHANTED_NUTRITIONAL_LIQUIFIER;
+    public static MachineRegistryObject<EMPigmentExtractor, BlockTile.BlockTileModel<EMPigmentExtractor, BlockTypeMachine<EMPigmentExtractor>>,
+            MekanismTileContainer<EMPigmentExtractor>, ItemBlockMachine> ENCHANTED_PIGMENT_EXTRACTOR;
+    public static MachineRegistryObject<EMPigmentMixer, BlockTile.BlockTileModel<EMPigmentMixer, BlockTypeMachine<EMPigmentMixer>>,
+            MekanismTileContainer<EMPigmentMixer>, ItemBlockMachine> ENCHANTED_PIGMENT_MIXER;
+    public static MachineRegistryObject<EMPlantingStation, BlockTile.BlockTileModel<EMPlantingStation, BlockTypeMachine<EMPlantingStation>>,
+            MekanismTileContainer<EMPlantingStation>, ItemBlockMachine> ENCHANTED_PLANTING_STATION;
+    public static MachineRegistryObject<EMRecycler, BlockTile.BlockTileModel<EMRecycler, BlockTypeMachine<EMRecycler>>,
+            MekanismTileContainer<EMRecycler>, ItemBlockMachine> ENCHANTED_RECYCLER;
 
     public static EnumMap<AMEMMTier, MachineRegistryObject<EFEnergizedSmelting, BlockTile.BlockTileModel<EFEnergizedSmelting, BlockTypeMachine<EFEnergizedSmelting>>,
             CFBase<EFEnergizedSmelting>, ItemBlockMachine>> ENCHANTED_ENERGIZED_SMELTING_FACTORIES;
@@ -250,38 +301,125 @@ public class AMEMMMachines {
                 AMELang.DESCRIPTION_ASTRAL_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING,Upgrade.ENERGY, AMEUpgrade.RADIOACTIVE_SEALING.getValue()))
                 .withEnergyConfig(MSConfig.usageConfig.adsorptionSeparator,MAX_SUPPLIER).withSound(MekanismSounds.CHEMICAL_INFUSER).withCustomShape(MSBlockShapes.ADSORPTION_SEPARATOR));
         ASTRAL_PAINTING_MACHINE = AMEMachines.MACHINES.registerSimple("astral_painting_machine", AMPaintingMachine::new, AMPaintingMachine.class,
-                AMELang.DESCRIPTION_ASTRAL_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
+                AMELang.DESCRIPTION_ASTRAL_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY))
                 .withEnergyConfig(MekanismConfig.usage.paintingMachine,MAX_SUPPLIER).withSound(MekanismSounds.PAINTING_MACHINE));
-        ASTRAL_ESSENTIAL_CRAFTER = AMEMachines.MACHINES.registerDefaultBlockItem("astral_crafter", AMCrafter::new, AMCrafter.class, CMCrafter<AMCrafter>::new,
+        ASTRAL_CDM = AMEMachines.MACHINES.registerSimple("astral_cdm", AMCDM::new, AMCDM.class,
+                AMELang.DESCRIPTION_ASTRAL_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
+                .withEnergyConfig(MSConfig.usageConfig.adsorptionSeparator,MAX_SUPPLIER));
+        ASTRAL_FLUID_ALLOYER = AMEMachines.MACHINES.registerDefaultBlockItem("astral_fluid_alloyer", AMFluidAlloyer::new, AMFluidAlloyer.class, CMFluidAlloyer::new,
+                AMELang.DESCRIPTION_ASTRAL_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY))
+                .withEnergyConfig(EMConfig.general.fluidAlloyerEnergyUsage,MAX_SUPPLIER).withSound(MekanismSounds.COMBINER));
+        ASTRAL_FLUID_COMBINER = AMEMachines.MACHINES.registerDefaultBlockItem("astral_fluid_combiner", AMFluidCombiner::new, AMFluidCombiner.class, CMFluidCombiner::new,
+                AMELang.DESCRIPTION_ASTRAL_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY))
+                .withEnergyConfig(EMConfig.general.fluidCombinerEnergyUsage,MAX_SUPPLIER).withSound(MekanismSounds.COMBINER));
+        ASTRAL_IOR = AMEMachines.MACHINES.registerSimple("astral_ior", AMIOR::new, AMIOR.class,
+                AMELang.DESCRIPTION_ASTRAL_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
+                .withEnergyConfig(MSConfig.usageConfig.infinityOreReprocessing,MAX_SUPPLIER).withSound(MSSounds.AIR_COMPRESSOR));
+        ASTRAL_NUTRITIONAL_LIQUIFIER = AMEMachines.MACHINES.registerSimple("astral_nutritional_liquifier", AMNutritionalLiquifier::new, AMNutritionalLiquifier.class,
+                AMELang.DESCRIPTION_ASTRAL_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY))
+                .withEnergyConfig(MekanismConfig.usage.nutritionalLiquifier,MAX_SUPPLIER).withSound(MekanismSounds.NUTRITIONAL_LIQUIFIER));
+        ASTRAL_PIGMENT_EXTRACTOR = AMEMachines.MACHINES.registerSimple("astral_pigment_extractor", AMPigmentExtractor::new, AMPigmentExtractor.class,
+                AMELang.DESCRIPTION_ASTRAL_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY))
+                .withEnergyConfig(MekanismConfig.usage.pigmentExtractor,MAX_SUPPLIER).withSound(MekanismSounds.PIGMENT_EXTRACTOR));
+        ASTRAL_PIGMENT_MIXER = AMEMachines.MACHINES.registerSimple("astral_pigment_mixer", AMPigmentMixer::new, AMPigmentMixer.class,
+                AMELang.DESCRIPTION_ASTRAL_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY))
+                .withEnergyConfig(MekanismConfig.usage.pigmentMixer,MAX_SUPPLIER).withSound(MekanismSounds.PIGMENT_MIXER));
+        if (LoadingModList.get().getModFileById("mekmm") != null){
+            ASTRAL_CNC_LATHE = AMEMachines.MACHINES.registerSimple("astral_cnc_lathe", AMCncLathe::new, AMCncLathe.class,
+                    AMELang.DESCRIPTION_ASTRAL_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
+                    .withEnergyConfig(MoreMachineConfig.usage.cnc_lathe,MAX_SUPPLIER).withSound(MekanismSounds.CRUSHER));
+            ASTRAL_CNC_ROLLING_MILL = AMEMachines.MACHINES.registerSimple("astral_cnc_rolling_mill", AMCncRollingMill::new, AMCncRollingMill.class,
+                    AMELang.DESCRIPTION_ASTRAL_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
+                    .withEnergyConfig(MoreMachineConfig.usage.cnc_rollingMill,MAX_SUPPLIER).withSound(MekanismSounds.CRUSHER));
+            ASTRAL_CNC_STAMPER = AMEMachines.MACHINES.registerSimple("astral_cnc_stamper", AMCncStamper::new, AMCncStamper.class,
+                    AMELang.DESCRIPTION_ASTRAL_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
+                    .withEnergyConfig(MoreMachineConfig.usage.cnc_rollingMill,MAX_SUPPLIER).withSound(MekanismSounds.CRUSHER));
+            ASTRAL_PLANTING_STATION = AMEMachines.MACHINES.registerSimple("astral_planting_station", AMPlantingStation::new, AMPlantingStation.class,
+                    AMELang.DESCRIPTION_ASTRAL_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
+                    .withEnergyConfig(MoreMachineConfig.usage.plantingStation,MAX_SUPPLIER).withSound(MekanismSounds.PRECISION_SAWMILL));
+            ASTRAL_RECYCLER = AMEMachines.MACHINES.registerSimple("astral_recycler", AMRecycler::new, AMRecycler.class,
+                    AMELang.DESCRIPTION_ASTRAL_MACHINE,builder -> builder.changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
+                    .withEnergyConfig(MoreMachineConfig.usage.recycler,MAX_SUPPLIER).withSound(MekanismSounds.PRECISION_SAWMILL));
+        }
+        ASTRAL_CRAFTER = AMEMachines.MACHINES.registerDefaultBlockItem("astral_crafter", AMCrafter::new, AMCrafter.class, CMCrafter<AMCrafter>::new,
                 AMELang.DESCRIPTION_ESSENTIAL_CRAFTER,builder -> builder.changeAttributeUpgrade(EnumSet.of(AMEUpgrade.RADIOACTIVE_SEALING.getValue(), Upgrade.ENERGY))
-                .withEnergyConfig(AMEMMConfig.usage.astralCrafter, MAX_SUPPLIER));
+                        .withEnergyConfig(AMEMMConfig.usage.astralCrafter, MAX_SUPPLIER));
     }
 
     public static void EnchantedMachines(){
         ENCHANTED_COMBINER = AMEMachines.MACHINES.registerSimple("enchanted_combiner", EMCombiner::new, EMCombiner.class, AMELang.DESCRIPTION_ENCHANTED_MACHINE,builder -> builder
                 .changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED, ExtraUpgrade.STACK, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
-                .withEnergyConfig(() -> MekanismConfig.storage.combiner.get().multiply(200),() -> MekanismConfig.storage.combiner.get().multiply(12800))
+                .withEnergyConfig(() -> MekanismConfig.usage.combiner.get().multiply(200),() -> MekanismConfig.storage.combiner.get().multiply(12800))
                 .withSound(MekanismSounds.COMBINER));
         ENCHANTED_COMPOSTER = AMEMachines.MACHINES.registerSimple("enchanted_composter", EMComposter::new, EMComposter.class, AMELang.DESCRIPTION_ENCHANTED_MACHINE,builder -> builder
                 .changeAttributeUpgrade(EnumSet.of(Upgrade.SPEED,ExtraUpgrade.STACK,AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
                 .withCustomShape(AMEBlockShapes.COMPOSTER));
         ENCHANTED_FLUID_INFUSER = AMEMachines.MACHINES.registerSimple("enchanted_fluid_infuser", EMFluidInfuser::new, EMFluidInfuser.class, AMELang.DESCRIPTION_ENCHANTED_MACHINE,builder -> builder
                 .changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED, ExtraUpgrade.STACK, AMEUpgrade.WATER_SUPPLY.getValue()))
-                .withEnergyConfig(() -> AMEConfig.usage.fluidInfuser.get().multiply(200), () -> AMEConfig.storage.fluidInfuser.get().multiply(12800))
+                .withEnergyConfig(AMEConfig.usage.fluidInfuser, () -> AMEConfig.storage.fluidInfuser.get().multiply(64))
                 .withSound(MekanismSounds.CHEMICAL_INFUSER));
         ENCHANTED_GNA = AMEMachines.MACHINES.registerSimple("enchanted_gna", EMGNA::new, EMGNA.class, AMELang.DESCRIPTION_ENCHANTED_MACHINE,builder -> builder
-                .changeAttributeUpgrade(EnumSet.of(AMEUpgrade.RADIOACTIVE_SEALING.getValue(), AMEUpgrade.AIR_INTAKE.getValue(), Upgrade.SPEED, ExtraUpgrade.STACK)));
+                .changeAttributeUpgrade(EnumSet.of(AMEUpgrade.RADIOACTIVE_SEALING.getValue(), AMEUpgrade.AIR_INTAKE.getValue(), Upgrade.SPEED)));
         ENCHANTED_MEKANICAL_CHARGER = AMEMachines.MACHINES.registerSimple("enchanted_mekanical_charger", EMMekanicalCharger::new, EMMekanicalCharger.class,AMELang.DESCRIPTION_ENCHANTED_MACHINE,builder -> builder
                 .changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, Upgrade.SPEED, ExtraUpgrade.STACK, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
-                .withEnergyConfig(() -> AMEConfig.usage.mekanicalCherger.get().multiply(200), () -> AMEConfig.storage.mekanicalCherger.get().multiply(12800)));
+                .withEnergyConfig(() -> AMEConfig.usage.mekanicalCherger.get().multiply(10), () -> AMEConfig.storage.mekanicalCherger.get().multiply(640)));
         ENCHANTED_REACTION_CHAMBER = AMEMachines.MACHINES.registerSimple("enchanted_reaction_chamber", EMReactionChamber::new, EMReactionChamber.class, AMELang.DESCRIPTION_ENCHANTED_MACHINE,builder -> builder
                 .changeAttributeUpgrade(EnumSet.of(Upgrade.MUFFLING, Upgrade.ENERGY, AMEUpgrade.COBBLESTONE_SUPPLY.getValue(), Upgrade.SPEED, ExtraUpgrade.STACK, AMEUpgrade.WATER_SUPPLY.getValue()))
                 .withEnergyConfig(() -> AMEConfig.usage.aaeReactionChamber.get().multiply(200), () -> AMEConfig.storage.aaeReactionChamber.get().multiply(12800))
                 .withSound(MekanismSounds.PRECISION_SAWMILL).withCustomShape(AMEBlockShapes.AAE_REACTION_CHAMBER));
         ENCHANTED_TRANSFORMER = AMEMachines.MACHINES.registerDefaultBlockItem("enchanted_transformer", EMTransformer::new, EMTransformer.class,ContainerTransformer<EMTransformer>::new, AMELang.DESCRIPTION_ENCHANTED_MACHINE,builder -> builder
-                .changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY, AMEUpgrade.COBBLESTONE_SUPPLY.getValue(),Upgrade.SPEED, ExtraUpgrade.STACK, AMEUpgrade.WATER_SUPPLY.getValue()))
+                .changeAttributeUpgrade(EnumSet.of(Upgrade.ENERGY, AMEUpgrade.COBBLESTONE_SUPPLY.getValue(), Upgrade.SPEED, ExtraUpgrade.STACK, AMEUpgrade.WATER_SUPPLY.getValue()))
                 .withEnergyConfig(() -> AMEConfig.usage.transformer.get().multiply(200), () -> AMEConfig.storage.transformer.get().multiply(12800)));
-        ENCHANTED_ESSENTIAL_CRAFTER = AMEMachines.MACHINES.registerDefaultBlockItem("enchanted_crafter", EMCrafter::new, EMCrafter.class, CMCrafter<EMCrafter>::new, AMELang.DESCRIPTION_ESSENTIAL_CRAFTER, builder -> builder
+        ENCHANTED_CDM = AMEMachines.MACHINES.registerSimple("enchanted_cdm", EMCDM::new, EMCDM.class,AMELang.DESCRIPTION_ENCHANTED_MACHINE,builder -> builder
+                .changeAttributeUpgrade(EnumSet.of(Upgrade.SPEED, ExtraUpgrade.STACK, Upgrade.MUFFLING, Upgrade.ENERGY, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
+                .withEnergyConfig(() -> MSConfig.usageConfig.adsorptionSeparator.get().multiply(100), () -> MSConfig.storageConfig.adsorptionSeparator.get().multiply(6400)));
+        ENCHANTED_FLUID_ALLOYER = AMEMachines.MACHINES.registerDefaultBlockItem("enchanted_fluid_alloyer", EMFluidAlloyer::new, EMFluidAlloyer.class, CMFluidAlloyer::new,AMELang.DESCRIPTION_ENCHANTED_MACHINE,builder -> builder
+                .changeAttributeUpgrade(EnumSet.of(Upgrade.SPEED, ExtraUpgrade.STACK, Upgrade.MUFFLING, Upgrade.ENERGY))
+                .withEnergyConfig(() -> EMConfig.general.fluidAlloyerEnergyUsage.get().multiply(100), () -> EMConfig.general.fluidAlloyerEnergyStorage.get().multiply(6400))
+                .withSound(MekanismSounds.COMBINER));
+        ENCHANTED_FLUID_COMBINER = AMEMachines.MACHINES.registerDefaultBlockItem("enchanted_fluid_combiner", EMFluidCombiner::new, EMFluidCombiner.class, CMFluidCombiner::new,AMELang.DESCRIPTION_ENCHANTED_MACHINE,builder -> builder
+                .changeAttributeUpgrade(EnumSet.of(Upgrade.SPEED, ExtraUpgrade.STACK, Upgrade.MUFFLING, Upgrade.ENERGY))
+                .withEnergyConfig(() -> EMConfig.general.fluidCombinerEnergyUsage.get().multiply(100), () -> EMConfig.general.fluidCombinerEnergyStorage.get().multiply(6400))
+                .withSound(MekanismSounds.COMBINER));
+        ENCHANTED_IOR = AMEMachines.MACHINES.registerSimple("enchanted_ior", EMIOR::new, EMIOR.class,AMELang.DESCRIPTION_ENCHANTED_MACHINE,builder -> builder
+                .changeAttributeUpgrade(EnumSet.of(Upgrade.SPEED, ExtraUpgrade.STACK, Upgrade.MUFFLING, Upgrade.ENERGY, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
+                .withEnergyConfig(() -> MSConfig.usageConfig.infinityOreReprocessing.get().multiply(100), () -> MSConfig.storageConfig.infinityOreReprocessing.get().multiply(6400))
+                .withSound(MSSounds.AIR_COMPRESSOR));
+        ENCHANTED_NUTRITIONAL_LIQUIFIER = AMEMachines.MACHINES.registerSimple("enchanted_nutritional_liquifier", EMNutritionalLiquifier::new, EMNutritionalLiquifier.class,AMELang.DESCRIPTION_ENCHANTED_MACHINE,builder -> builder
+                .changeAttributeUpgrade(EnumSet.of(Upgrade.SPEED, ExtraUpgrade.STACK, Upgrade.MUFFLING, Upgrade.ENERGY))
+                .withEnergyConfig(() -> MekanismConfig.usage.nutritionalLiquifier.get().multiply(100), () -> MekanismConfig.storage.nutritionalLiquifier.get().multiply(6400))
+                .withSound(MekanismSounds.NUTRITIONAL_LIQUIFIER));
+        ENCHANTED_PIGMENT_EXTRACTOR = AMEMachines.MACHINES.registerSimple("enchanted_pigment_extractor", EMPigmentExtractor::new, EMPigmentExtractor.class,AMELang.DESCRIPTION_ENCHANTED_MACHINE,builder -> builder
+                .changeAttributeUpgrade(EnumSet.of(Upgrade.SPEED, ExtraUpgrade.STACK, Upgrade.MUFFLING, Upgrade.ENERGY))
+                .withEnergyConfig(() -> MekanismConfig.usage.pigmentExtractor.get().multiply(100), () -> MekanismConfig.storage.pigmentExtractor.get().multiply(6400))
+                .withSound(MekanismSounds.PIGMENT_EXTRACTOR));
+        ENCHANTED_PIGMENT_MIXER = AMEMachines.MACHINES.registerSimple("enchanted_pigment_mixer", EMPigmentMixer::new, EMPigmentMixer.class,AMELang.DESCRIPTION_ENCHANTED_MACHINE,builder -> builder
+                .changeAttributeUpgrade(EnumSet.of(Upgrade.SPEED, ExtraUpgrade.STACK, Upgrade.MUFFLING, Upgrade.ENERGY))
+                .withEnergyConfig(MekanismConfig.usage.pigmentMixer, () -> MekanismConfig.storage.pigmentMixer.get().multiply(400))
+                .withSound(MekanismSounds.PIGMENT_MIXER));
+        if (LoadingModList.get().getModFileById("mekmm") != null){
+            ENCHANTED_CNC_LATHE = AMEMachines.MACHINES.registerSimple("enchanted_cnc_lathe", EMCncLathe::new, EMCncLathe.class,AMELang.DESCRIPTION_ENCHANTED_MACHINE,builder -> builder
+                    .changeAttributeUpgrade(EnumSet.of(Upgrade.SPEED, ExtraUpgrade.STACK, Upgrade.MUFFLING, Upgrade.ENERGY, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
+                    .withEnergyConfig(() -> MoreMachineConfig.usage.cnc_lathe.get().multiply(200), () -> MoreMachineConfig.storage.cnc_lathe.get().multiply(12800))
+                    .withSound(MekanismSounds.CRUSHER));
+            ENCHANTED_CNC_ROLLING_MILL = AMEMachines.MACHINES.registerSimple("enchanted_cnc_rolling_mill", EMCncRollingMill::new, EMCncRollingMill.class,AMELang.DESCRIPTION_ENCHANTED_MACHINE,builder -> builder
+                    .changeAttributeUpgrade(EnumSet.of(Upgrade.SPEED, ExtraUpgrade.STACK, Upgrade.MUFFLING, Upgrade.ENERGY, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
+                    .withEnergyConfig(() -> MoreMachineConfig.usage.cnc_rollingMill.get().multiply(200), () -> MoreMachineConfig.storage.cnc_rollingMill.get().multiply(12800))
+                    .withSound(MekanismSounds.CRUSHER));
+            ENCHANTED_CNC_STAMPER = AMEMachines.MACHINES.registerSimple("enchanted_cnc_stamper", EMCncStamper::new, EMCncStamper.class,AMELang.DESCRIPTION_ENCHANTED_MACHINE,builder -> builder
+                    .changeAttributeUpgrade(EnumSet.of(Upgrade.SPEED, ExtraUpgrade.STACK, Upgrade.MUFFLING, Upgrade.ENERGY, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
+                    .withEnergyConfig(() -> MoreMachineConfig.usage.cnc_rollingMill.get().multiply(200), () -> MoreMachineConfig.storage.cnc_rollingMill.get().multiply(12800))
+                    .withSound(MekanismSounds.CRUSHER));
+            ENCHANTED_PLANTING_STATION = AMEMachines.MACHINES.registerSimple("enchanted_planting_station", EMPlantingStation::new, EMPlantingStation.class,AMELang.DESCRIPTION_ENCHANTED_MACHINE,builder -> builder
+                    .changeAttributeUpgrade(EnumSet.of(Upgrade.SPEED, ExtraUpgrade.STACK, Upgrade.MUFFLING, Upgrade.ENERGY, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
+                    .withEnergyConfig(() -> MoreMachineConfig.usage.plantingStation.get().multiply(200), () -> MoreMachineConfig.storage.plantingStation.get().multiply(12800))
+                    .withSound(MekanismSounds.PRECISION_SAWMILL));
+            ENCHANTED_RECYCLER = AMEMachines.MACHINES.registerSimple("enchanted_recycler", EMRecycler::new, EMRecycler.class,AMELang.DESCRIPTION_ENCHANTED_MACHINE,builder -> builder
+                    .changeAttributeUpgrade(EnumSet.of(Upgrade.SPEED, ExtraUpgrade.STACK, Upgrade.MUFFLING, Upgrade.ENERGY, AMEUpgrade.COBBLESTONE_SUPPLY.getValue()))
+                    .withEnergyConfig(() -> MoreMachineConfig.usage.recycler.get().multiply(200), () -> MoreMachineConfig.storage.recycler.get().multiply(12800))
+                    .withSound(MekanismSounds.PRECISION_SAWMILL));
+        }
+        ENCHANTED_CRAFTER = AMEMachines.MACHINES.registerDefaultBlockItem("enchanted_crafter", EMCrafter::new, EMCrafter.class, CMCrafter<EMCrafter>::new, AMELang.DESCRIPTION_ESSENTIAL_CRAFTER, builder -> builder
                 .changeAttributeUpgrade(EnumSet.of(AMEUpgrade.RADIOACTIVE_SEALING.getValue(), Upgrade.ENERGY, Upgrade.SPEED, ExtraUpgrade.STACK))
                 .withEnergyConfig(() -> AMEConfig.usage.essentialCrafter.get().multiply(200),() -> AMEConfig.storage.essentialCrafter.get().multiply(12800)));
     }

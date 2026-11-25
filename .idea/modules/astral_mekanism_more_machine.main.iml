@@ -11,7 +11,7 @@
         <autoDetectTypes>
           <platformType>FORGE</platformType>
           <platformType>MIXIN</platformType>
-          <platformType>MCP</platformType>
+          <platformType>MINECRAFT</platformType>
         </autoDetectTypes>
         <projectReimportVersion>1</projectReimportVersion>
       </configuration>

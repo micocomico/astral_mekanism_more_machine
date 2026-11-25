@@ -1,11 +1,8 @@
 package ammm.block.blockentity.machine.astralmachine;
 
 import ammm.block.blockentity.machine.basemachine.BMCDM;
-import ammm.block.blockentity.machine.basemachine.BMPigmentExtractor;
-import mekanism.api.IContentsListener;
 import mekanism.api.chemical.ChemicalTankBuilder;
 import mekanism.api.chemical.gas.IGasTank;
-import mekanism.api.chemical.pigment.IPigmentTank;
 import mekanism.api.functions.ConstantPredicates;
 import mekanism.api.providers.IBlockProvider;
 import net.minecraft.core.BlockPos;

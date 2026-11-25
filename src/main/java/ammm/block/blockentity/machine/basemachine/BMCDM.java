@@ -1,62 +1,52 @@
 package ammm.block.blockentity.machine.basemachine;
 
-import fixdol.mekanismelements.common.tile.prefab.MSTileEntityRecipeMachine;
-import mekanism.api.providers.IBlockProvider;
-import mekanism.common.tile.component.TileComponentConfig;
-
-import mekanism.api.math.FloatingLong;
-
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.state.BlockState;
-import mekanism.api.recipes.cache.CachedRecipe;
+import ammm.recipes.cached.FormulizedChemicalDemolitionCachedRecipe;
 import fixdol.mekanismelements.api.recipes.ChemicalDemolitionRecipe;
-import mekanism.api.chemical.ChemicalTankBuilder;
-import mekanism.common.capabilities.holder.chemical.ChemicalTankHelper;
-import mekanism.common.integration.computer.computercraft.ComputerConstants;
-import mekanism.common.integration.computer.annotation.ComputerMethod;
-import mekanism.common.tile.component.config.ConfigInfo;
-import mekanism.api.functions.ConstantPredicates;
-import mekanism.common.capabilities.holder.energy.EnergyContainerHelper;
-import mekanism.common.inventory.slot.EnergyInventorySlot;
-import mekanism.common.inventory.slot.chemical.GasInventorySlot;
-import mekanism.api.chemical.gas.GasStack;
-import mekanism.common.capabilities.holder.chemical.IChemicalTankHolder;
-import mekanism.api.IContentsListener;
-import mekanism.common.capabilities.holder.energy.IEnergyContainerHolder;
-import mekanism.api.chemical.gas.IGasTank;
-import mekanism.api.recipes.inputs.IInputHandler;
-import mekanism.common.capabilities.holder.slot.IInventorySlotHolder;
-import mekanism.api.recipes.inputs.ILongInputHandler;
-import fixdol.mekanismelements.common.recipe.lookup.IMSDoubleRecipeLookupHandler;
 import fixdol.mekanismelements.common.recipe.IMSRecipeTypeProvider;
-import mekanism.common.recipe.IMekanismRecipeTypeProvider;
-import mekanism.api.recipes.outputs.IOutputHandler;
-import mekanism.common.recipe.lookup.IRecipeLookupHandler;
-import mekanism.api.recipes.inputs.InputHelper;
-import mekanism.common.capabilities.holder.slot.InventorySlotHelper;
-import net.minecraft.world.item.ItemStack;
-import java.util.List;
-import fixdol.mekanismelements.common.registries.MSBlocks;
-import fixdol.mekanismelements.common.recipe.lookup.cache.MSInputRecipeCache;
 import fixdol.mekanismelements.common.recipe.MSRecipeType;
-import fixdol.mekanismelements.common.tile.prefab.MSTileEntityProgressMachine;
-import mekanism.common.capabilities.energy.MachineEnergyContainer;
-import mekanism.common.util.MekanismUtils;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import fixdol.mekanismelements.common.recipe.lookup.IMSDoubleRecipeLookupHandler;
+import fixdol.mekanismelements.common.recipe.lookup.cache.MSInputRecipeCache;
+import fixdol.mekanismelements.common.tile.prefab.MSTileEntityRecipeMachine;
+import mekanism.api.IContentsListener;
+import mekanism.api.chemical.gas.GasStack;
+import mekanism.api.chemical.gas.IGasTank;
+import mekanism.api.math.FloatingLong;
+import mekanism.api.providers.IBlockProvider;
+import mekanism.api.recipes.cache.CachedRecipe;
+import mekanism.api.recipes.inputs.IInputHandler;
+import mekanism.api.recipes.inputs.ILongInputHandler;
+import mekanism.api.recipes.inputs.InputHelper;
+import mekanism.api.recipes.outputs.IOutputHandler;
 import mekanism.api.recipes.outputs.OutputHelper;
-import mekanism.common.inventory.container.slot.SlotOverlay;
+import mekanism.common.capabilities.energy.MachineEnergyContainer;
+import mekanism.common.capabilities.holder.chemical.ChemicalTankHelper;
+import mekanism.common.capabilities.holder.chemical.IChemicalTankHolder;
+import mekanism.common.capabilities.holder.energy.EnergyContainerHelper;
+import mekanism.common.capabilities.holder.energy.IEnergyContainerHolder;
+import mekanism.common.capabilities.holder.slot.IInventorySlotHolder;
+import mekanism.common.capabilities.holder.slot.InventorySlotHelper;
 import mekanism.common.integration.computer.SpecialComputerMethodWrapper;
-import mekanism.common.util.StatUtils;
-import mekanism.common.tile.component.TileComponentEjector;
-import mekanism.common.lib.transmitter.TransmissionType;
-import mekanism.api.Upgrade;
-import mekanism.common.inventory.warning.WarningTracker;
+import mekanism.common.integration.computer.annotation.ComputerMethod;
 import mekanism.common.integration.computer.annotation.WrappingComputerMethod;
-
-import fixdol.mekanismelements.api.recipes.cache.ChemicalDemolitionCachedRecipe;
+import mekanism.common.integration.computer.computercraft.ComputerConstants;
+import mekanism.common.inventory.container.slot.SlotOverlay;
+import mekanism.common.inventory.slot.EnergyInventorySlot;
 import mekanism.common.inventory.slot.InputInventorySlot;
 import mekanism.common.inventory.slot.OutputInventorySlot;
+import mekanism.common.inventory.slot.chemical.GasInventorySlot;
+import mekanism.common.inventory.warning.WarningTracker;
+import mekanism.common.lib.transmitter.TransmissionType;
+import mekanism.common.tile.component.TileComponentConfig;
+import mekanism.common.tile.component.TileComponentEjector;
+import mekanism.common.tile.component.config.ConfigInfo;
+import mekanism.common.util.MekanismUtils;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 
 public abstract class BMCDM extends MSTileEntityRecipeMachine<ChemicalDemolitionRecipe> implements
@@ -74,7 +64,6 @@ public abstract class BMCDM extends MSTileEntityRecipeMachine<ChemicalDemolition
     @WrappingComputerMethod(wrapper = SpecialComputerMethodWrapper.ComputerChemicalTankWrapper.class, methodNames = {"getChemicalInput", "getChemicalInputCapacity", "getChemicalInputNeeded",
             "getChemicalInputFilledPercentage"}, docPlaceholder = "chemical input tank")
     public IGasTank injectTank;
-    public double injectUsage = 1;
 
     private final IOutputHandler firstOutputHandler;
     private final IOutputHandler secondOutputHandler;
@@ -96,22 +85,19 @@ public abstract class BMCDM extends MSTileEntityRecipeMachine<ChemicalDemolition
     public BMCDM(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
         super(blockProvider, pos, state, TRACKED_ERROR_TYPES);
         configComponent = new TileComponentConfig(this, mekanism.common.lib.transmitter.TransmissionType.ITEM, mekanism.common.lib.transmitter.TransmissionType.GAS, mekanism.common.lib.transmitter.TransmissionType.ENERGY);
-        // Config is created from block attributes in parent constructor
         ConfigInfo itemConfig = getConfig().setupItemIOConfig(List.of(inputSlot), List.of(firstOutputSlot, secondOutputSlot), energySlot, false);
         if (itemConfig != null) {
             itemConfig.addSlotInfo(mekanism.common.tile.component.config.DataType.EXTRA,
                   new mekanism.common.tile.component.config.slot.InventorySlotInfo(true, true, chemicalInputSlot));
         }
-        
-        // Chemical Input Config - LEFT/BACK sides
+
         ConfigInfo chemicalConfig = getConfig().setupInputConfig(TransmissionType.GAS, injectTank);
         if (chemicalConfig != null) {
             chemicalConfig.setDataType(mekanism.common.tile.component.config.DataType.INPUT, mekanism.api.RelativeSide.LEFT);
             chemicalConfig.setDataType(mekanism.common.tile.component.config.DataType.INPUT, mekanism.api.RelativeSide.BACK);
             chemicalConfig.setEjecting(true);
         }
-        
-        // Energy Config - all sides accept
+
         ConfigInfo energyConfig = getConfig().setupInputConfig(TransmissionType.ENERGY, energyContainer);
         if (energyConfig != null) {
             for (mekanism.api.RelativeSide side : mekanism.api.RelativeSide.values()) {
@@ -201,7 +187,7 @@ public abstract class BMCDM extends MSTileEntityRecipeMachine<ChemicalDemolition
     @NotNull
     @Override
     public CachedRecipe<ChemicalDemolitionRecipe> createNewCachedRecipe(@NotNull ChemicalDemolitionRecipe recipe, int cacheIndex) {
-        return new ChemicalDemolitionCachedRecipe(recipe, recheckAllRecipeErrors, itemInputHandler, chemicalInputHandler, () -> StatUtils.inversePoisson(injectUsage), firstOutputHandler, secondOutputHandler)
+        return new FormulizedChemicalDemolitionCachedRecipe(recipe, recheckAllRecipeErrors, itemInputHandler, chemicalInputHandler, firstOutputHandler, secondOutputHandler, 10)
                 .setErrorsChanged(this::onErrorsChanged)
                 .setCanHolderFunction(() -> MekanismUtils.canFunction(this))
                 .setActive(this::setActive)
@@ -211,14 +197,6 @@ public abstract class BMCDM extends MSTileEntityRecipeMachine<ChemicalDemolition
     }
 
     protected abstract int getBaselineMaxOperations();
-
-    @Override
-    public void recalculateUpgrades(Upgrade upgrade) {
-        super.recalculateUpgrades(upgrade);
-        if (upgrade == Upgrade.GAS || upgrade == Upgrade.SPEED) {
-            injectUsage = MekanismUtils.getGasPerTickMeanMultiplier(this);
-        }
-    }
 
     @Override
     public void onCachedRecipeChanged(@Nullable mekanism.api.recipes.cache.CachedRecipe<ChemicalDemolitionRecipe> cachedRecipe, int cacheIndex) {

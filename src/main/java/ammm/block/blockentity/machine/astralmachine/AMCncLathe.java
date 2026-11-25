@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 public class AMCncLathe extends BEAMEElectricMachine {
 
     public AMCncLathe(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
-        super(blockProvider, pos, state,"mekmm:lathe");
+        super(blockProvider, pos, state,"mekmm:cnc_lathe");
     }
 
     @Override

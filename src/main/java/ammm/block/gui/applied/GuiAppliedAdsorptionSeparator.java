@@ -1,0 +1,23 @@
+package ammm.block.gui.applied;
+
+import ammm.block.blockentity.machine.appliedmachine.AppliedAdsorptionSeparator;
+import ammm.block.gui.applied.prefab.GuiAppliedDoubleToSingleEnergizedMachine;
+import fixdol.mekanismelements.client.MSJEIRecipeType;
+import mekanism.client.jei.MekanismJEIRecipeType;
+import mekanism.common.inventory.container.tile.MekanismTileContainer;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraftforge.fml.ModList;
+
+public class GuiAppliedAdsorptionSeparator extends GuiAppliedDoubleToSingleEnergizedMachine<AppliedAdsorptionSeparator> {
+
+    public GuiAppliedAdsorptionSeparator(MekanismTileContainer<AppliedAdsorptionSeparator> container, Inventory inv, Component title) {
+        super(container, inv, title);
+    }
+
+    @Override
+    protected MekanismJEIRecipeType<?>[] getJEIJeiRecipeTypes() {
+        return ModList.get().isLoaded("emi") ? new MekanismJEIRecipeType[] { } : new MekanismJEIRecipeType[] { MSJEIRecipeType.ADSORPTION_SEPARATOR };
+    }
+
+}

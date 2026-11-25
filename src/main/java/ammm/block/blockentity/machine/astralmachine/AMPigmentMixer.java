@@ -4,13 +4,9 @@ import ammm.block.blockentity.machine.basemachine.BMPigmentMixer;
 import mekanism.api.IContentsListener;
 import mekanism.api.chemical.ChemicalTankBuilder;
 import mekanism.api.chemical.pigment.IPigmentTank;
-import mekanism.api.inventory.IInventorySlot;
 import mekanism.api.providers.IBlockProvider;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-
-import java.util.Arrays;
 
 public class AMPigmentMixer extends BMPigmentMixer {
 

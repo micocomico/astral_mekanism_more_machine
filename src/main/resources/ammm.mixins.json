@@ -9,6 +9,8 @@
 	"refmap": "ammm.refmap.json",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
+      "ItemMaxStackSizeAccessor",
+      "StatUtilsMixin",
       "ame.AMEClientMixin",
       "ame.AMEDMachinesMixin",
       "ame.AMEMachinesMixin",
@@ -16,5 +18,8 @@
       "ame.GuiAppliedElectrolyticSeparatorMixin"
     ],
 	"client": [],
-	"server": []
+	"server": [],
+    "injectors": {
+      "defaultRequire": 1
+    }
 }

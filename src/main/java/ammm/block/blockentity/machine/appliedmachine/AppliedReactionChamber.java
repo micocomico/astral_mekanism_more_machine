@@ -7,7 +7,6 @@ import appeng.api.stacks.AEItemKey;
 import appeng.api.stacks.AEKey;
 import appeng.api.storage.MEStorage;
 import astral_mekanism.block.blockentity.appliedmachine.prefab.BEAppliedEnergizedMachine;
-import astral_mekanism.config.AMEConfig;
 import astral_mekanism.item.recipecard.FluidIngredientCardItem;
 import astral_mekanism.item.recipecard.ItemIngredientCardItem;
 import mekanism.api.IContentsListener;
@@ -15,7 +14,6 @@ import mekanism.api.providers.IBlockProvider;
 import mekanism.common.CommonWorldTickHandler;
 import mekanism.common.capabilities.holder.slot.IInventorySlotHolder;
 import mekanism.common.capabilities.holder.slot.InventorySlotHelper;
-import mekanism.common.config.MekanismConfig;
 import mekanism.common.inventory.slot.BasicInventorySlot;
 import mekanism.common.util.MekanismUtils;
 import net.minecraft.core.BlockPos;
@@ -43,8 +41,7 @@ public class AppliedReactionChamber extends BEAppliedEnergizedMachine {
     private long energyAmount;
 
     public AppliedReactionChamber(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
-        super(blockProvider, pos, state, AMEConfig.usage.aaeReactionChamber.getOrDefault().multiply(10)
-                .divideToLong(MekanismConfig.general.forgeConversionRate.get()));
+        super(blockProvider, pos, state,1);
     }
 
     @NotNull
@@ -77,7 +74,6 @@ public class AppliedReactionChamber extends BEAppliedEnergizedMachine {
         Arrays.fill(inputAmountB,0);
         outputAmountA = 0;
         outputAmountB = 0;
-        energyAmount = 0;
     }
 
     private void recalculateRecipeInfo() {
@@ -136,7 +132,6 @@ public class AppliedReactionChamber extends BEAppliedEnergizedMachine {
                         outputKeyB = AEFluidKey.of(outputB);
                         outputAmountA = outputA.getCount();
                         outputAmountB = outputB.getAmount();
-                        energyAmount = r.getEnergy();
                         return;
                     }
                 }
@@ -160,7 +155,7 @@ public class AppliedReactionChamber extends BEAppliedEnergizedMachine {
             }
             operations = Math.min(operations,outputKeyA != null ? storage.insert(outputKeyA, Long.MAX_VALUE, Actionable.SIMULATE, source) / outputAmountA : Long.MAX_VALUE);
             operations = Math.min(operations,outputKeyB != null ? storage.insert(outputKeyB, Long.MAX_VALUE, Actionable.SIMULATE, source) / outputAmountB : Long.MAX_VALUE);
-            operations = Math.min(operations, storage.insert(this.feKey, Long.MAX_VALUE, Actionable.SIMULATE, source) / energyAmount);
+            operations = Math.min(operations, getSupportableOperations(storage, source));
             if (operations > 0) {
                 storage.extract(inputKeyA, operations * inputAmountA, Actionable.MODULATE, source);
                 for (int i = 0; i < 9; i++){
@@ -168,7 +163,7 @@ public class AppliedReactionChamber extends BEAppliedEnergizedMachine {
                 }
                 storage.insert(outputKeyA, operations * outputAmountA, Actionable.MODULATE, source);
                 storage.insert(outputKeyB, operations * outputAmountB, Actionable.MODULATE, source);
-                storage.extract(this.feKey, operations * energyAmount, Actionable.MODULATE, source);
+                consumeEnergy(storage, source, operations);
                 setActive(true);
                 return;
             }

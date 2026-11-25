@@ -1,7 +1,6 @@
 package ammm.block.blockentity.machine.astralmachine;
 
 import ammm.block.blockentity.machine.basemachine.BMPigmentExtractor;
-import ammm.block.blockentity.machine.basemachine.BMPigmentMixer;
 import mekanism.api.IContentsListener;
 import mekanism.api.chemical.ChemicalTankBuilder;
 import mekanism.api.chemical.pigment.IPigmentTank;

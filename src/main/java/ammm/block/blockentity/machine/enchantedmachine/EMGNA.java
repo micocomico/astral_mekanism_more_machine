@@ -39,9 +39,9 @@ public class EMGNA extends BEGasToGasBlock {
     public void recalculateUpgrades(Upgrade upgrade) {
         super.recalculateUpgrades(upgrade);
         if (AMEEmpowered.empoweredIsLoaded()) {
-            baselineMaxOperations = 200 * (128 << AMEEmpowered.getAllSpeeds(this));
+            baselineMaxOperations = 25600 << AMEEmpowered.getAllSpeeds(this);
         } else if (upgrade == Upgrade.SPEED) {
-            baselineMaxOperations = 200 * (128 << upgradeComponent.getUpgrades(Upgrade.SPEED));
+            baselineMaxOperations = 25600 << upgradeComponent.getUpgrades(Upgrade.SPEED);
         }
     }
 

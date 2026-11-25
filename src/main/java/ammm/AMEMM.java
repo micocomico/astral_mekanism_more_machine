@@ -3,15 +3,15 @@ package ammm;
 import ammm.block.blockentity.factory.astralfactory.*;
 import ammm.block.blockentity.factory.enchantedfactory.*;
 import ammm.block.blockentity.factory.normalfactory.*;
-import ammm.block.blockentity.machine.astralmachine.AMAdsorptionSeparator;
-import ammm.block.blockentity.machine.astralmachine.AMCrafter;
-import ammm.block.blockentity.machine.astralmachine.AMPaintingMachine;
+import ammm.block.blockentity.machine.astralmachine.*;
 import ammm.block.blockentity.machine.enchantedmachine.*;
+import ammm.block.gui.applied.*;
 import ammm.block.gui.factory.*;
-import ammm.block.gui.machine.GMCrafter;
-import ammm.block.gui.machine.applied.*;
+import ammm.block.gui.machine.*;
+import ammm.mixin.ItemMaxStackSizeAccessor;
 import ammm.registries.*;
 import astral_mekanism.block.gui.basemachine.GuiAMEAdsorptionSeparator;
+import astral_mekanism.block.gui.basemachine.GuiAMEElectricMachine;
 import astral_mekanism.block.gui.basemachine.GuiAMEPaintingMachine;
 import astral_mekanism.block.gui.normalmachine.*;
 import astral_mekanism.block.gui.prefab.GuiDoubleItemToItemRecipeMachine;
@@ -30,21 +30,17 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.LoadingModList;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 
-// The value here should match an entry in the META-INF/mods.toml file
 @Mod(AMEMM.MODID)
 public class AMEMM {
 
-    // Define mod id in a common place for everything to reference
     public static final String MODID = AMEMMConstants.MODID;
-    // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public AMEMM() {
-        IEventBus modEventBus = FMLJavaModLoadingContext
-                .get().getModEventBus();
-
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
         AMEMMMachines.ESF.register(modEventBus);
         AMEMMMachines.INV.register(modEventBus);
@@ -54,6 +50,7 @@ public class AMEMM {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         initScreens();
+        ForgeRegistries.ITEMS.forEach(i -> ((ItemMaxStackSizeAccessor)i).setMaxStackSize(0x3fffffff));
     }
 
     private static void initScreens() {
@@ -93,13 +90,6 @@ public class AMEMM {
         registerScreenMek(AMEMMMachines.APPLIED_FLUID_ALLOYER, GuiAppliedFluidAlloyer::new);
         registerScreenMek(AMEMMMachines.APPLIED_FLUID_COMBINER, GuiAppliedFluidCombiner::new);
         registerScreenMek(AMEMMMachines.APPLIED_CRAFTER, GuiAppliedCrafter::new);
-        if (LoadingModList.get().getModFileById("mekmm") != null) {
-            registerScreenMek(AMEMMMachines.APPLIED_CNC_LATHE, GuiAppliedCncLathe::new);
-            registerScreenMek(AMEMMMachines.APPLIED_CNC_ROLLING_MILL, GuiAppliedCncRollingMill::new);
-            registerScreenMek(AMEMMMachines.APPLIED_CNC_STAMPER, GuiAppliedCncStamper::new);
-            registerScreenMek(AMEMMMachines.APPLIED_PLANTING_STATION, GuiAppliedPlantingStation::new);
-            registerScreenMek(AMEMMMachines.APPLIED_RECYCLER, GuiAppliedRecycler::new);
-        }
         registerScreenMek(AMEMMMachines.APPLIED_GAS_CONVERTER, GuiAppliedGasConverter::new);
         registerScreenMek(AMEMMMachines.APPLIED_GAS_SYNTHESIZER, GuiAppliedGasSynthesizer::new);
         registerScreenMek(AMEMMMachines.APPLIED_IAMRA, GuiAppliedIAMRA::new);
@@ -107,6 +97,53 @@ public class AMEMM {
         registerScreenMek(AMEMMMachines.APPLIED_ITEM_COMPRESSOR, GuiAppliedItemCompressor::new);
         registerScreenMek(AMEMMMachines.APPLIED_ITEM_UNZIPPER, GuiAppliedItemUnzipper::new);
         registerScreenMek(AMEMMMachines.APPLIED_MEKANICAL_MATTER_CONDENSER, GuiAppliedMekanicalMatterCondenser::new);
+
+        registerScreenMek(AMEMMMachines.ASTRAL_CRAFTER, GMCrafter<AMCrafter>::new);
+        registerScreenMek(AMEMMMachines.ASTRAL_ADSORPTION_SEPARATOR, GuiAMEAdsorptionSeparator<AMAdsorptionSeparator>::new);
+        registerScreenMek(AMEMMMachines.ASTRAL_PAINTING_MACHINE, GuiAMEPaintingMachine<AMPaintingMachine>::new);
+        registerScreenMek(AMEMMMachines.ASTRAL_CDM, GMCDM<AMCDM>::new);
+        registerScreenMek(AMEMMMachines.ASTRAL_FLUID_ALLOYER, GMFluidAlloyer<AMFluidAlloyer>::new);
+        registerScreenMek(AMEMMMachines.ASTRAL_FLUID_COMBINER, GMFluidCombiner<AMFluidCombiner>::new);
+        registerScreenMek(AMEMMMachines.ASTRAL_IOR, GMIOR<AMIOR>::new);
+        registerScreenMek(AMEMMMachines.ASTRAL_NUTRITIONAL_LIQUIFIER, GMNutritionalLiquifier<AMNutritionalLiquifier>::new);
+        registerScreenMek(AMEMMMachines.ASTRAL_PIGMENT_EXTRACTOR, GMPigmentExtractor<AMPigmentExtractor>::new);
+        registerScreenMek(AMEMMMachines.ASTRAL_PIGMENT_MIXER, GMPigmentMixer<AMPigmentMixer>::new);
+
+        registerScreenMek(AMEMMMachines.ENCHANTED_CRAFTER, GMCrafter<EMCrafter>::new);
+        registerScreenMek(AMEMMMachines.ENCHANTED_COMBINER, GuiDoubleItemToItemRecipeMachine<EMCombiner>::new);
+        registerScreenMek(AMEMMMachines.ENCHANTED_COMPOSTER, GuiMekanicalComposter<EMComposter>::new);
+        registerScreenMek(AMEMMMachines.ENCHANTED_GNA, GuiGasToGasBlock<EMGNA>::new);
+        registerScreenMek(AMEMMMachines.ENCHANTED_FLUID_INFUSER, GuiFluidInfuser<EMFluidInfuser>::new);
+        registerScreenMek(AMEMMMachines.ENCHANTED_MEKANICAL_CHARGER, GuiMekanicalCharger<EMMekanicalCharger>::new);
+        registerScreenMek(AMEMMMachines.ENCHANTED_REACTION_CHAMBER, GuiAAEReactionChamber<EMReactionChamber>::new);
+        registerScreenMek(AMEMMMachines.ENCHANTED_TRANSFORMER, GuiTransformer<EMTransformer>::new);
+        registerScreenMek(AMEMMMachines.ENCHANTED_CDM, GMCDM<EMCDM>::new);
+        registerScreenMek(AMEMMMachines.ENCHANTED_FLUID_ALLOYER, GMFluidAlloyer<EMFluidAlloyer>::new);
+        registerScreenMek(AMEMMMachines.ENCHANTED_FLUID_COMBINER, GMFluidCombiner<EMFluidCombiner>::new);
+        registerScreenMek(AMEMMMachines.ENCHANTED_IOR, GMIOR<EMIOR>::new);
+        registerScreenMek(AMEMMMachines.ENCHANTED_NUTRITIONAL_LIQUIFIER, GMNutritionalLiquifier<EMNutritionalLiquifier>::new);
+        registerScreenMek(AMEMMMachines.ENCHANTED_PIGMENT_EXTRACTOR, GMPigmentExtractor<EMPigmentExtractor>::new);
+        registerScreenMek(AMEMMMachines.ENCHANTED_PIGMENT_MIXER, GMPigmentMixer<EMPigmentMixer>::new);
+
+        if (LoadingModList.get().getModFileById("mekmm") != null) {
+            registerScreenMek(AMEMMMachines.APPLIED_CNC_LATHE, GuiAppliedCncLathe::new);
+            registerScreenMek(AMEMMMachines.APPLIED_CNC_ROLLING_MILL, GuiAppliedCncRollingMill::new);
+            registerScreenMek(AMEMMMachines.APPLIED_CNC_STAMPER, GuiAppliedCncStamper::new);
+            registerScreenMek(AMEMMMachines.APPLIED_PLANTING_STATION, GuiAppliedPlantingStation::new);
+            registerScreenMek(AMEMMMachines.APPLIED_RECYCLER, GuiAppliedRecycler::new);
+
+            registerScreenMek(AMEMMMachines.ASTRAL_CNC_LATHE, GuiAMEElectricMachine<AMCncLathe>::new);
+            registerScreenMek(AMEMMMachines.ASTRAL_CNC_ROLLING_MILL, GuiAMEElectricMachine<AMCncRollingMill>::new);
+            registerScreenMek(AMEMMMachines.ASTRAL_CNC_STAMPER, GMCncStamper<AMCncStamper>::new);
+            registerScreenMek(AMEMMMachines.ASTRAL_PLANTING_STATION, GMPlantingStation<AMPlantingStation>::new);
+            registerScreenMek(AMEMMMachines.ASTRAL_RECYCLER, GMRecycler<AMRecycler>::new);
+
+            registerScreenMek(AMEMMMachines.ENCHANTED_CNC_LATHE, GuiAMEElectricMachine<EMCncLathe>::new);
+            registerScreenMek(AMEMMMachines.ENCHANTED_CNC_ROLLING_MILL, GuiAMEElectricMachine<EMCncRollingMill>::new);
+            registerScreenMek(AMEMMMachines.ENCHANTED_CNC_STAMPER, GMCncStamper<EMCncStamper>::new);
+            registerScreenMek(AMEMMMachines.ENCHANTED_PLANTING_STATION, GMPlantingStation<EMPlantingStation>::new);
+            registerScreenMek(AMEMMMachines.ENCHANTED_RECYCLER, GMRecycler<EMRecycler>::new);
+        }
         if (LoadingModList.get().getModFileById("ame_dynamics") != null){
             registerScreenMek(AMEDMMMachines.APPLIED_SQUEEZER, GuiAppliedSqueezer::new);
             registerScreenMek(AMEDMMMachines.APPLIED_DRYING_BASIN, GuiAppliedDryingBasin::new);
@@ -115,21 +152,7 @@ public class AMEMM {
             registerScreenMek(AMETheValineMMMachines.APPLIED_VALINE_REACTOR, GuiAppliedValineReactor::new);
         }
 
-        registerScreenMek(AMEMMMachines.ASTRAL_ADSORPTION_SEPARATOR, GuiAMEAdsorptionSeparator<AMAdsorptionSeparator>::new);
-        registerScreenMek(AMEMMMachines.ASTRAL_PAINTING_MACHINE, GuiAMEPaintingMachine<AMPaintingMachine>::new);
-
-        registerScreenMek(AMEMMMachines.ENCHANTED_COMBINER, GuiDoubleItemToItemRecipeMachine<EMCombiner>::new);
-        registerScreenMek(AMEMMMachines.ENCHANTED_COMPOSTER, GuiMekanicalComposter<EMComposter>::new);
-        registerScreenMek(AMEMMMachines.ENCHANTED_GNA, GuiGasToGasBlock<EMGNA>::new);
-        registerScreenMek(AMEMMMachines.ENCHANTED_FLUID_INFUSER, GuiFluidInfuser<EMFluidInfuser>::new);
-        registerScreenMek(AMEMMMachines.ENCHANTED_MEKANICAL_CHARGER, GuiMekanicalCharger<EMMekanicalCharger>::new);
-        registerScreenMek(AMEMMMachines.ENCHANTED_REACTION_CHAMBER, GuiAAEReactionChamber<EMReactionChamber>::new);
-        registerScreenMek(AMEMMMachines.ENCHANTED_TRANSFORMER, GuiTransformer<EMTransformer>::new);
-
         AMEMMMachines.ENCHANTED_ENERGIZED_SMELTING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFEnergizedSmelting<EFEnergizedSmelting>::new));
-
-        registerScreenMek(AMEMMMachines.ASTRAL_ESSENTIAL_CRAFTER, GMCrafter<AMCrafter>::new);
-        registerScreenMek(AMEMMMachines.ENCHANTED_ESSENTIAL_CRAFTER, GMCrafter<EMCrafter>::new);
 
         AMEMMFactories.ASTRAL_CRUSHING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFElectric<AFCrushing>::new));
         AMEMMFactories.ENCHANTED_CRUSHING_FACTORIES.forEach((t, object) -> registerScreenMek(object, GFElectric<EFCrushing>::new));

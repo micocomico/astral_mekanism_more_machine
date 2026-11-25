@@ -40,12 +40,13 @@ public class EMTransformer extends BEAbstractTransformer {
     public void recalculateUpgrades(Upgrade upgrade) {
         super.recalculateUpgrades(upgrade);
         if (AMEEmpowered.empoweredIsLoaded()) {
-            if (AMEEmpowered.isEmpoweredSpeed(upgrade) || upgrade == ExtraUpgrade.STACK) {
-                baselineMaxOperations = 200 * (1 << (AMEEmpowered.getEmpoweredSpeeds(this)
-                        + upgradeComponent.getUpgrades(ExtraUpgrade.STACK)));
+            if (AMEEmpowered.isEmpoweredSpeed(upgrade) || upgrade == Upgrade.SPEED || upgrade == ExtraUpgrade.STACK) {
+                baselineMaxOperations = 200 * ((1 << upgradeComponent.getUpgrades(Upgrade.SPEED)) + (2 << AMEEmpowered
+                        .getEmpoweredSpeeds(this))) << upgradeComponent.getUpgrades(ExtraUpgrade.STACK);
             }
-        } else if (upgrade == ExtraUpgrade.STACK) {
-            baselineMaxOperations = 200 * (1 << upgradeComponent.getUpgrades(ExtraUpgrade.STACK));
+        } else if (upgrade == Upgrade.SPEED || upgrade == ExtraUpgrade.STACK) {
+            baselineMaxOperations = 200 << (upgradeComponent.getUpgrades(Upgrade.SPEED)
+                    + upgradeComponent.getUpgrades(ExtraUpgrade.STACK));
         }
     }
 

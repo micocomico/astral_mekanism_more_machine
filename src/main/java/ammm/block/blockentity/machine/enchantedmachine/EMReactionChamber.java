@@ -180,10 +180,13 @@ public class EMReactionChamber extends BlockEntityRecipeMachine<ReactionChamberR
     public void recalculateUpgrades(Upgrade upgrade) {
         super.recalculateUpgrades(upgrade);
         if (AMEEmpowered.empoweredIsLoaded()) {
-            if (AMEEmpowered.isEmpoweredSpeed(upgrade) || upgrade == ExtraUpgrade.STACK) {
-                baselineMaxOperations = 20 * (1 << (AMEEmpowered.getEmpoweredSpeeds(this)
-                        + upgradeComponent.getUpgrades(ExtraUpgrade.STACK)));
+            if (AMEEmpowered.isEmpoweredSpeed(upgrade) || upgrade == Upgrade.SPEED || upgrade == ExtraUpgrade.STACK) {
+                baselineMaxOperations = 20 * ((1 << upgradeComponent.getUpgrades(Upgrade.SPEED)) + (2 << AMEEmpowered
+                        .getEmpoweredSpeeds(this))) << upgradeComponent.getUpgrades(ExtraUpgrade.STACK);
             }
+        } else if (upgrade == Upgrade.SPEED || upgrade == ExtraUpgrade.STACK) {
+            baselineMaxOperations = 20 << (upgradeComponent.getUpgrades(Upgrade.SPEED)
+                    + upgradeComponent.getUpgrades(ExtraUpgrade.STACK));
         }
     }
 

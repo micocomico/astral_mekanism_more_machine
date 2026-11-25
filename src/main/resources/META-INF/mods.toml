@@ -72,7 +72,7 @@ side="CLIENT"
 modId="mekanism"
 mandatory=true
 versionRange="[10.4.0,)"
-ordering="NONE"
+ordering="AFTER"
 side="BOTH"
 [[dependencies.${mod_id}]]
 modId="ae2"

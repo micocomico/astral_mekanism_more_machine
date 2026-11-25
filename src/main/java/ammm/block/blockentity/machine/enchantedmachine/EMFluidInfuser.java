@@ -2,6 +2,7 @@ package ammm.block.blockentity.machine.enchantedmachine;
 
 import astral_mekanism.block.blockentity.basemachine.BEAbstractFluidInfuser;
 import astral_mekanism.integration.AMEEmpowered;
+import com.jerry.mekanism_extras.api.ExtraUpgrade;
 import mekanism.api.Upgrade;
 import mekanism.api.providers.IBlockProvider;
 import mekanism.common.inventory.container.MekanismContainer;
@@ -10,7 +11,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class EMFluidInfuser extends BEAbstractFluidInfuser {
-    private int baselineMaxOperations = 1;
+    private int baselineMaxOperations = 200;
     private int fluidTankCapacity = 1 * 20000000;
 
     public EMFluidInfuser(IBlockProvider blockProvider, BlockPos pos, BlockState state) {
@@ -38,9 +39,13 @@ public class EMFluidInfuser extends BEAbstractFluidInfuser {
     public void recalculateUpgrades(Upgrade upgrade) {
         super.recalculateUpgrades(upgrade);
         if (AMEEmpowered.empoweredIsLoaded()) {
-            baselineMaxOperations = 200 * (5 << AMEEmpowered.getAllSpeeds(this));
-        } else if (upgrade == Upgrade.SPEED) {
-            baselineMaxOperations = 200 * (5 << upgradeComponent.getUpgrades(Upgrade.SPEED));
+            if (AMEEmpowered.isEmpoweredSpeed(upgrade) || upgrade == Upgrade.SPEED || upgrade == ExtraUpgrade.STACK) {
+                baselineMaxOperations = 200 * ((1 << upgradeComponent.getUpgrades(Upgrade.SPEED)) + (2 << AMEEmpowered
+                        .getEmpoweredSpeeds(this))) << upgradeComponent.getUpgrades(ExtraUpgrade.STACK);
+            }
+        } else if (upgrade == Upgrade.SPEED || upgrade == ExtraUpgrade.STACK) {
+            baselineMaxOperations = 200 << (upgradeComponent.getUpgrades(Upgrade.SPEED)
+                    + upgradeComponent.getUpgrades(ExtraUpgrade.STACK));
         }
         fluidTankCapacity = 20000000 * baselineMaxOperations;
     }
